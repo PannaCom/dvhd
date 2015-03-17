@@ -7,6 +7,11 @@ using System.Web;
 using System.Web.Mvc;
 using dvhd.Models;
 using PagedList;
+using System.IO;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.html.simpleparser;
+
 namespace dvhd.Controllers
 {
     public class hosoController : Controller
@@ -122,6 +127,30 @@ namespace dvhd.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        //create report
+        [HttpPost]
+        [ValidateInput(false)]
+        public string createReport(string html) {
+            Document document = new Document();
+            try
+            {
+                PdfWriter.GetInstance(document, new FileStream("c:\\report.pdf", FileMode.Create));
+                document.Open();                
+                List<IElement> htmlarraylist = HTMLWorker.ParseToList(new StringReader(html), null);
+                for (int k = 0; k < htmlarraylist.Count; k++)
+                {
+                    document.Add((IElement)htmlarraylist[k]);
+                }
+
+                document.Close();
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
     }
 }

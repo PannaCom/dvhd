@@ -4,188 +4,96 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style id="styleDetail" type="text/css">
+    /* Ban In css*/
+    .tbBanIn {
+        width:99%;
+        border: 1px solid #bbbcbb;
+    }
+    .tbBanIn td, .tbBanIn th {
+        padding: 2px !important;
+    }
+    .tbBanIn label {
+        margin: 0 !important;
+    }
+</style>
 
-<h2>Details</h2>
-
-<fieldset>
-    <legend>HoSo</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.hoten)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.hoten)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ngaysinh)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ngaysinh)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.quoctich)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.quoctich)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.hokhauthuongtru)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.hokhauthuongtru)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.choohientai)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.choohientai)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.hotencha)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.hotencha)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.hotenme)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.hotenme)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.cmthochieu)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.cmthochieu)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.noicap)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.noicap)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ngaycap)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ngaycap)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.coquancap)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.coquancap)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.noicongtac)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.noicongtac)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.diachicoquan)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.diachicoquan)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.anhdoituong)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.anhdoituong)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.dacdiemnhandang)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.dacdiemnhandang)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.tienantiensu)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.tienantiensu)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.thoigianvipham)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.thoigianvipham)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.quanvipham)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.quanvipham)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.tinhvipham)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.tinhvipham)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.motavipham)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.motavipham)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.hinhthucvipham)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.hinhthucvipham)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.hanhvivipham)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.hanhvivipham)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.phuongthucvanchuyen)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.phuongthucvanchuyen)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.tuyenduongvanchuyen)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.tuyenduongvanchuyen)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.loaidongvat)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.loaidongvat)
-    </div>
-
-    <div class="display-label">
+<div id="divDetail" style="width: 100%; padding: 0 10px; margin-bottom:10px;">
+    <h2>Thông Tin Chi Tiết</h2>
+    <h4>Đối Tượng Vi Phạm</h4>
+    <table class="tbBanIn">
+        <tr>
+            <td rowspan="3" style="width:140px">
+                @Html.DisplayFor(model => model.anhdoituong)
+            </td>
+            <td><label>Họ và Tên :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.hoten) </td>
+        </tr>
+        <tr>            
+            <td><label>Ngày Sinh :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.ngaysinh) </td>            
+        </tr>
+        <tr>
+            <td><label>Quốc Tịch :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.quoctich) </td>
+        </tr>
+        <tr>
+            <td><label>Hộ Khẩu Thường Trú :</label></td> <td colspan="4"> @Html.DisplayFor(model => model.hokhauthuongtru) </td>
+        </tr>
+        <tr>
+            <td><label>Chỗ Ở Hiện Tại :</label></td> <td colspan="4"> @Html.DisplayFor(model => model.choohientai) </td>
+        </tr>
+        <tr>
+            <td><label>Họ Tên Cha :</label></td> <td> @Html.DisplayFor(model => model.hotencha) </td>
+            <td><label>Họ Tên Mẹ :</label></td> <td> @Html.DisplayFor(model => model.hotenme)<td> </td>
+        </tr>
+        <tr>
+            <td><label>Số CMND/Hộ Chiếu :</label></td> <td> @Html.DisplayFor(model => model.cmthochieu) </td>
+            <td><label>Ngày Cấp :</label></td> <td> @Html.DisplayFor(model => model.ngaycap) </td><td> </td>            
+        </tr>
+        <tr>
+            <td><label>Cơ Quan Cấp :</label></td> <td> @Html.DisplayFor(model => model.coquancap) </td>
+            <td><label>Nơi Cấp :</label></td> <td> @Html.DisplayFor(model => model.noicap) </td><td> </td>
+        </tr>
+        <tr>
+            <td><label>Nơi Công Tác :</label></td> <td colspan="4"> @Html.DisplayFor(model => model.noicongtac) </td>            
+        </tr>
+        <tr>
+            <td><label>Địa Chỉ Cơ Quan :</label></td> <td colspan="4"> @Html.DisplayFor(model => model.diachicoquan) </td>
+        </tr>
+        <tr>
+            <td><label>Đặc Điểm Nhận Dạng :</label></td> <td colspan="4"> @Html.DisplayFor(model => model.dacdiemnhandang) </td>            
+        </tr>
+        <tr>
+            <td><label>Tiền Án Tiền Sự :</label></td> <td colspan="4"> @Html.DisplayFor(model => model.tienantiensu) </td>
+        </tr>
+    </table>
+    
+    <h4>Hành Vi Vi Phạm</h4>
+    <table class="tbBanIn">
+        <tr>
+            <td style="width:125px"><label>Thời Gian Vi Phạm :</label></td> <td> @Html.DisplayFor(model => model.thoigianvipham) </td>
+            <td><label>Địa Điểm Vi Phạm :</label></td> <td> @Html.DisplayFor(model => model.quanvipham) , @Html.DisplayFor(model => model.tinhvipham) </td>            
+        </tr>
+        <tr>
+            <td><label>Mô Tả Vi Phạm :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.motavipham) </td>
+        </tr>
+        <tr>
+            <td><label>Hình Thức Vi Phạm :</label></td> <td> @Html.DisplayFor(model => model.hinhthucvipham) </td>
+            <td><label>Hành Vi Vi Phạm :</label></td> <td> @Html.DisplayFor(model => model.hanhvivipham)</td>            
+        </tr>
+        <tr>
+            <td><label>Phương Thức Vận Chuyển :</label></td> <td> @Html.DisplayFor(model => model.phuongthucvanchuyen) </td>
+            <td><label>Tuyến Đường Vận Chuyển :</label></td> <td> @Html.DisplayFor(model => model.tuyenduongvanchuyen)</td>            
+        </tr>
+        <tr>
+            <td colspan="2"> @Html.DisplayFor(model => model.anhdongvat) </td>
+            <td><label>Động Vật Hoang Dã :</label></td> <td> @Html.DisplayFor(model => model.loaidongvat)</td>            
+        </tr>
+        <tr>
+            <td><label>Đơn Vị Bắt Giữ :</label></td> <td> @Html.DisplayFor(model => model.donvibatgiu) </td>
+            <td><label>Tên Đơn Vị Bắt Giữ :</label></td> <td> @Html.DisplayFor(model => model.tendonvibatgiu)</td>            
+        </tr>
+    </table>
+           
+    @*<div class="display-label">
          @Html.DisplayNameFor(model => model.tinhtrangsong)
     </div>
     <div class="display-field">
@@ -211,106 +119,71 @@
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.tinhtrangbaoton)
-    </div>
+    </div>*@
+    
+    <h4>Xử Lý Vi Phạm</h4>
+    <table class="tbBanIn">
+        <tr>
+            <td><label>Thời Gian Xử Lý :</label></td> <td> @Html.DisplayFor(model => model.thoigianxuly) </td>
+            <td><label>Kết Quả Xử Lý :</label></td> <td> @Html.DisplayFor(model => model.ketquaxuly) </td>            
+        </tr>
+        <tr>
+            <td><label>Đơn Vị Xử Lý :</label></td> <td> @Html.DisplayFor(model => model.donvixuly) </td>
+            <td><label>Tên Đơn Vị Xử Lý :</label></td> <td> @Html.DisplayFor(model => model.tendonvixuly) </td>            
+        </tr>
+        <tr>
+            <td><label>Cán Bộ Xử Lý :</label></td> <td> @Html.DisplayFor(model => model.hotencanboxuly) </td>
+            <td><label>Cấp Bậc :</label></td> <td> @Html.DisplayFor(model => model.capbac) </td>            
+        </tr>
+        <tr>
+            <td><label>Địa Chỉ Liên Hệ :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.diachilienhe) </td>
+        </tr>
+        <tr>
+            <td><label>Ngày Xử Lý :</label></td> <td> @Html.DisplayFor(model => model.ngayxuly) </td>
+            <td><label>Bị Can :</label></td> <td> @Html.DisplayFor(model => model.bican) </td>            
+        </tr>
+        <tr>
+            <td><label>Kết Quả Xử Lý Chi Tiết :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.ketquaxulychitiet) </td>
+        </tr>
+        <tr>
+            <td><label>Mô Tả Xử Lý :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.motachitietxuly) </td>
+        </tr>
+    </table>          
+</div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.anhdongvat)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.anhdongvat)
-    </div>
+<div style="width:100%;text-align:center;">
+    <input type="button" value="In Thông Tin Chi Tiết" onclick="printDetails();" />
+    <input type="button" value="Tạo Báo Cáo Thông Tin Chi Tiết" onclick="createPDF();" />
+</div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.donvibatgiu)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.donvibatgiu)
-    </div>
+<script type="text/javascript">
+    function printDetails() {
+        var mywindow = window.open('', 'Thông Tin Chi Tiết', 'height=600,width=800');
+        mywindow.document.write('<html><head><title>Thông Tin Chi Tiết</title>');
+        mywindow.document.write('<style type="text/css">' + $("#styleDetail").html() + '</style>');
+        mywindow.document.write('</head><body >');
+        mywindow.document.write($("#divDetail").html());
+        mywindow.document.write('</body></html>');
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.tendonvibatgiu)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.tendonvibatgiu)
-    </div>
+        mywindow.document.close(); // necessary for IE >= 10
+        mywindow.focus(); // necessary for IE >= 10
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.thoigianxuly)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.thoigianxuly)
-    </div>
+        mywindow.print();
+        mywindow.close();
+    }
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ketquaxuly)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ketquaxuly)
-    </div>
+    function createPDF() {
+        $.ajax({
+            url: '@Url.Action("createReport")',
+            data: { html: $("#divDetail").html() },
+            type: 'POST',
+            success: function (result) {
+                alert(result);
+            }
+        });
+    }
+</script>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.donvixuly)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.donvixuly)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.tendonvixuly)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.tendonvixuly)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.hotencanboxuly)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.hotencanboxuly)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.capbac)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.capbac)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.diachilienhe)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.diachilienhe)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ngayxuly)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ngayxuly)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.bican)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.bican)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ketquaxulychitiet)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ketquaxulychitiet)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.motachitietxuly)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.motachitietxuly)
-    </div>
-</fieldset>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.id }) |
     @Html.ActionLink("Back to List", "Index")
