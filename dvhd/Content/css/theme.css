@@ -151,7 +151,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-family: "Roboto", "Arial", "sans-serif";
 	font-weight: 600;
 	line-height: 1.1;
-	color: #2D2B76;
+	color: #006600;
 }
 h1, .h1 {
 	font-size: 36px;
@@ -227,7 +227,7 @@ a:focus {
 }
 /* Link hover color */
 a:hover, a:focus, .box-icon a:hover, .usp a:hover i {
-	color: #5e5e5e;
+	color: #006600;
 }
 /* Margins */
 .mt20 {
@@ -253,7 +253,7 @@ a:hover, a:focus, .box-icon a:hover, .usp a:hover i {
 }
 /* Form */
 label {
-	/*color: #5e5e5e;
+	/*color: #006600;
     font-weight:bold;*/
     display: block;
     font-weight: bold;
@@ -264,7 +264,7 @@ label {
 	color: #057ad4;
 }
 .form-control option {
-	color: #5e5e5e;
+	color: #006600;
 }
 .form-control option:disabled {
 	color: #bfbfbf;
@@ -612,14 +612,14 @@ header nav {
 	background-color: #fff;
 }
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
-	color: #5e5e5e;
+	color: #006600;
 	background-color: transparent;
 }
 .navbar-default .navbar-text {
-	color: #5e5e5e;
+	color: #006600;
 }
 .navbar-default .navbar-nav > li > a {
-	color: #5e5e5e;
+	color: #006600;
 }
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
 	background-color: transparent;
@@ -628,7 +628,7 @@ header nav {
 	background-color: transparent;
 }
 .navbar-default .navbar-nav > .disabled > a, .navbar-default .navbar-nav > .disabled > a:hover, .navbar-default .navbar-nav > .disabled > a:focus {
-	color: #5e5e5e;
+	color: #006600;
 	background-color: transparent;
 }
 .navbar-default .navbar-collapse, .navbar-default .navbar-form {
@@ -642,7 +642,7 @@ header nav {
 	font-size: 13px;
 }
 .navbar-default .navbar-nav .dropdown-menu > li > a {
-	color: #5e5e5e;
+	color: #006600;
 }
 .navbar-default .navbar-nav .dropdown-menu > .active > a, .navbar-default .navbar-nav .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .dropdown-menu > .active > a:focus {
 	color: #ffffff;
@@ -840,11 +840,11 @@ header #logo {
 	right: 0;
 }
 .yamm a{
-	color: #5e5e5e;
+	color: #006600;
 }
 .list-unstyled, .list-unstyled ul {
 	min-width: 120px;
-	color: #5e5e5e;
+	color: #006600;
 }
 
 /* Reservation Form
@@ -1552,7 +1552,7 @@ aside .widget .news-content span a {
 	margin-top: 30px;
 }
 .nav-pills > li > a {
-	color: #5e5e5e;
+	color: #006600;
 	-webkit-transition: all 0.2s ease;
 	-moz-transition: all 0.2s ease;
 	-ms-transition: all 0.2s ease;
@@ -1602,7 +1602,7 @@ aside .widget .news-content span a {
 }
 .popover {
 	font-size: 12px;
-	color: #5e5e5e;
+	color: #006600;
 }
 /* Table */
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
@@ -1674,14 +1674,14 @@ footer {
 	margin-top: 100px;
 }
 footer a {
-	color: #5e5e5e;
+	color: #006600;
 }
 footer a:hover, footer a:focus {
-	color: #5e5e5e;
+	color: #006600;
 }
 footer h4 {
 	font-size: 14px;
-	color: #5e5e5e;
+	color: #006600;
 	text-transform: uppercase;
 	margin: 0 0 30px 0;
 }
