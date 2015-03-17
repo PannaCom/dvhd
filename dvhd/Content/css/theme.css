@@ -1538,10 +1538,10 @@ aside .widget .news-content span a {
 	background: #fff;
 }
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-	color: #555555;
+	color: #006600;
 	cursor: default;
 	background-color: #ffffff;
-	border: 1px solid #ebebeb;
+	border: 2px solid #006600;
 	border-bottom-color: transparent;
 }
 .tab-content {

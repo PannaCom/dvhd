@@ -632,6 +632,8 @@
     <Content Include="Views\hoso\Create.cshtml" />
     <Content Include="Views\hoso\Edit.cshtml" />
     <Content Include="Views\hoso\Delete.cshtml" />
+    <Content Include="Views\Shared\_KetQuaXuLy.cshtml" />
+    <Content Include="Views\Shared\_DonViXuLy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

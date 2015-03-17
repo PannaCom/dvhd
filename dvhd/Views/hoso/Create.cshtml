@@ -11,21 +11,76 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     <fieldset>
-        <div id="tab" style="width:100%;display:block;position:relative;float:left;">
-            <div id="tab1" style="width:32%;display:block;position:relative;float:left;background-color:#0094ff;color:#b6ff00;font-size:16;font-weight:bold;">Đối tượng vi phạm</div>
-            <div id="tab2" style="width:32%;display:block;position:relative;float:left;background-color:#0094ff;color:#b6ff00;font-size:16;font-weight:bold;">Hành vi vi phạm</div>
-            <div id="tab3" style="width:32%;display:block;position:relative;float:left;background-color:#0094ff;color:#b6ff00;font-size:16;font-weight:bold;">Kết quả xử lý</div>
-        </div>
-        <div id="doituongvipham" style="width:100%;display:block;position:relative;float:left;">
-            <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="room" style="width:auto;display:block;">Họ tên</label>
-                    <input name="hoten" type="text" id="hoten" value="" class="form-control" placeholder="Gõ tên đối tượng vi phạm"/>                
-                  </div>
-             </div>
+        <ul class="nav nav-tabs" style="padding-left:6px;">
+          <li class="active"><a href="#thongtin" data-toggle="tab" aria-expanded="true">Thông tin đối tượng vi phạm</a></li>
+          <li class=""><a href="#hanhvi" data-toggle="tab" aria-expanded="false">Hành vi vi phạm</a></li>
+          <li class=""><a href="#ketqua" data-toggle="tab" aria-expanded="false">Kết quả xử lý</a></li>
+        </ul>
+        <div class="tab-content" style="padding-left:6px;" >
+            <div class="tab-pane fade active in" id="thongtin" >
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Họ tên</label>
+                        <input name="hoten" type="text" tabindex="1" id="hoten" value="" class="form-control" placeholder="Gõ tên đối tượng vi phạm"/>                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Ngày sinh</label>
+                        <input name="ngaysinh" type="date" tabindex="2" id="ngaysinh" value="" class="form-control" placeholder="Gõ ngày sinh"/>                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Quốc tịch</label>
+                        <input name="quoctich" type="text" tabindex="3" id="quoctich" value="" class="form-control" placeholder="Quốc tịch"/>                
+                      </div>
+                 </div>
+            </div>
+            <div class="tab-pane fade" id="hanhvi" >
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Thời gian vi phạm</label>
+                        <input name="thoigianvipham" type="date" tabindex="4" id="thoigianvipham" value="" class="form-control" placeholder="Nhập thời gian vi phạm"/>                
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Thuộc quận huyện</label>
+                        <input name="quanvipham" type="text" tabindex="5" id="quanvipham" value="" class="form-control" placeholder="Thuộc quận huyện nào"/>                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Thuộc tỉnh thành</label>
+                        <input name="tinhvipham" type="text" tabindex="6" id="tinhvipham" value="" class="form-control" placeholder="Thuộc tỉnh thành"/>                
+                      </div>
+                 </div>
+            </div>
+            <div class="tab-pane fade" id="ketqua" >
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Thời gian xử lý</label>
+                        <input name="thoigianxuly1" type="date" id="thoigianxuly1" value="" class="form-control" placeholder="Nhập thời gian xử lý"/>
+                        <input name="thoigianxuly2" type="time" id="thoigianxuly2" value="" class="form-control" placeholder="Nhập thời gian xử lý"/>                
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Kết quả xử lý</label>
+                          @Html.Partial("~/Views/Shared/_KetQuaXuLy.cshtml")           
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Đơn vị xử lý</label>
+                        @Html.Partial("~/Views/Shared/_DonViXuLy.cshtml")                   
+                      </div>
+                 </div>
+            </div>
         </div>
         <p>
-            <input type="submit" value="Create" />
+            <input type="button" value="Thêm mới" onclick="checkField();" />
         </p>
     </fieldset>
 }
