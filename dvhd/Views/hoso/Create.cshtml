@@ -1,0 +1,36 @@
+﻿@model dvhd.Models.HoSo
+
+@{
+    ViewBag.Title = "Nhập dữ liệu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Nhập dữ liệu đối tượng vi phạm</h2>
+
+@using (Html.BeginForm("Create", "hoso", FormMethod.Post, new { id = "EditForm" })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <div id="tab" style="width:100%;display:block;position:relative;float:left;">
+            <div id="tab1" style="width:32%;display:block;position:relative;float:left;background-color:#0094ff;color:#b6ff00;font-size:16;font-weight:bold;">Đối tượng vi phạm</div>
+            <div id="tab2" style="width:32%;display:block;position:relative;float:left;background-color:#0094ff;color:#b6ff00;font-size:16;font-weight:bold;">Hành vi vi phạm</div>
+            <div id="tab3" style="width:32%;display:block;position:relative;float:left;background-color:#0094ff;color:#b6ff00;font-size:16;font-weight:bold;">Kết quả xử lý</div>
+        </div>
+        <div id="doituongvipham" style="width:100%;display:block;position:relative;float:left;">
+            <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="room" style="width:auto;display:block;">Họ tên</label>
+                    <input name="hoten" type="text" id="hoten" value="" class="form-control" placeholder="Gõ tên đối tượng vi phạm"/>                
+                  </div>
+             </div>
+        </div>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

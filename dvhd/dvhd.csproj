@@ -191,7 +191,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\baocaoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\hosoController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -625,6 +627,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\hoso\Index.cshtml" />
+    <Content Include="Views\hoso\Details.cshtml" />
+    <Content Include="Views\hoso\Create.cshtml" />
+    <Content Include="Views\hoso\Edit.cshtml" />
+    <Content Include="Views\hoso\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
