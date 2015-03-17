@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dvhdModelStoreContainer" CdmEntityContainer="dvhdEntities">
+    <EntitySetMapping Name="DsDvhds">
+      <EntityTypeMapping TypeName="dvhdModel.DsDvhd">
+        <MappingFragment StoreEntitySet="DsDvhd">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ten" ColumnName="ten" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HoSoes">
+      <EntityTypeMapping TypeName="dvhdModel.HoSo">
+        <MappingFragment StoreEntitySet="HoSo">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="hoten" ColumnName="hoten" />
+          <ScalarProperty Name="ngaysinh" ColumnName="ngaysinh" />
+          <ScalarProperty Name="quoctich" ColumnName="quoctich" />
+          <ScalarProperty Name="hokhauthuongtru" ColumnName="hokhauthuongtru" />
+          <ScalarProperty Name="choohientai" ColumnName="choohientai" />
+          <ScalarProperty Name="hotencha" ColumnName="hotencha" />
+          <ScalarProperty Name="hotenme" ColumnName="hotenme" />
+          <ScalarProperty Name="cmthochieu" ColumnName="cmthochieu" />
+          <ScalarProperty Name="noicap" ColumnName="noicap" />
+          <ScalarProperty Name="ngaycap" ColumnName="ngaycap" />
+          <ScalarProperty Name="coquancap" ColumnName="coquancap" />
+          <ScalarProperty Name="noicongtac" ColumnName="noicongtac" />
+          <ScalarProperty Name="diachicoquan" ColumnName="diachicoquan" />
+          <ScalarProperty Name="anhdoituong" ColumnName="anhdoituong" />
+          <ScalarProperty Name="dacdiemnhandang" ColumnName="dacdiemnhandang" />
+          <ScalarProperty Name="tienantiensu" ColumnName="tienantiensu" />
+          <ScalarProperty Name="thoigianvipham" ColumnName="thoigianvipham" />
+          <ScalarProperty Name="quanvipham" ColumnName="quanvipham" />
+          <ScalarProperty Name="tinhvipham" ColumnName="tinhvipham" />
+          <ScalarProperty Name="motavipham" ColumnName="motavipham" />
+          <ScalarProperty Name="hinhthucvipham" ColumnName="hinhthucvipham" />
+          <ScalarProperty Name="hanhvivipham" ColumnName="hanhvivipham" />
+          <ScalarProperty Name="phuongthucvanchuyen" ColumnName="phuongthucvanchuyen" />
+          <ScalarProperty Name="tuyenduongvanchuyen" ColumnName="tuyenduongvanchuyen" />
+          <ScalarProperty Name="loaidongvat" ColumnName="loaidongvat" />
+          <ScalarProperty Name="tinhtrangsong" ColumnName="tinhtrangsong" />
+          <ScalarProperty Name="donvitinh" ColumnName="donvitinh" />
+          <ScalarProperty Name="trigiatangvat" ColumnName="trigiatangvat" />
+          <ScalarProperty Name="tinhtrangbaoton" ColumnName="tinhtrangbaoton" />
+          <ScalarProperty Name="anhdongvat" ColumnName="anhdongvat" />
+          <ScalarProperty Name="donvibatgiu" ColumnName="donvibatgiu" />
+          <ScalarProperty Name="tendonvibatgiu" ColumnName="tendonvibatgiu" />
+          <ScalarProperty Name="thoigianxuly" ColumnName="thoigianxuly" />
+          <ScalarProperty Name="ketquaxuly" ColumnName="ketquaxuly" />
+          <ScalarProperty Name="donvixuly" ColumnName="donvixuly" />
+          <ScalarProperty Name="tendonvixuly" ColumnName="tendonvixuly" />
+          <ScalarProperty Name="hotencanboxuly" ColumnName="hotencanboxuly" />
+          <ScalarProperty Name="capbac" ColumnName="capbac" />
+          <ScalarProperty Name="diachilienhe" ColumnName="diachilienhe" />
+          <ScalarProperty Name="ngayxuly" ColumnName="ngayxuly" />
+          <ScalarProperty Name="bican" ColumnName="bican" />
+          <ScalarProperty Name="ketquaxulychitiet" ColumnName="ketquaxulychitiet" />
+          <ScalarProperty Name="motachitietxuly" ColumnName="motachitietxuly" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TinhThanhs">
+      <EntityTypeMapping TypeName="dvhdModel.TinhThanh">
+        <MappingFragment StoreEntitySet="TinhThanh">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="quanhuyen" ColumnName="quanhuyen" />
+          <ScalarProperty Name="tinhthanh1" ColumnName="tinhthanh" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

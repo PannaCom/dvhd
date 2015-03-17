@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dvhdModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="dvhdModelStoreContainer">
+    <EntitySet Name="DsDvhd" EntityType="dvhdModel.Store.DsDvhd" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HoSo" EntityType="dvhdModel.Store.HoSo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TinhThanh" EntityType="dvhdModel.Store.TinhThanh" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="DsDvhd">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ten" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="HoSo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="hoten" Type="nvarchar" Nullable="false" MaxLength="250" />
+    <Property Name="ngaysinh" Type="datetime" />
+    <Property Name="quoctich" Type="nvarchar" MaxLength="50" />
+    <Property Name="hokhauthuongtru" Type="nvarchar" MaxLength="500" />
+    <Property Name="choohientai" Type="nvarchar" MaxLength="500" />
+    <Property Name="hotencha" Type="nvarchar" MaxLength="250" />
+    <Property Name="hotenme" Type="nvarchar" MaxLength="250" />
+    <Property Name="cmthochieu" Type="nvarchar" MaxLength="150" />
+    <Property Name="noicap" Type="nvarchar" MaxLength="150" />
+    <Property Name="ngaycap" Type="datetime" />
+    <Property Name="coquancap" Type="nvarchar" MaxLength="250" />
+    <Property Name="noicongtac" Type="nvarchar" MaxLength="250" />
+    <Property Name="diachicoquan" Type="nvarchar" MaxLength="250" />
+    <Property Name="anhdoituong" Type="nvarchar" MaxLength="150" />
+    <Property Name="dacdiemnhandang" Type="nvarchar" MaxLength="550" />
+    <Property Name="tienantiensu" Type="nvarchar" MaxLength="850" />
+    <Property Name="thoigianvipham" Type="datetime" />
+    <Property Name="quanvipham" Type="nvarchar" MaxLength="50" />
+    <Property Name="tinhvipham" Type="nvarchar" MaxLength="50" />
+    <Property Name="motavipham" Type="ntext" />
+    <Property Name="hinhthucvipham" Type="nvarchar" MaxLength="50" />
+    <Property Name="hanhvivipham" Type="nvarchar" MaxLength="150" />
+    <Property Name="phuongthucvanchuyen" Type="nvarchar" MaxLength="50" />
+    <Property Name="tuyenduongvanchuyen" Type="nvarchar" MaxLength="150" />
+    <Property Name="loaidongvat" Type="nvarchar" MaxLength="150" />
+    <Property Name="tinhtrangsong" Type="nvarchar" MaxLength="50" />
+    <Property Name="donvitinh" Type="nvarchar" MaxLength="50" />
+    <Property Name="trigiatangvat" Type="nvarchar" MaxLength="50" />
+    <Property Name="tinhtrangbaoton" Type="nvarchar" MaxLength="150" />
+    <Property Name="anhdongvat" Type="nvarchar" MaxLength="50" />
+    <Property Name="donvibatgiu" Type="nvarchar" MaxLength="50" />
+    <Property Name="tendonvibatgiu" Type="nvarchar" MaxLength="150" />
+    <Property Name="thoigianxuly" Type="datetime" />
+    <Property Name="ketquaxuly" Type="nvarchar" MaxLength="150" />
+    <Property Name="donvixuly" Type="nvarchar" MaxLength="150" />
+    <Property Name="tendonvixuly" Type="nvarchar" MaxLength="150" />
+    <Property Name="hotencanboxuly" Type="nvarchar" MaxLength="150" />
+    <Property Name="capbac" Type="nvarchar" MaxLength="50" />
+    <Property Name="diachilienhe" Type="nvarchar" MaxLength="150" />
+    <Property Name="ngayxuly" Type="datetime" />
+    <Property Name="bican" Type="nvarchar" MaxLength="150" />
+    <Property Name="ketquaxulychitiet" Type="nvarchar" MaxLength="550" />
+    <Property Name="motachitietxuly" Type="ntext" />
+  </EntityType>
+  <EntityType Name="TinhThanh">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="quanhuyen" Type="nvarchar" MaxLength="255" />
+    <Property Name="tinhthanh" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+</Schema>

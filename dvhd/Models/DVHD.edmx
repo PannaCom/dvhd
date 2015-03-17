@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dvhdModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="dvhdModelStoreContainer">
+          <EntitySet Name="DsDvhd" EntityType="dvhdModel.Store.DsDvhd" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="HoSo" EntityType="dvhdModel.Store.HoSo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TinhThanh" EntityType="dvhdModel.Store.TinhThanh" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="DsDvhd">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ten" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="HoSo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="hoten" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="ngaysinh" Type="datetime" />
+          <Property Name="quoctich" Type="nvarchar" MaxLength="50" />
+          <Property Name="hokhauthuongtru" Type="nvarchar" MaxLength="500" />
+          <Property Name="choohientai" Type="nvarchar" MaxLength="500" />
+          <Property Name="hotencha" Type="nvarchar" MaxLength="250" />
+          <Property Name="hotenme" Type="nvarchar" MaxLength="250" />
+          <Property Name="cmthochieu" Type="nvarchar" MaxLength="150" />
+          <Property Name="noicap" Type="nvarchar" MaxLength="150" />
+          <Property Name="ngaycap" Type="datetime" />
+          <Property Name="coquancap" Type="nvarchar" MaxLength="250" />
+          <Property Name="noicongtac" Type="nvarchar" MaxLength="250" />
+          <Property Name="diachicoquan" Type="nvarchar" MaxLength="250" />
+          <Property Name="anhdoituong" Type="nvarchar" MaxLength="150" />
+          <Property Name="dacdiemnhandang" Type="nvarchar" MaxLength="550" />
+          <Property Name="tienantiensu" Type="nvarchar" MaxLength="850" />
+          <Property Name="thoigianvipham" Type="datetime" />
+          <Property Name="quanvipham" Type="nvarchar" MaxLength="50" />
+          <Property Name="tinhvipham" Type="nvarchar" MaxLength="50" />
+          <Property Name="motavipham" Type="ntext" />
+          <Property Name="hinhthucvipham" Type="nvarchar" MaxLength="50" />
+          <Property Name="hanhvivipham" Type="nvarchar" MaxLength="150" />
+          <Property Name="phuongthucvanchuyen" Type="nvarchar" MaxLength="50" />
+          <Property Name="tuyenduongvanchuyen" Type="nvarchar" MaxLength="150" />
+          <Property Name="loaidongvat" Type="nvarchar" MaxLength="150" />
+          <Property Name="tinhtrangsong" Type="nvarchar" MaxLength="50" />
+          <Property Name="donvitinh" Type="nvarchar" MaxLength="50" />
+          <Property Name="trigiatangvat" Type="nvarchar" MaxLength="50" />
+          <Property Name="tinhtrangbaoton" Type="nvarchar" MaxLength="150" />
+          <Property Name="anhdongvat" Type="nvarchar" MaxLength="50" />
+          <Property Name="donvibatgiu" Type="nvarchar" MaxLength="50" />
+          <Property Name="tendonvibatgiu" Type="nvarchar" MaxLength="150" />
+          <Property Name="thoigianxuly" Type="datetime" />
+          <Property Name="ketquaxuly" Type="nvarchar" MaxLength="150" />
+          <Property Name="donvixuly" Type="nvarchar" MaxLength="150" />
+          <Property Name="tendonvixuly" Type="nvarchar" MaxLength="150" />
+          <Property Name="hotencanboxuly" Type="nvarchar" MaxLength="150" />
+          <Property Name="capbac" Type="nvarchar" MaxLength="50" />
+          <Property Name="diachilienhe" Type="nvarchar" MaxLength="150" />
+          <Property Name="ngayxuly" Type="datetime" />
+          <Property Name="bican" Type="nvarchar" MaxLength="150" />
+          <Property Name="ketquaxulychitiet" Type="nvarchar" MaxLength="550" />
+          <Property Name="motachitietxuly" Type="ntext" />
+        </EntityType>
+        <EntityType Name="TinhThanh">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="quanhuyen" Type="nvarchar" MaxLength="255" />
+          <Property Name="tinhthanh" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dvhdModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="dvhdEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="DsDvhds" EntityType="dvhdModel.DsDvhd" />
+          <EntitySet Name="HoSoes" EntityType="dvhdModel.HoSo" />
+          <EntitySet Name="TinhThanhs" EntityType="dvhdModel.TinhThanh" />
+        </EntityContainer>
+        <EntityType Name="DsDvhd">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ten" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="HoSo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="hoten" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="ngaysinh" Type="DateTime" Precision="3" />
+          <Property Name="quoctich" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="hokhauthuongtru" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="choohientai" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="hotencha" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="hotenme" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="cmthochieu" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="noicap" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="ngaycap" Type="DateTime" Precision="3" />
+          <Property Name="coquancap" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="noicongtac" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="diachicoquan" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="anhdoituong" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="dacdiemnhandang" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
+          <Property Name="tienantiensu" Type="String" MaxLength="850" Unicode="true" FixedLength="false" />
+          <Property Name="thoigianvipham" Type="DateTime" Precision="3" />
+          <Property Name="quanvipham" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="tinhvipham" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="motavipham" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="hinhthucvipham" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="hanhvivipham" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="phuongthucvanchuyen" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="tuyenduongvanchuyen" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="loaidongvat" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="tinhtrangsong" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="donvitinh" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="trigiatangvat" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="tinhtrangbaoton" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="anhdongvat" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="donvibatgiu" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="tendonvibatgiu" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="thoigianxuly" Type="DateTime" Precision="3" />
+          <Property Name="ketquaxuly" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="donvixuly" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="tendonvixuly" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="hotencanboxuly" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="capbac" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="diachilienhe" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="ngayxuly" Type="DateTime" Precision="3" />
+          <Property Name="bican" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="ketquaxulychitiet" Type="String" MaxLength="550" Unicode="true" FixedLength="false" />
+          <Property Name="motachitietxuly" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TinhThanh">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="quanhuyen" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="tinhthanh1" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dvhdModelStoreContainer" CdmEntityContainer="dvhdEntities">
+          <EntitySetMapping Name="DsDvhds">
+            <EntityTypeMapping TypeName="dvhdModel.DsDvhd">
+              <MappingFragment StoreEntitySet="DsDvhd">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ten" ColumnName="ten" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HoSoes">
+            <EntityTypeMapping TypeName="dvhdModel.HoSo">
+              <MappingFragment StoreEntitySet="HoSo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="hoten" ColumnName="hoten" />
+                <ScalarProperty Name="ngaysinh" ColumnName="ngaysinh" />
+                <ScalarProperty Name="quoctich" ColumnName="quoctich" />
+                <ScalarProperty Name="hokhauthuongtru" ColumnName="hokhauthuongtru" />
+                <ScalarProperty Name="choohientai" ColumnName="choohientai" />
+                <ScalarProperty Name="hotencha" ColumnName="hotencha" />
+                <ScalarProperty Name="hotenme" ColumnName="hotenme" />
+                <ScalarProperty Name="cmthochieu" ColumnName="cmthochieu" />
+                <ScalarProperty Name="noicap" ColumnName="noicap" />
+                <ScalarProperty Name="ngaycap" ColumnName="ngaycap" />
+                <ScalarProperty Name="coquancap" ColumnName="coquancap" />
+                <ScalarProperty Name="noicongtac" ColumnName="noicongtac" />
+                <ScalarProperty Name="diachicoquan" ColumnName="diachicoquan" />
+                <ScalarProperty Name="anhdoituong" ColumnName="anhdoituong" />
+                <ScalarProperty Name="dacdiemnhandang" ColumnName="dacdiemnhandang" />
+                <ScalarProperty Name="tienantiensu" ColumnName="tienantiensu" />
+                <ScalarProperty Name="thoigianvipham" ColumnName="thoigianvipham" />
+                <ScalarProperty Name="quanvipham" ColumnName="quanvipham" />
+                <ScalarProperty Name="tinhvipham" ColumnName="tinhvipham" />
+                <ScalarProperty Name="motavipham" ColumnName="motavipham" />
+                <ScalarProperty Name="hinhthucvipham" ColumnName="hinhthucvipham" />
+                <ScalarProperty Name="hanhvivipham" ColumnName="hanhvivipham" />
+                <ScalarProperty Name="phuongthucvanchuyen" ColumnName="phuongthucvanchuyen" />
+                <ScalarProperty Name="tuyenduongvanchuyen" ColumnName="tuyenduongvanchuyen" />
+                <ScalarProperty Name="loaidongvat" ColumnName="loaidongvat" />
+                <ScalarProperty Name="tinhtrangsong" ColumnName="tinhtrangsong" />
+                <ScalarProperty Name="donvitinh" ColumnName="donvitinh" />
+                <ScalarProperty Name="trigiatangvat" ColumnName="trigiatangvat" />
+                <ScalarProperty Name="tinhtrangbaoton" ColumnName="tinhtrangbaoton" />
+                <ScalarProperty Name="anhdongvat" ColumnName="anhdongvat" />
+                <ScalarProperty Name="donvibatgiu" ColumnName="donvibatgiu" />
+                <ScalarProperty Name="tendonvibatgiu" ColumnName="tendonvibatgiu" />
+                <ScalarProperty Name="thoigianxuly" ColumnName="thoigianxuly" />
+                <ScalarProperty Name="ketquaxuly" ColumnName="ketquaxuly" />
+                <ScalarProperty Name="donvixuly" ColumnName="donvixuly" />
+                <ScalarProperty Name="tendonvixuly" ColumnName="tendonvixuly" />
+                <ScalarProperty Name="hotencanboxuly" ColumnName="hotencanboxuly" />
+                <ScalarProperty Name="capbac" ColumnName="capbac" />
+                <ScalarProperty Name="diachilienhe" ColumnName="diachilienhe" />
+                <ScalarProperty Name="ngayxuly" ColumnName="ngayxuly" />
+                <ScalarProperty Name="bican" ColumnName="bican" />
+                <ScalarProperty Name="ketquaxulychitiet" ColumnName="ketquaxulychitiet" />
+                <ScalarProperty Name="motachitietxuly" ColumnName="motachitietxuly" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TinhThanhs">
+            <EntityTypeMapping TypeName="dvhdModel.TinhThanh">
+              <MappingFragment StoreEntitySet="TinhThanh">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="quanhuyen" ColumnName="quanhuyen" />
+                <ScalarProperty Name="tinhthanh1" ColumnName="tinhthanh" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
