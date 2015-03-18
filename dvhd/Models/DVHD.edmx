@@ -144,7 +144,7 @@
           <Property Type="String" Name="tendonvixuly" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="hotencanboxuly" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="capbac" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="diachilienhe" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="diachilienhe" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="ngayxuly" Precision="3" />
           <Property Type="String" Name="bican" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="ketquaxulychitiet" MaxLength="550" FixedLength="false" Unicode="true" />
