@@ -6,6 +6,7 @@
 }
 
 <h2>Nhập dữ liệu đối tượng vi phạm</h2>
+<i>Dấu * cho biết trường  bắt buộc phải nhập</i>
 
 @using (Html.BeginForm("Create", "hoso", FormMethod.Post, new { id = "EditForm" })) {
     @Html.AntiForgeryToken()
@@ -20,7 +21,7 @@
             <div class="tab-pane fade active in" id="thongtin" >
                 <div class="col-md-12">
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Họ tên</label>
+                        <label for="room" style="width:auto;display:block;">Họ tên *</label>
                         <input name="hoten" type="text" tabindex="1" id="hoten" value="" class="form-control" placeholder="Gõ tên đối tượng vi phạm"/>                
                       </div>
                  </div>
@@ -32,8 +33,84 @@
                  </div>
                 <div class="col-md-12">
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Quốc tịch</label>
-                        <input name="quoctich" type="text" tabindex="3" id="quoctich" value="" class="form-control" placeholder="Quốc tịch"/>                
+                        <label for="room" style="width:auto;display:block;">Quốc tịch *</label>
+                        @Html.Partial("~/Views/Shared/_QuocGia.cshtml")                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Hộ khẩu thường trú </label>
+                        <input name="hokhauthuongtru" type="text" tabindex="4" id="hokhauthuongtru" value="" class="form-control" placeholder="Nhập hộ khẩu thường trú"/>                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Chỗ ở hiện tại *</label>
+                        <input name="choohientai" type="text" tabindex="5" id="choohientai" value="" class="form-control" placeholder="Nhập chỗ ở hiện tại"/>                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Họ tên cha</label>
+                        <input name="hotencha" type="text" tabindex="6" id="hotencha" value="" class="form-control" placeholder="Nhập họ tên cha"/>                
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Họ tên mẹ</label>
+                        <input name="hotenme" type="text" tabindex="7" id="hotenme" value="" class="form-control" placeholder="Nhập họ tên mẹ"/>                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Số chứng minh thư(hộ chiếu)</label>
+                        <input name="cmthochieu" type="text" tabindex="8" id="cmthochieu" value="" class="form-control" placeholder="Số cmt hoặc hộ chiếu"/>                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Nơi cấp </label>
+                        <input name="noicap" type="text" tabindex="9" id="noicap" value="" class="form-control" placeholder="Nơi cấp cmt hoặc hộ chiếu"/>                
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Ngày cấp</label>
+                        <input name="ngaycap" type="date" tabindex="10" id="ngaycap" value="" class="form-control" placeholder="Ngày cấp cmt hoặc hộ chiếu"/>                
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Cơ quan cấp</label>
+                        <input name="coquancap" type="text" tabindex="11" id="coquancap" value="" class="form-control" placeholder="Cơ quan cấp cmt hoặc hộ chiếu"/>                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Nơi công tác</label>
+                        <input name="noicongtac" type="text" tabindex="12" id="noicongtac" value="" class="form-control" placeholder="Tên cơ quan đối tượng đang công tác"/>                
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Địa chỉ nơi công tác</label>
+                        <input name="diachicoquan" type="text" tabindex="12" id="diachicoquan" value="" class="form-control" placeholder="Nhập địa chỉ cơ quan, email và số điện thoại cơ quan"/>                
+                      </div>
+                 </div>
+                 <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Upload ảnh đại diện</label>
+                        <input name="imageFile" type="file" id="imageFile" value="" multiple="multiple" class="form-control" runat="server" onchange="uploadProcess();"/>                                
+                        <div id="progressbar" class="progressbar">
+                            <div id="progresslabel" class="progressbarlabel"></div>
+                         </div>  
+                      </div>
+                 </div> 
+                 <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Ảnh đại diện</label>
+                        <input name="anhdoituong" type="hidden" id="anhdoituong" value="" class="form-control" />                  
+                          <div id="imageShow" style="width:200px;height:126px;"></div>
                       </div>
                  </div>
             </div>
@@ -88,4 +165,36 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+<script>
+    //Image upload
+    function uploadProcess() {
+        
+        var formdata = new FormData(); //FormData object
+        var fileInput = document.getElementById('imageFile');
+        for (i = 0; i < fileInput.files.length; i++) {
+            //Appending each file to FormData object
+            formdata.append(fileInput.files[i].name, fileInput.files[i]);
+            break;
+        }
+        formdata.append("filename", "");
+        showLoadingImage();
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress", function (evt) {
+            if (evt.lengthComputable) {
+                var progress = Math.round(evt.loaded * 100 / evt.total);
+                $("#progressbar").progressbar("value", progress);
+            }
+        }, false);
 
+        xhr.open('POST', '/hoso/UploadImageProcess');
+        xhr.send(formdata);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                $('#imageShow').html("<img src=\"" + xhr.responseText + "\" width=200 height=126>");
+                $('#anhdoituong').val(xhr.responseText);
+                
+            }
+        }
+        return false;
+    }
+</script>

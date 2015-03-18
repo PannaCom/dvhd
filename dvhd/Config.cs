@@ -14,34 +14,15 @@ namespace dvhd
 {
     public class Config
     {
-        
-        public static string domain ="http://queenland.vn";//"http://localhost:55773/";// "http://queenland.vn";
+
+        public static string domain = "http://demo.binhyen.net";//"http://localhost:58509//";
         public static int PageSize =5;
-        public static string HotelImagePath = "/Images/Hotels";
-        public static string NewsImagePath = "/Images/News";
-        public static string JobsImagePath = "/Images/Jobs";
-        public static string GolfImagePath = "/Images/golf";
-        public static string SlideImagePath = "/Images/slides";
-        public static string ProjectImagePath = "/Images/Projects";
-        public static string ChouponImagePath = "/Images/choupon";
+      
+        public static string HoSoImagePath = "/Images/HoSo";
         public static string LogoImagePath = "/Images";
-        public static int imgWidthHotelRoom = 750;
-        public static int imgHeightHotelRoom = 481;
-        public static int imgWidthProject = 800;
-        public static int imgHeightProject = 504;
-        public static int imgWidthGolf = 800;
-        public static int imgHeightGolf = 504;
+       
         public static int imgWidthNews = 300;
-        public static int imgHeightNews = 200;
-        public static int imgWidthBigSlide = 1700;
-        public static int imgHeightBigSlide = 449;
-        public static int imgWidthSmallSlide = 600;
-        public static int imgHeightSmallSlide = 90;
-        public static int imgWidthLogo = 635;
-        public static int imgHeightLogo = 294;
-        public static int imgWidthLogo2 = 1224;//for mobile
-        public static int imgHeightLogo2 = 313;
-        public static string imgSlideWidth = "292px";
+        public static int imgHeightNews = 400;
         private static dvhdEntities db = new dvhdEntities();
         public static int datetimeid()
         {
