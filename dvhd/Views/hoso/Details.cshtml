@@ -22,12 +22,20 @@
     <h2>Thông Tin Chi Tiết</h2>
     <h4>Đối Tượng Vi Phạm</h4>
     <table class="tbBanIn">
+        
         <tr>
-            <td rowspan="3" style="width:140px">
-                <img src="@Model.anhdoituong" width="300" height="200">
-            </td>
+            @if (Model.anhdoituong != null)
+            {
+                <td rowspan="3" style="width:140px">
+                    <img src="@Model.anhdoituong" width="300" height="200">
+                </td>
+            }else{
+                <td rowspan="3">
+                </td>
+            }
             <td><label>Họ và Tên :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.hoten) </td>
         </tr>
+       
         <tr>            
             <td><label>Ngày Sinh :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.ngaysinh) </td>            
         </tr>
@@ -83,10 +91,20 @@
             <td><label>Phương Thức Vận Chuyển :</label></td> <td> @Html.DisplayFor(model => model.phuongthucvanchuyen) </td>
             <td><label>Tuyến Đường Vận Chuyển :</label></td> <td> @Html.DisplayFor(model => model.tuyenduongvanchuyen)</td>            
         </tr>
+      
         <tr>
-            <td colspan="2"> <img src="@Model.anhdongvat" width="300" height="200"> </td>
+             @if (Model.anhdongvat != null)
+            {
+                <td rowspan="3" style="width:140px">
+                    <img src="@Model.anhdongvat" width="300" height="200">
+                </td>
+            }else{
+                <td rowspan="3">
+                </td>
+            }
             <td><label>Động Vật Hoang Dã :</label></td> <td> @Html.DisplayFor(model => model.loaidongvat)</td>            
         </tr>
+        
         <tr>
             <td><label>Số Lượng Chi Tiết :</label></td> <td> @Html.DisplayFor(model => model.soluongchitiet) </td>
             <td><label>Trị Giá Tang Vật :</label></td> <td> @Html.DisplayFor(model => model.trigiatangvat)</td>            
@@ -189,6 +207,6 @@
 </script>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
