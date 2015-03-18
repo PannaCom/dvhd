@@ -94,7 +94,7 @@
                  <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Địa chỉ nơi công tác</label>
-                        <input name="diachicoquan" type="text" tabindex="12" id="diachicoquan" value="" class="form-control" placeholder="Nhập địa chỉ cơ quan, email và số điện thoại cơ quan"/>                
+                        <input name="diachicoquan" type="text" tabindex="13" id="diachicoquan" value="" class="form-control" placeholder="Nhập địa chỉ cơ quan, email và số điện thoại cơ quan"/>                
                       </div>
                  </div>
                  <div class="col-md-6">
@@ -113,24 +113,36 @@
                           <div id="imageShow" style="width:200px;height:126px;"></div>
                       </div>
                  </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Đặc điểm nhận dạng</label>
+                        <input name="dacdiemnhandang" type="text" tabindex="14" id="dacdiemnhandang" value="" class="form-control" placeholder="Đặc điểm nhận dạng của đối tượng"/>                
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Tiền án tiền sự</label>
+                        <input name="tienantiensu" type="text" tabindex="15" id="tienantiensu" value="" class="form-control" placeholder="Tiền án tiền sự"/>                
+                      </div>
+                 </div>
             </div>
             <div class="tab-pane fade" id="hanhvi" >
                 <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Thời gian vi phạm</label>
-                        <input name="thoigianvipham" type="date" tabindex="4" id="thoigianvipham" value="" class="form-control" placeholder="Nhập thời gian vi phạm"/>                
+                        <input name="thoigianvipham" type="date" tabindex="16" id="thoigianvipham" value="" class="form-control" placeholder="Nhập thời gian vi phạm"/>                
                       </div>
                  </div>
                  <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Thuộc quận huyện</label>
-                        <input name="quanvipham" type="text" tabindex="5" id="quanvipham" value="" class="form-control" placeholder="Thuộc quận huyện nào"/>                
+                        <input name="quanvipham" type="text" tabindex="5" id="quanvipham" value="" class="form-control" placeholder="Thuộc quận huyện nào" onkeyup="searchQuanHuyen();"/>                
                       </div>
                  </div>
                 <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Thuộc tỉnh thành</label>
-                        <input name="tinhvipham" type="text" tabindex="6" id="tinhvipham" value="" class="form-control" placeholder="Thuộc tỉnh thành"/>                
+                        <input name="tinhvipham" type="text" tabindex="6" id="tinhvipham" value="" class="form-control" placeholder="Thuộc tỉnh thành" onkeyup="searchTinhThanh();"/>                
                       </div>
                  </div>
             </div>
