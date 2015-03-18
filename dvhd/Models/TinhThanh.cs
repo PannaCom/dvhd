@@ -16,6 +16,6 @@ namespace dvhd.Models
     {
         public int id { get; set; }
         public string quanhuyen { get; set; }
-        public string tinhthanh1 { get; set; }
+        public string tinhthanhpho { get; set; }
     }
 }

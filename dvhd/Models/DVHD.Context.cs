@@ -26,7 +26,7 @@ namespace dvhd.Models
         }
     
         public DbSet<DsDvhd> DsDvhds { get; set; }
-        public DbSet<HoSo> HoSoes { get; set; }
         public DbSet<TinhThanh> TinhThanhs { get; set; }
+        public DbSet<HoSo> HoSoes { get; set; }
     }
 }

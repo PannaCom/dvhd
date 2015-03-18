@@ -165,8 +165,93 @@ function Login() {
             }
         }
     }
-    function isEmail(email) {
+function isEmail(email) {
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         ///^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$./;
         return re.test(email);
+}
+function checkHVVP(obj, value) {
+   if (obj.checked) {
+       if (document.getElementById("hanhvivipham").value.indexOf(value) < 0) document.getElementById("hanhvivipham").value += ", " + value;
+   } else {
+       document.getElementById("hanhvivipham").value = document.getElementById("hanhvivipham").value.replace(", " + value, "");
+   }
+}
+
+function uploadAnhDongVat() {
+    if (document.getElementById("anhloaidongvativ").style.display == "none") {
+        $("#anhloaidongvativ").show();
+    } else {
+        $("#anhloaidongvativ").hide();
+    }   
+}
+function uploadAnhDaiDien() {
+    if (document.getElementById("anhdaidiendiv").style.display == "none") {
+        $("#anhdaidiendiv").show();
+    } else {
+        $("#anhdaidiendiv").hide();
     }
+}
+//Image upload
+function uploadProcess() {
+
+    var formdata = new FormData(); //FormData object
+    var fileInput = document.getElementById('imageFile');
+    for (i = 0; i < fileInput.files.length; i++) {
+        //Appending each file to FormData object
+        formdata.append(fileInput.files[i].name, fileInput.files[i]);
+        break;
+    }
+    formdata.append("filename", "");
+    //showLoadingImage();
+    var xhr = new XMLHttpRequest();
+    xhr.upload.addEventListener("progress", function (evt) {
+        if (evt.lengthComputable) {
+            var progress = Math.round(evt.loaded * 100 / evt.total);
+            $("#progressbar").progressbar("value", progress);
+        }
+    }, false);
+
+    xhr.open('POST', '/hoso/UploadImageProcess');
+    xhr.send(formdata);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            $('#imageShow').html("<img src=\"" + xhr.responseText + "\" width=200 height=126>");
+            $('#anhdoituong').val(xhr.responseText);
+
+        }
+    }
+    return false;
+}
+
+//Image upload
+function uploadProcessLoaidongvat() {
+
+    var formdata = new FormData(); //FormData object
+    var fileInput = document.getElementById('imageFileloaidongvat');
+    for (i = 0; i < fileInput.files.length; i++) {
+        //Appending each file to FormData object
+        formdata.append(fileInput.files[i].name, fileInput.files[i]);
+        break;
+    }
+    formdata.append("filename", "");
+    //showLoadingImage();
+    var xhr = new XMLHttpRequest();
+    xhr.upload.addEventListener("progress", function (evt) {
+        if (evt.lengthComputable) {
+            var progress = Math.round(evt.loaded * 100 / evt.total);
+            $("#progressbarloaidongvat").progressbar("value", progress);
+        }
+    }, false);
+
+    xhr.open('POST', '/hoso/UploadImageProcessLoaidongvat');
+    xhr.send(formdata);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            $('#imageShowloaidongvat').html("<img src=\"" + xhr.responseText + "\" width=200 height=126>");
+            $('#anhdongvat').val(xhr.responseText);
+
+        }
+    }
+    return false;
+}

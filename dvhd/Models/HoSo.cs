@@ -42,6 +42,7 @@ namespace dvhd.Models
         public string loaidongvat { get; set; }
         public string tinhtrangsong { get; set; }
         public string donvitinh { get; set; }
+        public string soluongchitiet { get; set; }
         public string trigiatangvat { get; set; }
         public string tinhtrangbaoton { get; set; }
         public string anhdongvat { get; set; }
@@ -58,5 +59,6 @@ namespace dvhd.Models
         public string bican { get; set; }
         public string ketquaxulychitiet { get; set; }
         public string motachitietxuly { get; set; }
+        public string hosocode { get; set; }
     }
 }

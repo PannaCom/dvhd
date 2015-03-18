@@ -21,9 +21,27 @@
             <div class="tab-pane fade active in" id="thongtin" >
                 <div class="col-md-12">
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Họ tên *</label>
-                        <input name="hoten" type="text" tabindex="1" id="hoten" value="" class="form-control" placeholder="Gõ tên đối tượng vi phạm"/>                
+                        <label for="room" style="width:auto;display:block;">Họ tên * </label>
+                        <input name="hoten" type="text" tabindex="1" id="hoten" value="" class="form-control" placeholder="Gõ tên đối tượng vi phạm"/>(<a onclick="uploadAnhDaiDien();" style="cursor:pointer;">Click để upload ảnh nếu có</a>)                
                       </div>
+                 </div>
+                <div id="anhdaidiendiv" style="display:none;">
+                     <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="room" style="width:auto;display:block;">Upload ảnh đại diện</label>
+                            <input name="imageFile" type="file" id="imageFile" value="" multiple="multiple" class="form-control" runat="server" onchange="uploadProcess();"/>                                
+                            <div id="progressbar" class="progressbar">
+                                <div id="progresslabel" class="progressbarlabel"></div>
+                             </div>  
+                          </div>
+                     </div> 
+                     <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="room" style="width:auto;display:block;">Ảnh đại diện</label>
+                            <input name="anhdoituong" type="hidden" id="anhdoituong" value="" class="form-control" />                  
+                              <div id="imageShow" style="width:200px;height:126px;"></div>
+                          </div>
+                     </div>
                  </div>
                 <div class="col-md-12">
                       <div class="form-group">
@@ -97,22 +115,7 @@
                         <input name="diachicoquan" type="text" tabindex="13" id="diachicoquan" value="" class="form-control" placeholder="Nhập địa chỉ cơ quan, email và số điện thoại cơ quan"/>                
                       </div>
                  </div>
-                 <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Upload ảnh đại diện</label>
-                        <input name="imageFile" type="file" id="imageFile" value="" multiple="multiple" class="form-control" runat="server" onchange="uploadProcess();"/>                                
-                        <div id="progressbar" class="progressbar">
-                            <div id="progresslabel" class="progressbarlabel"></div>
-                         </div>  
-                      </div>
-                 </div> 
-                 <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Ảnh đại diện</label>
-                        <input name="anhdoituong" type="hidden" id="anhdoituong" value="" class="form-control" />                  
-                          <div id="imageShow" style="width:200px;height:126px;"></div>
-                      </div>
-                 </div>
+                
                  <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Đặc điểm nhận dạng</label>
@@ -130,19 +133,121 @@
                 <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Thời gian vi phạm</label>
-                        <input name="thoigianvipham" type="date" tabindex="16" id="thoigianvipham" value="" class="form-control" placeholder="Nhập thời gian vi phạm"/>                
+                        <input name="thoigianvipham1" type="date" tabindex="16" id="thoigianvipham1" value="" class="form-control" placeholder="Nhập thời gian vi phạm"/>
+                        <input name="thoigianvipham2" type="time" tabindex="16" id="thoigianvipham2" value="11:00:00" class="form-control" placeholder="Nhập thời gian vi phạm"/>
+                        <input type="hidden" id="thoigianvipham" name="thoigianvipham"/>                    
                       </div>
                  </div>
                  <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Thuộc quận huyện</label>
-                        <input name="quanvipham" type="text" tabindex="5" id="quanvipham" value="" class="form-control" placeholder="Thuộc quận huyện nào" onkeyup="searchQuanHuyen();"/>                
+                        <input name="quanvipham" type="text" tabindex="17" id="quanvipham" value="" class="form-control" placeholder="Thuộc quận huyện nào" onkeyup="searchQuanHuyen();"/>                
                       </div>
                  </div>
                 <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Thuộc tỉnh thành</label>
-                        <input name="tinhvipham" type="text" tabindex="6" id="tinhvipham" value="" class="form-control" placeholder="Thuộc tỉnh thành" onkeyup="searchTinhThanh();"/>                
+                        <input name="tinhvipham" type="text" tabindex="18" id="tinhvipham" value="" class="form-control" placeholder="Thuộc tỉnh thành" onkeyup="searchTinhThanh();"/>                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Mô tả vi phạm chi tiết</label>
+                        <textarea name="motavipham" tabindex="19" id="motavipham" value="" rows="4" cols="20" class="form-control"></textarea>                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Hình thức vi phạm</label>
+                        @Html.Partial("~/Views/Shared/_HinhThucViPham.cshtml")                  
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Hành vi vi phạm</label>
+                        @Html.Partial("~/Views/Shared/_HanhViViPham.cshtml")                  
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Phương thức vận chuyển</label>
+                        @Html.Partial("~/Views/Shared/_PhuongThucVanChuyen.cshtml")                  
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Tuyến đường vận chuyển</label>
+                        <input name="tuyenduongvanchuyen" type="text" tabindex="23" id="tuyenduongvanchuyen" value="" class="form-control" placeholder="tuyến đường vận chuyển" />                
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Loài vi phạm *</label>
+                        <input name="loaidongvat" type="text" tabindex="24" id="loaidongvat" value="" class="form-control" placeholder="loài vi phạm" onkeyup="searchLoaidDv();"/>                
+                        (<a onclick="uploadAnhDongVat();" style="cursor:pointer;">Click để upload ảnh vi phạm nếu có</a>) 
+                      </div>
+                 </div>
+                 <div id="anhloaidongvativ" style="display:none;">
+                     <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="room" style="width:auto;display:block;">Upload ảnh vi phạm</label>
+                            <input name="imageFileloaidongvat" type="file" id="imageFileloaidongvat" value="" multiple="multiple" class="form-control" runat="server" onchange="uploadProcessLoaidongvat();"/>                                
+                            <div id="progressbarloaidongvat" class="progressbar">
+                                <div id="progresslabelloaidongvat" class="progressbarlabel"></div>
+                             </div>  
+                          </div>
+                     </div> 
+                     <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="room" style="width:auto;display:block;">Ảnh </label>
+                            <input name="anhdongvat" type="hidden" id="anhdongvat" value="" class="form-control" />                  
+                              <div id="imageShowloaidongvat" style="width:200px;height:126px;"></div>
+                          </div>
+                     </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Tình trạng</label>
+                        <select id="tinhtrangsong" class="form-control" name="tinhtrangsong" tabindex="25">
+                            <option value="sống">sống</option>
+                            <option value="chết">chết</option>
+                        </select>
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Đơn vị tính</label>
+                        @Html.Partial("~/Views/Shared/_DonViTinh.cshtml")     
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Số lượng chi tiết</label>
+                        <textarea name="soluongchitiet" tabindex="27" id="soluongchitiet" value="" rows="4" cols="20" class="form-control"></textarea>                 
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Trị giá tang vật</label>
+                        <input name="trigiatangvat" type="text" tabindex="28" id="trigiatangvat" value="" class="form-control" placeholder="trị giá tang vật" />                
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Tình trạng bảo tồn</label>
+                        @Html.Partial("~/Views/Shared/_TinhTrangBaoTon.cshtml")     
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Đơn vị bắt giữ</label>
+                        @Html.Partial("~/Views/Shared/_DonViCoQuan.cshtml")     
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Tên đơn vị bắt giữ:</label>
+                        <input name="tendonvibatgiu" type="text" tabindex="28" id="tendonvibatgiu" value="" class="form-control" placeholder="Ghi rõ tên đơn vị bắt giữ" />                
                       </div>
                  </div>
             </div>
@@ -151,7 +256,8 @@
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Thời gian xử lý</label>
                         <input name="thoigianxuly1" type="date" id="thoigianxuly1" value="" class="form-control" placeholder="Nhập thời gian xử lý"/>
-                        <input name="thoigianxuly2" type="time" id="thoigianxuly2" value="" class="form-control" placeholder="Nhập thời gian xử lý"/>                
+                        <input name="thoigianxuly2" type="time" id="thoigianxuly2" value="" class="form-control" placeholder="Nhập thời gian xử lý"/>   
+                        <input name="thoigianxuly" type="hidden" id="thoigianxuly" value=""/>                 
                       </div>
                  </div>
                  <div class="col-md-12">
@@ -166,6 +272,12 @@
                         @Html.Partial("~/Views/Shared/_DonViXuLy.cshtml")                   
                       </div>
                  </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Tên đơn vị bắt giữ:</label>
+                        <input name="tendonvibatgiu" type="text" tabindex="28" id="tendonvibatgiu" value="" class="form-control" placeholder="Ghi rõ tên đơn vị bắt giữ" />                
+                      </div>
+                 </div>
             </div>
         </div>
         <p>
@@ -178,35 +290,23 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 <script>
-    //Image upload
-    function uploadProcess() {
-        
-        var formdata = new FormData(); //FormData object
-        var fileInput = document.getElementById('imageFile');
-        for (i = 0; i < fileInput.files.length; i++) {
-            //Appending each file to FormData object
-            formdata.append(fileInput.files[i].name, fileInput.files[i]);
-            break;
+    $("#progressbar").progressbar({
+        max: 100,
+        change: function (evt, ui) {
+            $("#progresslabel").text($("#progressbar").progressbar("value") + "%");
+        },
+        complete: function (evt, ui) {
+            $("#progresslabel").text("Upload ảnh thành công!");
         }
-        formdata.append("filename", "");
-        showLoadingImage();
-        var xhr = new XMLHttpRequest();
-        xhr.upload.addEventListener("progress", function (evt) {
-            if (evt.lengthComputable) {
-                var progress = Math.round(evt.loaded * 100 / evt.total);
-                $("#progressbar").progressbar("value", progress);
-            }
-        }, false);
-
-        xhr.open('POST', '/hoso/UploadImageProcess');
-        xhr.send(formdata);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                $('#imageShow').html("<img src=\"" + xhr.responseText + "\" width=200 height=126>");
-                $('#anhdoituong').val(xhr.responseText);
-                
-            }
+    });
+    $("#progressbarloaidongvat").progressbar({
+        max: 100,
+        change: function (evt, ui) {
+            $("#progresslabelloaidongvat").text($("#progressbarloaidongvat").progressbar("value") + "%");
+        },
+        complete: function (evt, ui) {
+            $("#progresslabelloaidongvat").text("Upload ảnh thành công!");
         }
-        return false;
-    }
+    });
+    evt.preventDefault();
 </script>

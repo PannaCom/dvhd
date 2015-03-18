@@ -51,6 +51,26 @@ namespace dvhd.Controllers
             string ok = resizeImage(Config.imgWidthNews, Config.imgHeightNews, fullPath, Config.HoSoImagePath + "/" + nameFile);
             return Config.HoSoImagePath + "/" + nameFile;
         }
+        [HttpPost]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public string UploadImageProcessLoaidongvat(HttpPostedFileBase file, string filename)
+        {
+            string physicalPath = HttpContext.Server.MapPath("../" + Config.HoSoImagePath + "\\");
+            string nameFile = String.Format("{0}.jpg", Guid.NewGuid().ToString());
+            int countFile = Request.Files.Count;
+            string fullPath = physicalPath + System.IO.Path.GetFileName(nameFile);
+            for (int i = 0; i < countFile; i++)
+            {
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+                }
+                Request.Files[i].SaveAs(fullPath);
+                break;
+            }
+            //string ok = resizeImage(Config.imgWidthNews, Config.imgHeightNews, fullPath, Config.HoSoImagePath + "/" + nameFile);
+            return Config.HoSoImagePath + "/" + nameFile;
+        }
         public string resizeImage(int maxWidth, int maxHeight, string fullPath, string path)
         {
 
