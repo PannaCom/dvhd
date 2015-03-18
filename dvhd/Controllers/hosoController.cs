@@ -200,7 +200,7 @@ namespace dvhd.Controllers
             Document document = new Document();
             try
             {
-                PdfWriter.GetInstance(document, new FileStream("c:\\report.pdf", FileMode.Create));
+                PdfWriter.GetInstance(document, new FileStream("d:\\report.pdf", FileMode.Create));
                 document.Open();                
                 List<IElement> htmlarraylist = HTMLWorker.ParseToList(new StringReader(html), null);
                 for (int k = 0; k < htmlarraylist.Count; k++)

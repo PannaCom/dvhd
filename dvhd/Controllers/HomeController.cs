@@ -30,6 +30,48 @@ namespace dvhd.Controllers
 
             return View();
         }
+
+        #region DuyVT
+        
+        public string getLoai(string keyword)
+        {
+            var p = (from q in db.HoSoes where q.loaidongvat.Contains(keyword) orderby q.loaidongvat select q.loaidongvat).Distinct().Take(10);
+            return JsonConvert.SerializeObject(p.ToList());
+        }
+
+        public string getLoaiDetails(string keyword)
+        {
+            var p = (from q in db.HoSoes where q.loaidongvat.Contains(keyword) orderby q.loaidongvat select new { q.loaidongvat, q.thoigianvipham, q.tinhvipham, q.hoten, q.cmthochieu, q.hanhvivipham });
+            return JsonConvert.SerializeObject(p.ToList());
+        }
+
+
+        public string getTinh(string keyword)
+        {
+            var p = (from q in db.HoSoes where q.tinhvipham.Contains(keyword) orderby q.tinhvipham select q.tinhvipham).Distinct().Take(10);
+            return JsonConvert.SerializeObject(p.ToList());
+        }
+
+        public string getTinhDetails(string keyword)
+        {
+            var p = (from q in db.HoSoes where q.tinhvipham.Contains(keyword) orderby q.tinhvipham select new { q.loaidongvat, q.thoigianvipham, q.tinhvipham, q.hoten, q.cmthochieu, q.hanhvivipham });
+            return JsonConvert.SerializeObject(p.ToList());
+        }
+
+        public string getCMT(string keyword)
+        {
+            var p = (from q in db.HoSoes where q.cmthochieu.Contains(keyword) orderby q.cmthochieu select q.cmthochieu).Distinct().Take(10);
+            return JsonConvert.SerializeObject(p.ToList());
+        }
+
+        public string getCMTDetails(string keyword)
+        {
+            var p = (from q in db.HoSoes where q.cmthochieu.Contains(keyword) orderby q.cmthochieu select new { q.loaidongvat, q.thoigianvipham, q.tinhvipham, q.hoten, q.cmthochieu, q.hanhvivipham });
+            return JsonConvert.SerializeObject(p.ToList());
+        }
+
+        #endregion
+
         public string getQuanHuyen(string keyword) {
             var p = (from q in db.TinhThanhs where q.quanhuyen.Contains(keyword) orderby q.quanhuyen select q.quanhuyen).Distinct().Take(10);
             return JsonConvert.SerializeObject(p.ToList());

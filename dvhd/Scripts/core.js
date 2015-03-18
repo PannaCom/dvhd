@@ -1,4 +1,96 @@
-﻿function searchQuanHuyen() {
+﻿// format date to dd/MM/yyyy
+function formatDate(strDate) {
+    if (strDate == undefined || strDate == null) {
+        return "";
+    }
+    var fullDate = new Date(strDate);    
+    var tmpMonth = (fullDate.getMonth() + 1).toString();
+    var tmpDate = fullDate.getDate().toString();
+    return (tmpDate.length == 2 ? tmpDate : "0" + tmpDate) + "/" + (tmpMonth.length == 2 ? tmpMonth : "0" + tmpMonth)
+        + "/" + fullDate.getFullYear().toString();
+}
+
+function setDefaultValue(str) {
+    if (str == undefined || str == null) {
+        return "";
+    }
+    return str;
+}
+
+function setResult2Table(result) {
+    $("#countResult").text("Tổng Số Vụ Vi Phạm : " + result.length);
+    var htmlContent = '<tr><th>Tên Loài DVHD</th><th>Thời Gian Vi Phạm</th>'
+        + '<th>Tỉnh</th><th>Đối Tượng Vi Phạm</th>'
+        + '<th>Số CMT/Hộ Chiếu</th><th>Hành Vi Vi Phạm</th></tr>';
+    $.each(result, function (idx, q) {
+        htmlContent += '<tr><td>' + q.loaidongvat + '</td><td>' + formatDate(q.thoigianvipham) + '</td><td>'
+            + q.tinhvipham + '</td><td>' + q.hoten + '</td><td>' + setDefaultValue(q.cmthochieu) + '</td><td>' + q.hanhvivipham + '</td></tr>';
+    });
+    $("#tbResult").html(htmlContent);
+    $("#btnCreateReport").removeAttr("disabled");
+}
+
+function baocao_searchLoai() {
+    var keyword = document.getElementById('baocao_loaiDVHD').value;
+    $('#baocao_loaiDVHD').autocomplete({
+        source: '/Home/getLoai?keyword=' + keyword,
+        select: function (event, ui) {
+            $(event.target).val(ui.item.value);
+            $.ajax({
+                url: '/Home/getLoaiDetails?keyword=' + ui.item.value,
+                type: 'POST',
+                dataType: 'json',
+                success: function (result) {
+                    setResult2Table(result);
+                }
+            });
+            return false;
+        },
+        minLength: 1
+    });
+}
+
+function baocao_doituong() {
+    var keyword = document.getElementById('baocao_cmt').value;
+    $('#baocao_cmt').autocomplete({
+        source: '/Home/getCMT?keyword=' + keyword,
+        select: function (event, ui) {
+            $(event.target).val(ui.item.value);
+            $.ajax({
+                url: '/Home/getCMTDetails?keyword=' + ui.item.value,
+                type: 'POST',
+                dataType: 'json',
+                success: function (result) {
+                    setResult2Table(result);
+                }
+            });
+            return false;
+        },
+        minLength: 1
+    });
+}
+
+function baocao_searchTinh() {
+    var keyword = document.getElementById('baocao_tinh').value;
+    $('#baocao_tinh').autocomplete({
+        source: '/Home/getTinh?keyword=' + keyword,
+        select: function (event, ui) {
+            $(event.target).val(ui.item.value);
+            $.ajax({
+                url: '/Home/getTinhDetails?keyword=' + ui.item.value,
+                type: 'POST',
+                dataType: 'json',
+                success: function (result) {
+                    setResult2Table(result);
+                }
+            });
+            return false;
+        },
+        minLength: 1
+    });
+}
+
+function searchQuanHuyen() {
     var keyword = document.getElementById('quanvipham').value;
     //alert(keyword);
     $('#quanvipham').autocomplete({
@@ -13,6 +105,7 @@
         minLength: 1
     });
 }
+
 function searchTinhThanh() {
     var keyword = document.getElementById('tinhvipham').value;
     //alert(keyword);
