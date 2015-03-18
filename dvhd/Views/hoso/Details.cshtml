@@ -24,7 +24,7 @@
     <table class="tbBanIn">
         <tr>
             <td rowspan="3" style="width:140px">
-                @Html.DisplayFor(model => model.anhdoituong)
+                <img src="@Model.anhdoituong" width="300" height="200">
             </td>
             <td><label>Họ và Tên :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.hoten) </td>
         </tr>
@@ -84,8 +84,12 @@
             <td><label>Tuyến Đường Vận Chuyển :</label></td> <td> @Html.DisplayFor(model => model.tuyenduongvanchuyen)</td>            
         </tr>
         <tr>
-            <td colspan="2"> @Html.DisplayFor(model => model.anhdongvat) </td>
+            <td colspan="2"> <img src="@Model.anhdongvat" width="300" height="200"> </td>
             <td><label>Động Vật Hoang Dã :</label></td> <td> @Html.DisplayFor(model => model.loaidongvat)</td>            
+        </tr>
+        <tr>
+            <td><label>Số Lượng Chi Tiết :</label></td> <td> @Html.DisplayFor(model => model.soluongchitiet) </td>
+            <td><label>Trị Giá Tang Vật :</label></td> <td> @Html.DisplayFor(model => model.trigiatangvat)</td>            
         </tr>
         <tr>
             <td><label>Đơn Vị Bắt Giữ :</label></td> <td> @Html.DisplayFor(model => model.donvibatgiu) </td>
