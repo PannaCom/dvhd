@@ -4,7 +4,21 @@
 }
 
 <h2>Báo Cáo Theo Loại Động Vật Hoang Dã</h2>
-
+<style id="styleDetail" type="text/css">
+   /* Ban In css*/
+    .tbBanIn {
+        width:100%;
+        border: 1px solid #bbbcbb;
+        border-collapse: collapse;
+    }
+    .tbBanIn td, .tbBanIn th {
+        border: 1px solid #bbbcbb;
+        padding: 2px !important;
+    }
+    .tbBanIn label {
+        margin: 0 !important;
+    }
+</style>
 <script>
     document.addEventListener("keydown", autosearch);
     function autosearch(event) {
@@ -25,7 +39,8 @@
 </div>
 
 <div class="col-md-12" style="text-align:center;">
-    <input id="btnCreateReport" type="button" value="Tạo Báo Cáo" onclick="baocao_createPDF();" disabled="disabled" />
+    <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" disabled="disabled" />
+    <input id="btnCreateReport" type="button" value="Xuất ra PDF file" onclick="baocao_createPDF();" disabled="disabled" />
 </div>
 
 
@@ -45,5 +60,19 @@
                 window.open("/Images/Report/"+result);
             }
         });
+    }
+    function baocao_createPDFBanin() {
+        var mywindow = window.open('', 'Thông Tin Chi Tiết', 'height=600,width=800');
+        mywindow.document.write('<html><head><title>Thông Tin Chi Tiết</title>');
+        mywindow.document.write('<style type="text/css">' + $("#styleDetail").html() + '</style>');
+        mywindow.document.write('</head><body >');
+        mywindow.document.write($("#divResult").html());
+        mywindow.document.write('</body></html>');
+
+        mywindow.document.close(); // necessary for IE >= 10
+        mywindow.focus(); // necessary for IE >= 10
+
+        mywindow.print();
+        mywindow.close();
     }
 </script>

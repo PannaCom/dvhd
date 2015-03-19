@@ -2226,16 +2226,4 @@ border: 1px solid;
 .progressbarlabel {
     color:yellow;
 }
- /* Ban In css*/
-    .tbBanIn {
-        width:99%;
-        border: 1px solid #bbbcbb;
-        border-collapse: collapse;
-    }
-    .tbBanIn td, .tbBanIn th {
-        border: 1px solid #bbbcbb;
-        padding: 2px !important;
-    }
-    .tbBanIn label {
-        margin: 0 !important;
-    }
+ 

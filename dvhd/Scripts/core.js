@@ -28,6 +28,7 @@ function setResult2Table(result) {
     });
     $("#tbResult").html(htmlContent);
     $("#btnCreateReport").removeAttr("disabled");
+    $("#btnCreateReportBanIn").removeAttr("disabled");
 }
 
 function baocao_searchLoai() {
