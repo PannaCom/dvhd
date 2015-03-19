@@ -210,7 +210,9 @@ namespace dvhd.Controllers
             Document document = new Document();
             try
             {
-                PdfWriter.GetInstance(document, new FileStream("d:\\report.pdf", FileMode.Create));
+                string path = HttpContext.Server.MapPath("../Images/Report" + "\\");
+                string reportName = "HoSoDayDu" + Guid.NewGuid().ToString() + ".pdf";
+                PdfWriter.GetInstance(document, new FileStream(path + reportName, FileMode.Create));
                 document.Open();                
                 List<IElement> htmlarraylist = HTMLWorker.ParseToList(new StringReader(html), null);
                 for (int k = 0; k < htmlarraylist.Count; k++)
@@ -219,7 +221,7 @@ namespace dvhd.Controllers
                 }
 
                 document.Close();
-                return "ok";
+                return reportName;
             }
             catch (Exception ex)
             {

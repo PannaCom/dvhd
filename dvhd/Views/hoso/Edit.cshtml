@@ -18,7 +18,7 @@
           <li class=""><a href="#ketqua" data-toggle="tab" aria-expanded="false">Kết quả xử lý</a></li>
         </ul>
         <div class="tab-content" style="padding-left:6px;" >
-            <div class="tab-pane fade active in" id="thongtin" >
+            <div class="tab-pane fade active in" id="thongtin">
                 <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Họ tên * </label>
@@ -49,7 +49,7 @@
                 <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Ngày sinh</label>
-                        <input name="ngaysinh" type="text" tabindex="2" id="ngaysinh" value="@dvhd.Config.showDate(@Model.ngaysinh)" class="form-control" placeholder="Gõ ngày sinh"/>                
+                        <input name="ngaysinh" type="date" tabindex="2" id="ngaysinh" value="@dvhd.Config.showDate(@Model.ngaysinh)" class="form-control" placeholder="Gõ ngày sinh"/>                
                       </div>
                  </div>
                 <div class="col-md-12">
@@ -98,7 +98,7 @@
                  <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Ngày cấp</label>
-                        <input name="ngaycap" type="text" tabindex="10" id="ngaycap" value="@dvhd.Config.showDate(@Model.ngaycap)" class="form-control" placeholder="Ngày cấp cmt hoặc hộ chiếu"/>                
+                        <input name="ngaycap" type="date" tabindex="10" id="ngaycap" value="@dvhd.Config.showDate(@Model.ngaycap)" class="form-control" placeholder="Ngày cấp cmt hoặc hộ chiếu"/>                
                       </div>
                  </div>
                  <div class="col-md-12">
@@ -137,7 +137,7 @@
                 <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Thời gian vi phạm</label>
-                        <input name="thoigianvipham1" type="text" tabindex="16" id="thoigianvipham1" value="@dvhd.Config.showDate(@Model.thoigianvipham)" class="form-control" placeholder="Nhập thời gian vi phạm"/>
+                        <input name="thoigianvipham1" type="date" tabindex="16" id="thoigianvipham1" value="@dvhd.Config.showDate(@Model.thoigianvipham)" class="form-control" placeholder="Nhập thời gian vi phạm"/>
                         <input name="thoigianvipham2" type="time" tabindex="16" id="thoigianvipham2" value="@dvhd.Config.showTime(@Model.thoigianvipham)" class="form-control" placeholder="Nhập thời gian vi phạm"/>
                         <input type="hidden" id="thoigianvipham" name="thoigianvipham"/>                    
                       </div>
@@ -270,7 +270,7 @@
                 <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Thời gian xử lý</label>
-                        <input name="thoigianxuly1" type="text" id="thoigianxuly1" value="@dvhd.Config.showDate(@Model.thoigianxuly)" class="form-control" placeholder="Nhập thời gian xử lý"/>
+                        <input name="thoigianxuly1" type="date" id="thoigianxuly1" value="@dvhd.Config.showDate(@Model.thoigianxuly)" class="form-control" placeholder="Nhập thời gian xử lý"/>
                         <input name="thoigianxuly2" type="time" id="thoigianxuly2" value="@dvhd.Config.showTime(@Model.thoigianxuly)" class="form-control" placeholder="Nhập thời gian xử lý"/>   
                         <input name="thoigianxuly" type="hidden" id="thoigianxuly" value=""/>                 
                       </div>
@@ -335,7 +335,7 @@
             </div>
         </div>
         <p>
-            <input type="button" value="Thêm mới" onclick="checkField();" />
+            <input type="button" value="Cập nhật hồ sơ" onclick="checkField();" />
         </p>
     </fieldset>
 }
@@ -393,6 +393,8 @@
         $("#ketquaxulydiv").html(content);
     }
     function checkField() {
+        //alert(document.getElementById("ngaysinh").value);
+        //return;
         if (document.getElementById("hoten").value == "") {
             alert("Nhập họ tên đối tượng");
             document.getElementById("hoten").focus();

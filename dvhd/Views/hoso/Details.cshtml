@@ -175,7 +175,7 @@
 
 <div style="width:100%;text-align:center;">
     <input type="button" value="In Thông Tin Chi Tiết" onclick="printDetails();" />
-    <input type="button" value="Tạo Báo Cáo Thông Tin Chi Tiết" onclick="createPDF();" />
+    <input type="button" value="Xuất ra file PDF" onclick="createPDF();" />
 </div>
 
 <script type="text/javascript">
@@ -200,6 +200,7 @@
             data: { html: $("#divDetail").html() },
             type: 'POST',
             success: function (result) {
+                //window.open("/Images/Report/" + result);
                 alert(result);
             }
         });

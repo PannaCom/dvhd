@@ -236,11 +236,11 @@ namespace dvhd
             {
                 DateTime d = DateTime.Now;
                 if (d1 != null) d = (DateTime)d1;
-                return d.Day.ToString("00") + "/" + d.Month.ToString("00") + "/" + d.Year.ToString();
+                return d.Year.ToString("00") + "-" + d.Month.ToString("00") + "-" + d.Day.ToString("00");
             }
             catch (Exception ex) {
                 DateTime d = DateTime.Now;
-                return d.Day.ToString("00") + "/" + d.Month.ToString("00") + "/" + d.Year.ToString();
+                return d.Year.ToString("00") + "-" + d.Month.ToString("00") + "-" + d.Day.ToString("00");
             }
         }
         public static string showTime(DateTime? d1)
