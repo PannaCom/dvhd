@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Báo cáo theo loài Động vật hoang dã";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Báo Cáo Theo Loại Động Vật Hoang Dã</h2>
+
+<script>
+    document.addEventListener("keydown", autosearch);
+    function autosearch(event) {
+        var keyCode = ('which' in event) ? event.which : event.keyCode;
+        //alert("The Unicode key code is: " + keyCode);
+        if (keyCode == 13) {
+            baocaotheoloai();
+        }
+        
+    }
+</script>
+<div class="col-md-12">
+    <div class="form-group">
+        <label for="room" style="width:auto;display:block;">Loại Động Vật Hoang Dã</label>
+        <input name="baocao_loaiDVHD" type="text" tabindex="1" id="baocao_loaiDVHD" value="" class="form-control" placeholder="Tên Loại Động Vật Hoang Dã" onkeyup="baocao_searchLoai();"/>
+        <input type="button" value="Tìm kiếm" onclick="baocaotheoloai();">
+    </div>
+</div>
+
+<div class="col-md-12" style="text-align:center;">
+    <input id="btnCreateReport" type="button" value="Tạo Báo Cáo" onclick="baocao_createPDF();" disabled="disabled" />
+</div>
+
+
+<div id="divResult" class="col-md-12">
+    <label id="countResult"></label>
+    <table id="tbResult" class="tbBanIn"></table>
+</div>
+
+<script type="text/javascript">
+    function baocao_createPDF() {
+        $.ajax({
+            url: '@Url.Action("createReport")',
+            data: { html: $("#divResult").html(), type: 1 },
+            type: 'POST',
+            success: function (result) {
+                //alert(result);
+                window.open("/Images/Report/"+result);
+            }
+        });
+    }
+</script>

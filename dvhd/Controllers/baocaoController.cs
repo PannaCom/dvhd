@@ -43,6 +43,7 @@ namespace dvhd.Controllers
         [ValidateInput(false)]
         public string createReport(string html, int type)
         {
+            string path = HttpContext.Server.MapPath("../Images/Report"+ "\\");
             Document document = new Document();
             try
             {
@@ -50,20 +51,20 @@ namespace dvhd.Controllers
                 switch (type)
                 {
                     case 1:
-                        reportName = "d:\\BaoCaoTheoLoai.pdf";
+                        reportName = "BaoCaoTheoLoai"+Guid.NewGuid().ToString()+".pdf";
                         break;
                     case 2:
-                        reportName = "d:\\BaoCaoTheoTinh.pdf";
+                        reportName = "BaoCaoTheoTinh" + Guid.NewGuid().ToString() + ".pdf";
                         break;
                     case 3:
-                        reportName = "d:\\BaoCaoTheoDoiTuong.pdf";
+                        reportName = "BaoCaoTheoDoiTuong" + Guid.NewGuid().ToString() + ".pdf";
                         break;
                     default:
-                        reportName = "d:\\BaoCao.pdf";
+                        reportName = "BaoCao" + Guid.NewGuid().ToString() + ".pdf";
                         break;
                 }
 
-                PdfWriter.GetInstance(document, new FileStream(reportName, FileMode.Create));
+                PdfWriter.GetInstance(document, new FileStream(path + reportName, FileMode.Create));
                 document.Open();
                 List<IElement> htmlarraylist = HTMLWorker.ParseToList(new StringReader(html), null);
                 for (int k = 0; k < htmlarraylist.Count; k++)
@@ -72,7 +73,7 @@ namespace dvhd.Controllers
                 }
 
                 document.Close();
-                return "ok";
+                return reportName;
             }
             catch (Exception ex)
             {

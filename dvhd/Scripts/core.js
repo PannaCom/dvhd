@@ -33,7 +33,7 @@ function setResult2Table(result) {
 function baocao_searchLoai() {
     var keyword = document.getElementById('baocao_loaiDVHD').value;
     $('#baocao_loaiDVHD').autocomplete({
-        source: '/Home/getLoai?keyword=' + keyword,
+        source: '/Home/getLoaiDVHD?keyword=' + keyword,
         select: function (event, ui) {
             $(event.target).val(ui.item.value);
             $.ajax({
@@ -49,7 +49,17 @@ function baocao_searchLoai() {
         minLength: 1
     });
 }
-
+function baocaotheoloai() {
+    var keyword = document.getElementById('baocao_loaiDVHD').value;
+    $.ajax({
+        url: '/Home/getLoaiDetails?keyword=' + keyword,
+        type: 'POST',
+        dataType: 'json',
+        success: function (result) {
+            setResult2Table(result);
+        }
+    });
+}
 function baocao_doituong() {
     var keyword = document.getElementById('baocao_cmt').value;
     $('#baocao_cmt').autocomplete({
