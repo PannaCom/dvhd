@@ -7,7 +7,7 @@
 
 <h2>Nhập dữ liệu đối tượng vi phạm</h2>
 <i>Dấu * cho biết trường  bắt buộc phải nhập</i>
-<a href="/hoso/Create?hosocode=@Model.hosocode">+Thêm đồng phạm</a>
+<a href="/hoso/Create?hosocode=@ViewBag.hosocode">+Thêm đồng phạm</a>
 @using (Html.BeginForm("Edit", "hoso", FormMethod.Post, new { id = "EditForm" })) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(false)
