@@ -231,6 +231,32 @@ namespace dvhd
         public static string getTime(DateTime d) {
             return d.Hour.ToString("00") + ":" + d.Second.ToString("00");
         }
+        public static string showDate(DateTime? d1){
+            try
+            {
+                DateTime d = DateTime.Now;
+                if (d1 != null) d = (DateTime)d1;
+                return d.Day.ToString("00") + "/" + d.Month.ToString("00") + "/" + d.Year.ToString();
+            }
+            catch (Exception ex) {
+                DateTime d = DateTime.Now;
+                return d.Day.ToString("00") + "/" + d.Month.ToString("00") + "/" + d.Year.ToString();
+            }
+        }
+        public static string showTime(DateTime? d1)
+        {
+            try
+            {
+                DateTime d = DateTime.Now;
+                if (d1 != null) d = (DateTime)d1;
+                return d.Hour.ToString("00") + ":" + d.Minute.ToString("00") + ":" + d.Second.ToString("00");
+            }
+            catch (Exception ex)
+            {
+                DateTime d = DateTime.Now;
+                return d.Hour.ToString("00") + ":" + d.Minute.ToString("00") + ":" + d.Second.ToString("00");
+            }
+        }
         public static string formatDateVn(DateTime d) {
             return d.Day.ToString("00") + "/" + d.Month.ToString("00") + "/" + d.Year.ToString();
         }

@@ -7,7 +7,7 @@
       <Diagram DiagramId="5aaeed2ef8f14d32bbec428747808683" Name="Diagram1">
         <EntityTypeShape EntityType="dvhdModel.DsDvhd" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dvhdModel.TinhThanh" Width="1.5" PointX="5.125" PointY="3.375" />
-        <EntityTypeShape EntityType="dvhdModel.HoSo" Width="1.5" PointX="3.125" PointY="1.75" />
+        <EntityTypeShape EntityType="dvhdModel.HoSo" Width="1.5" PointX="3" PointY="1.625" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

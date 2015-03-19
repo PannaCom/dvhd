@@ -110,11 +110,20 @@ namespace dvhd.Controllers
         //
         // GET: /hoso/Create
 
-        public ActionResult Create()
+        public ActionResult Create(string hosocode)
         {
+            if (hosocode == null)
+            {
+                ViewBag.hosocode = Guid.NewGuid().ToString();
+            }
+            else { ViewBag.hosocode = hosocode; }
             return View();
         }
-
+        public ActionResult AddMore(string hosocode)
+        {
+            ViewBag.hosocode = hosocode;
+            return View();
+        }
         //
         // POST: /hoso/Create
 
@@ -126,7 +135,8 @@ namespace dvhd.Controllers
             {
                 db.HoSoes.Add(hoso);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AddMore", new { hosocode = hoso.hosocode });
+                //return RedirectToAction("Index");
             }
 
             return View(hoso);

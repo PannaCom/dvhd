@@ -10,7 +10,7 @@
 
 @using (Html.BeginForm("Create", "hoso", FormMethod.Post, new { id = "EditForm" })) {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+    @Html.ValidationSummary(false)
     <fieldset>
         <ul class="nav nav-tabs" style="padding-left:6px;">
           <li class="active"><a href="#thongtin" data-toggle="tab" aria-expanded="true">Thông tin đối tượng vi phạm</a></li>
@@ -256,7 +256,7 @@
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Thời gian xử lý</label>
                         <input name="thoigianxuly1" type="date" id="thoigianxuly1" value="" class="form-control" placeholder="Nhập thời gian xử lý"/>
-                        <input name="thoigianxuly2" type="time" id="thoigianxuly2" value="" class="form-control" placeholder="Nhập thời gian xử lý"/>   
+                        <input name="thoigianxuly2" type="time" id="thoigianxuly2" value="11:00:00" class="form-control" placeholder="Nhập thời gian xử lý"/>   
                         <input name="thoigianxuly" type="hidden" id="thoigianxuly" value=""/>                 
                       </div>
                  </div>
@@ -302,6 +302,19 @@
                         <input name="bican" type="text" tabindex="38" id="bican" value="" class="form-control" placeholder="Bị can" />                
                       </div>
                  </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Kết quả xử lý</label>
+                        <div id="ketquaxulydiv" name="ketquaxulydiv"><input name="ketquaxulychitiet" type="text" tabindex="39" id="ketquaxulychitiet" value="" class="form-control" placeholder="Kết quả xử lý" /></div>                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Mô tả chi tiết kết quả xư lý</label>
+                        <textarea name="motachitietxuly" tabindex="40" id="motachitietxuly" value="" rows="4" cols="20" class="form-control"></textarea>                
+                        <input type="hidden" id="hosocode" name="hosocode" value="@ViewBag.hosocode">
+                      </div>
+                 </div>
             </div>
         </div>
         <p>
@@ -333,4 +346,57 @@
         }
     });
     evt.preventDefault();
+    function changeKetQuaXuLy() {
+        var content = "";
+        //Nếu là Cơ quan điều tra thì có các hình thức xử lý
+        if ($("#donvixuly").val() == "Cơ quan điều tra") {
+            content = "<select id=ketquaxulychitiet name=ketquaxulychitiet class=\"form-control\">";
+            content += "<option value=\"Tạm đình chỉ\">Tạm đình chỉ</option>";
+            content += "<option value=\"Đình chỉ\">Đình chỉ</option>";
+            content += "<option value=\"Kết thúc chuyển sang Viện kiểm sát\">Kết thúc chuyển sang Viện kiểm sát</option>";
+            content += "</option>";
+        }else
+        if ($("#donvixuly").val() == "Viện kiểm sát") {
+            content = "<select id=ketquaxulychitiet name=ketquaxulychitiet class=\"form-control\">";
+            content += "<option value=\"Tạm đình chỉ\">Tạm đình chỉ</option>";
+            content += "<option value=\"Đình chỉ\">Đình chỉ</option>";
+            content += "<option value=\"Truy tố\">Truy tố</option>";
+            content += "</option>";
+        }else
+            if ($("#donvixuly").val() == "Tòa án") {
+                content = "<select id=ketquaxulychitiet name=ketquaxulychitiet class=\"form-control\">";
+                content += "<option value=\"Tạm đình chỉ\">Tạm đình chỉ</option>";
+                content += "<option value=\"Đình chỉ\">Đình chỉ</option>";
+                content += "<option value=\"Kết án\">Kết án</option>";
+                content += "<option value=\"Kháng cáo, kháng nghị\">Kháng cáo, kháng nghị</option>";
+                content += "</option>";
+            } else {
+                content = "<input name=\"ketquaxulychitiet\" type=\"text\" tabindex=\"39\" id=\"ketquaxulychitiet\" value=\"\" class=\"form-control\" placeholder=\"Kết quả xử lý\" />";
+            }
+        $("#ketquaxulydiv").html(content);
+    }
+    function checkField() {
+        if (document.getElementById("hoten").value == "") {
+            alert("Nhập họ tên đối tượng");
+            document.getElementById("hoten").focus();
+            return;
+        }
+        if (document.getElementById("hokhauthuongtru").value == "") {
+            alert("Nhập hộ khẩu thường trú");
+            document.getElementById("hokhauthuongtru").focus();
+            return;
+        }
+        if (document.getElementById("choohientai").value == "") {
+            alert("Nhập chỗ ở hiện tại");
+            document.getElementById("choohientai").focus();
+            return;
+        }
+        if ($("#thoigianvipham1").val() != "" && $("#thoigianvipham2").val() != "") {
+            $("#thoigianvipham").val($("#thoigianvipham1").val() +" "+ $("#thoigianvipham2").val());
+        }
+        if ($("#thoigianxuly1").val() != "" && $("#thoigianxuly2").val() != "") {
+            $("#thoigianxuly").val($("#thoigianxuly1").val() + " " + $("#thoigianxuly2").val());
+        }
+        document.getElementById("EditForm").submit();
+    }
 </script>

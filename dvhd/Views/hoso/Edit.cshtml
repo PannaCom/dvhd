@@ -5,363 +5,337 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>Nhập dữ liệu đối tượng vi phạm</h2>
+<i>Dấu * cho biết trường  bắt buộc phải nhập</i>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm("Edit", "hoso", FormMethod.Post, new { id = "EditForm" })) {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-
+    @Html.ValidationSummary(false)
     <fieldset>
-        <legend>HoSo</legend>
-
-        @Html.HiddenFor(model => model.id)
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.hoten)
+        <ul class="nav nav-tabs" style="padding-left:6px;">
+          <li class="active"><a href="#thongtin" data-toggle="tab" aria-expanded="true">Thông tin đối tượng vi phạm</a></li>
+          <li class=""><a href="#hanhvi" data-toggle="tab" aria-expanded="false">Hành vi vi phạm</a></li>
+          <li class=""><a href="#ketqua" data-toggle="tab" aria-expanded="false">Kết quả xử lý</a></li>
+        </ul>
+        <div class="tab-content" style="padding-left:6px;" >
+            <div class="tab-pane fade active in" id="thongtin" >
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Họ tên * </label>
+                        <input name="hoten" type="text" tabindex="1" id="hoten" value="@Model.hoten" class="form-control" placeholder="Gõ tên đối tượng vi phạm"/>(<a onclick="uploadAnhDaiDien();" style="cursor:pointer;">Click để upload ảnh nếu có</a>)                
+                      </div>
+                 </div>
+                <div id="anhdaidiendiv" style="display:none;">
+                     <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="room" style="width:auto;display:block;">Upload ảnh đại diện</label>
+                            <input name="imageFile" type="file" id="imageFile" value="" multiple="multiple" class="form-control" runat="server" onchange="uploadProcess();"/>                                
+                            <div id="progressbar" class="progressbar">
+                                <div id="progresslabel" class="progressbarlabel"></div>
+                             </div>  
+                          </div>
+                     </div> 
+                     <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="room" style="width:auto;display:block;">Ảnh đại diện</label>
+                            <input name="anhdoituong" type="hidden" id="anhdoituong" value="@Model.anhdoituong" class="form-control" />                  
+                              <div id="imageShow" style="width:200px;height:126px;"><img src="@Model.anhdoituong" width="200" height="126"></div>
+                          </div>
+                     </div>
+                 </div>
+                @if (Model.anhdoituong != null) { 
+                    <script>$("#anhdaidiendiv").show();</script>
+                }
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Ngày sinh</label>
+                        <input name="ngaysinh" type="text" tabindex="2" id="ngaysinh" value="@dvhd.Config.showDate(@Model.ngaysinh)" class="form-control" placeholder="Gõ ngày sinh"/>                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Quốc tịch *</label>
+                        @Html.Partial("~/Views/Shared/_QuocGia.cshtml")   
+                        <script>document.getElementById("quoctich").value="@Html.Raw(@Model.quoctich)";</script>               
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Hộ khẩu thường trú </label>
+                        <input name="hokhauthuongtru" type="text" tabindex="4" id="hokhauthuongtru" value="@Model.hokhauthuongtru" class="form-control" placeholder="Nhập hộ khẩu thường trú"/>                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Chỗ ở hiện tại *</label>
+                        <input name="choohientai" type="text" tabindex="5" id="choohientai" value="@Model.choohientai" class="form-control" placeholder="Nhập chỗ ở hiện tại"/>                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Họ tên cha</label>
+                        <input name="hotencha" type="text" tabindex="6" id="hotencha" value="@Model.hotencha" class="form-control" placeholder="Nhập họ tên cha"/>                
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Họ tên mẹ</label>
+                        <input name="hotenme" type="text" tabindex="7" id="hotenme" value="@Model.hotenme" class="form-control" placeholder="Nhập họ tên mẹ"/>                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Số chứng minh thư(hộ chiếu)</label>
+                        <input name="cmthochieu" type="text" tabindex="8" id="cmthochieu" value="@Model.cmthochieu" class="form-control" placeholder="Số cmt hoặc hộ chiếu"/>                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Nơi cấp </label>
+                        <input name="noicap" type="text" tabindex="9" id="noicap" value="@Model.noicap" class="form-control" placeholder="Nơi cấp cmt hoặc hộ chiếu"/>                
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Ngày cấp</label>
+                        <input name="ngaycap" type="text" tabindex="10" id="ngaycap" value="@dvhd.Config.showDate(@Model.ngaycap)" class="form-control" placeholder="Ngày cấp cmt hoặc hộ chiếu"/>                
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Cơ quan cấp</label>
+                        <input name="coquancap" type="text" tabindex="11" id="coquancap" value="@Model.coquancap" class="form-control" placeholder="Cơ quan cấp cmt hoặc hộ chiếu"/>                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Nơi công tác</label>
+                        <input name="noicongtac" type="text" tabindex="12" id="noicongtac" value="@Model.noicongtac" class="form-control" placeholder="Tên cơ quan đối tượng đang công tác"/>                
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Địa chỉ nơi công tác</label>
+                        <input name="diachicoquan" type="text" tabindex="13" id="diachicoquan" value="@Model.diachicoquan" class="form-control" placeholder="Nhập địa chỉ cơ quan, email và số điện thoại cơ quan"/>                
+                      </div>
+                 </div>
+                
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Đặc điểm nhận dạng</label>
+                        <input name="dacdiemnhandang" type="text" tabindex="14" id="dacdiemnhandang" value="@Model.dacdiemnhandang" class="form-control" placeholder="Đặc điểm nhận dạng của đối tượng"/>                
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Tiền án tiền sự</label>
+                        <input name="tienantiensu" type="text" tabindex="15" id="tienantiensu" value="@Model.tienantiensu" class="form-control" placeholder="Tiền án tiền sự"/>                
+                      </div>
+                 </div>
+            </div>
+            <div class="tab-pane fade" id="hanhvi" >
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Thời gian vi phạm</label>
+                        <input name="thoigianvipham1" type="text" tabindex="16" id="thoigianvipham1" value="@dvhd.Config.showDate(@Model.thoigianvipham)" class="form-control" placeholder="Nhập thời gian vi phạm"/>
+                        <input name="thoigianvipham2" type="time" tabindex="16" id="thoigianvipham2" value="@dvhd.Config.showTime(@Model.thoigianvipham)" class="form-control" placeholder="Nhập thời gian vi phạm"/>
+                        <input type="hidden" id="thoigianvipham" name="thoigianvipham"/>                    
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Thuộc quận huyện</label>
+                        <input name="quanvipham" type="text" tabindex="17" id="quanvipham" value="@Model.quanvipham" class="form-control" placeholder="Thuộc quận huyện nào" onkeyup="searchQuanHuyen();"/>                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Thuộc tỉnh thành</label>
+                        <input name="tinhvipham" type="text" tabindex="18" id="tinhvipham" value="@Model.tinhvipham" class="form-control" placeholder="Thuộc tỉnh thành" onkeyup="searchTinhThanh();"/>                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Mô tả vi phạm chi tiết</label>
+                        <textarea name="motavipham" tabindex="19" id="motavipham"  rows="4" cols="20" class="form-control">@Model.motavipham</textarea>                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Hình thức vi phạm</label>
+                        @Html.Partial("~/Views/Shared/_HinhThucViPham.cshtml")      
+                        <script>document.getElementById("hinhthucvipham").value = "@Html.Raw(@Model.hinhthucvipham)";</script>              
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Hành vi vi phạm</label>
+                        @Html.Partial("~/Views/Shared/_HanhViViPham.cshtml")    
+                        <script>document.getElementById("hanhvivipham").value = "@Html.Raw(@Model.hanhvivipham)";</script>               
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Phương thức vận chuyển</label>
+                        @Html.Partial("~/Views/Shared/_PhuongThucVanChuyen.cshtml")
+                        <script>document.getElementById("phuongthucvanchuyen").value = "@Html.Raw(@Model.phuongthucvanchuyen)";</script>                      
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Tuyến đường vận chuyển</label>
+                        <input name="tuyenduongvanchuyen" type="text" tabindex="23" id="tuyenduongvanchuyen" value="@Model.tuyenduongvanchuyen" class="form-control" placeholder="tuyến đường vận chuyển" />                
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Loài vi phạm *</label>
+                        <input name="loaidongvat" type="text" tabindex="24" id="loaidongvat" value="@Model.loaidongvat" class="form-control" placeholder="loài vi phạm" onkeyup="searchLoaidDv();"/>                
+                        (<a onclick="uploadAnhDongVat();" style="cursor:pointer;">Click để upload ảnh vi phạm nếu có</a>) 
+                      </div>
+                 </div>
+                 <div id="anhloaidongvativ" style="display:none;">
+                     <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="room" style="width:auto;display:block;">Upload ảnh vi phạm</label>
+                            <input name="imageFileloaidongvat" type="file" id="imageFileloaidongvat" value="" multiple="multiple" class="form-control" runat="server" onchange="uploadProcessLoaidongvat();"/>                                
+                            <div id="progressbarloaidongvat" class="progressbar">
+                                <div id="progresslabelloaidongvat" class="progressbarlabel"></div>
+                             </div>  
+                          </div>
+                     </div> 
+                     <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="room" style="width:auto;display:block;">Ảnh </label>
+                            <input name="anhdongvat" type="hidden" id="anhdongvat" value="@Model.anhdongvat" class="form-control" />                  
+                              <div id="imageShowloaidongvat" style="width:200px;height:126px;"><img src="@Model.anhdongvat"  width="200" height="126"></div>
+                          </div>
+                     </div>
+                 </div>
+                @if (Model.anhdongvat != null) { 
+                    <script>$("#anhloaidongvativ").show();</script>
+                }
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Tình trạng</label>
+                        <select id="tinhtrangsong" class="form-control" name="tinhtrangsong" tabindex="25">
+                            <option value="sống">sống</option>
+                            <option value="chết">chết</option>
+                        </select>
+                        <script>document.getElementById("tinhtrangsong").value = "@Html.Raw(@Model.tinhtrangsong)";</script>  
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Đơn vị tính</label>
+                        @Html.Partial("~/Views/Shared/_DonViTinh.cshtml")     
+                        <script>document.getElementById("donvitinh").value = "@Html.Raw(@Model.donvitinh)";</script> 
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Số lượng chi tiết</label>
+                        <textarea name="soluongchitiet" tabindex="27" id="soluongchitiet" value="" rows="4" cols="20" class="form-control">@Model.soluongchitiet</textarea>                 
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Trị giá tang vật</label>
+                        <input name="trigiatangvat" type="text" tabindex="28" id="trigiatangvat" value="@Model.trigiatangvat" class="form-control" placeholder="trị giá tang vật" />                
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Tình trạng bảo tồn</label>
+                        @Html.Partial("~/Views/Shared/_TinhTrangBaoTon.cshtml")   
+                        <script>document.getElementById("tinhtrangbaoton").value = "@Html.Raw(@Model.tinhtrangbaoton)";</script>      
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Đơn vị bắt giữ</label>
+                        @Html.Partial("~/Views/Shared/_DonViCoQuan.cshtml")   
+                        <script>document.getElementById("donvibatgiu").value = "@Html.Raw(@Model.donvibatgiu)";</script>      
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Tên đơn vị bắt giữ:</label>
+                        <input name="tendonvibatgiu" type="text" tabindex="31" id="tendonvibatgiu" value="@Model.tendonvibatgiu" class="form-control" placeholder="Ghi rõ tên đơn vị bắt giữ" />                
+    
+                      </div>
+                 </div>
+            </div>
+            <div class="tab-pane fade" id="ketqua" >
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Thời gian xử lý</label>
+                        <input name="thoigianxuly1" type="text" id="thoigianxuly1" value="@dvhd.Config.showDate(@Model.thoigianxuly)" class="form-control" placeholder="Nhập thời gian xử lý"/>
+                        <input name="thoigianxuly2" type="time" id="thoigianxuly2" value="@dvhd.Config.showTime(@Model.thoigianxuly)" class="form-control" placeholder="Nhập thời gian xử lý"/>   
+                        <input name="thoigianxuly" type="hidden" id="thoigianxuly" value=""/>                 
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Kết quả xử lý</label>
+                          @Html.Partial("~/Views/Shared/_KetQuaXuLy.cshtml")  
+                          <script>document.getElementById("ketquaxuly").value = "@Html.Raw(@Model.ketquaxuly)";</script>            
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Đơn vị xử lý</label>
+                        @Html.Partial("~/Views/Shared/_DonViXuLy.cshtml")  
+                        <script>document.getElementById("donvixuly").value = "@Html.Raw(@Model.donvixuly)";</script>                    
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Tên đơn vị xử lý</label>
+                        <input name="tendonvixuly" type="text" tabindex="34" id="tendonvixuly" value="@Model.tendonvixuly" class="form-control" placeholder="Ghi rõ tên đơn vị xử lý" />                
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Họ tên cán bộ xử lý</label>
+                        <input name="hotencanboxuly" type="text" tabindex="35" id="hotencanboxuly" value="@Model.hotencanboxuly" class="form-control" placeholder="Họ tên cán bộ xử lý" />                
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Cấp bậc</label>
+                        <input name="capbac" type="text" tabindex="36" id="capbac" value="@Model.capbac" class="form-control" placeholder="Cấp bậc của cán bộ xử lý" />                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Địa chỉ liên hệ(địa chỉ cơ quan, số điện thoại, email của cán bộ)</label>
+                        <textarea name="diachilienhe" tabindex="37" id="diachilienhe" value="" rows="4" cols="20" class="form-control">@Model.diachilienhe</textarea>                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Bị can</label>
+                        <input name="bican" type="text" tabindex="38" id="bican" value="@Model.bican" class="form-control" placeholder="Bị can" />                
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Kết quả xử lý</label>
+                        <div id="ketquaxulydiv" name="ketquaxulydiv"><input name="ketquaxulychitiet" type="text" tabindex="39" id="ketquaxulychitiet" value="@Model.ketquaxuly" class="form-control" placeholder="Kết quả xử lý" /></div>                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Mô tả chi tiết kết quả xư lý</label>
+                        <textarea name="motachitietxuly" tabindex="40" id="motachitietxuly" value="" rows="4" cols="20" class="form-control">@Model.motachitietxuly</textarea>                
+                        <input type="hidden" id="hosocode" name="hosocode" value="@ViewBag.hosocode">
+                      </div>
+                 </div>
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.hoten)
-            @Html.ValidationMessageFor(model => model.hoten)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ngaysinh)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ngaysinh)
-            @Html.ValidationMessageFor(model => model.ngaysinh)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.quoctich)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.quoctich)
-            @Html.ValidationMessageFor(model => model.quoctich)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.hokhauthuongtru)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.hokhauthuongtru)
-            @Html.ValidationMessageFor(model => model.hokhauthuongtru)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.choohientai)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.choohientai)
-            @Html.ValidationMessageFor(model => model.choohientai)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.hotencha)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.hotencha)
-            @Html.ValidationMessageFor(model => model.hotencha)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.hotenme)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.hotenme)
-            @Html.ValidationMessageFor(model => model.hotenme)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.cmthochieu)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.cmthochieu)
-            @Html.ValidationMessageFor(model => model.cmthochieu)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.noicap)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.noicap)
-            @Html.ValidationMessageFor(model => model.noicap)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ngaycap)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ngaycap)
-            @Html.ValidationMessageFor(model => model.ngaycap)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.coquancap)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.coquancap)
-            @Html.ValidationMessageFor(model => model.coquancap)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.noicongtac)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.noicongtac)
-            @Html.ValidationMessageFor(model => model.noicongtac)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.diachicoquan)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.diachicoquan)
-            @Html.ValidationMessageFor(model => model.diachicoquan)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.anhdoituong)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.anhdoituong)
-            @Html.ValidationMessageFor(model => model.anhdoituong)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.dacdiemnhandang)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.dacdiemnhandang)
-            @Html.ValidationMessageFor(model => model.dacdiemnhandang)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.tienantiensu)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.tienantiensu)
-            @Html.ValidationMessageFor(model => model.tienantiensu)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.thoigianvipham)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.thoigianvipham)
-            @Html.ValidationMessageFor(model => model.thoigianvipham)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.quanvipham)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.quanvipham)
-            @Html.ValidationMessageFor(model => model.quanvipham)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.tinhvipham)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.tinhvipham)
-            @Html.ValidationMessageFor(model => model.tinhvipham)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.motavipham)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.motavipham)
-            @Html.ValidationMessageFor(model => model.motavipham)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.hinhthucvipham)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.hinhthucvipham)
-            @Html.ValidationMessageFor(model => model.hinhthucvipham)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.hanhvivipham)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.hanhvivipham)
-            @Html.ValidationMessageFor(model => model.hanhvivipham)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.phuongthucvanchuyen)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.phuongthucvanchuyen)
-            @Html.ValidationMessageFor(model => model.phuongthucvanchuyen)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.tuyenduongvanchuyen)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.tuyenduongvanchuyen)
-            @Html.ValidationMessageFor(model => model.tuyenduongvanchuyen)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.loaidongvat)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.loaidongvat)
-            @Html.ValidationMessageFor(model => model.loaidongvat)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.tinhtrangsong)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.tinhtrangsong)
-            @Html.ValidationMessageFor(model => model.tinhtrangsong)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.donvitinh)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.donvitinh)
-            @Html.ValidationMessageFor(model => model.donvitinh)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.trigiatangvat)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.trigiatangvat)
-            @Html.ValidationMessageFor(model => model.trigiatangvat)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.tinhtrangbaoton)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.tinhtrangbaoton)
-            @Html.ValidationMessageFor(model => model.tinhtrangbaoton)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.anhdongvat)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.anhdongvat)
-            @Html.ValidationMessageFor(model => model.anhdongvat)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.donvibatgiu)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.donvibatgiu)
-            @Html.ValidationMessageFor(model => model.donvibatgiu)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.tendonvibatgiu)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.tendonvibatgiu)
-            @Html.ValidationMessageFor(model => model.tendonvibatgiu)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.thoigianxuly)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.thoigianxuly)
-            @Html.ValidationMessageFor(model => model.thoigianxuly)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ketquaxuly)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ketquaxuly)
-            @Html.ValidationMessageFor(model => model.ketquaxuly)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.donvixuly)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.donvixuly)
-            @Html.ValidationMessageFor(model => model.donvixuly)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.tendonvixuly)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.tendonvixuly)
-            @Html.ValidationMessageFor(model => model.tendonvixuly)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.hotencanboxuly)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.hotencanboxuly)
-            @Html.ValidationMessageFor(model => model.hotencanboxuly)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.capbac)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.capbac)
-            @Html.ValidationMessageFor(model => model.capbac)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.diachilienhe)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.diachilienhe)
-            @Html.ValidationMessageFor(model => model.diachilienhe)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ngayxuly)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ngayxuly)
-            @Html.ValidationMessageFor(model => model.ngayxuly)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.bican)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.bican)
-            @Html.ValidationMessageFor(model => model.bican)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ketquaxulychitiet)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ketquaxulychitiet)
-            @Html.ValidationMessageFor(model => model.ketquaxulychitiet)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.motachitietxuly)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.motachitietxuly)
-            @Html.ValidationMessageFor(model => model.motachitietxuly)
-        </div>
-
         <p>
-            <input type="submit" value="Save" />
+            <input type="button" value="Thêm mới" onclick="checkField();" />
         </p>
     </fieldset>
 }
@@ -369,7 +343,77 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<script>
+    $("#progressbar").progressbar({
+        max: 100,
+        change: function (evt, ui) {
+            $("#progresslabel").text($("#progressbar").progressbar("value") + "%");
+        },
+        complete: function (evt, ui) {
+            $("#progresslabel").text("Upload ảnh thành công!");
+        }
+    });
+    $("#progressbarloaidongvat").progressbar({
+        max: 100,
+        change: function (evt, ui) {
+            $("#progresslabelloaidongvat").text($("#progressbarloaidongvat").progressbar("value") + "%");
+        },
+        complete: function (evt, ui) {
+            $("#progresslabelloaidongvat").text("Upload ảnh thành công!");
+        }
+    });
+    evt.preventDefault();
+    function changeKetQuaXuLy() {
+        var content = "";
+        //Nếu là Cơ quan điều tra thì có các hình thức xử lý
+        if ($("#donvixuly").val() == "Cơ quan điều tra") {
+            content = "<select id=ketquaxulychitiet name=ketquaxulychitiet class=\"form-control\">";
+            content += "<option value=\"Tạm đình chỉ\">Tạm đình chỉ</option>";
+            content += "<option value=\"Đình chỉ\">Đình chỉ</option>";
+            content += "<option value=\"Kết thúc chuyển sang Viện kiểm sát\">Kết thúc chuyển sang Viện kiểm sát</option>";
+            content += "</option>";
+        } else
+            if ($("#donvixuly").val() == "Viện kiểm sát") {
+                content = "<select id=ketquaxulychitiet name=ketquaxulychitiet class=\"form-control\">";
+                content += "<option value=\"Tạm đình chỉ\">Tạm đình chỉ</option>";
+                content += "<option value=\"Đình chỉ\">Đình chỉ</option>";
+                content += "<option value=\"Truy tố\">Truy tố</option>";
+                content += "</option>";
+            } else
+                if ($("#donvixuly").val() == "Tòa án") {
+                    content = "<select id=ketquaxulychitiet name=ketquaxulychitiet class=\"form-control\">";
+                    content += "<option value=\"Tạm đình chỉ\">Tạm đình chỉ</option>";
+                    content += "<option value=\"Đình chỉ\">Đình chỉ</option>";
+                    content += "<option value=\"Kết án\">Kết án</option>";
+                    content += "<option value=\"Kháng cáo, kháng nghị\">Kháng cáo, kháng nghị</option>";
+                    content += "</option>";
+                } else {
+                    content = "<input name=\"ketquaxulychitiet\" type=\"text\" tabindex=\"39\" id=\"ketquaxulychitiet\" value=\"\" class=\"form-control\" placeholder=\"Kết quả xử lý\" />";
+                }
+        $("#ketquaxulydiv").html(content);
+    }
+    function checkField() {
+        if (document.getElementById("hoten").value == "") {
+            alert("Nhập họ tên đối tượng");
+            document.getElementById("hoten").focus();
+            return;
+        }
+        if (document.getElementById("hokhauthuongtru").value == "") {
+            alert("Nhập hộ khẩu thường trú");
+            document.getElementById("hokhauthuongtru").focus();
+            return;
+        }
+        if (document.getElementById("choohientai").value == "") {
+            alert("Nhập chỗ ở hiện tại");
+            document.getElementById("choohientai").focus();
+            return;
+        }
+        if ($("#thoigianvipham1").val() != "" && $("#thoigianvipham2").val() != "") {
+            $("#thoigianvipham").val($("#thoigianvipham1").val() + " " + $("#thoigianvipham2").val());
+        }
+        if ($("#thoigianxuly1").val() != "" && $("#thoigianxuly2").val() != "") {
+            $("#thoigianxuly").val($("#thoigianxuly1").val() + " " + $("#thoigianxuly2").val());
+        }
+        document.getElementById("EditForm").submit();
+    }
+</script>

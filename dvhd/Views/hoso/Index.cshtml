@@ -4,6 +4,21 @@
     ViewBag.Title = "Danh sách đối tượng vi phạm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style id="styleDetail" type="text/css">
+   /* Ban In css*/
+    .tbBanIn {
+        width:100%;
+        border: 1px solid #bbbcbb;
+        border-collapse: collapse;
+    }
+    .tbBanIn td, .tbBanIn th {
+        border: 1px solid #bbbcbb;
+        padding: 2px !important;
+    }
+    .tbBanIn label {
+        margin: 0 !important;
+    }
+</style>
 <h2>Danh sách đối tượng vi phạm</h2>
 <p>
     @Html.ActionLink("Thêm mới", "Create")
@@ -66,7 +81,7 @@
         <td>
            @item.hanhvivipham
         </td>
-        <td>
+        <td width="20%">
            @item.soluongchitiet
         </td>
         <td>
