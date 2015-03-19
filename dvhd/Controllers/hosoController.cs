@@ -149,6 +149,7 @@ namespace dvhd.Controllers
         {
             HoSo hoso = db.HoSoes.Find(id);
             ViewBag.hosocode = hoso.hosocode;
+            if (hoso.hosocode == null) ViewBag.hosocode = Guid.NewGuid().ToString();
             if (hoso == null)
             {
                 return HttpNotFound();
