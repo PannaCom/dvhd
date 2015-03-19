@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "AddMore";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Bạn có muốn nhập tiếp hồ sơ đồng phạm của vụ vi phạm này?&nbsp;<input type="button" value="Có" onclick="Yes();"><input type="button" value="Không" onclick="No();"></h2>
+<script>
+    function Yes() {
+        location.href = "/hoso/Create?hosocode=@ViewBag.hosocode";
+    }
+    function No() {
+        location.href = "/hoso/Index";
+    }
+</script>
