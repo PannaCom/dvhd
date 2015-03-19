@@ -351,28 +351,31 @@
         //Nếu là Cơ quan điều tra thì có các hình thức xử lý
         if ($("#donvixuly").val() == "Cơ quan điều tra") {
             content = "<select id=ketquaxulychitiet name=ketquaxulychitiet class=\"form-control\">";
+            content += "<option value=\"Đang điều tra\">Đang điều tra</option>";
             content += "<option value=\"Tạm đình chỉ\">Tạm đình chỉ</option>";
             content += "<option value=\"Đình chỉ\">Đình chỉ</option>";
-            content += "<option value=\"Kết thúc chuyển sang Viện kiểm sát\">Kết thúc chuyển sang Viện kiểm sát</option>";
+            content += "<option value=\"Kết thúc điều tra chuyển Viện kiểm sát\">Kết thúc điều tra chuyển Viện kiểm sát</option>";
             content += "</option>";
-        }else
-        if ($("#donvixuly").val() == "Viện kiểm sát") {
-            content = "<select id=ketquaxulychitiet name=ketquaxulychitiet class=\"form-control\">";
-            content += "<option value=\"Tạm đình chỉ\">Tạm đình chỉ</option>";
-            content += "<option value=\"Đình chỉ\">Đình chỉ</option>";
-            content += "<option value=\"Truy tố\">Truy tố</option>";
-            content += "</option>";
-        }else
-            if ($("#donvixuly").val() == "Tòa án") {
+        } else
+            if ($("#donvixuly").val() == "Viện kiểm sát") {
                 content = "<select id=ketquaxulychitiet name=ketquaxulychitiet class=\"form-control\">";
+                content += "<option value=\"Đang thụ lý hồ sơ\">Đang thụ lý hồ sơ</option>";
                 content += "<option value=\"Tạm đình chỉ\">Tạm đình chỉ</option>";
                 content += "<option value=\"Đình chỉ\">Đình chỉ</option>";
-                content += "<option value=\"Kết án\">Kết án</option>";
-                content += "<option value=\"Kháng cáo, kháng nghị\">Kháng cáo, kháng nghị</option>";
+                content += "<option value=\"Truy tố\">Truy tố</option>";
                 content += "</option>";
-            } else {
-                content = "<input name=\"ketquaxulychitiet\" type=\"text\" tabindex=\"39\" id=\"ketquaxulychitiet\" value=\"\" class=\"form-control\" placeholder=\"Kết quả xử lý\" />";
-            }
+            } else
+                if ($("#donvixuly").val() == "Tòa án") {
+                    content = "<select id=ketquaxulychitiet name=ketquaxulychitiet class=\"form-control\">";
+                    content += "<option value=\"Đang thụ lý hồ sơ\">Đang thụ lý hồ sơ</option>";
+                    content += "<option value=\"Tạm đình chỉ\">Tạm đình chỉ</option>";
+                    content += "<option value=\"Đình chỉ\">Đình chỉ</option>";
+                    content += "<option value=\"Kết án\">Kết án</option>";
+                    content += "<option value=\"Kháng cáo, kháng nghị\">Kháng cáo, kháng nghị</option>";
+                    content += "</option>";
+                } else {
+                    content = "<input name=\"ketquaxulychitiet\" type=\"text\" tabindex=\"39\" id=\"ketquaxulychitiet\" value=\"\" class=\"form-control\" placeholder=\"Kết quả xử lý\" />";
+                }
         $("#ketquaxulydiv").html(content);
     }
     function checkField() {
