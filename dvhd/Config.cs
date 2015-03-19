@@ -16,7 +16,7 @@ namespace dvhd
     {
 
         public static string domain = "http://demo.binhyen.net";//"http://localhost:58509//";
-        public static int PageSize =5;
+        public static int PageSize =15;
       
         public static string HoSoImagePath = "/Images/HoSo";
         public static string LogoImagePath = "/Images";
