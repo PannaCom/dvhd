@@ -1,8 +1,13 @@
 ﻿@model dvhd.Models.HoSo
+@using System.Globalization;
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var ngaysinh = Model.ngaysinh.HasValue == true ? Model.ngaysinh.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture) : "";
+    var ngaycapCMT = Model.ngaycap.HasValue == true ? Model.ngaycap.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture) : "";
+    var thoigianvipham = Model.thoigianvipham.HasValue == true ? Model.thoigianvipham.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture) : "";
+    var thoigianxuly = Model.thoigianxuly.HasValue == true ? Model.thoigianxuly.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture) : "";
 }
 <style id="styleDetail" type="text/css">
     /* Ban In css*/
@@ -29,15 +34,16 @@
                 <td rowspan="3" style="width:140px">
                     <img src="@Model.anhdoituong" width="300" height="200">
                 </td>
-            }else{
+            }
+            else
+            {
                 <td rowspan="3">
                 </td>
             }
             <td><label>Họ và Tên :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.hoten) </td>
         </tr>
-       
         <tr>            
-            <td><label>Ngày Sinh :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.ngaysinh) </td>            
+            <td><label>Ngày Sinh :</label></td> <td colspan="3"> @ngaysinh </td>            
         </tr>
         <tr>
             <td><label>Quốc Tịch :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.quoctich) </td>
@@ -54,7 +60,7 @@
         </tr>
         <tr>
             <td><label>Số CMND/Hộ Chiếu :</label></td> <td> @Html.DisplayFor(model => model.cmthochieu) </td>
-            <td><label>Ngày Cấp :</label></td> <td> @Html.DisplayFor(model => model.ngaycap) </td><td> </td>            
+            <td><label>Ngày Cấp :</label></td> <td> @ngaycapCMT </td><td> </td>            
         </tr>
         <tr>
             <td><label>Cơ Quan Cấp :</label></td> <td> @Html.DisplayFor(model => model.coquancap) </td>
@@ -77,7 +83,7 @@
     <h4>Hành Vi Vi Phạm</h4>
     <table class="tbBanIn">
         <tr>
-            <td style="width:125px"><label>Thời Gian Vi Phạm :</label></td> <td> @Html.DisplayFor(model => model.thoigianvipham) </td>
+            <td style="width:125px"><label>Thời Gian Vi Phạm :</label></td> <td> @thoigianvipham </td>
             <td><label>Địa Điểm Vi Phạm :</label></td> <td> @Html.DisplayFor(model => model.quanvipham) , @Html.DisplayFor(model => model.tinhvipham) </td>            
         </tr>
         <tr>
@@ -94,14 +100,16 @@
       
         <tr>
              @if (Model.anhdongvat != null)
-            {
+             {
                 <td rowspan="3" style="width:140px">
                     <img src="@Model.anhdongvat" width="300" height="200">
                 </td>
-            }else{
+             }
+             else
+             {
                 <td rowspan="3">
                 </td>
-            }
+             }
             <td><label>Động Vật Hoang Dã :</label></td> <td> @Html.DisplayFor(model => model.loaidongvat)</td>            
         </tr>
         
@@ -146,7 +154,7 @@
     <h4>Xử Lý Vi Phạm</h4>
     <table class="tbBanIn">
         <tr>
-            <td><label>Thời Gian Xử Lý :</label></td> <td> @Html.DisplayFor(model => model.thoigianxuly) </td>
+            <td><label>Thời Gian Xử Lý :</label></td> <td> @thoigianxuly </td>
             <td><label>Kết Quả Xử Lý :</label></td> <td> @Html.DisplayFor(model => model.ketquaxuly) </td>            
         </tr>
         <tr>
