@@ -235,12 +235,16 @@ namespace dvhd
             try
             {
                 DateTime d = DateTime.Now;
-                if (d1 != null) d = (DateTime)d1;
+                if (d1 != null && d1 != d)
+                {
+                    d = (DateTime)d1;
+                }
+                else return "";
                 return d.Year.ToString("00") + "-" + d.Month.ToString("00") + "-" + d.Day.ToString("00");
             }
             catch (Exception ex) {
                 //DateTime d = DateTime.Now;
-                return null;// d.Year.ToString("00") + "-" + d.Month.ToString("00") + "-" + d.Day.ToString("00");
+                return "";// d.Year.ToString("00") + "-" + d.Month.ToString("00") + "-" + d.Day.ToString("00");
             }
         }
         public static string showTime(DateTime? d1)
@@ -248,13 +252,17 @@ namespace dvhd
             try
             {
                 DateTime d = DateTime.Now;
-                if (d1 != null) d = (DateTime)d1;
+                if (d1 != null && d1 != d)
+                {
+                    d = (DateTime)d1;
+                }
+                else return "";
                 return d.Hour.ToString("00") + ":" + d.Minute.ToString("00") + ":" + d.Second.ToString("00");
             }
             catch (Exception ex)
             {
                 //DateTime d = DateTime.Now;
-                return null;//d.Hour.ToString("00") + ":" + d.Minute.ToString("00") + ":" + d.Second.ToString("00");
+                return "";//d.Hour.ToString("00") + ":" + d.Minute.ToString("00") + ":" + d.Second.ToString("00");
             }
         }
         public static string formatDateVn(DateTime d) {
