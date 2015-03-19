@@ -239,8 +239,8 @@ namespace dvhd
                 return d.Year.ToString("00") + "-" + d.Month.ToString("00") + "-" + d.Day.ToString("00");
             }
             catch (Exception ex) {
-                DateTime d = DateTime.Now;
-                return d.Year.ToString("00") + "-" + d.Month.ToString("00") + "-" + d.Day.ToString("00");
+                //DateTime d = DateTime.Now;
+                return null;// d.Year.ToString("00") + "-" + d.Month.ToString("00") + "-" + d.Day.ToString("00");
             }
         }
         public static string showTime(DateTime? d1)
@@ -253,8 +253,8 @@ namespace dvhd
             }
             catch (Exception ex)
             {
-                DateTime d = DateTime.Now;
-                return d.Hour.ToString("00") + ":" + d.Minute.ToString("00") + ":" + d.Second.ToString("00");
+                //DateTime d = DateTime.Now;
+                return null;//d.Hour.ToString("00") + ":" + d.Minute.ToString("00") + ":" + d.Second.ToString("00");
             }
         }
         public static string formatDateVn(DateTime d) {
