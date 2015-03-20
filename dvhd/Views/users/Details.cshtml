@@ -1,0 +1,44 @@
+﻿@model dvhd.Models.user
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>user</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.pass)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.pass)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.groups)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.groups)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.permission)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.permission)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

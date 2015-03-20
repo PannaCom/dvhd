@@ -1,0 +1,118 @@
+﻿@model dvhd.Models.user
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Thêm user và phân quyền</h2>
+@using (Html.BeginForm("Create", "users", FormMethod.Post, new { id = "EditForm" })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false)
+    <fieldset>
+        <div class="col-md-12">
+              <div class="form-group">
+                 <label for="room" style="width:auto;display:block;">User name * </label>
+                 <input name="name" type="text" tabindex="1" id="name" value="" class="form-control" placeholder="Nhập user name"/>               
+              </div>
+        </div>
+        <div class="col-md-12">
+              <div class="form-group">
+                 <label for="room" style="width:auto;display:block;">password * </label>
+                 <input name="pass" type="password" tabindex="1" id="pass" value="" class="form-control" placeholder="Nhập password"/>               
+              </div>
+        </div>
+        <div class="col-md-12">
+              <div class="form-group">
+                 <label for="room" style="width:auto;display:block;">Thuộc đơn vị * </label>
+                 <select id="groups" class="form-control" name="groups" tabindex="33" onchange="changePermission();">                   
+                    <option value="Tổng cục môi trường">Tổng cục môi trường</option>
+                    <option value="Cảnh sát môi trường" selected>Cảnh sát môi trường</option>
+                    <option value="Hải quan">Hải quan</option>
+                    <option value="Kiểm lâm">Kiểm lâm</option>
+                    <option value="Quản lý thị trường">Quản lý thị trường</option>
+                    <option value="Viện kiểm sát">Viện kiểm sát</option>
+                    <option value="Tòa án">Tòa án</option>
+                    <option value="Cơ quan điều tra">Cơ quan điều tra</option>
+                    <option value="Nhập dữ liệu">Nhập dữ liệu</option>
+                    <option value="Admin hệ thống">Admin hệ thống</option>
+                </select>              
+              </div>
+        </div>
+        <div class="col-md-12">
+              <div class="form-group">
+                 <label for="room" style="width:auto;display:block;">Các quyền: </label>
+                 <input type="checkbox" id="ALL" onclick="checkAll(this, 'ALL');">TẤT CẢ   
+                 <input type="hidden" value="" id="permission" name="permission">          
+              </div>
+        </div>
+        <div class="col-md-12">
+              <div class="form-group">
+                 <label for="room" style="width:auto;display:block;"><input type="checkbox" id="HS" onclick="checkHS();">Quyền truy cập hồ sơ đối tượng vi phạm</label>
+                 <input type="checkbox" id="HS0" onclick="checkPermission(this, 'HS0');">Xem danh sách 
+                 <input type="checkbox" id="HS1" onclick="checkPermission(this, 'HS1');">Tạo mới hồ sơ
+                 <input type="checkbox" id="HS2" onclick="checkPermission(this, 'HS2');">Xem và in hồ sơ 
+                 <input type="checkbox" id="HS3" onclick="checkPermission(this, 'HS3');">Sửa hồ sơ 
+                 <input type="checkbox" id="HS4" onclick="checkPermission(this, 'HS4');">Xóa hồ sơ             
+              </div>
+        </div>
+        <div class="col-md-12">
+              <div class="form-group">
+                 <label for="room" style="width:auto;display:block;"><input type="checkbox" id="BC_1_3" onclick="checkBC(1, 3);">Quyền truy cập xem báo cáo thông tin vi phạm</label>
+                 <input type="checkbox" id="BC1" onclick="checkPermission(this, 'BC1');">Xem báo cáo theo loài bị vi phạm
+                 <input type="checkbox" id="BC2" onclick="checkPermission(this, 'BC2');">Xem báo cáo theo địa bàn vi phạm
+                 <input type="checkbox" id="BC3" onclick="checkPermission(this, 'BC3');">Xem báo cáo theo đối tượng vi phạm                   
+              </div>
+        </div>
+        <div class="col-md-12">
+              <div class="form-group">
+                 <label for="room" style="width:auto;display:block;"><input type="checkbox" id="BC_4_5" onclick="checkBC(4, 5);">Quyền truy cập xem báo cáo hành vi vi phạm</label>
+                 <input type="checkbox" id="BC4" onclick="checkPermission(this, 'BC4');">Xem báo cáo theo hình thức vi phạm(hành chính, hình sự)
+                 <input type="checkbox" id="BC5" onclick="checkPermission(this, 'BC5');">Xem báo cáo theo hành vi vi phạm(buôn bán, vận chuyển, nuôi nhốt...)
+              </div>
+        </div>
+        <div class="col-md-12">
+              <div class="form-group">
+                 <label for="room" style="width:auto;display:block;"><input type="checkbox" id="BC_6_8" onclick="checkBC(6, 8);">Quyền truy cập xem báo cáo kết quả xử lý</label>
+                 <input type="checkbox" id="BC6" onclick="checkPermission(this, 'BC6');">Xem báo cáo số vụ xử lý hình sự
+                 <input type="checkbox" id="BC7" onclick="checkPermission(this, 'BC7');">Xem báo cáo số vụ xử lý hành chính
+                 <input type="checkbox" id="BC8" onclick="checkPermission(this, 'BC8');">Xem báo cáo số vụ không xử lý   
+              </div>
+        </div>
+        <div class="col-md-12">
+              <div class="form-group">
+                 <label for="room" style="width:auto;display:block;"><input type="checkbox" id="US" onclick="checkUS();">Quyền truy cập quản lý user đăng nhập</label>
+                 <input type="checkbox" id="US0" onclick="checkPermission(this, 'US0');">Xem danh sách user đăng nhập
+                 <input type="checkbox" id="US1" onclick="checkPermission(this, 'US1');">Tạo user đăng nhập
+                 <input type="checkbox" id="US2" onclick="checkPermission(this, 'US2');">Sửa user đăng nhập 
+                 <input type="checkbox" id="US3" onclick="checkPermission(this, 'US3');">Xóa user đăng nhập    
+              </div>
+        </div>
+         <p>
+            <input type="button" value="Thêm mới" onclick="checkField();" />
+        </p>
+    </fieldset>
+}    
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<script>
+    
+    function checkField() {
+        //alert(document.getElementById("permission").value);
+        //return;
+        if (document.getElementById("name").value == "") {
+            alert("Nhập user name");
+            document.getElementById("name").focus();
+            return;
+        }
+        if (document.getElementById("pass").value == "") {
+            alert("Nhập password");
+            document.getElementById("pass").focus();
+            return;
+        }
+        if (document.getElementById("permission").value == "") {
+            alert("Bạn chưa phân quyền user");
+            return;
+        }
+        document.getElementById("EditForm").submit();
+    }
+</script>

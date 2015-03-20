@@ -9,6 +9,7 @@
           <EntitySet Name="DsDvhd" EntityType="dvhdModel.Store.DsDvhd" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="HoSo" EntityType="dvhdModel.Store.HoSo" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TinhThanh" EntityType="dvhdModel.Store.TinhThanh" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="users" EntityType="dvhdModel.Store.users" store:Type="Tables" Schema="dbo" />
         </EntityContainer>
         <EntityType Name="DsDvhd">
           <Key>
@@ -76,6 +77,16 @@
           <Property Name="quanhuyen" Type="nvarchar" MaxLength="255" />
           <Property Name="tinhthanhpho" Type="nvarchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="pass" Type="nvarchar" MaxLength="50" />
+          <Property Name="groups" Type="nvarchar" MaxLength="150" />
+          <Property Name="permission" Type="nvarchar" MaxLength="250" />
+        </EntityType>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -84,6 +95,7 @@
           <EntitySet Name="DsDvhds" EntityType="dvhdModel.DsDvhd" />
           <EntitySet Name="TinhThanhs" EntityType="dvhdModel.TinhThanh" />
           <EntitySet Name="HoSoes" EntityType="dvhdModel.HoSo" />
+          <EntitySet Name="users" EntityType="dvhdModel.user" />
         </EntityContainer>
         <EntityType Name="DsDvhd">
           <Key>
@@ -150,6 +162,16 @@
           <Property Type="String" Name="ketquaxulychitiet" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="motachitietxuly" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="hosocode" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="pass" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="groups" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="permission" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -222,6 +244,17 @@
                 <ScalarProperty Name="quoctich" ColumnName="quoctich" />
                 <ScalarProperty Name="ngaysinh" ColumnName="ngaysinh" />
                 <ScalarProperty Name="hoten" ColumnName="hoten" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="dvhdModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="permission" ColumnName="permission" />
+                <ScalarProperty Name="groups" ColumnName="groups" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

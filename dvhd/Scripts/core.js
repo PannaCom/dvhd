@@ -359,3 +359,92 @@ function uploadProcessLoaidongvat() {
     }
     return false;
 }
+
+//Phần dành cho phân quyền user
+function checkPermission(obj, value) {
+    if (obj.checked) {
+        if (document.getElementById("permission").value.indexOf(value) < 0) document.getElementById("permission").value += value;
+    } else {
+        document.getElementById("permission").value = document.getElementById("permission").value.replace(value, "");
+    }
+}
+function checkHS() {
+    if (!document.getElementById("HS").checked) {
+        for (var i = 0; i <= 4; i++) {
+            if (document.getElementById("HS" + i)) document.getElementById("HS" + i).checked = false;
+            document.getElementById("permission").value = document.getElementById("permission").value.replace("HS" + i, "");
+        }
+        return;
+    }
+    for (var i = 0; i <= 4; i++) {
+        if (document.getElementById("HS" + i)) document.getElementById("HS" + i).checked = true;
+        if (document.getElementById("permission").value.indexOf("HS" + i) < 0) document.getElementById("permission").value += "HS" + i;
+    }
+}
+function checkUS() {
+    if (!document.getElementById("US").checked) {
+        for (var i = 0; i <= 3; i++) {
+            if (document.getElementById("US" + i)) document.getElementById("US" + i).checked = false;
+            document.getElementById("permission").value = document.getElementById("permission").value.replace("US" + i, "");
+        }
+        return;
+    }
+    for (var i = 0; i <= 3; i++) {
+        if (document.getElementById("US" + i)) document.getElementById("US" + i).checked = true;
+        if (document.getElementById("permission").value.indexOf("US" + i) < 0) document.getElementById("permission").value += "US" + i;
+    }
+}
+function checkBC(from, to) {
+    if (!document.getElementById("BC_" + from + "_" + to).checked) {
+        for (var i = from; i <= to; i++) {
+            if (document.getElementById("BC" + i)) document.getElementById("BC" + i).checked = false;
+            document.getElementById("permission").value = document.getElementById("permission").value.replace("BC" + i, "");
+        }
+        return;
+    }
+    for (var i = from; i <= to; i++) {
+        if (document.getElementById("BC" + i)) document.getElementById("BC" + i).checked = true;
+        if (document.getElementById("permission").value.indexOf("BC" + i) < 0) document.getElementById("permission").value += "BC" + i;
+    }
+}
+function checkAll() {
+    if (!document.getElementById("ALL").checked) {
+        clearAll();
+        return;
+    }
+    //var per = "";
+    for (var i = 0; i <= 4; i++) {
+        if (document.getElementById("HS" + i)) document.getElementById("HS" + i).checked = true;
+        if (document.getElementById("permission").value.indexOf("HS" + i) < 0) document.getElementById("permission").value += "HS" + i;
+    }
+    for (var i = 1; i <= 8; i++) {
+        if (document.getElementById("BC" + i)) document.getElementById("BC" + i).checked = true;
+        if (document.getElementById("permission").value.indexOf("BC" + i) < 0) document.getElementById("permission").value += "BC" + i;
+    }
+    for (var i = 0; i <= 3; i++) {
+        if (document.getElementById("US" + i)) document.getElementById("US" + i).checked = true;
+        if (document.getElementById("permission").value.indexOf("US" + i) < 0) document.getElementById("permission").value += "US" + i;
+    }
+    document.getElementById("HS").checked = true;
+    document.getElementById("US").checked = true;
+    document.getElementById("BC_1_3").checked = true;
+    document.getElementById("BC_4_5").checked = true;
+    document.getElementById("BC_6_8").checked = true;
+}
+function clearAll() {
+    for (var i = 0; i <= 4; i++) {
+        if (document.getElementById("HS" + i)) document.getElementById("HS" + i).checked = false;
+    }
+    for (var i = 1; i <= 8; i++) {
+        if (document.getElementById("BC" + i)) document.getElementById("BC" + i).checked = false;
+    }
+    for (var i = 0; i <= 3; i++) {
+        if (document.getElementById("US" + i)) document.getElementById("US" + i).checked = false;
+    }
+    document.getElementById("permission").value = "";
+    document.getElementById("HS").checked = false;
+    document.getElementById("US").checked = false;
+    document.getElementById("BC_1_3").checked = false;
+    document.getElementById("BC_4_5").checked = false;
+    document.getElementById("BC_6_8").checked = false;
+}
