@@ -256,7 +256,7 @@ function Login() {
         formdata.append("name", name);
         formdata.append("pass", pass);
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/User/Login');
+        xhr.open('POST', '/users/Login');
         xhr.send(formdata);
         var content = "";
         xhr.onreadystatechange = function () {
@@ -264,7 +264,7 @@ function Login() {
                 if (xhr.responseText == 0) {
                     alert("Sai user hoặc mật khẩu!");
                 } else {
-                    window.location.href = "/Admin/Index";
+                    window.location.href = "/Home/Index";
                 }
             }
         }
@@ -412,6 +412,7 @@ function checkAll() {
         clearAll();
         return;
     }
+    if (document.getElementById("permission").value.indexOf("ALL") < 0) document.getElementById("permission").value += "ALL";
     //var per = "";
     for (var i = 0; i <= 4; i++) {
         if (document.getElementById("HS" + i)) document.getElementById("HS" + i).checked = true;

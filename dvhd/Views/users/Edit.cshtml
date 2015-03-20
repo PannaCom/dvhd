@@ -17,7 +17,7 @@
         </div>
         <div class="col-md-12">
               <div class="form-group">
-                 <label for="room" style="width:auto;display:block;">password * <input type="checkbox" id="CP">Đổi password</label>
+                 <label for="room" style="width:auto;display:block;">password * </label>
                  <input name="pass" type="password" tabindex="1" id="pass" value="" class="form-control" placeholder="Nhập password"/>               
               </div>
         </div>
@@ -46,7 +46,7 @@
         </div>
         <div class="col-md-12">
               <div class="form-group">
-                 <label for="room" style="width:auto;display:block;">Các quyền: </label>
+                 <label for="room" style="width:auto;display:block;">PHÂN QUYỀN CHO USER</label>
                  <input type="checkbox" id="ALL" onclick="checkAll(this, 'ALL');">TẤT CẢ   
                  <input type="hidden" value="@Model.permission" id="permission" name="permission">          
               </div>
@@ -93,9 +93,11 @@
                  <input type="checkbox" id="US3" onclick="checkPermission(this, 'US3');">Xóa user đăng nhập    
               </div>
         </div>
-         <p>
+        <div class="col-md-12">
+          <div class="form-group">
             <input type="button" value="Cập nhật quyền" onclick="updatePermission();"/>
-        </p>
+          </div>
+        </div>
     </fieldset>
 }    
 <div>
@@ -104,9 +106,11 @@
 <script>
     function showPermission(permission) {
         var count = 0;
+        var totalcount = 0;
         for (var i = 0; i <= 4; i++)
             if (permission.indexOf("HS"+i)>=0)
             {
+                totalcount++;
                 count++;
                 document.getElementById("HS" + i).checked = true;
             }
@@ -114,6 +118,7 @@
         count = 0;
         for (var i = 1; i <= 3; i++)
             if (permission.indexOf("BC" + i) >= 0) {
+                totalcount++;
                 count++;
                 document.getElementById("BC" + i).checked = true;
             }
@@ -121,6 +126,7 @@
         count = 0;
         for (var i = 4; i <= 5; i++)
             if (permission.indexOf("BC" + i) >= 0) {
+                totalcount++;
                 count++;
                 document.getElementById("BC" + i).checked = true;
             }
@@ -128,6 +134,7 @@
         count = 0;
         for (var i = 6; i <=8; i++)
             if (permission.indexOf("BC" + i) >= 0) {
+                totalcount++;
                 count++;
                 document.getElementById("BC" + i).checked = true;
             }
@@ -135,10 +142,12 @@
         count = 0;
         for (var i = 0; i <= 3; i++)
             if (permission.indexOf("US" + i) >= 0) {
+                totalcount++;
                 count++;
                 document.getElementById("US" + i).checked = true;
             }
         if (count >= 4) document.getElementById("US").checked = true;
+        if (totalcount >= 17) document.getElementById("ALL").checked = true;
 
     }
     showPermission("@Model.permission");
@@ -160,5 +169,30 @@
             return;
         }
         document.getElementById("EditForm").submit();
+    }
+    function updatePermission() {
+        if (document.getElementById("permission").value == "") {
+            alert("Bạn chưa phân quyền user");
+            return;
+        }
+        var id = @ViewBag.id;
+        var permission=document.getElementById("permission").value;
+        var formdata = new FormData(); //FormData object
+        formdata.append("id", id);
+        formdata.append("permission", permission);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/users/updatePermission');
+        xhr.send(formdata);
+        var content = "";
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.responseText == 0) {
+                    alert("Lỗi không cập nhật được phân quyền, kiểm tra hệ thống!");
+                } else {
+                    alert("Cập nhật quyền cho user thành công!");
+                    window.location.href = "/users/Index";
+                }
+            }
+        }
     }
 </script>
