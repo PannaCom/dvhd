@@ -19,7 +19,7 @@
         margin: 0 !important;
     }
 </style>
-<script>
+@*<script>
     document.addEventListener("keydown", autosearch);
     function autosearch(event) {
         var keyCode = ('which' in event) ? event.which : event.keyCode;
@@ -29,21 +29,20 @@
         }
         
     }
-</script>
+</script>*@
 
 <div class="col-md-12">
     <div class="form-group">
         <label for="room" style="width:auto;display:block;">Loại Động Vật Hoang Dã</label>
-        <input name="baocao_loaiDVHD" type="text" tabindex="1" id="baocao_loaiDVHD" value="" class="form-control" placeholder="Tên Loại Động Vật Hoang Dã" onkeyup="baocao_searchLoai();"/>
-        <input type="button" value="Tìm kiếm" onclick="baocaotheoloai();">
+        <input name="baocao_loaiDVHD" type="text" tabindex="1" id="baocao_loaiDVHD" value="" class="form-control" placeholder="Tên Loại Động Vật Hoang Dã" onkeyup="baocao_search(this, 1);"/>
+        <input type="button" value="Tìm kiếm" onclick="baocao_getData('baocao_loaiDVHD', 1);">
     </div>
 </div>
 
 <div class="col-md-12" style="text-align:center;">
     <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" disabled="disabled" />
-    <input id="btnCreateReport" type="button" value="Xuất ra PDF file" onclick="baocao_createPDF();" disabled="disabled" />
+    <input id="btnCreateReport" type="button" value="Xuất ra PDF file" onclick="baocao_createPDF(1);" disabled="disabled" />
 </div>
-
 
 <div id="divResult" class="col-md-12">
     <label id="countResult"></label>
@@ -51,29 +50,6 @@
 </div>
 
 <script type="text/javascript">
-    function baocao_createPDF() {
-        $.ajax({
-            url: '@Url.Action("createReport")',
-            data: { html: $("#divResult").html(), type: 1 },
-            type: 'POST',
-            success: function (result) {
-                //alert(result);
-                window.open("/Images/Report/"+result);
-            }
-        });
-    }
-    function baocao_createPDFBanin() {
-        var mywindow = window.open('', 'Thông Tin Chi Tiết', 'height=600,width=800');
-        mywindow.document.write('<html><head><title>Thông Tin Chi Tiết</title>');
-        mywindow.document.write('<style type="text/css">' + $("#styleDetail").html() + '</style>');
-        mywindow.document.write('</head><body >');
-        mywindow.document.write($("#divResult").html());
-        mywindow.document.write('</body></html>');
-
-        mywindow.document.close(); // necessary for IE >= 10
-        mywindow.focus(); // necessary for IE >= 10
-
-        mywindow.print();
-        mywindow.close();
-    }
+    var urlCreateBaoCaoPDF = '@Url.Action("createReport")';
 </script>
+

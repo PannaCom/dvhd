@@ -17,6 +17,54 @@ function setDefaultValue(str) {
     return str;
 }
 
+function baocao_search(input, type) {
+    var inputId = input.id;
+    if (input.onkeyup.arguments[0].which == 13) {
+        baocao_getData(inputId, type);
+        return;
+    }
+    
+    var urlSearch = "";
+    var urlGetDetails = "";
+    if (type == 1) {
+        urlSearch = '/Home/getLoaiDVHD?keyword=';
+    } else if (type == 2) {
+        urlSearch = '/Home/getTinhThanh?keyword=';
+    } else if (type == 3) {
+        urlSearch = '/Home/getCMT?keyword=';
+    }
+
+    $('#' + inputId).autocomplete({
+        source: urlSearch + input.value,
+        select: function (event, ui) {
+            $(event.target).val(ui.item.value);           
+            baocao_getData(inputId, type);
+            return false;
+        },
+        minLength: 1
+    });
+}
+
+function baocao_getData(inputId, type) {
+    var keyword = document.getElementById(inputId).value;
+    var urlGetDetails = "";
+    if (type == 1) {
+        urlGetDetails = '/Home/getLoaiDetails?keyword=';
+    } else if (type == 2) {
+        urlGetDetails = '/Home/getTinhDetails?keyword=';
+    } else if (type == 3) {
+        urlGetDetails = '/Home/getCMTDetails?keyword=';
+    }
+    $.ajax({
+        url: urlGetDetails + keyword,
+        type: 'POST',
+        dataType: 'json',
+        success: function (result) {
+            setResult2Table(result);
+        }
+    });
+}
+
 function setResult2Table(result) {
     $("#countResult").text("Tổng Số Vụ Vi Phạm : " + result.length);
     var htmlContent = '<tr><th>Tên Loài DVHD</th><th>Thời Gian Vi Phạm</th>'
@@ -31,74 +79,30 @@ function setResult2Table(result) {
     $("#btnCreateReportBanIn").removeAttr("disabled");
 }
 
-function baocao_searchLoai() {
-    var keyword = document.getElementById('baocao_loaiDVHD').value;
-    $('#baocao_loaiDVHD').autocomplete({
-        source: '/Home/getLoaiDVHD?keyword=' + keyword,
-        select: function (event, ui) {
-            $(event.target).val(ui.item.value);
-            $.ajax({
-                url: '/Home/getLoaiDetails?keyword=' + ui.item.value,
-                type: 'POST',
-                dataType: 'json',
-                success: function (result) {
-                    setResult2Table(result);
-                }
-            });
-            return false;
-        },
-        minLength: 1
-    });
-}
-function baocaotheoloai() {
-    var keyword = document.getElementById('baocao_loaiDVHD').value;
+function baocao_createPDF(type) {
     $.ajax({
-        url: '/Home/getLoaiDetails?keyword=' + keyword,
+        url: urlCreateBaoCaoPDF,
+        data: { html: $("#divResult").html(), type: type },
         type: 'POST',
-        dataType: 'json',
         success: function (result) {
-            setResult2Table(result);
+            alert(result);
         }
     });
 }
-function baocao_doituong() {
-    var keyword = document.getElementById('baocao_cmt').value;
-    $('#baocao_cmt').autocomplete({
-        source: '/Home/getCMT?keyword=' + keyword,
-        select: function (event, ui) {
-            $(event.target).val(ui.item.value);
-            $.ajax({
-                url: '/Home/getCMTDetails?keyword=' + ui.item.value,
-                type: 'POST',
-                dataType: 'json',
-                success: function (result) {
-                    setResult2Table(result);
-                }
-            });
-            return false;
-        },
-        minLength: 1
-    });
-}
 
-function baocao_searchTinh() {
-    var keyword = document.getElementById('baocao_tinh').value;
-    $('#baocao_tinh').autocomplete({
-        source: '/Home/getTinh?keyword=' + keyword,
-        select: function (event, ui) {
-            $(event.target).val(ui.item.value);
-            $.ajax({
-                url: '/Home/getTinhDetails?keyword=' + ui.item.value,
-                type: 'POST',
-                dataType: 'json',
-                success: function (result) {
-                    setResult2Table(result);
-                }
-            });
-            return false;
-        },
-        minLength: 1
-    });
+function baocao_createPDFBanin() {
+    var mywindow = window.open('', 'Thông Tin Chi Tiết', 'height=600,width=800');
+    mywindow.document.write('<html><head><title>Thông Tin Chi Tiết</title>');
+    mywindow.document.write('<style type="text/css">' + $("#styleDetail").html() + '</style>');
+    mywindow.document.write('</head><body >');
+    mywindow.document.write($("#divResult").html());
+    mywindow.document.write('</body></html>');
+
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10
+
+    mywindow.print();
+    mywindow.close();
 }
 
 function searchQuanHuyen() {

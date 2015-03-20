@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Báo Cáo Theo Tỉnh";
+}
+
+<h2>Báo Cáo Theo Tỉnh</h2>
+
+<style id="styleDetail" type="text/css">
+    /* Ban In css*/
+    .tbBanIn {
+        width:99%;
+        border: 1px solid #bbbcbb;
+        border-collapse: collapse;
+    }
+    .tbBanIn td, .tbBanIn th {
+        border: 1px solid #bbbcbb;
+        padding: 2px !important;
+    }
+    .tbBanIn label {
+        margin: 0 !important;
+    }
+</style>
+
+<div class="col-md-12">
+    <div class="form-group">
+        <label for="room" style="width:auto;display:block;">Tỉnh Vi Phạm</label>
+        <input name="baocao_tinh" type="text" tabindex="1" id="baocao_tinh" value="" class="form-control" placeholder="Tên Tỉnh Vi Phạm" onkeyup="baocao_search(this, 2);"/>
+        <input type="button" value="Tìm kiếm" onclick="baocao_getData('baocao_tinh', 2);">
+    </div>
+</div>
+
+<div class="col-md-12" style="text-align:center;">
+    <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" disabled="disabled" />
+    <input id="btnCreateReport" type="button" value="Xuất ra PDF file" onclick="baocao_createPDF(2);" disabled="disabled" />
+</div>
+
+<div id="divResult" class="col-md-12">
+    <label id="countResult"></label>
+    <table id="tbResult" class="tbBanIn"></table>
+</div>
+
+<script type="text/javascript">
+    var urlCreateBaoCaoPDF = '@Url.Action("createReport")';
+</script>
