@@ -38,13 +38,18 @@ namespace dvhd.Controllers
         
         public string getLoaiDetails(string keyword)
         {
-            var p = (from q in db.HoSoes where q.loaidongvat.Contains(keyword) orderby q.loaidongvat select new { q.loaidongvat, q.thoigianvipham, q.tinhvipham, q.hoten, q.cmthochieu, q.hanhvivipham });
+            var p = (from q in db.HoSoes where q.loaidongvat.Contains(keyword) orderby q.loaidongvat select new { q.loaidongvat, q.thoigianvipham, q.tinhvipham,q.quanvipham, q.hoten, q.cmthochieu, q.hanhvivipham });
             return JsonConvert.SerializeObject(p.ToList());
         }
 
         public string getTinhDetails(string keyword)
         {
-            var p = (from q in db.HoSoes where q.tinhvipham.Contains(keyword) orderby q.tinhvipham select new { q.loaidongvat, q.thoigianvipham, q.tinhvipham, q.hoten, q.cmthochieu, q.hanhvivipham });
+            var p = (from q in db.HoSoes where q.tinhvipham.Contains(keyword) orderby q.tinhvipham select new { q.loaidongvat, q.thoigianvipham, q.tinhvipham, q.quanvipham, q.hoten, q.cmthochieu, q.hanhvivipham });
+            return JsonConvert.SerializeObject(p.ToList());
+        }
+        public string getQuanHuyenDetails(string keyword)
+        {
+            var p = (from q in db.HoSoes where q.quanvipham.Contains(keyword) || q.tinhvipham.Contains(keyword) orderby q.quanvipham select new { q.loaidongvat, q.thoigianvipham, q.tinhvipham, q.quanvipham, q.hoten, q.cmthochieu, q.hanhvivipham });
             return JsonConvert.SerializeObject(p.ToList());
         }
 
@@ -56,7 +61,7 @@ namespace dvhd.Controllers
 
         public string getCMTDetails(string keyword)
         {
-            var p = (from q in db.HoSoes where q.cmthochieu.Contains(keyword) orderby q.cmthochieu select new { q.loaidongvat, q.thoigianvipham, q.tinhvipham, q.hoten, q.cmthochieu, q.hanhvivipham });
+            var p = (from q in db.HoSoes where q.cmthochieu.Contains(keyword) orderby q.cmthochieu select new { q.loaidongvat, q.thoigianvipham, q.tinhvipham, q.quanvipham, q.hoten, q.cmthochieu, q.hanhvivipham });
             return JsonConvert.SerializeObject(p.ToList());
         }
 
@@ -76,5 +81,6 @@ namespace dvhd.Controllers
             var p = (from q in db.DsDvhds where q.ten.Contains(keyword) select q.ten).Take(10);
             return JsonConvert.SerializeObject(p.ToList());
         }
+        
     }
 }

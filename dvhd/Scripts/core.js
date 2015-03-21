@@ -29,7 +29,7 @@ function baocao_search(input, type) {
     if (type == 1) {
         urlSearch = '/Home/getLoaiDVHD?keyword=';
     } else if (type == 2) {
-        urlSearch = '/Home/getTinhThanh?keyword=';
+        urlSearch = '/Home/getQuanHuyen?keyword=';
     } else if (type == 3) {
         urlSearch = '/Home/getCMT?keyword=';
     }
@@ -51,7 +51,7 @@ function baocao_getData(inputId, type) {
     if (type == 1) {
         urlGetDetails = '/Home/getLoaiDetails?keyword=';
     } else if (type == 2) {
-        urlGetDetails = '/Home/getTinhDetails?keyword=';
+        urlGetDetails = '/Home/getQuanHuyenDetails?keyword=';
     } else if (type == 3) {
         urlGetDetails = '/Home/getCMTDetails?keyword=';
     }
@@ -68,11 +68,11 @@ function baocao_getData(inputId, type) {
 function setResult2Table(result) {
     $("#countResult").text("Tổng Số Vụ Vi Phạm : " + result.length);
     var htmlContent = '<tr><th>Tên Loài DVHD</th><th>Thời Gian Vi Phạm</th>'
-        + '<th>Tỉnh</th><th>Đối Tượng Vi Phạm</th>'
+        + '<th>Địa Bàn</th><th>Đối Tượng Vi Phạm</th>'
         + '<th>Số CMT/Hộ Chiếu</th><th>Hành Vi Vi Phạm</th></tr>';
     $.each(result, function (idx, q) {
         htmlContent += '<tr><td>' + q.loaidongvat + '</td><td>' + formatDate(q.thoigianvipham) + '</td><td>'
-            + q.tinhvipham + '</td><td>' + q.hoten + '</td><td>' + setDefaultValue(q.cmthochieu) + '</td><td>' + q.hanhvivipham + '</td></tr>';
+            + q.quanvipham +'/'+q.tinhvipham+ '</td><td>' + q.hoten + '</td><td>' + setDefaultValue(q.cmthochieu) + '</td><td>' + q.hanhvivipham + '</td></tr>';
     });
     $("#tbResult").html(htmlContent);
     $("#btnCreateReport").removeAttr("disabled");
@@ -85,7 +85,8 @@ function baocao_createPDF(type) {
         data: { html: $("#divResult").html(), type: type },
         type: 'POST',
         success: function (result) {
-            alert(result);
+            //alert(result);
+            window.open("/Images/Report/"+result,"_blank");
         }
     });
 }
