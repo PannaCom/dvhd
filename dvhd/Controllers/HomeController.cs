@@ -12,6 +12,7 @@ namespace dvhd.Controllers
         private dvhdEntities db = new dvhdEntities();
         public ActionResult Index()
         {
+            if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
             return View();
@@ -20,6 +21,19 @@ namespace dvhd.Controllers
         {
             return View();
         }
+        public ActionResult Logout()
+        {
+            if (Request.Cookies["logged"] != null)
+            {
+                Response.Cookies["logged"].Expires = DateTime.Now.AddDays(-1);
+            }
+            Session.Abandon();
+            return View();
+        }
+        public ActionResult Permission() {
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your app description page.";

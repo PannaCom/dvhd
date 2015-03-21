@@ -25,6 +25,8 @@ namespace dvhd.Controllers
 
         public ActionResult Index(int? page)
         {
+            if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
+            if (!Config.checkPermission(Config.getCookie("logged"), "HS1")) return RedirectToAction("Permission", "Home");
             var p = (from q in db.HoSoes select q).OrderByDescending(o => o.id).Take(1000);
             int pageSize = Config.PageSize;
             int pageNumber = (page ?? 1);

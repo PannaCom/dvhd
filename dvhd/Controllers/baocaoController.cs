@@ -21,6 +21,8 @@ namespace dvhd.Controllers
         // GET: /BaoCaoTheoLoai/
         public ActionResult BaoCaoTheoLoai()
         {
+            if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
+            if (!Config.checkPermission(Config.getCookie("logged"), "BC1")) return RedirectToAction("Permission", "Home");
             return View();
         }
 

@@ -81,17 +81,23 @@ namespace dvhd.Controllers
         [HttpPost]
         public string Login(string name, string pass)
         {
-            MD5 md5Hash = MD5.Create();
-            pass = Config.GetMd5Hash(md5Hash, pass);
-            var p = (from q in db.users where q.name.Contains(name) && q.pass.Contains(pass) select q.name).SingleOrDefault();
-            if (p != null && p != "")
+            try
             {
-                //Ghi ra cookie
-                Config.setCookie("logged", "logged");
-                return "1";
+                MD5 md5Hash = MD5.Create();
+                pass = Config.GetMd5Hash(md5Hash, pass);
+                var p = (from q in db.users where q.name.Contains(name) && q.pass.Contains(pass) select q).FirstOrDefault().permission;
+                if (p != null && p != "")
+                {
+                    //Ghi ra cookie
+                    Config.setCookie("logged", p);
+                    return "1";
+                }
+                else
+                {
+                    return "0";
+                }
             }
-            else
-            {
+            catch (Exception ex) {
                 return "0";
             }
             //return "0";
