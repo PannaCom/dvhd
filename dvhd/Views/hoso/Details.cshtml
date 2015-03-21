@@ -17,6 +17,7 @@
         width:99%;
         border: 1px solid #bbbcbb;
         border-collapse: collapse;
+        table-layout:fixed;
     }
     .tbBanIn td, .tbBanIn th {
         border: 1px solid #bbbcbb;
@@ -36,13 +37,14 @@
         <tr>
             @if (Model.anhdoituong != null)
             {
-                <td rowspan="3" style="width:19%">
+                <td rowspan="3" style="width:305px;">
                     <img src="@Model.anhdoituong" width="300" height="200">
                 </td>
             }
             else
             {
-                <td rowspan="3" style="width:19%">
+                <td rowspan="3" style="width:305px;">
+                    <img src="/Images/HoSo/no-image.png" width="300" height="200">                    
                 </td>
             }
             <td style="width:19%"><label>Họ và Tên :</label></td> <td colspan="3" style="width:57%"> @Html.DisplayFor(model => model.hoten) </td>
@@ -88,7 +90,7 @@
     <h4><u>Hành Vi Vi Phạm</u></h4>
     <table class="tbBanIn">
         <tr>
-            <td style="width:19%"><label>Thời Gian Vi Phạm :</label></td> <td style="width:10%"> @thoigianvipham </td>
+            <td style="width:305px;"><label>Thời Gian Vi Phạm :</label></td> <td style="width:10%"> @thoigianvipham </td>
             <td style="width:13%"><label>Địa Điểm Vi Phạm :</label></td> <td colspan="2"> @Html.DisplayFor(model => model.quanvipham) , @Html.DisplayFor(model => model.tinhvipham) </td>            
         </tr>
         <tr>
@@ -105,21 +107,23 @@
         <tr>
              @if (Model.anhdongvat != null)
              {
-                <td rowspan="3" style="width:140px">
+                <td rowspan="3">
                     <img src="@Model.anhdongvat" width="300" height="200">
                 </td>
              }
              else
-             {
+             {                
                 <td rowspan="3">
+                    <img src="/Images/HoSo/no-image.png" width="300" height="200">
                 </td>
              }
-            <td><label>Động Vật Hoang Dã :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.loaidongvat)</td>            
+            <td><label>Động Vật Hoang Dã :</label></td> <td> @Html.DisplayFor(model => model.loaidongvat)</td>            
+            <td><label>Trị Giá Tang Vật :</label></td> <td> @Html.DisplayFor(model => model.trigiatangvat)</td>            
         </tr>
         
         <tr>
-            <td><label>Số Lượng Chi Tiết :</label></td> <td> @Html.DisplayFor(model => model.soluongchitiet) </td>
-            <td><label>Trị Giá Tang Vật :</label></td> <td> @Html.DisplayFor(model => model.trigiatangvat)</td>            
+            <td><label>Số Lượng Chi Tiết :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.soluongchitiet) </td>
+            
         </tr>
         <tr>
             <td><label>Đơn Vị Bắt Giữ :</label></td> <td> @Html.DisplayFor(model => model.donvibatgiu) </td>
