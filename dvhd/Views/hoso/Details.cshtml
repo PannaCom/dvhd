@@ -12,35 +12,40 @@
 <style id="styleDetail" type="text/css">
     /* Ban In css*/
     .tbBanIn {
+        font-size: 13px;
+        font-family: "Roboto", "Arial", "sans-serif !important";
         width:99%;
         border: 1px solid #bbbcbb;
+        border-collapse: collapse;
     }
     .tbBanIn td, .tbBanIn th {
+        border: 1px solid #bbbcbb;
         padding: 2px !important;
     }
     .tbBanIn label {
+        font-weight:bold;
         margin: 0 !important;
     }
 </style>
 
 <div id="divDetail" style="width: 100%; padding: 0 10px; margin-bottom:10px;">
     <h2>Thông Tin Chi Tiết</h2>
-    <h4>Đối Tượng Vi Phạm</h4>
+    <h4><u>Đối Tượng Vi Phạm</u></h4>
     <table class="tbBanIn">
         
         <tr>
             @if (Model.anhdoituong != null)
             {
-                <td rowspan="3" style="width:140px">
+                <td rowspan="3" style="width:19%">
                     <img src="@Model.anhdoituong" width="300" height="200">
                 </td>
             }
             else
             {
-                <td rowspan="3">
+                <td rowspan="3" style="width:19%">
                 </td>
             }
-            <td><label>Họ và Tên :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.hoten) </td>
+            <td style="width:19%"><label>Họ và Tên :</label></td> <td colspan="3" style="width:57%"> @Html.DisplayFor(model => model.hoten) </td>
         </tr>
         <tr>            
             <td><label>Ngày Sinh :</label></td> <td colspan="3"> @ngaysinh </td>            
@@ -55,16 +60,16 @@
             <td><label>Chỗ Ở Hiện Tại :</label></td> <td colspan="4"> @Html.DisplayFor(model => model.choohientai) </td>
         </tr>
         <tr>
-            <td><label>Họ Tên Cha :</label></td> <td> @Html.DisplayFor(model => model.hotencha) </td>
-            <td><label>Họ Tên Mẹ :</label></td> <td> @Html.DisplayFor(model => model.hotenme)<td> </td>
+            <td style="width:24%"><label>Họ Tên Cha :</label></td> <td style="width:24%"> @Html.DisplayFor(model => model.hotencha) </td>
+            <td style="width:24%"><label>Họ Tên Mẹ :</label></td> <td colspan="2"> @Html.DisplayFor(model => model.hotenme)</td>
         </tr>
         <tr>
             <td><label>Số CMND/Hộ Chiếu :</label></td> <td> @Html.DisplayFor(model => model.cmthochieu) </td>
-            <td><label>Ngày Cấp :</label></td> <td> @ngaycapCMT </td><td> </td>            
+            <td><label>Ngày Cấp :</label></td> <td colspan="2"> @ngaycapCMT </td>
         </tr>
         <tr>
             <td><label>Cơ Quan Cấp :</label></td> <td> @Html.DisplayFor(model => model.coquancap) </td>
-            <td><label>Nơi Cấp :</label></td> <td> @Html.DisplayFor(model => model.noicap) </td><td> </td>
+            <td><label>Nơi Cấp :</label></td> <td colspan="2"> @Html.DisplayFor(model => model.noicap) </td>
         </tr>
         <tr>
             <td><label>Nơi Công Tác :</label></td> <td colspan="4"> @Html.DisplayFor(model => model.noicongtac) </td>            
@@ -80,24 +85,23 @@
         </tr>
     </table>
     
-    <h4>Hành Vi Vi Phạm</h4>
+    <h4><u>Hành Vi Vi Phạm</u></h4>
     <table class="tbBanIn">
         <tr>
-            <td style="width:125px"><label>Thời Gian Vi Phạm :</label></td> <td> @thoigianvipham </td>
-            <td><label>Địa Điểm Vi Phạm :</label></td> <td> @Html.DisplayFor(model => model.quanvipham) , @Html.DisplayFor(model => model.tinhvipham) </td>            
+            <td style="width:19%"><label>Thời Gian Vi Phạm :</label></td> <td style="width:10%"> @thoigianvipham </td>
+            <td style="width:13%"><label>Địa Điểm Vi Phạm :</label></td> <td colspan="2"> @Html.DisplayFor(model => model.quanvipham) , @Html.DisplayFor(model => model.tinhvipham) </td>            
         </tr>
         <tr>
-            <td><label>Mô Tả Vi Phạm :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.motavipham) </td>
+            <td><label>Mô Tả Vi Phạm :</label></td> <td colspan="4"> @Html.DisplayFor(model => model.motavipham) </td>
         </tr>
         <tr>
             <td><label>Hình Thức Vi Phạm :</label></td> <td> @Html.DisplayFor(model => model.hinhthucvipham) </td>
-            <td><label>Hành Vi Vi Phạm :</label></td> <td> @Html.DisplayFor(model => model.hanhvivipham)</td>            
+            <td><label>Hành Vi Vi Phạm :</label></td> <td colspan="2"> @Html.DisplayFor(model => model.hanhvivipham)</td>            
         </tr>
         <tr>
             <td><label>Phương Thức Vận Chuyển :</label></td> <td> @Html.DisplayFor(model => model.phuongthucvanchuyen) </td>
-            <td><label>Tuyến Đường Vận Chuyển :</label></td> <td> @Html.DisplayFor(model => model.tuyenduongvanchuyen)</td>            
-        </tr>
-      
+            <td><label>Tuyến Đường Vận Chuyển :</label></td> <td colspan="2"> @Html.DisplayFor(model => model.tuyenduongvanchuyen)</td>            
+        </tr>      
         <tr>
              @if (Model.anhdongvat != null)
              {
@@ -110,7 +114,7 @@
                 <td rowspan="3">
                 </td>
              }
-            <td><label>Động Vật Hoang Dã :</label></td> <td> @Html.DisplayFor(model => model.loaidongvat)</td>            
+            <td><label>Động Vật Hoang Dã :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.loaidongvat)</td>            
         </tr>
         
         <tr>
@@ -151,7 +155,7 @@
         @Html.DisplayFor(model => model.tinhtrangbaoton)
     </div>*@
     
-    <h4>Xử Lý Vi Phạm</h4>
+    <h4><u>Xử Lý Vi Phạm</u></h4>
     <table class="tbBanIn">
         <tr>
             <td><label>Thời Gian Xử Lý :</label></td> <td> @thoigianxuly </td>
@@ -188,7 +192,7 @@
 
 <script type="text/javascript">
     function printDetails() {
-        var mywindow = window.open('', 'Thông Tin Chi Tiết', 'height=600,width=800');
+        var mywindow = window.open('', 'Thông Tin Chi Tiết', 'height=650,width=1200');
         mywindow.document.write('<html><head><title>Thông Tin Chi Tiết</title>');
         mywindow.document.write('<style type="text/css">' + $("#styleDetail").html() + '</style>');
         mywindow.document.write('</head><body >');
