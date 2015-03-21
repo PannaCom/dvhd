@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "BaoCaoTongHop";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Báo Cáo Tổng hợp</h2>
+<style id="styleDetail" type="text/css">
+   /* Ban In css*/
+    .tbBanIn {
+        width:100%;
+        border: 1px solid #bbbcbb;
+        border-collapse: collapse;
+    }
+    .tbBanIn td, .tbBanIn th {
+        border: 1px solid #bbbcbb;
+        padding: 2px !important;
+    }
+    .tbBanIn label {
+        margin: 0 !important;
+    }
+</style>
+<script>
+    document.addEventListener("keydown", autosearch);
+    function autosearch(event) {
+        var keyCode = ('which' in event) ? event.which : event.keyCode;
+        //alert("The Unicode key code is: " + keyCode);
+        if (keyCode == 13) {
+            baocaotonghop();
+        }
+        
+    }
+</script>
+
+<div class="col-md-12">
+    <div class="form-group">
+        <label for="room" style="width:auto;display:block;">Lọc tỉnh thành</label>
+        <input name="tinhvipham" type="text" tabindex="1" id="tinhvipham" value="" class="form-control" placeholder="Tên tỉnh thành" onkeyup="searchTinhThanh();"/>
+        <input type="button" value="Tìm kiếm" onclick="baocaotonghop();">
+    </div>
+</div>
+
+<div class="col-md-12" style="text-align:center;">
+    <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" disabled="disabled" />
+</div>
+
+<div id="divResult" class="col-md-12">
+    <label id="countResult"></label>
+    <table id="tbResult" class="tbBanIn"></table>
+</div>
+
+<script type="text/javascript">
+    var urlCreateBaoCaoPDF = '@Url.Action("createReport")';
+</script>

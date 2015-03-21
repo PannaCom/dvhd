@@ -364,7 +364,28 @@ function uploadProcessLoaidongvat() {
     }
     return false;
 }
-
+//Báo cáo thống kê tổng hợp
+function baocaotonghop() {
+    $("#tbResult").html("Đang tổng hợp báo cáo, xin chờ....");
+    var formdata = new FormData(); //FormData object
+    var tinhvipham = document.getElementById("tinhvipham").value;
+    //var pass = document.getElementById("pass").value;
+    formdata.append("tinhvipham", tinhvipham);
+    //formdata.append("pass", pass);
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/baocao/baocaotonghopreport');
+    xhr.send(formdata);
+    var content = "";
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            if (xhr.responseText == 0) {
+                alert("Không có dữ liệu!");
+            } else {
+                $("#tbResult").html(xhr.responseText);
+            }
+        }
+    }
+}
 //Phần dành cho phân quyền user
 function checkPermission(obj, value) {
     if (obj.checked) {
