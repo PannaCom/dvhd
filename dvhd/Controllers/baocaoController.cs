@@ -7,6 +7,7 @@ using System.IO;
 using System.Web.Mvc;
 using dvhd.Models;
 using System.Linq;
+using System.Globalization;
 namespace dvhd.Controllers
 {
     public class baocaoController : Controller
@@ -41,11 +42,46 @@ namespace dvhd.Controllers
         {
             return View();
         }
+        
         // GET: /BaoCaoTongHop/
         public ActionResult BaoCaoTongHop()
         {
             return View();
         }
+
+        // GET: /BaoCaoHinhThuc/
+        public ActionResult BaoCaoHinhThuc(string type)
+        {
+            if (type != null && type != string.Empty)
+            {
+                var p = (from q in db.HoSoes
+                         where q.hinhthucvipham.Contains(type)
+                         orderby q.thoigianvipham
+                         select q).ToList();
+                return View(p);
+            }
+            return View();
+        }
+
+        // GET: /BaoCaoHanhVi/
+        public ActionResult BaoCaoHanhVi()
+        {            
+            return View();
+        }
+
+        public ActionResult xuly(string type)
+        {
+            if (type != null && type != string.Empty)
+            {
+                var p = (from q in db.HoSoes
+                         where q.ketquaxuly.Contains(type)
+                         orderby q.ngayxuly
+                         select q).ToList();                
+                return View(p);
+            }
+            return View();
+        }
+
         public string baocaotonghopreport(string tinhvipham) {
             try
             {
@@ -76,38 +112,51 @@ namespace dvhd.Controllers
         //create report
         [HttpPost]
         [ValidateInput(false)]
-        public string createReport(string html, int type)
-        {
-            string path = HttpContext.Server.MapPath("../Images/Report"+ "\\");
-            Document document = new Document();
+        public string createReport(string keyword, int type)
+        {            
             try
             {
                 var reportName = "";
+                var content = "";
                 switch (type)
                 {
                     case 1:
                         reportName = "BaoCaoTheoLoai"+Guid.NewGuid().ToString()+".pdf";
+                        content = HomeController.getLoaiContentPDF(keyword);
                         break;
                     case 2:
                         reportName = "BaoCaoTheoTinh" + Guid.NewGuid().ToString() + ".pdf";
+                        content = HomeController.getQuanHuyenContentPDF(keyword);
                         break;
                     case 3:
                         reportName = "BaoCaoTheoDoiTuong" + Guid.NewGuid().ToString() + ".pdf";
+                        content = HomeController.getDoiTuongContentPdf(keyword);
                         break;
                     default:
                         reportName = "BaoCao" + Guid.NewGuid().ToString() + ".pdf";
+                        content = HomeController.getLoaiContentPDF(keyword);
                         break;
                 }
 
-                PdfWriter.GetInstance(document, new FileStream(path + reportName, FileMode.Create));
-                document.Open();
-                List<IElement> htmlarraylist = HTMLWorker.ParseToList(new StringReader(html), null);
-                for (int k = 0; k < htmlarraylist.Count; k++)
-                {
-                    document.Add((IElement)htmlarraylist[k]);
-                }
+                string path = HttpContext.Server.MapPath("../Images/Report" + "\\");
+                iTextSharp.text.pdf.BaseFont Vn_Helvetica = iTextSharp.text.pdf.BaseFont.CreateFont(@"C:\Windows\Fonts\arial.ttf", "Identity-H", iTextSharp.text.pdf.BaseFont.EMBEDDED);
+                iTextSharp.text.Font fontNormal = new iTextSharp.text.Font(Vn_Helvetica, 12, iTextSharp.text.Font.NORMAL);
+                
+                Document doc = new Document();
+                PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(path + reportName, FileMode.Create, FileAccess.Write));
+                doc.Open();
+                doc.Add(new Paragraph(content, fontNormal));
+                doc.Close();
 
-                document.Close();
+                //Document document = new Document();
+                //PdfWriter.GetInstance(document, new FileStream(path + reportName, FileMode.Create));
+                //document.Open();
+                //List<IElement> htmlarraylist = HTMLWorker.ParseToList(new StringReader(html), null);
+                //for (int k = 0; k < htmlarraylist.Count; k++)
+                //{
+                //    document.Add((IElement)htmlarraylist[k]);
+                //}
+                //document.Close();
                 return reportName;
             }
             catch (Exception ex)

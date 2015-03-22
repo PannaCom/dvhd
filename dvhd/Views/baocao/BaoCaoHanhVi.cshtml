@@ -1,9 +1,9 @@
 ﻿@{
-    ViewBag.Title = "Báo cáo theo loài Động vật hoang dã";
+    ViewBag.Title = "Báo cáo theo Hành Vi Vi Phạm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Báo Cáo Theo Loại Động Vật Hoang Dã</h2>
+<h2>Báo Cáo Theo Hành Vi Vi Phạm</h2>
 <style id="styleDetail" type="text/css">
    /* Ban In css*/
     .tbBanIn {
@@ -23,8 +23,8 @@
 <div class="col-md-12">
     <div class="form-group">
         <label for="room" style="width:auto;display:block;">Loại Động Vật Hoang Dã</label>
-        <input name="baocao_loaiDVHD" type="text" tabindex="1" id="baocao_loaiDVHD" value="" class="form-control" placeholder="Tê Tê, Báo Gấm, Bò Rừng, Tê Giác, Hổ ..." onkeyup="baocao_search(this, 1);"/>
-        <input type="button" value="Tìm kiếm" onclick="baocao_getData('baocao_loaiDVHD', 1);">
+        <input name="baocao_hanhviVP" type="text" tabindex="1" id="baocao_hanhviVP" value="" class="form-control" placeholder="vận chuyển, buôn bán, nuôi nhốt, kinh doanh, giết mổ, trưng bày rượu ngâm" onkeyup="baocao_search(this, 5);"/>
+        <input type="button" value="Tìm kiếm" onclick="baocao_getData('baocao_hanhviVP', 5);">
     </div>
 </div>
 
@@ -41,4 +41,3 @@
 <script type="text/javascript">
     var urlCreateBaoCaoPDF = '@Url.Action("createReport")';
 </script>
-

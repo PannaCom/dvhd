@@ -1,0 +1,14 @@
+﻿<select id="hinhthucvipham" onchange="changeHinhThucVP();" class="form-control" name="hinhthucvipham">
+    <option value="@dvhd.Config.hinhthucvipham[0]">@dvhd.Config.hinhthucvipham[0]</option>
+    <option value="@dvhd.Config.hinhthucvipham[1]">@dvhd.Config.hinhthucvipham[1]</option>
+</select>
+
+<script type="text/javascript">
+    function changeHinhThucVP() {
+        baocao_getData('hinhthucvipham', 4);
+    }
+    //$(function () {
+    //    baocao_getData('hinhthucvipham', 4);
+    //});
+</script>
+

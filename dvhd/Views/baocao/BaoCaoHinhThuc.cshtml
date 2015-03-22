@@ -1,0 +1,64 @@
+﻿@model List<dvhd.Models.HoSo>
+
+@{
+    ViewBag.Title = "Báo cáo theo Hình Thức Vi Phạm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Báo Cáo Theo Hình Thức Vi Phạm</h2>
+<style id="styleDetail" type="text/css">
+   /* Ban In css*/
+    .tbBanIn {
+        width:100%;
+        border: 1px solid #bbbcbb;
+        border-collapse: collapse;
+    }
+    .tbBanIn td, .tbBanIn th {
+        border: 1px solid #bbbcbb;
+        padding: 2px !important;
+    }
+    .tbBanIn label {
+        margin: 0 !important;
+    }
+</style>
+
+<div class="col-md-12">
+    <div class="form-group">
+    <label for="room" style="width:auto;display:block;">Hình thức vi phạm</label>
+    @Html.Partial("~/Views/baocao/_HinhThucVP.cshtml")
+    </div>
+</div>
+
+<div class="col-md-12" style="text-align:center;">
+    <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" disabled="disabled" />
+    @*<input id="btnCreateReport" type="button" value="Xuất ra PDF file" onclick="baocao_createPDF('baocao_loaiDVHD', 1);" disabled="disabled" />*@
+</div>
+
+<div id="divResult" class="col-md-12">
+    <label id="countResult"></label>
+    <table id="tbResult" class="tbBanIn">
+        @if (Model != null && Model.Count > 0) { 
+            <tr>
+                <th>Stt</th><th>Hình Thức Vi Phạm</th><th>Hành Vi Vi Phạm</th>
+                <th>Loại Vi Phạm</th><th>Địa Điểm Vi Phạm</th>
+		        <th>Mô Tả Chi Tiết</th><th>Số Lượng Chi Tiết</th><th>Tên Đơn Vị Bắt Giữ</th>
+		        <th>Phương Thức Vận Chuyển</th><th>Tuyến Đường Vận Chuyển</th><th>Ngày Vi Phạm</th>
+            </tr>
+            for (var i = 0; i<Model.Count; i++) {
+                var hoso = Model[i];
+                var thoigianvipham = hoso.thoigianvipham.HasValue == true ? hoso.thoigianvipham.Value.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) : "";
+                <tr>
+                    <td>@(i + 1)</td><td>@hoso.hinhthucvipham</td><td>@hoso.hanhvivipham</td>
+                    <td>@hoso.loaidongvat</td><td>@hoso.quanvipham "/" @hoso.tinhvipham</td><td>@hoso.motavipham</td>
+                    <td>@hoso.soluongchitiet</td><td>@hoso.tendonvibatgiu</td>
+                    <td>@hoso.phuongthucvanchuyen</td><td>@hoso.tuyenduongvanchuyen</td><td>@thoigianvipham</td>
+                </tr>
+            }        
+        }
+    </table>
+</div>
+
+<script type="text/javascript">
+    var urlCreateBaoCaoPDF = '@Url.Action("createReport")';    
+</script>
+

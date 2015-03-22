@@ -2,7 +2,7 @@
     ViewBag.Title = "Báo Cáo Theo Tỉnh";
 }
 
-<h2>Báo Cáo Theo Tỉnh</h2>
+<h2>Báo Cáo Theo Địa Bàn</h2>
 
 <style id="styleDetail" type="text/css">
     /* Ban In css*/
@@ -23,14 +23,14 @@
 <div class="col-md-12">
     <div class="form-group">
         <label for="room" style="width:auto;display:block;">Địa bàn vi phạm(Quận huyện/Tỉnh thành)</label>
-        <input name="baocao_tinh" type="text" tabindex="1" id="baocao_tinh" value="" class="form-control" placeholder="Tên Tỉnh Vi Phạm" onkeyup="baocao_search(this, 2);"/>
+        <input name="baocao_tinh" type="text" tabindex="1" id="baocao_tinh" value="" class="form-control" placeholder="Cầu Giấy, Ba Đình, Hà Nội, Huế, Đăk Lăk, ..." onkeyup="baocao_search(this, 2);"/>
         <input type="button" value="Tìm kiếm" onclick="baocao_getData('baocao_tinh', 2);">
     </div>
 </div>
 
 <div class="col-md-12" style="text-align:center;">
     <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" disabled="disabled" />
-    <input id="btnCreateReport" type="button" value="Xuất ra PDF file" onclick="baocao_createPDF(2);" disabled="disabled" />
+    <input id="btnCreateReport" type="button" value="Xuất ra PDF file" onclick="baocao_createPDF('baocao_tinh', 2);" disabled="disabled" />
 </div>
 
 <div id="divResult" class="col-md-12">

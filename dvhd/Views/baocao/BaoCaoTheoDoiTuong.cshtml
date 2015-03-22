@@ -23,14 +23,14 @@
 <div class="col-md-12">
     <div class="form-group">
         <label for="room" style="width:auto;display:block;">Đối Tượng Vi Phạm</label>
-        <input name="baocao_cmt" type="text" tabindex="1" id="baocao_cmt" value="" class="form-control" placeholder="Số CMT/Hộ Chiếu" onkeyup="baocao_search(this, 3);"/>
+        <input name="baocao_cmt" type="text" tabindex="1" id="baocao_cmt" value="" class="form-control" placeholder="Nhà Hàng, Quán Ăn, 123, ..." onkeyup="baocao_search(this, 3);"/>
         <input type="button" value="Tìm kiếm" onclick="baocao_getData('baocao_cmt', 3);">
     </div>
 </div>
 
 <div class="col-md-12" style="text-align:center;">
     <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" disabled="disabled" />
-    <input id="btnCreateReport" type="button" value="Xuất ra PDF file" onclick="baocao_createPDF(3);" disabled="disabled" />
+    <input id="btnCreateReport" type="button" value="Xuất ra PDF file" onclick="baocao_createPDF('baocao_cmt', 3);" disabled="disabled" />
 </div>
 
 <div id="divResult" class="col-md-12">

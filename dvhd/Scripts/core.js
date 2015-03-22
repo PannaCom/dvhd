@@ -21,17 +21,20 @@ function baocao_search(input, type) {
     var inputId = input.id;
     if (input.onkeyup.arguments[0].which == 13) {
         baocao_getData(inputId, type);
+        $(".ui-autocomplete").hide();
         return;
     }
     
     var urlSearch = "";
     var urlGetDetails = "";
-    if (type == 1) {
+    if (type == 1) { // Theo Loai
         urlSearch = '/Home/getLoaiDVHD?keyword=';
-    } else if (type == 2) {
-        urlSearch = '/Home/getQuanHuyen?keyword=';
-    } else if (type == 3) {
+    } else if (type == 2) { // Theo Dia Ban
+        urlSearch = '/Home/searchQuanHuyen?keyword=';
+    } else if (type == 3) { // Theo Doi Tuong
         urlSearch = '/Home/getCMT?keyword=';
+    } else if (type == 5) { // Theo Hanh Vi Vi Pham
+        urlSearch = '/Home/getHanhViVP?keyword=';
     }
 
     $('#' + inputId).autocomplete({
@@ -48,41 +51,95 @@ function baocao_search(input, type) {
 function baocao_getData(inputId, type) {
     var keyword = document.getElementById(inputId).value;
     var urlGetDetails = "";
-    if (type == 1) {
+    if (type == 1) { // Theo Loai
         urlGetDetails = '/Home/getLoaiDetails?keyword=';
-    } else if (type == 2) {
+    } else if (type == 2) { // Theo Dia Ban
         urlGetDetails = '/Home/getQuanHuyenDetails?keyword=';
-    } else if (type == 3) {
+    } else if (type == 3) { // Theo Doi Tuong
         urlGetDetails = '/Home/getCMTDetails?keyword=';
+    } else if (type == 4) { // Hinh Thuc Vi Pham
+        urlGetDetails = '/Home/getHTVPDetails?keyword=';
+    } else if (type == 5) { // Hanh Vi Vi Pham
+        urlGetDetails = '/Home/getHanhViVPDetails?keyword=';
     }
     $.ajax({
         url: urlGetDetails + keyword,
         type: 'POST',
         dataType: 'json',
         success: function (result) {
-            setResult2Table(result);
+            setResult2Table(result, type);
         }
     });
 }
 
-function setResult2Table(result) {
-    $("#countResult").text("Tổng Số Vụ Vi Phạm : " + result.length);
-    var htmlContent = '<tr><th>Tên Loài DVHD</th><th>Thời Gian Vi Phạm</th>'
-        + '<th>Địa Bàn</th><th>Đối Tượng Vi Phạm</th>'
-        + '<th>Số CMT/Hộ Chiếu</th><th>Hành Vi Vi Phạm</th></tr>';
-    $.each(result, function (idx, q) {
-        htmlContent += '<tr><td>' + q.loaidongvat + '</td><td>' + formatDate(q.thoigianvipham) + '</td><td>'
-            + q.quanvipham +'/'+q.tinhvipham+ '</td><td>' + q.hoten + '</td><td>' + setDefaultValue(q.cmthochieu) + '</td><td>' + q.hanhvivipham + '</td></tr>';
-    });
+function setResult2Table(result, type) {
+    //$("#countResult").text("Tổng Số Vụ Vi Phạm : " + result.length);
+    var htmlContent = '';
+    if (type == 1) { // Theo Loai
+        htmlContent = '<tr><th>Stt</th><th>Tên Loài</th>'
+        + '<th>Tình Trạng Bảo Tồn</th><th>Đơn Vị Tính</th>'
+        + '<th>Số Lượng Chi Tiết</th><th>Trị Giá Tang Vật</th>'
+		+ '<th>Tên Đơn Vị Bắt Giữ</th><th>Phương Thức Vận Chuyển</th>'
+		+ '<th>Tuyến Đường Vận Chuyển</th><th>Ngày Vi Phạm</th></tr>';
+        $.each(result, function (idx, q) {
+            htmlContent += '<tr><td>' + (idx + 1) + '</td><td>' + q.loaidongvat + '</td><td>' + q.tinhtrangbaoton + '</td><td>'
+                + q.donvitinh + '</td><td>' + q.soluongchitiet + '</td><td>' + q.trigiatangvat + '</td><td>' + q.tendonvibatgiu + '</td><td>'
+                + q.phuongthucvanchuyen + '</td><td>' + q.tuyenduongvanchuyen + '</td><td>' + formatDate(q.thoigianvipham) + '</td></tr>';
+        });
+    } else if (type == 2) { // Theo Dia Ban        
+        htmlContent = '<tr><th>Stt</th><th>Tên Địa Bàn</th>'
+        + '<th>Đối Tượng Vi Phạm</th><th>Địa Chỉ Thường Trú</th>'
+        + '<th>Hành Vi Vi Phạm</th><th>Tên Loài</th>'
+		+ '<th>Số Lượng Chi Tiết</th><th>Tên Đơn Vị Bắt Giữ</th>'
+		+ '<th>Ngày Vi Phạm</th></tr>';
+        $.each(result, function (idx, q) {            
+            htmlContent += '<tr><td>' + (idx + 1) + '</td><td>' + q.diaban + '</td><td>' + q.hoten + '</td><td>'
+                + q.diachilienhe + '</td><td>' + q.hanhvivipham + '</td><td>' + q.loaidongvat + '</td><td>' + q.soluongchitiet + '</td><td>'
+                + q.tendonvibatgiu + '</td><td>' + formatDate(q.thoigianvipham) + '</td></tr>';
+        });
+    } else if (type == 3) { // Theo Doi Tuong
+        htmlContent = '<tr><th>Stt</th><th>Đối Tượng Vi Phạm</th><th>Số CMT/Hộ Chiếu</th>'
+        + '<th>Địa Chỉ Thường Trú</th><th>Thông Tin Thân Nhân</th>'
+		+ '<th>Tiền Án Tiền Sự</th><th>Hành Vi Vi Phạm</th>'
+		+ '<th>Tên Loài</th><th>Số Lượng Chi Tiết</th><th>Ngày Vi Phạm</th></tr>';
+        $.each(result, function (idx, q) {
+            htmlContent += '<tr><td>' + (idx + 1) + '</td><td>' + q.hoten + '</td><td>' + q.cmthochieu + '</td><td>'
+                + q.diachilienhe + '</td><td>Họ tên Cha: ' + q.hotencha + '<br/>Họ tên Mẹ: ' + q.hotenme + '</td><td>'
+                + q.tienantiensu + '</td><td>' + q.hanhvivipham + '</td><td>'
+                + q.loaidongvat + '</td><td>' + q.soluongchitiet + '</td><td>' + formatDate(q.thoigianvipham) + '</td></tr>';
+        });
+    } else if (type == 4) { // Theo Hinh Thuc Vi Pham
+        htmlContent = '<tr><th>Stt</th><th>Hình Thức Vi Phạm</th><th>Hành Vi Vi Phạm</th>'
+        + '<th>Loại Vi Phạm</th><th>Địa Điểm Vi Phạm</th>'
+		+ '<th>Mô Tả Chi Tiết</th><th>Số Lượng Chi Tiết</th><th>Tên Đơn Vị Bắt Giữ</th>'
+		+ '<th>Phương Thức Vận Chuyển</th><th>Tuyến Đường Vận Chuyển</th><th>Ngày Vi Phạm</th></tr>';
+        $.each(result, function (idx, q) {
+            htmlContent += '<tr><td>' + (idx + 1) + '</td><td>' + q.hinhthucvipham + '</td><td>' + q.hanhvivipham + '</td><td>'
+                + q.loaidongvat + '</td><td>' + q.diaban + '</td><td>' + q.motavipham + '</td><td>'
+                + q.soluongchitiet + '</td><td>' + q.tendonvibatgiu + '</td><td>'
+                + q.phuongthucvanchuyen + '</td><td>' + q.tuyenduongvanchuyen + '</td><td>' + formatDate(q.thoigianvipham) + '</td></tr>';
+        });        
+    } else if (type == 5) { // Theo Hanh Vi Vi Pham
+        htmlContent = '<tr><th>Stt</th><th>Hành Vi Vi Phạm</th><th>Hình Thức Vi Phạm</th>'
+        + '<th>Loại Vi Phạm</th><th>Địa Điểm Vi Phạm</th>'
+		+ '<th>Mô Tả Chi Tiết</th><th>Số Lượng Chi Tiết</th><th>Tên Đơn Vị Bắt Giữ</th>'
+		+ '<th>Phương Thức Vận Chuyển</th><th>Tuyến Đường Vận Chuyển</th><th>Ngày Vi Phạm</th></tr>';
+        $.each(result, function (idx, q) {
+            htmlContent += '<tr><td>' + (idx + 1) + '</td><td>' + q.hanhvivipham + '</td><td>' + q.hinhthucvipham + '</td><td>'
+                + q.loaidongvat + '</td><td>' + q.diaban + '</td><td>' + q.motavipham + '</td><td>'
+                + q.soluongchitiet + '</td><td>' + q.tendonvibatgiu + '</td><td>'
+                + q.phuongthucvanchuyen + '</td><td>' + q.tuyenduongvanchuyen + '</td><td>' + formatDate(q.thoigianvipham) + '</td></tr>';
+        });
+    }
     $("#tbResult").html(htmlContent);
     $("#btnCreateReport").removeAttr("disabled");
     $("#btnCreateReportBanIn").removeAttr("disabled");
 }
 
-function baocao_createPDF(type) {
+function baocao_createPDF(inputId, type) {    
     $.ajax({
         url: urlCreateBaoCaoPDF,
-        data: { html: $("#divResult").html(), type: type },
+        data: { keyword: $("#" + inputId).val(), type: type }, //  $("#divResult").html()
         type: 'POST',
         success: function (result) {
             //alert(result);
