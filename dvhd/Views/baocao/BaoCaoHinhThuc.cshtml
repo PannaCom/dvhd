@@ -12,6 +12,7 @@
         width:100%;
         border: 1px solid #bbbcbb;
         border-collapse: collapse;
+        table-layout: fixed;
     }
     .tbBanIn td, .tbBanIn th {
         border: 1px solid #bbbcbb;
@@ -30,7 +31,7 @@
 </div>
 
 <div class="col-md-12" style="text-align:center;">
-    <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" disabled="disabled" />
+    <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" />
     @*<input id="btnCreateReport" type="button" value="Xuất ra PDF file" onclick="baocao_createPDF('baocao_loaiDVHD', 1);" disabled="disabled" />*@
 </div>
 
@@ -39,17 +40,17 @@
     <table id="tbResult" class="tbBanIn">
         @if (Model != null && Model.Count > 0) { 
             <tr>
-                <th>Stt</th><th>Hình Thức Vi Phạm</th><th>Hành Vi Vi Phạm</th>
-                <th>Loại Vi Phạm</th><th>Địa Điểm Vi Phạm</th>
-		        <th>Mô Tả Chi Tiết</th><th>Số Lượng Chi Tiết</th><th>Tên Đơn Vị Bắt Giữ</th>
-		        <th>Phương Thức Vận Chuyển</th><th>Tuyến Đường Vận Chuyển</th><th>Ngày Vi Phạm</th>
+                <th style="width:22px;">Stt</th><th style="width:70px;">Hình Thức Vi Phạm</th><th style="width:70px;">Hành Vi Vi Phạm</th>
+                <th style="width:100px;">Loại Vi Phạm</th><th style="width:100px;">Địa Điểm Vi Phạm</th>
+		        <th>Mô Tả Chi Tiết</th><th style="width:150px;">Số Lượng Chi Tiết</th><th style="width:120px;">Tên Đơn Vị Bắt Giữ</th>
+		        <th style="width:70px;">Phương Thức Vận Chuyển</th><th style="width:70px;">Tuyến Đường Vận Chuyển</th><th style="width:75px;">Ngày Vi Phạm</th>
             </tr>
             for (var i = 0; i<Model.Count; i++) {
                 var hoso = Model[i];
                 var thoigianvipham = hoso.thoigianvipham.HasValue == true ? hoso.thoigianvipham.Value.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) : "";
                 <tr>
                     <td>@(i + 1)</td><td>@hoso.hinhthucvipham</td><td>@hoso.hanhvivipham</td>
-                    <td>@hoso.loaidongvat</td><td>@hoso.quanvipham "/" @hoso.tinhvipham</td><td>@hoso.motavipham</td>
+                    <td>@hoso.loaidongvat</td><td>@hoso.quanvipham/@hoso.tinhvipham</td><td>@hoso.motavipham</td>
                     <td>@hoso.soluongchitiet</td><td>@hoso.tendonvibatgiu</td>
                     <td>@hoso.phuongthucvanchuyen</td><td>@hoso.tuyenduongvanchuyen</td><td>@thoigianvipham</td>
                 </tr>

@@ -5,13 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Báo Cáo Theo Hình Thức Xử Lý</h2>
+<h2 id="titleXuLy"></h2>
 <style id="styleDetail" type="text/css">
    /* Ban In css*/
     .tbBanIn {
         width:100%;
         border: 1px solid #bbbcbb;
         border-collapse: collapse;
+        table-layout: fixed;
     }
     .tbBanIn td, .tbBanIn th {
         border: 1px solid #bbbcbb;
@@ -23,18 +24,18 @@
 </style>
 
 <div class="col-md-12" style="text-align:center;">
-    <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" disabled="disabled" />
-    @*<input id="btnCreateReport" type="button" value="Xuất ra PDF file" onclick="baocao_createPDF('baocao_loaiDVHD', 1);" disabled="disabled" />*@
+    <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" />
+    @*<input id="btnExportExcel" type="button" value="Xuất ra Excel file" onclick="exportExcel();" />*@
 </div>
 
 <div id="divResult" class="col-md-12">
     <label id="countResult"></label>
     <table id="tbResult" class="tbBanIn">
         <tr>
-            <th>Stt</th><th>Kết Quả Xử Lý</th><th>Kết Quả Xử Lý Chi Tiết</th>
-            <th>Đơn Vị Xử Lý</th><th>Tên Đơn Vị Xử Lý</th>
-		    <th>Bị Can</th><th>Mô Tả Chi Tiết Xử Lý</th><th>Mô Tả Chi Tiết</th>
-		    <th>Hành Vi Vi Phạm</th><th>Ngày Xử Lý</th><th>Cán Bộ Xử Lý</th>
+            <th style="width:22px;">Stt</th><th style="width:70px;">Kết Quả Xử Lý</th><th style="width:100px;">Kết Quả Xử Lý Chi Tiết</th>
+            @*<th>Đơn Vị Xử Lý</th>*@ <th style="width:100px;">Tên Đơn Vị Xử Lý</th>
+		    <th style="width:100px;">Bị Can</th><th style="width:100px;">Mô Tả Chi Tiết Xử Lý</th><th>Mô Tả Chi Tiết Vi Phạm</th>
+		    <th style="width:100px;">Hành Vi Vi Phạm</th><th style="width:75px;">Ngày Xử Lý</th><th style="width:90px;">Cán Bộ Xử Lý</th>
         </tr>
         @if (Model != null && Model.Count > 0)
         { 
@@ -44,7 +45,7 @@
                 var ngayxuly = hoso.ngayxuly.HasValue == true ? hoso.ngayxuly.Value.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) : "";
             <tr>
                 <td>@(i + 1)</td><td>@hoso.ketquaxuly</td><td>@hoso.ketquaxulychitiet</td>
-                <td>@hoso.donvixuly</td><td>@hoso.tendonvixuly</td>
+                @*<td>@hoso.donvixuly</td>*@<td>@hoso.tendonvixuly</td>
                 <td>@hoso.hoten</td><td>@hoso.motachitietxuly</td><td>@hoso.motavipham</td>
                 <td>@hoso.hanhvivipham</td><td>@ngayxuly</td><td>@hoso.hotencanboxuly</td>
              </tr>
@@ -55,5 +56,43 @@
 
 <script type="text/javascript">
     var urlCreateBaoCaoPDF = '@Url.Action("createReport")';
+    $(function () {
+        var rs = getUrlParameter('type');
+        if (rs == "hình sự") {
+            $("#titleXuLy").text("Tra Cứu Số Vụ Xử Lý Hình Sự");
+        } else if (rs == "hành chính") {
+            $("#titleXuLy").text("Tra Cứu Số Vụ Xử Lý Hành Chính");
+        } else if (rs == "không xử lý") {
+            $("#titleXuLy").text("Tra Cứu Số Vụ Không Xử Lý");
+        } else {
+            $("#titleXuLy").text("Tra Cứu Theo Kết Quả Xử Lý Vi Phạm");
+        }        
+    });
+
+    function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        var paraValue = "";
+        for (var i = 0; i < sURLVariables.length; i++) {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == sParam) {
+                paraValue = decodeURIComponent(sParameterName[1]);
+                break;
+            }
+        }
+        return paraValue.toLowerCase();
+    }
+
+    function exportExcel(type) {
+        $.ajax({
+            url: '@Url.Action("exportExel","baocao")',
+            data: {type:type},
+            type: 'POST',
+            dataType: 'json',
+            success: function (result) {
+                alert(result);
+            }
+        });
+    }
 </script>
 

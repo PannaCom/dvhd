@@ -82,9 +82,9 @@ namespace dvhd.Controllers
                           orderby q.tinhvipham, q.quanvipham
                           select new
                           {
-                              diaban = q.loaidongvat + "/" + q.tinhvipham,
+                              diaban = q.quanvipham + "/" + q.tinhvipham,
                               q.hoten,
-                              q.diachilienhe,
+                              q.choohientai,
                               q.hanhvivipham,
                               q.loaidongvat,
                               q.soluongchitiet,
@@ -98,9 +98,9 @@ namespace dvhd.Controllers
                       orderby q.tinhvipham, q.quanvipham
                       select new
                       {
-                          diaban = q.loaidongvat + "/" + q.tinhvipham,
+                          diaban = q.quanvipham + "/" + q.tinhvipham,
                           q.hoten,
-                          q.diachilienhe,
+                          q.choohientai,
                           q.hanhvivipham,
                           q.loaidongvat,
                           q.soluongchitiet,
@@ -113,7 +113,8 @@ namespace dvhd.Controllers
         public string getCMTDetails(string keyword)
         {            
             int rs;
-            if (int.TryParse(keyword.Substring(0, 1), out rs)) {
+            if (int.TryParse(keyword.Substring(0, 1), out rs) || (keyword.Length > 1 && Char.IsLetter(keyword, 0) && int.TryParse(keyword.Substring(1, 1), out rs)))
+            {                
                 var p1 = (from q in db.HoSoes
                          where q.cmthochieu.Contains(keyword)
                          orderby q.cmthochieu
@@ -121,7 +122,7 @@ namespace dvhd.Controllers
                          {
                              q.hoten,
                              q.cmthochieu,
-                             q.diachilienhe,
+                             q.choohientai,
                              q.hotencha,
                              q.hotenme,
                              q.tienantiensu,
@@ -140,7 +141,7 @@ namespace dvhd.Controllers
                      {
                          q.hoten,
                          q.cmthochieu,
-                         q.diachilienhe,
+                         q.choohientai,
                          q.hotencha,
                          q.hotenme,
                          q.tienantiensu,
@@ -247,11 +248,10 @@ namespace dvhd.Controllers
             return content;
         }
 
-
         public string getCMT(string keyword)
         {
             int rs;
-            if (int.TryParse(keyword.Substring(0, 1), out rs))
+            if (int.TryParse(keyword.Substring(0, 1), out rs) || (keyword.Length > 1 && Char.IsLetter(keyword, 0) && int.TryParse(keyword.Substring(1, 1), out rs)))
             {
                 var p1 = (from q in db.HoSoes where q.cmthochieu.Contains(keyword) orderby q.cmthochieu select q.cmthochieu ).Distinct().Take(10).ToList();
                 return JsonConvert.SerializeObject(p1);

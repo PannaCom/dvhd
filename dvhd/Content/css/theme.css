@@ -1540,7 +1540,7 @@ aside .widget .news-content span a {
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
 	color: #006600;
 	cursor: default;
-	background-color: #ffffff;
+	background-color: blanchedalmond;
 	border: 2px solid #006600;
 	border-bottom-color: transparent;
 }
