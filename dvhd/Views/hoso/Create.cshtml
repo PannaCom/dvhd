@@ -5,21 +5,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Nhập dữ liệu đối tượng vi phạm</h2>
-<i>Dấu * cho biết trường  bắt buộc phải nhập</i>
+<h2 style="margin-left:5px;">Nhập dữ liệu đối tượng vi phạm</h2>
+<i style="margin-left:5px;">Dấu * cho biết trường  bắt buộc phải nhập</i>
 
 @using (Html.BeginForm("Create", "hoso", FormMethod.Post, new { id = "EditForm" })) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(false)
     <fieldset>
+        <div class="col-md-11">
         <ul class="nav nav-tabs" style="padding-left:6px;">
           <li class="active"><a href="#thongtin" data-toggle="tab" aria-expanded="true">Thông tin đối tượng vi phạm</a></li>
           <li class=""><a href="#hanhvi" data-toggle="tab" aria-expanded="false">Hành vi vi phạm</a></li>
           <li class=""><a href="#ketqua" data-toggle="tab" aria-expanded="false">Kết quả xử lý</a></li>
         </ul>
-        <div class="tab-content" style="padding-left:6px;" >
+        <div class="tab-content">
             <div class="tab-pane fade active in" id="thongtin" >
-                <div class="col-md-12">
+                <div class="col-md-12" >
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Họ tên * </label>
                         <input name="hoten" type="text" tabindex="1" id="hoten" value="" class="form-control" placeholder="Gõ tên đối tượng vi phạm"/>(<a onclick="uploadAnhDaiDien();" style="cursor:pointer;">Click để upload ảnh nếu có</a>)                
@@ -315,16 +316,19 @@
                         <input type="hidden" id="hosocode" name="hosocode" value="@ViewBag.hosocode">
                       </div>
                  </div>
+                      
+                 
             </div>
         </div>
-        <p>
-            <input type="button" value="Thêm mới" onclick="checkField();" />
-        </p>
+            <div class="form-group" style="text-align:center;">
+                <input type="button" value="THÊM HỒ SƠ" onclick="checkField();" style="font-weight:bold;"/>
+            </div>
+       </div>
     </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Trở về danh sách hồ sơ", "Index")
 </div>
 <script>
     $("#progressbar").progressbar({

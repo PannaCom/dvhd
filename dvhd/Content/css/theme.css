@@ -1514,7 +1514,8 @@ aside .widget .news-content span a {
 }
 /* Nav Tabs */
 .nav-tabs {
-	border-bottom: 1px solid #ebebeb;
+	border-bottom: 1px solid #006600;
+    /*border:1px solid #006600;*/ 
 }
 .nav-tabs > li {
 	float: left;

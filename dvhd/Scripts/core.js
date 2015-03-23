@@ -340,10 +340,13 @@ function isEmail(email) {
         return re.test(email);
 }
 function checkHVVP(obj, value) {
+   var space = ", ";
+   if (document.getElementById("hanhvivipham").value == "") space = "";
    if (obj.checked) {
-       if (document.getElementById("hanhvivipham").value.indexOf(value) < 0) document.getElementById("hanhvivipham").value += ", " + value;
+       if (document.getElementById("hanhvivipham").value.indexOf(value) < 0) document.getElementById("hanhvivipham").value += space + value;
    } else {
        document.getElementById("hanhvivipham").value = document.getElementById("hanhvivipham").value.replace(", " + value, "");
+       document.getElementById("hanhvivipham").value = document.getElementById("hanhvivipham").value.replace(value, "");
    }
 }
 

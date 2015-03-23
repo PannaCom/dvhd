@@ -5,13 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Nhập dữ liệu đối tượng vi phạm</h2>
-<i>Dấu * cho biết trường  bắt buộc phải nhập</i>
+<h2 style="margin-left:5px;">Nhập dữ liệu đối tượng vi phạm</h2>
+<i style="margin-left:5px;">Dấu * cho biết trường  bắt buộc phải nhập</i>
 <a href="/hoso/Create?hosocode=@ViewBag.hosocode" target="_blank">+Thêm đồng phạm</a>
 @using (Html.BeginForm("Edit", "hoso", FormMethod.Post, new { id = "EditForm" })) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(false)
     <fieldset>
+        <div class="col-md-11">
         <ul class="nav nav-tabs" style="padding-left:6px;">
           <li class="active"><a href="#thongtin" data-toggle="tab" aria-expanded="true">Thông tin đối tượng vi phạm</a></li>
           <li class=""><a href="#hanhvi" data-toggle="tab" aria-expanded="false">Hành vi vi phạm</a></li>
@@ -334,9 +335,10 @@
                  </div>
             </div>
         </div>
-        <p>
-            <input type="button" value="Cập nhật hồ sơ" onclick="checkField();" />
-        </p>
+        <div class="form-group" style="text-align:center;">
+                <input type="button" value="CẬP NHẬT HỒ SƠ" onclick="checkField();" style="font-weight:bold;"/>
+            </div>
+        </div>
     </fieldset>
 }
 
