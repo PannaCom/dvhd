@@ -23,11 +23,13 @@ namespace dvhd.Controllers
         //
         // GET: /hoso/
 
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string keyword)
         {
+            if (keyword == null) keyword = "";
+            ViewBag.keyword = keyword;
             if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
             if (!Config.checkPermission(Config.getCookie("logged"), "HS1")) return RedirectToAction("Permission", "Home");
-            var p = (from q in db.HoSoes select q).OrderByDescending(o => o.id).Take(1000);
+            var p = (from q in db.HoSoes where q.hoten.Contains(keyword) || q.cmthochieu.Contains(keyword) select q).OrderByDescending(o => o.id).Take(1000);
             int pageSize = Config.PageSize;
             int pageNumber = (page ?? 1);
             ViewBag.page = page;

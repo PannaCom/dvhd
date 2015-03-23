@@ -4,10 +4,21 @@
     ViewBag.Title = "Danh sách đối tượng vi phạm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script>
+    document.addEventListener("keydown", autosearch);
+    function autosearch(event) {
+        var keyCode = ('which' in event) ? event.which : event.keyCode;
+        //alert("The Unicode key code is: " + keyCode);
+        if (keyCode == 13) {
+            timhoso();
+        }
+
+    }
+</script>
 <style id="styleDetail" type="text/css">
    /* Ban In css*/
     .tbBanIn {
-        width:100%;
+        width:99%;
         border: 1px solid #bbbcbb;
         border-collapse: collapse;
     }
@@ -19,15 +30,40 @@
         margin: 0 !important;
     }
 </style>
-<h2>Danh sách đối tượng vi phạm</h2>
-<p>
+<h2 style="margin-left:5px;">Danh sách đối tượng vi phạm</h2>
+<p style="margin-left:5px;">
     @Html.ActionLink("Thêm mới", "Create")
 </p>
 
-<table class="tbBanIn">
+<div class="col-md-12">
+    <div class="form-group">
+        <label for="room" style="width:auto;display:block;">Đối Tượng Vi Phạm</label>
+        <input name="baocao_cmt" type="text" tabindex="1" id="baocao_cmt" value="@ViewBag.keyword" class="form-control" placeholder="Nhập tên hoặc số cmt, hộ chiếu của đối tượng" onkeyup="baocao_timhoso();"/>
+        <input type="button" value="Tìm kiếm" onclick="timhoso();">
+    </div>
+</div>
+@if (Model.PageCount>1){
+    <div class="col-md-12">
+    <ul class="pagination clearfix">
+            <li class="disabled"><a href="#">«</a></li>
+            @for (int i = 1; i <= Model.PageCount; i++)
+            {
+                if (i != ViewBag.page){
+                   <text><li><a href="/hoso/Index?page=@i&keyword=@ViewBag.keyword">@i</a></li></text>
+                }else{
+                   <text><li><a href="/hoso/Index?page=@i&keyword=@ViewBag.keyword" style="background-color:#ddd ;">@i</a></li></text>
+                }
+            }
+    </ul>
+    </div>
+}
+<table class="tbBanIn" style="margin-left:5px;margin-right:5px;">
     <tr>
         <th>
             Tên đối tượng
+        </th>
+        <th>
+            Số CMT/Hộ chiếu
         </th>
         <th>
             Địa chỉ
@@ -42,7 +78,7 @@
             Hành vi vi phạm
         </th>
         <th>
-            Số lượng
+            Số lượng chi tiết
         </th>
         <th>
             Loài vi phạm
@@ -52,10 +88,13 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        <td width="15%">
             @item.hoten
         </td>
-        <td width="20%">
+         <td>
+            @item.cmthochieu
+        </td>
+        <td width="15%">
             @item.hokhauthuongtru
         </td>
         <td>
@@ -67,16 +106,16 @@
         <td>
            @item.hanhvivipham
         </td>
-        <td width="20%">
+        <td width="15%">
            @item.soluongchitiet
         </td>
-        <td>
+        <td width="15%">
            @item.loaidongvat
         </td>
-        <td>
-            @Html.ActionLink("Sửa", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Bản in", "Details", new { id = item.id }, new { target="_blank"}) |
-            @Html.ActionLink("Xóa", "Delete", new { id=item.id })
+        <td width="4%">
+            -@Html.ActionLink("Sửa", "Edit", new { id=item.id }) <br />
+            -@Html.ActionLink("Bản in", "Details", new { id = item.id }, new { target="_blank"}) <br />
+            -@Html.ActionLink("Xóa", "Delete", new { id=item.id })
         </td>
     </tr>
 }
@@ -89,11 +128,34 @@
             @for (int i = 1; i <= Model.PageCount; i++)
             {
                 if (i != ViewBag.page){
-                   <text><li><a href="/hoso/Index?page=@i">@i</a></li></text>
+                   <text><li><a href="/hoso/Index?page=@i&keyword=@ViewBag.keyword">@i</a></li></text>
                 }else{
-                   <text><li><a href="/hoso/Index?page=@i" style="background-color:#ddd ;">@i</a></li></text>
+                   <text><li><a href="/hoso/Index?page=@i&keyword=@ViewBag.keyword" style="background-color:#ddd ;">@i</a></li></text>
                 }
             }
     </ul>
     </div>
 }
+<script>
+    function timhoso() {
+        var keyword = document.getElementById("baocao_cmt").value;
+        window.location.href = "/hoso/Index?page=1&keyword=" + keyword;
+    }
+    function baocao_timhoso() {
+        var keyword = document.getElementById("baocao_cmt").value;
+
+      
+        urlSearch = '/Home/getCMT?keyword=';
+        
+
+        $('#baocao_cmt').autocomplete({
+            source: urlSearch + keyword,
+            select: function (event, ui) {
+                $(event.target).val(ui.item.value);
+                timhoso();
+                return false;
+            },
+            minLength: 1
+        });
+    }
+</script>

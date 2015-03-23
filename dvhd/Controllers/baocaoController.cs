@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using dvhd.Models;
 using System.Linq;
 using System.Globalization;
-using Excel = Microsoft.Office.Interop.Excel;
+//using Excel = Microsoft.Office.Interop.Excel;
 
 namespace dvhd.Controllers
 {
@@ -86,47 +86,47 @@ namespace dvhd.Controllers
 
         public string exportExel(string type = "Hành Chính")
         {
-            if (type != null && type != string.Empty)
-            {
-                var p = (from q in db.HoSoes
-                         where q.ketquaxuly.Contains(type)
-                         orderby q.ngayxuly
-                         select q).ToList();
+            //if (type != null && type != string.Empty)
+            //{
+            //    var p = (from q in db.HoSoes
+            //             where q.ketquaxuly.Contains(type)
+            //             orderby q.ngayxuly
+            //             select q).ToList();
 
-                Excel.Application xlApp ;
-                Excel.Workbook xlWorkBook ;
-                Excel.Worksheet xlWorkSheet ;
-                object misValue = System.Reflection.Missing.Value;
+            //    Excel.Application xlApp ;
+            //    Excel.Workbook xlWorkBook ;
+            //    Excel.Worksheet xlWorkSheet ;
+            //    object misValue = System.Reflection.Missing.Value;
 
-                xlApp = new Excel.Application();
-                xlWorkBook = xlApp.Workbooks.Add(misValue);
-                xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+            //    xlApp = new Excel.Application();
+            //    xlWorkBook = xlApp.Workbooks.Add(misValue);
+            //    xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
             
-                for (var i = 0; i < p.Count; i++)
-                {
-                    var row=p[i];                
-                    var j=0;                
-                    xlWorkSheet.Cells[i + 1, ++j] = i+1;
-                    xlWorkSheet.Cells[i + 1, ++j] = row.ketquaxuly;
-                    xlWorkSheet.Cells[i + 1, ++j] = row.ketquaxulychitiet;
-                    xlWorkSheet.Cells[i + 1, ++j] = row.donvixuly;
-                    xlWorkSheet.Cells[i + 1, ++j] = row.tendonvixuly;
-                    xlWorkSheet.Cells[i + 1, ++j] = row.hoten;
-                    xlWorkSheet.Cells[i + 1, ++j] = row.motachitietxuly;
-                    xlWorkSheet.Cells[i + 1, ++j] = row.motavipham;
-                    xlWorkSheet.Cells[i + 1, ++j] = row.hanhvivipham;
-                    xlWorkSheet.Cells[i + 1, ++j] = row.ngayxuly.HasValue == true ? row.ngayxuly.Value.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) : "";
-                    xlWorkSheet.Cells[i + 1, ++j] = row.hotencanboxuly;
-                }
+            //    for (var i = 0; i < p.Count; i++)
+            //    {
+            //        var row=p[i];                
+            //        var j=0;                
+            //        xlWorkSheet.Cells[i + 1, ++j] = i+1;
+            //        xlWorkSheet.Cells[i + 1, ++j] = row.ketquaxuly;
+            //        xlWorkSheet.Cells[i + 1, ++j] = row.ketquaxulychitiet;
+            //        xlWorkSheet.Cells[i + 1, ++j] = row.donvixuly;
+            //        xlWorkSheet.Cells[i + 1, ++j] = row.tendonvixuly;
+            //        xlWorkSheet.Cells[i + 1, ++j] = row.hoten;
+            //        xlWorkSheet.Cells[i + 1, ++j] = row.motachitietxuly;
+            //        xlWorkSheet.Cells[i + 1, ++j] = row.motavipham;
+            //        xlWorkSheet.Cells[i + 1, ++j] = row.hanhvivipham;
+            //        xlWorkSheet.Cells[i + 1, ++j] = row.ngayxuly.HasValue == true ? row.ngayxuly.Value.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) : "";
+            //        xlWorkSheet.Cells[i + 1, ++j] = row.hotencanboxuly;
+            //    }
 
-                xlWorkBook.SaveAs("csharp.net-informations.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
-                xlWorkBook.Close(true, misValue, misValue);
-                xlApp.Quit();
+            //    xlWorkBook.SaveAs("csharp.net-informations.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+            //    xlWorkBook.Close(true, misValue, misValue);
+            //    xlApp.Quit();
 
-                releaseObject(xlWorkSheet);
-                releaseObject(xlWorkBook);
-                releaseObject(xlApp);
-            }
+            //    releaseObject(xlWorkSheet);
+            //    releaseObject(xlWorkBook);
+            //    releaseObject(xlApp);
+            //}
             return "OK";
         }
 
