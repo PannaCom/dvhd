@@ -28,7 +28,7 @@ namespace dvhd.Controllers
             if (keyword == null) keyword = "";
             ViewBag.keyword = keyword;
             if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
-            if (!Config.checkPermission(Config.getCookie("logged"), "HS1")) return RedirectToAction("Permission", "Home");
+            if (!Config.checkPermission(Config.getCookie("logged"), "HS0")) return RedirectToAction("Permission", "Home");
             var p = (from q in db.HoSoes where q.hoten.Contains(keyword) || q.cmthochieu.Contains(keyword) select q).OrderByDescending(o => o.id).Take(1000);
             int pageSize = Config.PageSize;
             int pageNumber = (page ?? 1);
@@ -103,6 +103,8 @@ namespace dvhd.Controllers
 
         public ActionResult Details(int id = 0)
         {
+            if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
+            if (!Config.checkPermission(Config.getCookie("logged"), "HS2")) return RedirectToAction("Permission", "Home");
             HoSo hoso = db.HoSoes.Find(id);
             if (hoso == null)
             {
@@ -116,6 +118,8 @@ namespace dvhd.Controllers
 
         public ActionResult Create(string hosocode)
         {
+            if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
+            if (!Config.checkPermission(Config.getCookie("logged"), "HS1")) return RedirectToAction("Permission", "Home");
             if (hosocode == null)
             {
                 ViewBag.hosocode = Guid.NewGuid().ToString();
@@ -151,6 +155,8 @@ namespace dvhd.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+            if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
+            if (!Config.checkPermission(Config.getCookie("logged"), "HS3")) return RedirectToAction("Permission", "Home");
             HoSo hoso = db.HoSoes.Find(id);
             ViewBag.hosocode = hoso.hosocode;
             if (hoso.hosocode == null) ViewBag.hosocode = Guid.NewGuid().ToString();
@@ -182,6 +188,8 @@ namespace dvhd.Controllers
 
         public ActionResult Delete(int id = 0)
         {
+            if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
+            if (!Config.checkPermission(Config.getCookie("logged"), "HS4")) return RedirectToAction("Permission", "Home");
             HoSo hoso = db.HoSoes.Find(id);
             if (hoso == null)
             {

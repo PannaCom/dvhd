@@ -76,12 +76,13 @@
                  <input type="checkbox" id="BC5" onclick="checkPermission(this, 'BC5');">Xem báo cáo theo hành vi vi phạm(buôn bán, vận chuyển, nuôi nhốt...)
               </div>
         </div>
-        <div class="col-md-12">
+         <div class="col-md-12">
               <div class="form-group">
-                 <label for="room" style="width:auto;display:block;"><input type="checkbox" id="BC_6_8" onclick="checkBC(6, 8);">Quyền truy cập xem báo cáo kết quả xử lý</label>
+                 <label for="room" style="width:auto;display:block;"><input type="checkbox" id="BC_6_9" onclick="checkBC(6, 9);">Quyền truy cập xem báo cáo kết quả xử lý</label>
                  <input type="checkbox" id="BC6" onclick="checkPermission(this, 'BC6');">Xem báo cáo số vụ xử lý hình sự
                  <input type="checkbox" id="BC7" onclick="checkPermission(this, 'BC7');">Xem báo cáo số vụ xử lý hành chính
-                 <input type="checkbox" id="BC8" onclick="checkPermission(this, 'BC8');">Xem báo cáo số vụ không xử lý   
+                 <input type="checkbox" id="BC8" onclick="checkPermission(this, 'BC8');">Xem báo cáo số vụ không xử lý 
+                 <input type="checkbox" id="BC9" onclick="checkPermission(this, 'BC9');">Xem báo cáo tổng hợp 
               </div>
         </div>
         <div class="col-md-12">
@@ -132,13 +133,13 @@
             }
         if (count >= 2) document.getElementById("BC_4_5").checked = true;
         count = 0;
-        for (var i = 6; i <=8; i++)
+        for (var i = 6; i <=9; i++)
             if (permission.indexOf("BC" + i) >= 0) {
                 totalcount++;
                 count++;
                 document.getElementById("BC" + i).checked = true;
             }
-        if (count >= 3) document.getElementById("BC_6_8").checked = true;
+        if (count >= 4) document.getElementById("BC_6_9").checked = true;
         count = 0;
         for (var i = 0; i <= 3; i++)
             if (permission.indexOf("US" + i) >= 0) {
@@ -147,7 +148,7 @@
                 document.getElementById("US" + i).checked = true;
             }
         if (count >= 4) document.getElementById("US").checked = true;
-        if (totalcount >= 17) document.getElementById("ALL").checked = true;
+        if (totalcount >= 18) document.getElementById("ALL").checked = true;
 
     }
     showPermission("@Model.permission");

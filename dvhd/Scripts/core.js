@@ -504,7 +504,7 @@ function checkAll() {
         if (document.getElementById("HS" + i)) document.getElementById("HS" + i).checked = true;
         if (document.getElementById("permission").value.indexOf("HS" + i) < 0) document.getElementById("permission").value += "HS" + i;
     }
-    for (var i = 1; i <= 8; i++) {
+    for (var i = 1; i <= 9; i++) {
         if (document.getElementById("BC" + i)) document.getElementById("BC" + i).checked = true;
         if (document.getElementById("permission").value.indexOf("BC" + i) < 0) document.getElementById("permission").value += "BC" + i;
     }
@@ -516,13 +516,13 @@ function checkAll() {
     document.getElementById("US").checked = true;
     document.getElementById("BC_1_3").checked = true;
     document.getElementById("BC_4_5").checked = true;
-    document.getElementById("BC_6_8").checked = true;
+    document.getElementById("BC_6_9").checked = true;
 }
 function clearAll() {
     for (var i = 0; i <= 4; i++) {
         if (document.getElementById("HS" + i)) document.getElementById("HS" + i).checked = false;
     }
-    for (var i = 1; i <= 8; i++) {
+    for (var i = 1; i <= 9; i++) {
         if (document.getElementById("BC" + i)) document.getElementById("BC" + i).checked = false;
     }
     for (var i = 0; i <= 3; i++) {
@@ -533,5 +533,5 @@ function clearAll() {
     document.getElementById("US").checked = false;
     document.getElementById("BC_1_3").checked = false;
     document.getElementById("BC_4_5").checked = false;
-    document.getElementById("BC_6_8").checked = false;
+    document.getElementById("BC_6_9").checked = false;
 }
