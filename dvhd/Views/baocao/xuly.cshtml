@@ -5,25 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 id="titleXuLy"></h2>
-<style id="styleDetail" type="text/css">
-   /* Ban In css*/
-    .tbBanIn {
-        width:100%;
-        border: 1px solid #bbbcbb;
-        border-collapse: collapse;
-        table-layout: fixed;
-    }
-    .tbBanIn td, .tbBanIn th {
-        border: 1px solid #bbbcbb;
-        padding: 2px !important;
-    }
-    .tbBanIn label {
-        margin: 0 !important;
-    }
-</style>
+<link rel="stylesheet" href="~/Content/css/printStyle.css" />
 
-<div class="col-md-12" style="text-align:center;">
+<h2 id="titleXuLy"></h2>
+
+<div class="col-md-12 noPrint" style="text-align:center;">
     <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" />
     @*<input id="btnExportExcel" type="button" value="Xuất ra Excel file" onclick="exportExcel();" />*@
 </div>
@@ -34,8 +20,9 @@
         <tr>
             <th style="width:22px;">Stt</th><th style="width:70px;">Kết Quả Xử Lý</th><th style="width:100px;">Kết Quả Xử Lý Chi Tiết</th>
             @*<th>Đơn Vị Xử Lý</th>*@ <th style="width:100px;">Tên Đơn Vị Xử Lý</th>
-		    <th style="width:100px;">Bị Can</th><th style="width:100px;">Mô Tả Chi Tiết Xử Lý</th><th>Mô Tả Chi Tiết Vi Phạm</th>
-		    <th style="width:100px;">Hành Vi Vi Phạm</th><th style="width:75px;">Ngày Xử Lý</th><th style="width:90px;">Cán Bộ Xử Lý</th>
+		    <th style="width:100px;">Bị Can</th><th style="width:100px;">Mô Tả Chi Tiết Xử Lý</th><th style="width:500px;">Mô Tả Chi Tiết Vi Phạm</th>
+		    <th style="width:100px;">Hành Vi Vi Phạm</th><th style="width:75px;">Ngày Xử Lý</th>
+            <th style="width:90px;">Cán Bộ Xử Lý</th><th style="width:70px;">Cấp Bậc</th>
         </tr>
         @if (Model != null && Model.Count > 0)
         { 
@@ -47,7 +34,7 @@
                 <td>@(i + 1)</td><td>@hoso.ketquaxuly</td><td>@hoso.ketquaxulychitiet</td>
                 @*<td>@hoso.donvixuly</td>*@<td>@hoso.tendonvixuly</td>
                 <td>@hoso.hoten</td><td>@hoso.motachitietxuly</td><td>@hoso.motavipham</td>
-                <td>@hoso.hanhvivipham</td><td>@ngayxuly</td><td>@hoso.hotencanboxuly</td>
+                <td>@hoso.hanhvivipham</td><td>@ngayxuly</td><td>@hoso.hotencanboxuly</td><td>@hoso.capbac</td>
              </tr>
             }
         }        

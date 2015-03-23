@@ -3,24 +3,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Báo Cáo Theo Loại Động Vật Hoang Dã</h2>
-<style id="styleDetail" type="text/css">
-   /* Ban In css*/
-    .tbBanIn {
-        width:100%;
-        border: 1px solid #bbbcbb;
-        border-collapse: collapse;
-    }
-    .tbBanIn td, .tbBanIn th {
-        border: 1px solid #bbbcbb;
-        padding: 2px !important;
-    }
-    .tbBanIn label {
-        margin: 0 !important;
-    }
-</style>
+<link rel="stylesheet" href="~/Content/css/printStyle.css" />
 
-<div class="col-md-12">
+<h2>Báo Cáo Theo Loại Động Vật Hoang Dã</h2>
+
+<div class="col-md-12 noPrint">
     <div class="form-group">
         <label for="room" style="width:auto;display:block;">Loại Động Vật Hoang Dã</label>
         <input name="baocao_loaiDVHD" type="text" tabindex="1" id="baocao_loaiDVHD" value="" class="form-control" placeholder="Tê Tê, Báo Gấm, Bò Rừng, Tê Giác, Hổ ..." onkeyup="baocao_search(this, 1);"/>
@@ -28,7 +15,7 @@
     </div>
 </div>
 
-<div class="col-md-12" style="text-align:center;">
+<div class="col-md-12 noPrint" style="text-align:center;">
     <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" disabled="disabled" />
     @*<input id="btnCreateReport" type="button" value="Xuất ra PDF file" onclick="baocao_createPDF('baocao_loaiDVHD', 1);" disabled="disabled" />*@
 </div>

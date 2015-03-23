@@ -77,11 +77,11 @@ function setResult2Table(result, type) {
     //$("#countResult").text("Tổng Số Vụ Vi Phạm : " + result.length);
     var htmlContent = '';
     if (type == 1) { // Theo Loai
-        htmlContent = '<tr><th>Stt</th><th>Tên Loài</th>'
-        + '<th>Tình Trạng Bảo Tồn</th><th>Đơn Vị Tính</th>'
-        + '<th>Số Lượng Chi Tiết</th><th>Trị Giá Tang Vật</th>'
-		+ '<th>Tên Đơn Vị Bắt Giữ</th><th>Phương Thức Vận Chuyển</th>'
-		+ '<th>Tuyến Đường Vận Chuyển</th><th>Ngày Vi Phạm</th></tr>';
+        htmlContent = '<tr><th style="width:22px;">Stt</th><th style="width:160px;">Tên Loài</th>'
+        + '<th style="width:80px;">Tình Trạng Bảo Tồn</th><th style="width:70px;">Đơn Vị Tính</th>'
+        + '<th style="width:250px;">Số Lượng Chi Tiết</th><th style="width:90px;">Trị Giá Tang Vật</th>'
+		+ '<th style="width:220px;">Tên Đơn Vị Bắt Giữ</th><th style="width:110px;">Phương Thức Vận Chuyển</th>'
+		+ '<th style="width:110px;">Tuyến Đường Vận Chuyển</th><th style="width:75px;">Ngày Vi Phạm</th></tr>';
         $.each(result, function (idx, q) {
             htmlContent += '<tr><td>' + (idx + 1) + '</td><td>' + setDefaultValue(q.loaidongvat) + '</td><td>' + setDefaultValue(q.tinhtrangbaoton) + '</td><td>'
                 + setDefaultValue(q.donvitinh) + '</td><td>' + setDefaultValue(q.soluongchitiet) + '</td><td>' + setDefaultValue(q.trigiatangvat) + '</td><td>' 
@@ -90,7 +90,7 @@ function setResult2Table(result, type) {
         });
     } else if (type == 2) { // Theo Dia Ban        
         htmlContent = '<tr><th style="width:22px;">Stt</th><th style="width:100px;">Tên Địa Bàn</th>'
-        + '<th style="width:120px;">Đối Tượng Vi Phạm</th><th >Địa Chỉ Thường Trú</th>'
+        + '<th style="width:120px;">Đối Tượng Vi Phạm</th><th style="width:260px;">Địa Chỉ Thường Trú</th>'
         + '<th style="width:105px;">Hành Vi Vi Phạm</th><th style="width:150px;">Tên Loài</th>'
 		+ '<th style="width:250px;">Số Lượng Chi Tiết</th><th style="width:220px;">Tên Đơn Vị Bắt Giữ</th>'
 		+ '<th style="width:75px;">Ngày Vi Phạm</th></tr>';
@@ -102,7 +102,7 @@ function setResult2Table(result, type) {
         });
     } else if (type == 3) { // Theo Doi Tuong
         htmlContent = '<tr><th style="width:22px;">Stt</th><th style="width:120px;">Đối Tượng Vi Phạm</th><th style="width:80px;">Số CMT/Hộ Chiếu</th>'
-        + '<th>Địa Chỉ Thường Trú</th><th style="width:110px;">Thông Tin Thân Nhân</th>'
+        + '<th style="width:235px;">Địa Chỉ Thường Trú</th><th style="width:110px;">Thông Tin Thân Nhân</th>'
 		+ '<th style="width:200px;">Tiền Án Tiền Sự</th><th style="width:160px;">Hành Vi Vi Phạm</th>'
 		+ '<th style="width:150px;">Tên Loài</th><th style="width:150px;">Số Lượng Chi Tiết</th><th style="width:75px;">Ngày Vi Phạm</th></tr>';
         $.each(result, function (idx, q) {
@@ -114,7 +114,7 @@ function setResult2Table(result, type) {
     } else if (type == 4) { // Theo Hinh Thuc Vi Pham
         htmlContent = '<tr><th style="width:22px;">Stt</th><th style="width:70px;">Hình Thức Vi Phạm</th><th style="width:70px;">Hành Vi Vi Phạm</th>'
                 + '<th style="width:100px;">Loại Vi Phạm</th><th style="width:100px;">Địa Điểm Vi Phạm</th>'
-		        + '<th>Mô Tả Chi Tiết</th><th style="width:150px;">Số Lượng Chi Tiết</th><th style="width:120px;">Tên Đơn Vị Bắt Giữ</th>'
+		        + '<th style="width:470px;">Mô Tả Chi Tiết</th><th style="width:150px;">Số Lượng Chi Tiết</th><th style="width:120px;">Tên Đơn Vị Bắt Giữ</th>'
                 + '<th style="width:70px;">Phương Thức Vận Chuyển</th><th style="width:70px;">Tuyến Đường Vận Chuyển</th><th style="width:75px;">Ngày Vi Phạm</th></tr>';
         $.each(result, function (idx, q) {
             htmlContent += '<tr><td>' + (idx + 1) + '</td><td>' + setDefaultValue(q.hinhthucvipham) + '</td><td>' + setDefaultValue(q.hanhvivipham) + '</td><td>'
@@ -125,7 +125,7 @@ function setResult2Table(result, type) {
     } else if (type == 5) { // Theo Hanh Vi Vi Pham
         htmlContent = '<tr><th style="width:22px;">Stt</th><th style="width:70px;">Hành Vi Vi Phạm</th><th style="width:70px;">Hình Thức Vi Phạm</th>'
                 + '<th style="width:100px;">Loại Vi Phạm</th><th style="width:100px;">Địa Điểm Vi Phạm</th>'
-		        + '<th>Mô Tả Chi Tiết</th><th style="width:150px;">Số Lượng Chi Tiết</th><th style="width:120px;">Tên Đơn Vị Bắt Giữ</th>'
+		        + '<th style="width:470px;">Mô Tả Chi Tiết</th><th style="width:150px;">Số Lượng Chi Tiết</th><th style="width:120px;">Tên Đơn Vị Bắt Giữ</th>'
                 + '<th style="width:70px;">Phương Thức Vận Chuyển</th><th style="width:70px;">Tuyến Đường Vận Chuyển</th><th style="width:75px;">Ngày Vi Phạm</th></tr>';
         $.each(result, function (idx, q) {
             htmlContent += '<tr><td>' + (idx + 1) + '</td><td>' + setDefaultValue(q.hanhvivipham) + '</td><td>' + setDefaultValue(q.hinhthucvipham) + '</td><td>'
@@ -152,18 +152,20 @@ function baocao_createPDF(inputId, type) {
 }
 
 function baocao_createPDFBanin() {
-    var mywindow = window.open('', 'Thông Tin Chi Tiết', 'height=600,width=800');
-    mywindow.document.write('<html><head><title>Thông Tin Chi Tiết</title>');
-    mywindow.document.write('<style type="text/css">' + $("#styleDetail").html() + '</style>');
-    mywindow.document.write('</head><body >');
-    mywindow.document.write($("#divResult").html());
-    mywindow.document.write('</body></html>');
+    window.print();
+    //var mywindow = window.open('', 'Thông Tin Chi Tiết', 'height=600,width=800');
+    //mywindow.document.write('<html><head><title>Thông Tin Chi Tiết</title>');
+    ////mywindow.document.write(' <link rel="stylesheet" href="~/Content/css/printStyle.css" /> ');
+    //// <style type="text/css" href="~/Content/css/printStyle.css"></style>'' + $("#styleDetail").html() + '
+    //mywindow.document.write('</head><body >');
+    //mywindow.document.write($("#divResult").html());
+    //mywindow.document.write('</body></html>');
 
-    mywindow.document.close(); // necessary for IE >= 10
-    mywindow.focus(); // necessary for IE >= 10
+    //mywindow.document.close(); // necessary for IE >= 10
+    //mywindow.focus(); // necessary for IE >= 10
 
-    mywindow.print();
-    mywindow.close();
+    //mywindow.print();
+    //mywindow.close();
 }
 
 function searchQuanHuyen() {

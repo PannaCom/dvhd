@@ -1,0 +1,46 @@
+﻿/* Ban In css*/
+.tbBanIn {
+    width: 100%;
+    border: 1px solid #bbbcbb;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+    .tbBanIn td, .tbBanIn th {
+        border: 1px solid #bbbcbb;
+        padding: 1px !important;
+    }
+
+    .tbBanIn label {
+        margin: 0 !important;
+    }
+
+@media print {
+    body {
+        font-family: "Roboto", "Arial", "sans-serif !important";
+        font-size: 14px;
+        padding:0 !important;
+    }
+    @page {
+        size:landscape;
+    }
+
+    .noPrint {
+        display: none;
+    } 
+}    
+   /*.tbBanIn {
+        display:block;
+        width:100%;
+        border: 1px solid #bbbcbb;
+        border-collapse: collapse;
+        table-layout:fixed;        
+    }
+    .tbBanIn td, .tbBanIn th {
+        /*width:auto !important;*/
+        border: 1px solid #bbbcbb;
+        padding: 1px !important;
+    }
+    .tbBanIn label {
+        margin: 0 !important;
+    }*/
