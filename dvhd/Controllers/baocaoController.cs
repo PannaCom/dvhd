@@ -35,6 +35,8 @@ namespace dvhd.Controllers
         // GET: /BaoCaoTheoTinh/
         public ActionResult BaoCaoTheoTinh()
         {
+            if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
+            if (!Config.checkPermission(Config.getCookie("logged"), "BC2")) return RedirectToAction("Permission", "Home");
             return View();
         }
 
@@ -42,18 +44,24 @@ namespace dvhd.Controllers
         // GET: /BaoCaoTheoTinh/
         public ActionResult BaoCaoTheoDoiTuong()
         {
+            if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
+            if (!Config.checkPermission(Config.getCookie("logged"), "BC3")) return RedirectToAction("Permission", "Home");
             return View();
         }
         
         // GET: /BaoCaoTongHop/
         public ActionResult BaoCaoTongHop()
         {
+            if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
+            if (!Config.checkPermission(Config.getCookie("logged"), "BC9")) return RedirectToAction("Permission", "Home");
             return View();
         }
 
         // GET: /BaoCaoHinhThuc/
         public ActionResult BaoCaoHinhThuc(string type)
         {
+            if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
+            if (!Config.checkPermission(Config.getCookie("logged"), "BC4")) return RedirectToAction("Permission", "Home");
             if (type != null && type != string.Empty)
             {
                 var p = (from q in db.HoSoes
@@ -67,12 +75,18 @@ namespace dvhd.Controllers
 
         // GET: /BaoCaoHanhVi/
         public ActionResult BaoCaoHanhVi()
-        {            
+        {
+            if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
+            if (!Config.checkPermission(Config.getCookie("logged"), "BC5")) return RedirectToAction("Permission", "Home");
             return View();
         }
 
         public ActionResult xuly(string type)
         {
+            if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
+            if (type.Equals(Config.ketquaxuly[1]) && !Config.checkPermission(Config.getCookie("logged"), "BC6")) return RedirectToAction("Permission", "Home");
+            if (type.Equals(Config.ketquaxuly[2]) && !Config.checkPermission(Config.getCookie("logged"), "BC7")) return RedirectToAction("Permission", "Home");
+            if (type.Equals(Config.ketquaxuly[3]) && !Config.checkPermission(Config.getCookie("logged"), "BC8")) return RedirectToAction("Permission", "Home");
             if (type != null && type != string.Empty)
             {
                 var p = (from q in db.HoSoes

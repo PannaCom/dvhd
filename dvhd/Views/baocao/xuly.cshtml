@@ -58,14 +58,14 @@
     var urlCreateBaoCaoPDF = '@Url.Action("createReport")';
     $(function () {
         var rs = getUrlParameter('type');
-        if (rs == "hình sự") {
-            $("#titleXuLy").text("Tra Cứu Số Vụ Xử Lý Hình Sự");
-        } else if (rs == "hành chính") {
-            $("#titleXuLy").text("Tra Cứu Số Vụ Xử Lý Hành Chính");
-        } else if (rs == "không xử lý") {
-            $("#titleXuLy").text("Tra Cứu Số Vụ Không Xử Lý");
+        if (rs == "@Html.Raw(@dvhd.Config.ketquaxuly[2])") {
+            $("#titleXuLy").text("Báo Cáo Tổng Hợp Danh Sách Xử Lý Hình Sự");
+        } else if (rs == "@Html.Raw(@dvhd.Config.ketquaxuly[1])") {
+            $("#titleXuLy").text("Báo Cáo Tổng Hợp Danh Sách Xử Lý Hành Chính");
+        } else if (rs == "@Html.Raw(@dvhd.Config.ketquaxuly[3])") {
+            $("#titleXuLy").text("Báo Cáo Tổng Hợp Danh Sách Không Xử Lý");
         } else {
-            $("#titleXuLy").text("Tra Cứu Theo Kết Quả Xử Lý Vi Phạm");
+            $("#titleXuLy").text("Báo Cáo Tổng Hợp Kết Quả Xử Lý Vi Phạm");
         }        
     });
 

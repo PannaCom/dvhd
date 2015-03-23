@@ -19,6 +19,9 @@ namespace dvhd.Controllers
 
         public ActionResult Index(int? page)
         {
+            if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
+            if (!Config.checkPermission(Config.getCookie("logged"), "US0")) return RedirectToAction("Permission", "Home");
+
             var p = (from q in db.users select q).OrderByDescending(o => o.id).Take(1000);
             int pageSize = Config.PageSize;
             int pageNumber = (page ?? 1);
@@ -44,6 +47,8 @@ namespace dvhd.Controllers
 
         public ActionResult Create()
         {
+            if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
+            if (!Config.checkPermission(Config.getCookie("logged"), "US1")) return RedirectToAction("Permission", "Home");
             return View();
         }
 
@@ -107,6 +112,8 @@ namespace dvhd.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+            if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
+            if (!Config.checkPermission(Config.getCookie("logged"), "US2")) return RedirectToAction("Permission", "Home");
             user user = db.users.Find(id);
             if (user == null)
             {
@@ -141,6 +148,8 @@ namespace dvhd.Controllers
 
         public ActionResult Delete(int id = 0)
         {
+            if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
+            if (!Config.checkPermission(Config.getCookie("logged"), "US3")) return RedirectToAction("Permission", "Home");
             user user = db.users.Find(id);
             if (user == null)
             {
