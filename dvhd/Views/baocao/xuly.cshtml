@@ -11,7 +11,7 @@
 
 <div class="col-md-12 noPrint" style="text-align:center;">
     <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" />
-    @*<input id="btnExportExcel" type="button" value="Xuất ra Excel file" onclick="exportExcel();" />*@
+    <input id="btnCreateReport" type="button" value="Xuất ra Excel file" onclick="ExportExcel(getUrlParameter('type'), 6);" />
 </div>
 
 <div id="divResult" class="col-md-12">
@@ -19,7 +19,7 @@
     <table id="tbResult" class="tbBanIn">
         <tr>
             <th style="width:22px;">Stt</th><th style="width:70px;">Kết Quả Xử Lý</th><th style="width:100px;">Kết Quả Xử Lý Chi Tiết</th>
-            @*<th>Đơn Vị Xử Lý</th>*@ <th style="width:100px;">Tên Đơn Vị Xử Lý</th>
+            <th style="width:100px;">Tên Đơn Vị Xử Lý</th>
 		    <th style="width:100px;">Bị Can</th><th style="width:100px;">Mô Tả Chi Tiết Xử Lý</th><th style="width:500px;">Mô Tả Chi Tiết Vi Phạm</th>
 		    <th style="width:100px;">Hành Vi Vi Phạm</th><th style="width:75px;">Ngày Xử Lý</th>
             <th style="width:90px;">Cán Bộ Xử Lý</th><th style="width:70px;">Cấp Bậc</th>
@@ -32,8 +32,8 @@
                 var ngayxuly = hoso.ngayxuly.HasValue == true ? hoso.ngayxuly.Value.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) : "";
             <tr>
                 <td>@(i + 1)</td><td>@hoso.ketquaxuly</td><td>@hoso.ketquaxulychitiet</td>
-                @*<td>@hoso.donvixuly</td>*@<td>@hoso.tendonvixuly</td>
-                <td>@hoso.hoten</td><td>@hoso.motachitietxuly</td><td>@hoso.motavipham</td>
+                <td>@hoso.tendonvixuly</td><td>@hoso.hoten</td>
+                <td>@hoso.motachitietxuly</td><td>@hoso.motavipham</td>
                 <td>@hoso.hanhvivipham</td><td>@ngayxuly</td><td>@hoso.hotencanboxuly</td><td>@hoso.capbac</td>
              </tr>
             }
@@ -41,8 +41,7 @@
     </table>
 </div>
 
-<script type="text/javascript">
-    var urlCreateBaoCaoPDF = '@Url.Action("createReport")';
+<script type="text/javascript">    
     $(function () {
         var rs = getUrlParameter('type');
         if (rs == "@Html.Raw(@dvhd.Config.ketquaxuly[2])") {
@@ -68,18 +67,6 @@
             }
         }
         return paraValue.toLowerCase();
-    }
-
-    function exportExcel(type) {
-        $.ajax({
-            url: '@Url.Action("exportExel","baocao")',
-            data: {type:type},
-            type: 'POST',
-            dataType: 'json',
-            success: function (result) {
-                alert(result);
-            }
-        });
-    }
+    }    
 </script>
 

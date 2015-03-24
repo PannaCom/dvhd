@@ -17,14 +17,10 @@
 
 <div class="col-md-12 noPrint" style="text-align:center;">
     <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" disabled="disabled" />
-    @*<input id="btnCreateReport" type="button" value="Xuất ra PDF file" onclick="baocao_createPDF('baocao_loaiDVHD', 1);" disabled="disabled" />*@
+    <input id="btnCreateReport" type="button" value="Xuất ra Excel file" onclick="ExportExcel(document.getElementById('baocao_hanhviVP').value, 5);" disabled="disabled"/>
 </div>
 
 <div id="divResult" class="col-md-12">
     <label id="countResult"></label>
     <table id="tbResult" class="tbBanIn"></table>
 </div>
-
-<script type="text/javascript">
-    var urlCreateBaoCaoPDF = '@Url.Action("createReport")';
-</script>

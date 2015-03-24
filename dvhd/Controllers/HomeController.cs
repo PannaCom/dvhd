@@ -69,7 +69,7 @@ namespace dvhd.Controllers
                      });
             return JsonConvert.SerializeObject(p.ToList());
         }
-
+        
         public string getQuanHuyenDetails(string keyword)
         {
             if (keyword.Contains("/"))
@@ -146,7 +146,9 @@ namespace dvhd.Controllers
                          q.hotenme,
                          q.tienantiensu,
                          q.hanhvivipham,
-                         q.loaidongvat
+                         q.loaidongvat,
+                         q.soluongchitiet,
+                         q.thoigianvipham
                      });
             return JsonConvert.SerializeObject(p2.ToList());
         }
@@ -154,7 +156,7 @@ namespace dvhd.Controllers
         public string getHTVPDetails(string keyword)
         {
             var p = (from q in db.HoSoes
-                     where q.hinhthucvipham.Equals(keyword)
+                     where q.hinhthucvipham.Contains(keyword)
                      orderby q.loaidongvat
                      select new
                      {

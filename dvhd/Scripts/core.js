@@ -139,33 +139,25 @@ function setResult2Table(result, type) {
     $("#btnCreateReportBanIn").removeAttr("disabled");
 }
 
-function baocao_createPDF(inputId, type) {    
-    $.ajax({
-        url: urlCreateBaoCaoPDF,
-        data: { keyword: $("#" + inputId).val(), type: type }, //  $("#divResult").html()
-        type: 'POST',
-        success: function (result) {
-            //alert(result);
-            window.open("/Images/Report/"+result,"_blank");
-        }
-    });
+//Export Excel
+function ExportExcel(keyword, type) {
+    window.open("/baocao/ExportExcel?keyword=" + keyword + "&type=" + type, "_blank");
 }
 
+//function baocao_createPDF(inputId, type) {    
+//    $.ajax({
+//        url: urlCreateBaoCaoPDF,
+//        data: { keyword: $("#" + inputId).val(), type: type }, //  $("#divResult").html()
+//        type: 'POST',
+//        success: function (result) {
+//            //alert(result);
+//            window.open("/Images/Report/"+result,"_blank");
+//        }
+//    });
+//}
+
 function baocao_createPDFBanin() {
-    window.print();
-    //var mywindow = window.open('', 'Thông Tin Chi Tiết', 'height=600,width=800');
-    //mywindow.document.write('<html><head><title>Thông Tin Chi Tiết</title>');
-    ////mywindow.document.write(' <link rel="stylesheet" href="~/Content/css/printStyle.css" /> ');
-    //// <style type="text/css" href="~/Content/css/printStyle.css"></style>'' + $("#styleDetail").html() + '
-    //mywindow.document.write('</head><body >');
-    //mywindow.document.write($("#divResult").html());
-    //mywindow.document.write('</body></html>');
-
-    //mywindow.document.close(); // necessary for IE >= 10
-    //mywindow.focus(); // necessary for IE >= 10
-
-    //mywindow.print();
-    //mywindow.close();
+    window.print();  
 }
 
 function searchQuanHuyen() {
