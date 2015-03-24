@@ -463,6 +463,7 @@ namespace dvhd.Controllers
             try
             {
                 //int tongsovu, sovuhanhchinh, sovuhinhsu,;
+                int stongsovu = 0, ssovuhanhchinh = 0, ssovuhinhsu = 0, sxulyhanhchinh = 0, sxulyhinhsu = 0, skhongxuly = 0;
                 var p = (from q in db.HoSoes where q.tinhvipham.Contains(tinhvipham) orderby q.tinhvipham, q.quanvipham select new { tinhvipham = q.tinhvipham, quanvipham = q.quanvipham }).Distinct().Take(1000).ToList();
                 var content = "<tr><th>Tỉnh thành</th><th>Quận huyện</th><th>Tổng số vụ</th><th>Số vụ vi phạm hành chính</th><th>Số vụ vi phạm hình sự</th><th>Số vụ xử lý hành chính</th><th>Số vụ xử lý hình sự</th><th>Số vụ không xử lý</th><tr>";
                 for (int i = 0; i < p.Count; i++) {
@@ -473,13 +474,20 @@ namespace dvhd.Controllers
                     string ketquaxuly2 = Config.ketquaxuly[2];
                     string ketquaxuly3 = Config.ketquaxuly[3];
                     int? tongsovu = (int?)db.HoSoes.Count(o => o.quanvipham.Contains(qvp));//.Count(o => o.quanvipham.Contains(p[i].quanvipham));//.Count();//(from c in db.HoSoes where c.quanvipham.Contains(p[i].quanvipham) select c).ToList().Count();
-                    int sovuhanhchinh = (int)db.HoSoes.Count(o => o.quanvipham.Contains(qvp)  && o.hinhthucvipham.Contains(hinhthucvipham0));//(from c in db.HoSoes where c.quanvipham.Contains(p[i].quanvipham) && c.hinhthucvipham.Contains(Config.hinhthucvipham[0]) select c).ToList().Count();
-                    int sovuhinhsu = (int)db.HoSoes.Count(o => o.quanvipham.Contains(qvp) && o.hinhthucvipham.Contains(hinhthucvipham1));// (from c in db.HoSoes where c.quanvipham.Contains(p[i].quanvipham) && c.hinhthucvipham.Contains(Config.hinhthucvipham[1]) select c).ToList().Count();
-                    int xulyhanhchinh = (int)db.HoSoes.Count(o => o.quanvipham.Contains(qvp) && o.ketquaxuly.Contains(ketquaxuly1));// (from c in db.HoSoes where c.quanvipham.Contains(p[i].quanvipham) && c.ketquaxuly.Contains(Config.ketquaxuly[1]) select c).ToList().Count();
-                    int xulyhinhsu = (int)db.HoSoes.Count(o => o.quanvipham.Contains(qvp) && o.ketquaxuly.Contains(ketquaxuly2)); ;//(from c in db.HoSoes where c.quanvipham.Contains(p[i].quanvipham) && c.ketquaxuly.Contains(Config.ketquaxuly[2]) select c).ToList().Count();
-                    int khongxuly = (int)db.HoSoes.Count(o => o.quanvipham.Contains(qvp) && o.ketquaxuly.Contains(ketquaxuly3));//(from c in db.HoSoes where c.quanvipham.Contains(p[i].quanvipham) && c.ketquaxuly.Contains(Config.ketquaxuly[3]) select c).ToList().Count();
+                    stongsovu += (int)tongsovu;
+                    int? sovuhanhchinh = (int?)db.HoSoes.Count(o => o.quanvipham.Contains(qvp)  && o.hinhthucvipham.Contains(hinhthucvipham0));//(from c in db.HoSoes where c.quanvipham.Contains(p[i].quanvipham) && c.hinhthucvipham.Contains(Config.hinhthucvipham[0]) select c).ToList().Count();
+                    ssovuhanhchinh += (int)sovuhanhchinh;
+                    int? sovuhinhsu = (int?)db.HoSoes.Count(o => o.quanvipham.Contains(qvp) && o.hinhthucvipham.Contains(hinhthucvipham1));// (from c in db.HoSoes where c.quanvipham.Contains(p[i].quanvipham) && c.hinhthucvipham.Contains(Config.hinhthucvipham[1]) select c).ToList().Count();
+                    ssovuhinhsu += (int)sovuhinhsu;
+                    int? xulyhanhchinh = (int?)db.HoSoes.Count(o => o.quanvipham.Contains(qvp) && o.ketquaxuly.Contains(ketquaxuly1));// (from c in db.HoSoes where c.quanvipham.Contains(p[i].quanvipham) && c.ketquaxuly.Contains(Config.ketquaxuly[1]) select c).ToList().Count();
+                    sxulyhanhchinh += (int)xulyhanhchinh;
+                    int? xulyhinhsu = (int?)db.HoSoes.Count(o => o.quanvipham.Contains(qvp) && o.ketquaxuly.Contains(ketquaxuly2)); ;//(from c in db.HoSoes where c.quanvipham.Contains(p[i].quanvipham) && c.ketquaxuly.Contains(Config.ketquaxuly[2]) select c).ToList().Count();
+                    sxulyhinhsu += (int)xulyhinhsu;
+                    int? khongxuly = (int?)db.HoSoes.Count(o => o.quanvipham.Contains(qvp) && o.ketquaxuly.Contains(ketquaxuly3));//(from c in db.HoSoes where c.quanvipham.Contains(p[i].quanvipham) && c.ketquaxuly.Contains(Config.ketquaxuly[3]) select c).ToList().Count();
+                    skhongxuly += (int)khongxuly;
                     content += "<tr><td>" + p[i].tinhvipham + "</td><td>" + p[i].quanvipham + "</td><td>" + tongsovu + "</td><td>" + sovuhanhchinh + "</td><td>" + sovuhinhsu + "</td><td>" + xulyhanhchinh + "</td><td>" + xulyhinhsu + "</td><td>" + khongxuly + "</td>";
                 }
+                content += "<tr><td colspan=2 align=right>Tổng:</td><td>" + stongsovu + "</td><td>" + ssovuhanhchinh + "</td><td>" + ssovuhinhsu + "</td><td>" + sxulyhanhchinh + "</td><td>" + sxulyhinhsu + "</td><td>" + skhongxuly + "</td></tr>";
                 return content;
             }
             catch (Exception ex) {
