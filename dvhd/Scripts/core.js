@@ -450,6 +450,8 @@ function baocaotonghop() {
             }
         }
     }
+    $("#btnCreateReportBanIn").removeAttr("disabled");
+
 }
 //Phần dành cho phân quyền user
 function checkPermission(obj, value) {

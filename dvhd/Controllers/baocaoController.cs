@@ -143,7 +143,79 @@ namespace dvhd.Controllers
             //}
             return "OK";
         }
+             
+        [ValidateInput(false)]
+        public void ExportExcelBaoCaoTheoLoai(string keyword)
+        {  
+            System.Web.HttpContext.Current.Response.ContentType = "application/force-download";
+            System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment; filename=Print.xls");
+            System.Web.HttpContext.Current.Response.Write("<html xmlns:x=\"urn:schemas-microsoft-com:office:excel\">");
+            System.Web.HttpContext.Current.Response.Write("<head>");
+            System.Web.HttpContext.Current.Response.Write("<META http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
+            System.Web.HttpContext.Current.Response.Write("<!--[if gte mso 9]><xml>");
+            System.Web.HttpContext.Current.Response.Write("<x:ExcelWorkbook>");
+            System.Web.HttpContext.Current.Response.Write("<x:ExcelWorksheets>");
+            System.Web.HttpContext.Current.Response.Write("<x:ExcelWorksheet>");
+            System.Web.HttpContext.Current.Response.Write("<x:Name>Report Data</x:Name>");
+            System.Web.HttpContext.Current.Response.Write("<x:WorksheetOptions>");
+            System.Web.HttpContext.Current.Response.Write("<x:Print>");
+            System.Web.HttpContext.Current.Response.Write("<x:ValidPrinterInfo/>");
+            System.Web.HttpContext.Current.Response.Write("</x:Print>");
+            System.Web.HttpContext.Current.Response.Write("</x:WorksheetOptions>");
+            System.Web.HttpContext.Current.Response.Write("</x:ExcelWorksheet>");
+            System.Web.HttpContext.Current.Response.Write("</x:ExcelWorksheets>");
+            System.Web.HttpContext.Current.Response.Write("</x:ExcelWorkbook>");
+            System.Web.HttpContext.Current.Response.Write("</xml>");
+            System.Web.HttpContext.Current.Response.Write("<![endif]--> ");            
+            System.Web.HttpContext.Current.Response.Write("</head>");
+            System.Web.HttpContext.Current.Response.Write("Báo cáo theo loài "+keyword);
+            //Ghi ra nội dung báo cáo ở đây
+            var p = (from q in db.HoSoes
+                     where q.loaidongvat.Contains(keyword)
+                     orderby q.loaidongvat
+                     select new
+                     {
+                         q.loaidongvat,
+                         q.tinhtrangbaoton,
+                         q.donvitinh,
+                         q.soluongchitiet,
+                         q.trigiatangvat,
+                         q.tendonvibatgiu,
+                         q.phuongthucvanchuyen,
+                         q.tuyenduongvanchuyen,
+                         q.thoigianvipham
+                     }).ToList();
+            //Ghi ra nội dung chi tiết;
+            string htmlContent = "<table ><tr><th style=\"width:auto;\">Stt</th><th style=\"width:auto;\">Tên Loài</th>";
+            htmlContent += "<th style=\"width:auto;\">Tình Trạng Bảo Tồn</th><th style=\"width:auto;\">Đơn Vị Tính</th>";
+            htmlContent += "<th style=\"width:auto;\">Số Lượng Chi Tiết</th><th style=\"width:auto;\">Trị Giá Tang Vật</th>";
+            htmlContent += "<th style=\"width:auto;\">Tên Đơn Vị Bắt Giữ</th><th style=\"width:auto;\">Phương Thức Vận Chuyển</th>";
+            htmlContent += "<th style=\"width:auto;\">Tuyến Đường Vận Chuyển</th><th style=\"width:auto;\">Ngày Vi Phạm</th></tr>";
+                for(int i=0;i<p.Count;i++){
+                    htmlContent += "<tr><td >" + (i + 1) + "</td><td style=\"width:auto;\">" + p[i].loaidongvat + "</td><td style=\"width:auto;\">" + p[i].tinhtrangbaoton + "</td><td style=\"width:auto;\">";
+                    htmlContent += p[i].donvitinh + "</td><td style=\"width:auto;\">" + p[i].soluongchitiet + "</td><td style=\"width:auto;\">" + p[i].trigiatangvat + "</td><td style=\"width:auto;\">";
+                    htmlContent += p[i].tendonvibatgiu + "</td><td style=\"width:auto;\">" + p[i].phuongthucvanchuyen + "</td><td style=\"width:auto;\">";
+                    htmlContent += p[i].tuyenduongvanchuyen + "</td><td style=\"width:auto;\">" + p[i].thoigianvipham + "</td></tr>";
+                }
+            htmlContent +="</table>";
+            System.Web.HttpContext.Current.Response.Write(htmlContent);
+            System.Web.HttpContext.Current.Response.Flush();
+           
+        }
+        public void Downloaded(string path,string filename)
+        {
+            string strFilePath = path + filename;
 
+            if (!System.IO.File.Exists(strFilePath))
+            {
+                System.IO.File.Create(strFilePath).Close();
+            }
+            StreamWriter sw = System.IO.File.CreateText(strFilePath);
+            sw.WriteLine("");
+            sw.WriteLine(sw.NewLine);
+            sw.Flush();
+            sw.Close();
+        }
         private string releaseObject(object obj)
         {
             try

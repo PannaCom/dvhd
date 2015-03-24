@@ -17,7 +17,8 @@
 
 <div class="col-md-12 noPrint" style="text-align:center;">
     <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" disabled="disabled" />
-    @*<input id="btnCreateReport" type="button" value="Xuất ra PDF file" onclick="baocao_createPDF('baocao_loaiDVHD', 1);" disabled="disabled" />*@
+    <input id="btnCreateReport" type="button" value="Xuất ra Excel file" onclick="ExportExcel();" disabled="disabled"/>
+    <asp:Button id="btnBuyCat" runat="server" Text="Buy Cat" UseSubmitBehavior="False" ToolTip="Click to buy a cat" OnClick="btnBuyCat_Click" EnableViewState="true" />
 </div>
 
 <div id="divResult" class="col-md-12">
@@ -27,5 +28,9 @@
 
 <script type="text/javascript">
     var urlCreateBaoCaoPDF = '@Url.Action("createReport")';
+    //Báo cáo thống kê tổng hợp
+    function ExportExcel() {
+        window.open("/baocao/ExportExcelBaoCaoTheoLoai?keyword=" + document.getElementById("baocao_loaiDVHD").value, "_blank");
+    }
 </script>
 
