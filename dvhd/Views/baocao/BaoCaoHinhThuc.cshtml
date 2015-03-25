@@ -7,7 +7,7 @@
 
 <link rel="stylesheet" href="~/Content/css/printStyle.css" />
 
-<h2>Báo Cáo Theo Hình Thức Vi Phạm</h2>
+<h3>Báo Cáo Theo Hình Thức Vi Phạm</h3>
 
 <div class="col-md-12 noPrint">
     <div class="form-group">
@@ -21,8 +21,14 @@
     <input id="btnCreateReport" type="button" value="Xuất ra Excel file" onclick="ExportExcel(document.getElementById('hinhthucvipham').value, 4);" />
 </div>
 
-<div id="divResult" class="col-md-12">
-    <label id="countResult"></label>
+<div id="divResult" class="col-md-12">    
+    @if (Model != null && Model.Count > 0)
+    {
+        <label id="countResult">Tổng Số Vụ Vi Phạm : @Model.Count</label>
+    } else {
+        <label id="countResult"></label>
+    }
+    
     <table id="tbResult" class="tbBanIn">
         @if (Model != null && Model.Count > 0) { 
             <tr>

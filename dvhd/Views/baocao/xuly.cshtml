@@ -7,7 +7,7 @@
 
 <link rel="stylesheet" href="~/Content/css/printStyle.css" />
 
-<h2 id="titleXuLy"></h2>
+<h3 id="titleXuLy"></h3>
 
 <div class="col-md-12 noPrint" style="text-align:center;">
     <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" />
@@ -15,7 +15,10 @@
 </div>
 
 <div id="divResult" class="col-md-12">
-    <label id="countResult"></label>
+    @if (Model != null && Model.Count > 0)
+    { 
+        <label id="countResult">Tổng Số Vụ Vi Phạm : @Model.Count</label>
+    }
     <table id="tbResult" class="tbBanIn">
         <tr>
             <th style="width:22px;">Stt</th><th style="width:70px;">Kết Quả Xử Lý</th><th style="width:100px;">Kết Quả Xử Lý Chi Tiết</th>
