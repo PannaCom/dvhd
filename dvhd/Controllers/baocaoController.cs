@@ -464,7 +464,7 @@ namespace dvhd.Controllers
             {
                 //int tongsovu, sovuhanhchinh, sovuhinhsu,;
                 int stongsovu = 0, ssovuhanhchinh = 0, ssovuhinhsu = 0, sxulyhanhchinh = 0, sxulyhinhsu = 0, skhongxuly = 0;
-                var p = (from q in db.HoSoes where q.tinhvipham.Contains(tinhvipham) orderby q.tinhvipham, q.quanvipham select new { tinhvipham = q.tinhvipham, quanvipham = q.quanvipham }).Distinct().Take(1000).ToList();
+                var p = (from q in db.HoSoes where q.tinhvipham.Contains(tinhvipham) select new { tinhvipham = q.tinhvipham, quanvipham = q.quanvipham }).OrderBy(o=>o.tinhvipham).ThenBy(o=>o.quanvipham).Distinct().Take(1000).ToList();
                 var content = "<tr><th>Tỉnh thành</th><th>Quận huyện</th><th>Tổng số vụ</th><th>Số vụ vi phạm hành chính</th><th>Số vụ vi phạm hình sự</th><th>Số vụ xử lý hành chính</th><th>Số vụ xử lý hình sự</th><th>Số vụ không xử lý</th><tr>";
                 for (int i = 0; i < p.Count; i++) {
                     string qvp = p[i].quanvipham;
