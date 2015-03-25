@@ -535,3 +535,38 @@ function clearAll() {
     document.getElementById("BC_4_5").checked = false;
     document.getElementById("BC_6_9").checked = false;
 }
+function changePermission() {
+    var groupname = $("#groups").val();
+    //alert(group);
+    clearAll();
+    switch(groupname) {
+        case "Tổng cục môi trường":
+        case "Admin hệ thống":            
+            document.getElementById("ALL").checked = true;
+            checkAll();
+            break;
+        case "Cảnh sát môi trường":
+        case "Hải quan":
+        case "Kiểm lâm":
+        case "Quản lý thị trường":
+        case "Cơ quan điều tra":
+        case "Nhập dữ liệu":
+            document.getElementById("ALL").checked = false;
+            document.getElementById("HS").checked = true;
+            checkHS();
+            break;
+        case "Viện kiểm sát":
+        case "Tòa án":
+            document.getElementById("ALL").checked = false;
+            document.getElementById("BC_1_3").checked = true;
+            document.getElementById("BC_4_5").checked = true;
+            document.getElementById("BC_6_9").checked = true;
+            checkBC(1, 3);
+            checkBC(4, 5);
+            checkBC(6, 9);
+            break;
+        default:
+            alert("Chọn quyền");
+               
+    } 
+}
