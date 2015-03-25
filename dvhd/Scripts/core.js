@@ -443,6 +443,7 @@ function baocaotonghop() {
         }
     }
     $("#btnCreateReportBanIn").removeAttr("disabled");
+    $("#btnCreateReport").removeAttr("disabled");
 
 }
 //Phần dành cho phân quyền user

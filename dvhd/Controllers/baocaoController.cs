@@ -125,6 +125,10 @@ namespace dvhd.Controllers
             var filename = "";
             switch (type)
             {
+                case 0:
+                    filename = "Báo Cáo Tổng Hợp Địa Bàn " + keyword + " " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    htmlContent = "<table>"+baocaotonghopreport(keyword)+"</table>";
+                    break;
                 case 1:
                     filename = "Báo Cáo Theo Loài " + keyword + " " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);                    
                     htmlContent = getLoaiData(keyword);
@@ -508,7 +512,7 @@ namespace dvhd.Controllers
         {
             try
             {
-                //int tongsovu, sovuhanhchinh, sovuhinhsu,;
+               
                 string hinhthucvipham0 = Config.hinhthucvipham[0];
                 string hinhthucvipham1 = Config.hinhthucvipham[1];
                 string ketquaxuly1 = Config.ketquaxuly[1];
