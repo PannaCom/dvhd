@@ -74,7 +74,7 @@ function baocao_getData(inputId, type) {
 }
 
 function setResult2Table(result, type) {
-    //$("#countResult").text("Tổng Số Vụ Vi Phạm : " + result.length);
+    $("#countResult").text("Tổng Số Vụ Vi Phạm : " + result.length);
     var htmlContent = '';
     if (type == 1) { // Theo Loai
         htmlContent = '<tr><th style="width:22px;">Stt</th><th style="width:160px;">Tên Loài</th>'
