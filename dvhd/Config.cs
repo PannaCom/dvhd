@@ -270,6 +270,18 @@ namespace dvhd
         public static string formatDateVn(DateTime d) {
             return d.Day.ToString("00") + "/" + d.Month.ToString("00") + "/" + d.Year.ToString();
         }
+        public static DateTime convertToDateTimeFromString(string s) {
+            try
+            {
+                s = convertFromDateIdToDateString2(s);
+                DateTime d = DateTime.Parse(s);
+                return d;
+            }
+            catch (Exception ex)
+            {
+                return DateTime.Now;
+            }
+        }
         public static string convertToDateTime(string s) {
             try
             {

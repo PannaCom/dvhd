@@ -2,22 +2,49 @@
     ViewBag.Title = "Báo cáo theo Hành Vi Vi Phạm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <link rel="stylesheet" href="~/Content/css/printStyle.css" />
-
-<h3>Báo Cáo Theo Hành Vi Vi Phạm</h3>
-
-<div class="col-md-12 noPrint">
-    <div class="form-group">
-        <label for="room" style="width:auto;display:block;">Loại Động Vật Hoang Dã</label>
-        <input name="baocao_hanhviVP" type="text" tabindex="1" id="baocao_hanhviVP" value="" class="form-control" placeholder="vận chuyển, buôn bán, nuôi nhốt, kinh doanh, giết mổ, trưng bày rượu ngâm" onkeyup="baocao_search(this, 5);"/>
-        <input type="button" value="Tìm kiếm" onclick="baocao_getData('baocao_hanhviVP', 5);">
+<!-- Reservation form -->
+<section id="reservation-form" style="margin-top:10px;" class="noPrint">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">  
+        <h3>Báo Cáo Theo Hành Vi Vi Phạm</h3>       
+        <form class="form-inline reservation-horizontal clearfix" role="form"   name="reservationform" id="reservationform">
+          <div class="row">
+              <div class="col-sm-2" >
+                  <div class="form-group">
+                    <label>Hành Vi Vi Phạm</label>
+				    <input name="baocao_hanhviVP" type="text" tabindex="1" id="baocao_hanhviVP" value="" class="form-control" placeholder="vận chuyển, buôn bán, nuôi nhốt, kinh doanh, giết mổ, trưng bày rượu ngâm" onkeyup="baocao_search(this, 5, getDateIdNew(document.getElementById('fromdate').value), getDateIdNew(document.getElementById('todate').value));"/>            
+                  </div>
+              </div>
+              <div class="col-sm-2" >
+                  <div class="form-group">
+                    <label>Từ ngày</label>
+				    <input name="fromdate" type="date" id="fromdate" value="" class="form-control" placeholder="Từ ngày" />              
+                  </div>
+              </div>
+              <div class="col-sm-2" >
+                  <div class="form-group">
+                    <label>Đến ngày</label>
+				    <input name="todate" type="date" id="todate" value="" class="form-control" placeholder="Đến ngày" />               
+                  </div>
+              </div>
+              <div class="col-sm-2" >
+                  <div class="form-group">
+                    <label>Tìm</label>
+				    <input type="button" style="height:32px;" value="Tìm kiếm" onclick="baocao_getData('baocao_hanhviVP', 5, getDateIdNew(document.getElementById('fromdate').value), getDateIdNew(document.getElementById('todate').value));" />            
+                  </div>
+              </div>
+          </div>
+        </form>
+      </div>
     </div>
-</div>
+  </div>
+</section> 
 
-<div class="col-md-12 noPrint" style="text-align:center;">
+<div class="col-md-12 noPrint" style="text-align:center;margin-top:15px;">
     <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" disabled="disabled" />
-    <input id="btnCreateReport" type="button" value="Xuất ra Excel file" onclick="ExportExcel(document.getElementById('baocao_hanhviVP').value, 5);" disabled="disabled"/>
+    <input id="btnCreateReport" type="button" value="Xuất ra Excel file" onclick="ExportExcel(document.getElementById('baocao_hanhviVP').value, 5, getDateIdNew(document.getElementById('fromdate').value), getDateIdNew(document.getElementById('todate').value));" disabled="disabled"/>
 </div>
 
 <div id="divResult" class="col-md-12">

@@ -851,7 +851,7 @@ header #logo {
 -------------------------------------------------- */
 #reservation-form {
 	margin-top: -113px;
-    background-color:#FFCA08;
+    /*background-color:#FFCA08;*/
 }
 /* Vertical */
 #reservation-form .reservation-horizontal, #reservation-form .reservation-vertical, #contact-form .contact-vertical {
@@ -863,9 +863,9 @@ header #logo {
 	/*padding: 30px 30px;*/
     padding: 10px 30px;
 	z-index: 9999;
-	/*background-color: #ebebeb;*/
+	/*background-color: #ebebeb;
     color:#ffffff;
-    background-color: #343C5F;
+    background-color: #343C5F;*/
 }
 #reservation-form .reservation-vertical h2 {
 	margin-top: 0;

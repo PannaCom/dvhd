@@ -57,16 +57,26 @@ namespace dvhd.Controllers
         }
 
         // GET: /BaoCaoHinhThuc/
-        public ActionResult BaoCaoHinhThuc(string type)
+        public ActionResult BaoCaoHinhThuc(string type,string fromdate,string todate)
         {
+            DateTime fdate = DateTime.Now.AddDays(-1000);
+            DateTime tdate = DateTime.Now.AddDays(1000);
+            if (fromdate != "" &&  fromdate != null)
+            {
+                fdate = Config.convertToDateTimeFromString(fromdate);
+            }
+            if (todate != "" && todate != null)
+            {
+                tdate = Config.convertToDateTimeFromString(todate);
+            } 
             if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
             if (!Config.checkPermission(Config.getCookie("logged"), "BC4")) return RedirectToAction("Permission", "Home");
             if (type != null && type != string.Empty)
             {
                 var p = (from q in db.HoSoes
-                         where q.hinhthucvipham.Contains(type)
+                         where q.hinhthucvipham.Contains(type) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
                          orderby q.thoigianvipham
-                         select q).ToList();
+                         select q).OrderBy(o=>o.hinhthucvipham).ThenBy(o=>o.thoigianvipham).ToList();
                 return View(p);
             }
             return View();
@@ -80,8 +90,21 @@ namespace dvhd.Controllers
             return View();
         }
 
-        public ActionResult xuly(string type)
+        public ActionResult xuly(string type, string fromdate, string todate)
         {
+            DateTime fdate = DateTime.Now.AddDays(-1000);
+            DateTime tdate = DateTime.Now.AddDays(1000);
+            if (fromdate != "" && fromdate != null)
+            {
+                fdate = Config.convertToDateTimeFromString(fromdate);
+            }
+            if (todate != "" && todate != null)
+            {
+                tdate = Config.convertToDateTimeFromString(todate);
+            }
+            ViewBag.type = type;
+            ViewBag.fdate = fdate;
+            ViewBag.tdate = tdate;
             if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
             if (type.Equals(Config.ketquaxuly[1]) && !Config.checkPermission(Config.getCookie("logged"), "BC6")) return RedirectToAction("Permission", "Home");
             if (type.Equals(Config.ketquaxuly[2]) && !Config.checkPermission(Config.getCookie("logged"), "BC7")) return RedirectToAction("Permission", "Home");
@@ -89,16 +112,14 @@ namespace dvhd.Controllers
             if (type != null && type != string.Empty)
             {
                 var p = (from q in db.HoSoes
-                         where q.ketquaxuly.Contains(type)
-                         orderby q.ngayxuly
-                         select q).ToList();                
+                         where q.ketquaxuly.Contains(type) && q.thoigianxuly >= fdate && q.thoigianxuly <= tdate select q).OrderBy(o => o.ketquaxuly).ThenBy(o => o.thoigianxuly).ToList();                
                 return View(p);
             }
             return View();
         }
                      
         [ValidateInput(false)]
-        public void ExportExcel(string keyword, int type)
+        public void ExportExcel(string keyword, int type,string fromdate,string todate)
         {  
             System.Web.HttpContext.Current.Response.ContentType = "application/force-download";            
             System.Web.HttpContext.Current.Response.Write("<html xmlns:x=\"urn:schemas-microsoft-com:office:excel\">");
@@ -131,27 +152,27 @@ namespace dvhd.Controllers
                     break;
                 case 1:
                     filename = "Báo Cáo Theo Loài " + keyword + " " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);                    
-                    htmlContent = getLoaiData(keyword);
+                    htmlContent = getLoaiData(keyword,fromdate,todate);
                     break;
                 case 2: 
-                    filename = "Báo Cáo Theo Địa Bàn " + keyword + " " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);                    
-                    htmlContent = getDiaBanData(keyword);
+                    filename = "Báo Cáo Theo Địa Bàn " + keyword + " " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    htmlContent = getDiaBanData(keyword, fromdate, todate);
                     break;
                 case 3: 
-                    filename = "Báo Cáo Theo Đối Tượng " + keyword + " " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);                    
-                    htmlContent = getDoiTuongData(keyword);
+                    filename = "Báo Cáo Theo Đối Tượng " + keyword + " " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    htmlContent = getDoiTuongData(keyword,fromdate,todate);
                     break;
                 case 4: 
-                    filename = "Báo Cáo Theo Hình Thức Vi Phạm " + keyword + " " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);                    
-                    htmlContent = getHinhThucData(keyword);
+                    filename = "Báo Cáo Theo Hình Thức Vi Phạm " + keyword + " " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    htmlContent = getHinhThucData(keyword, fromdate, todate);
                     break;
                 case 5: 
                     filename = "Báo Cáo Theo Hành Vi Vi Phạm " + keyword + " " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
-                    htmlContent = getHanhViData(keyword);
+                    htmlContent = getHanhViData(keyword, fromdate, todate);
                     break;
                 case 6: 
                     filename = "Báo Cáo Theo Kết Quả Xử Lý " + keyword + " " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
-                    htmlContent = getXuLyData(keyword);                    
+                    htmlContent = getXuLyData(keyword, fromdate, todate);                    
                     break;                
             }
 
@@ -162,12 +183,20 @@ namespace dvhd.Controllers
            
         }
 
-        public string getXuLyData(string keyword)
+        public string getXuLyData(string keyword, string fromdate, string todate)
         {
+            DateTime fdate = DateTime.Now.AddDays(-1000);
+            DateTime tdate = DateTime.Now.AddDays(1000);
+            if (fromdate != "" && fromdate != null)
+            {
+                fdate = Config.convertToDateTimeFromString(fromdate);
+            }
+            if (todate != "" && todate != null)
+            {
+                tdate = Config.convertToDateTimeFromString(todate);
+            }
             var p = (from q in db.HoSoes
-                     where q.ketquaxuly.Contains(keyword)
-                     orderby q.ngayxuly
-                     select q).ToList();                
+                     where q.ketquaxuly.Contains(keyword) && q.thoigianxuly >= fdate && q.thoigianxuly <= tdate select q).OrderBy(o => o.ketquaxuly).ThenBy(o => o.thoigianxuly).ToList();                
             var htmlContent = "<table><tr><th style=\"width:auto;\">Stt</th><th style=\"width:auto;\">Kết Quả Xử Lý</th><th style=\"width:auto;\">Kết Quả Xử Lý Chi Tiết</th>"
                 + "<th style=\"width:auto;\">Tên Đơn Vị Xử Lý</th><th style=\"width:auto;\">Bị Can</th><th style=\"width:auto;\">Mô Tả Chi Tiết Xử Lý</th>"
                 + "<th style=\"width:auto;\">Mô Tả Chi Tiết Vi Phạm</th><th style=\"width:auto;\">Hành Vi Vi Phạm</th>"
@@ -186,10 +215,20 @@ namespace dvhd.Controllers
             return htmlContent;
         }
 
-        public string getHanhViData(string keyword)
+        public string getHanhViData(string keyword, string fromdate, string todate)
         {
+            DateTime fdate = DateTime.Now.AddDays(-1000);
+            DateTime tdate = DateTime.Now.AddDays(1000);
+            if (fromdate != "")
+            {
+                fdate = Config.convertToDateTimeFromString(fromdate);
+            }
+            if (todate != "")
+            {
+                tdate = Config.convertToDateTimeFromString(todate);
+            } 
             var p = (from q in db.HoSoes
-                     where q.hanhvivipham.Contains(keyword)
+                     where q.hanhvivipham.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
                      orderby q.loaidongvat
                      select new
                      {
@@ -203,7 +242,7 @@ namespace dvhd.Controllers
                          q.phuongthucvanchuyen,
                          q.tuyenduongvanchuyen,
                          q.thoigianvipham
-                     }).ToList();
+                     }).OrderBy(o => o.hanhvivipham).ThenBy(o => o.thoigianvipham).ToList();
             var htmlContent = "<table><tr><th style=\"width:auto;\">Stt</th><th style=\"width:auto;\">Hành Vi Vi Phạm</th><th style=\"width:auto;\">Hình Thức Vi Phạm</th>"
                 + "<th style=\"width:auto;\">Loại Vi Phạm</th><th style=\"width:auto;\">Địa Điểm Vi Phạm</th>"
                 + "<th style=\"width:auto;\">Mô Tả Chi Tiết</th><th style=\"width:auto;\">Số Lượng Chi Tiết</th><th style=\"width:auto;\">Tên Đơn Vị Bắt Giữ</th>"
@@ -223,9 +262,20 @@ namespace dvhd.Controllers
             return htmlContent;
         }
 
-        public string getHinhThucData(string keyword) {
+        public string getHinhThucData(string keyword, string fromdate, string todate)
+        {
+            DateTime fdate = DateTime.Now.AddDays(-1000);
+            DateTime tdate = DateTime.Now.AddDays(1000);
+            if (fromdate != "")
+            {
+                fdate = Config.convertToDateTimeFromString(fromdate);
+            }
+            if (todate != "")
+            {
+                tdate = Config.convertToDateTimeFromString(todate);
+            } 
             var p = (from q in db.HoSoes
-                     where q.hinhthucvipham.Contains(keyword)
+                     where q.hinhthucvipham.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
                      orderby q.loaidongvat
                      select new
                      {
@@ -239,7 +289,7 @@ namespace dvhd.Controllers
                          q.phuongthucvanchuyen,
                          q.tuyenduongvanchuyen,
                          q.thoigianvipham
-                     }).ToList();
+                     }).OrderBy(o=>o.hinhthucvipham).ThenBy(o=>o.thoigianvipham).ToList();
             var htmlContent = "<table><tr><th style=\"width:auto;\">Stt</th><th style=\"width:auto;\">Hình Thức Vi Phạm</th><th style=\"width:auto;\">Hành Vi Vi Phạm</th>"
                 + "<th style=\"width:auto;\">Loại Vi Phạm</th><th style=\"width:auto;\">Địa Điểm Vi Phạm</th>"
                 + "<th style=\"width:auto;\">Mô Tả Chi Tiết</th><th style=\"width:auto;\">Số Lượng Chi Tiết</th><th style=\"width:auto;\">Tên Đơn Vị Bắt Giữ</th>"
@@ -259,8 +309,18 @@ namespace dvhd.Controllers
             return htmlContent;
         }
 
-        public string getDoiTuongData(string keyword)
+        public string getDoiTuongData(string keyword,string fromdate,string todate)
         {
+            DateTime fdate = DateTime.Now.AddDays(-1000);
+            DateTime tdate = DateTime.Now.AddDays(1000);
+            if (fromdate != "")
+            {
+                fdate = Config.convertToDateTimeFromString(fromdate);
+            }
+            if (todate != "")
+            {
+                tdate = Config.convertToDateTimeFromString(todate);
+            } 
             var htmlContent = "<table><tr><th style=\"width:auto;\">Stt</th><th style=\"width:auto;\">Đối Tượng Vi Phạm</th><th style=\"width:auto;\">Số CMT/Hộ Chiếu</th>"
                     + "<th style=\"width:auto;\">Địa Chỉ Thường Trú</th><th style=\"width:auto;\">Thông Tin Thân Nhân</th>"
                     + "<th style=\"width:auto;\">Tiền Án Tiền Sự</th><th style=\"width:auto;\">Hành Vi Vi Phạm</th>"
@@ -269,7 +329,7 @@ namespace dvhd.Controllers
             if (int.TryParse(keyword.Substring(0, 1), out rs) || (keyword.Length > 1 && Char.IsLetter(keyword, 0) && int.TryParse(keyword.Substring(1, 1), out rs)))
             {
                 var p = (from q in db.HoSoes
-                          where q.cmthochieu.Contains(keyword)
+                         where q.cmthochieu.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
                           orderby q.cmthochieu
                           select new
                           {
@@ -283,7 +343,7 @@ namespace dvhd.Controllers
                               q.loaidongvat,
                               q.soluongchitiet,
                               q.thoigianvipham
-                          }).ToList();
+                          }).OrderBy(o=>o.hoten).ThenBy(o=>o.thoigianvipham).ToList();
                 for (int i = 0; i < p.Count; i++)
                 {
                     htmlContent += "<tr><td >" + (i + 1) + "</td><td style=\"width:auto;\">" + p[i].hoten + "</td><td style=\"width:auto;\">"
@@ -300,7 +360,7 @@ namespace dvhd.Controllers
             }
 
             var p2 = (from q in db.HoSoes
-                      where q.hoten.Contains(keyword)
+                      where q.hoten.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
                       orderby q.hoten
                       select new
                       {
@@ -314,7 +374,7 @@ namespace dvhd.Controllers
                           q.loaidongvat,
                           q.soluongchitiet,
                           q.thoigianvipham
-                      }).ToList();
+                      }).OrderBy(o => o.hoten).ThenBy(o => o.thoigianvipham).ToList();
             for (int i = 0; i < p2.Count; i++)
             {
                 htmlContent += "<tr><td >" + (i + 1) + "</td><td style=\"width:auto;\">" + p2[i].hoten + "</td><td style=\"width:auto;\">"
@@ -330,19 +390,29 @@ namespace dvhd.Controllers
             return htmlContent;
         }
 
-        public string getDiaBanData(string keyword) {
+        public string getDiaBanData(string keyword,string fromdate,string todate) {
+            DateTime fdate = DateTime.Now.AddDays(-1000);
+            DateTime tdate = DateTime.Now.AddDays(1000);
+            if (fromdate != "")
+            {
+                fdate = Config.convertToDateTimeFromString(fromdate);
+            }
+            if (todate != "")
+            {
+                tdate = Config.convertToDateTimeFromString(todate);
+            }
             var htmlContent = "<table><tr><th style=\"width:auto;\">Stt</th><th style=\"width:auto;\">Tên Địa Bàn</th>"
                     + "<th style=\"width:auto;\">Đối Tượng Vi Phạm</th><th style=\"width:auto;\">Địa Chỉ Thường Trú</th>"
                     + "<th style=\"width:auto;\">Hành Vi Vi Phạm</th><th style=\"width:auto;\">Tên Loài</th>"
                     + "<th style=\"width:auto;\">Số Lượng Chi Tiết</th><th style=\"width:auto;\">Tên Đơn Vị Bắt Giữ</th>"
                     + "<th style=\"width:auto;\">Ngày Vi Phạm</th></tr>";
-            if (keyword.Contains("/"))
+            if (keyword!=null && keyword!="" && keyword.Contains("/"))
             {
                 var quanTinh = keyword.Trim().Split('/');
                 var quan = quanTinh[0].Trim();
                 var tinh = quanTinh[1].Trim();
                 var p = (from q in db.HoSoes
-                          where q.quanvipham.Contains(quan) && q.tinhvipham.Contains(tinh)
+                         where q.quanvipham.Contains(quan) && q.tinhvipham.Contains(tinh) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
                           orderby q.tinhvipham, q.quanvipham
                           select new
                           {
@@ -354,7 +424,7 @@ namespace dvhd.Controllers
                               q.soluongchitiet,
                               q.tendonvibatgiu,
                               q.thoigianvipham
-                          }).ToList();                
+                          }).OrderBy(o=>o.diaban).ThenBy(o=>o.thoigianvipham).ToList();                
                 for (int i = 0; i < p.Count; i++)
                 {
                     htmlContent += "<tr><td >" + (i + 1) + "</td><td style=\"width:auto;\">" + p[i].diaban + "</td><td style=\"width:auto;\">" 
@@ -368,7 +438,7 @@ namespace dvhd.Controllers
                 return htmlContent;
             }
             var p2 = (from q in db.HoSoes
-                      where q.quanvipham.Contains(keyword) || q.tinhvipham.Contains(keyword)
+                      where (q.quanvipham.Contains(keyword) || q.tinhvipham.Contains(keyword)) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
                       orderby q.tinhvipham, q.quanvipham
                       select new
                       {
@@ -380,7 +450,7 @@ namespace dvhd.Controllers
                           q.soluongchitiet,
                           q.tendonvibatgiu,
                           q.thoigianvipham
-                      }).ToList();
+                      }).OrderBy(o => o.diaban).ThenBy(o => o.thoigianvipham).ToList();
             for (int i = 0; i < p2.Count; i++)
             {
                 htmlContent += "<tr><td >" + (i + 1) + "</td><td style=\"width:auto;\">" + p2[i].diaban + "</td><td style=\"width:auto;\">"
@@ -394,10 +464,20 @@ namespace dvhd.Controllers
             return htmlContent;
         }
 
-        public string getLoaiData(string keyword) {
+        public string getLoaiData(string keyword,string fromdate,string todate) {
+            DateTime fdate = DateTime.Now.AddDays(-1000);
+            DateTime tdate = DateTime.Now.AddDays(1000);
+            if (fromdate != "")
+            {
+                fdate = Config.convertToDateTimeFromString(fromdate);
+            }
+            if (todate != "")
+            {
+                tdate = Config.convertToDateTimeFromString(todate);
+            } 
             // lấy dữ liệu từ db
             var p = (from q in db.HoSoes
-                     where q.loaidongvat.Contains(keyword)
+                     where q.loaidongvat.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
                      orderby q.loaidongvat
                      select new
                      {
@@ -410,7 +490,7 @@ namespace dvhd.Controllers
                          q.phuongthucvanchuyen,
                          q.tuyenduongvanchuyen,
                          q.thoigianvipham
-                     }).ToList();
+                     }).OrderBy(o=>o.loaidongvat).ThenBy(o=>o.thoigianvipham).ToList();
             // ghi dữ liệu
             var htmlContent = "<table><tr><th style=\"width:auto;\">Stt</th><th style=\"width:auto;\">Tên Loài</th>";
             htmlContent += "<th style=\"width:auto;\">Tình Trạng Bảo Tồn</th><th style=\"width:auto;\">Đơn Vị Tính</th>";

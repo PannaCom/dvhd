@@ -50,10 +50,20 @@ namespace dvhd.Controllers
 
         #region DuyVT
         
-        public string getLoaiDetails(string keyword)
+        public string getLoaiDetails(string keyword,string fromdate,string todate)
         {
+            DateTime fdate = DateTime.Now.AddDays(-1000);
+            DateTime tdate = DateTime.Now.AddDays(1000);
+            if (fromdate != "")
+            {
+                fdate = Config.convertToDateTimeFromString(fromdate);
+            }
+            if (todate != "")
+            {
+                tdate = Config.convertToDateTimeFromString(todate);
+            } 
             var p = (from q in db.HoSoes
-                     where q.loaidongvat.Contains(keyword)
+                     where q.loaidongvat.Contains(keyword) && q.thoigianvipham>=fdate && q.thoigianvipham<=tdate
                      orderby q.loaidongvat
                      select new
                      {
@@ -66,19 +76,29 @@ namespace dvhd.Controllers
                          q.phuongthucvanchuyen,
                          q.tuyenduongvanchuyen,
                          q.thoigianvipham
-                     });
+                     }).OrderBy(o=>o.loaidongvat).ThenBy(o=>o.thoigianvipham);
             return JsonConvert.SerializeObject(p.ToList());
         }
         
-        public string getQuanHuyenDetails(string keyword)
+        public string getQuanHuyenDetails(string keyword,string fromdate,string todate)
         {
+            DateTime fdate = DateTime.Now.AddDays(-1000);
+            DateTime tdate = DateTime.Now.AddDays(1000);
+            if (fromdate != "")
+            {
+                fdate = Config.convertToDateTimeFromString(fromdate);
+            }
+            if (todate != "")
+            {
+                tdate = Config.convertToDateTimeFromString(todate);
+            } 
             if (keyword.Contains("/"))
             {
                 var quanTinh = keyword.Trim().Split('/');
                 var quan = quanTinh[0].Trim();
                 var tinh = quanTinh[1].Trim();
                 var p1 = (from q in db.HoSoes
-                          where q.quanvipham.Contains(quan) && q.tinhvipham.Contains(tinh)
+                          where q.quanvipham.Contains(quan) && q.tinhvipham.Contains(tinh) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
                           orderby q.tinhvipham, q.quanvipham
                           select new
                           {
@@ -90,11 +110,11 @@ namespace dvhd.Controllers
                               q.soluongchitiet,
                               q.tendonvibatgiu,
                               q.thoigianvipham
-                          });
+                          }).OrderBy(o=>o.diaban).ThenBy(o=>o.thoigianvipham);
                 return JsonConvert.SerializeObject(p1.ToList());
             }
             var p2 = (from q in db.HoSoes
-                      where q.quanvipham.Contains(keyword) || q.tinhvipham.Contains(keyword)
+                      where (q.quanvipham.Contains(keyword) || q.tinhvipham.Contains(keyword)) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
                       orderby q.tinhvipham, q.quanvipham
                       select new
                       {
@@ -106,17 +126,27 @@ namespace dvhd.Controllers
                           q.soluongchitiet,
                           q.tendonvibatgiu,
                           q.thoigianvipham
-                      });
+                      }).OrderBy(o => o.diaban).ThenBy(o => o.thoigianvipham);
             return JsonConvert.SerializeObject(p2.ToList());
         }
 
-        public string getCMTDetails(string keyword)
-        {            
+        public string getCMTDetails(string keyword, string fromdate, string todate)
+        {
+            DateTime fdate = DateTime.Now.AddDays(-1000);
+            DateTime tdate = DateTime.Now.AddDays(1000);
+            if (fromdate != "")
+            {
+                fdate = Config.convertToDateTimeFromString(fromdate);                
+            }
+            if (todate != "")
+            {
+                tdate = Config.convertToDateTimeFromString(todate);
+            } 
             int rs;
-            if (int.TryParse(keyword.Substring(0, 1), out rs) || (keyword.Length > 1 && Char.IsLetter(keyword, 0) && int.TryParse(keyword.Substring(1, 1), out rs)))
+            if ((keyword!="" && keyword!=null) && ((int.TryParse(keyword.Substring(0, 1), out rs) || (keyword.Length > 1 && Char.IsLetter(keyword, 0) && int.TryParse(keyword.Substring(1, 1), out rs)))))
             {                
                 var p1 = (from q in db.HoSoes
-                         where q.cmthochieu.Contains(keyword)
+                          where q.cmthochieu.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
                          orderby q.cmthochieu
                          select new
                          {
@@ -130,12 +160,12 @@ namespace dvhd.Controllers
                              q.loaidongvat,
                              q.soluongchitiet,
                              q.thoigianvipham
-                         });
+                         }).OrderBy(o=>o.hoten).ThenBy(o=>o.thoigianvipham);
                 return JsonConvert.SerializeObject(p1.ToList());
             }
 
             var p2 = (from q in db.HoSoes
-                     where q.hoten.Contains(keyword)
+                      where q.hoten.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
                      orderby q.hoten
                      select new
                      {
@@ -149,14 +179,24 @@ namespace dvhd.Controllers
                          q.loaidongvat,
                          q.soluongchitiet,
                          q.thoigianvipham
-                     });
+                     }).OrderBy(o => o.hoten).ThenBy(o => o.thoigianvipham); ;
             return JsonConvert.SerializeObject(p2.ToList());
         }
 
-        public string getHTVPDetails(string keyword)
+        public string getHTVPDetails(string keyword, string fromdate, string todate)
         {
+            DateTime fdate = DateTime.Now.AddDays(-1000);
+            DateTime tdate = DateTime.Now.AddDays(1000);
+            if (fromdate != "")
+            {
+                fdate = Config.convertToDateTimeFromString(fromdate);
+            }
+            if (todate != "")
+            {
+                tdate = Config.convertToDateTimeFromString(todate);
+            } 
             var p = (from q in db.HoSoes
-                     where q.hinhthucvipham.Contains(keyword)
+                     where q.hinhthucvipham.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
                      orderby q.loaidongvat
                      select new
                      {
@@ -170,14 +210,24 @@ namespace dvhd.Controllers
                          q.phuongthucvanchuyen,
                          q.tuyenduongvanchuyen,
                          q.thoigianvipham
-                     });
+                     }).OrderBy(o=>o.hinhthucvipham).ThenBy(o=>o.thoigianvipham);
             return JsonConvert.SerializeObject(p.ToList());
-        }                
+        }
 
-        public string getHanhViVPDetails(string keyword)
+        public string getHanhViVPDetails(string keyword, string fromdate, string todate)
         {
+            DateTime fdate = DateTime.Now.AddDays(-1000);
+            DateTime tdate = DateTime.Now.AddDays(1000);
+            if (fromdate != "")
+            {
+                fdate = Config.convertToDateTimeFromString(fromdate);
+            }
+            if (todate != "")
+            {
+                tdate = Config.convertToDateTimeFromString(todate);
+            } 
             var p = (from q in db.HoSoes
-                     where q.hanhvivipham.Contains(keyword)
+                     where q.hanhvivipham.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
                      orderby q.loaidongvat
                      select new
                      {                         
@@ -191,7 +241,7 @@ namespace dvhd.Controllers
                          q.phuongthucvanchuyen,
                          q.tuyenduongvanchuyen,
                          q.thoigianvipham
-                     });
+                     }).OrderBy(o=>o.hanhvivipham).ThenBy(o=>o.thoigianvipham);
             return JsonConvert.SerializeObject(p.ToList());
         }
 

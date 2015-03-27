@@ -7,11 +7,41 @@
 
 <link rel="stylesheet" href="~/Content/css/printStyle.css" />
 
-<h3 id="titleXuLy"></h3>
-
+<!-- Reservation form -->
+<section id="reservation-form" style="margin-top:10px;" class="noPrint">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">  
+        <h3 id="titleXuLy"></h3>        
+        <form class="form-inline reservation-horizontal clearfix" role="form"   name="reservationform" id="reservationform">
+          <div class="row">
+              <div class="col-sm-2" >
+                  <div class="form-group">
+                    <label>Từ ngày</label>
+				    <input name="fromdate" type="date" id="fromdate" value="@dvhd.Config.showDate((DateTime)@ViewBag.fdate)" class="form-control" placeholder="Từ ngày" />              
+                  </div>
+              </div>
+              <div class="col-sm-2" >
+                  <div class="form-group">
+                    <label>Đến ngày</label>
+				    <input name="todate" type="date" id="todate" value="@dvhd.Config.showDate((DateTime)@ViewBag.tdate)" class="form-control" placeholder="Đến ngày" />               
+                  </div>
+              </div>
+              <div class="col-sm-2" >
+                  <div class="form-group">
+                    <label>Tìm</label>
+				    <input type="button" style="height:32px;" value="Tìm kiếm" onclick="searchxuly('@Html.Raw(@ViewBag.type)', getDateIdNew(document.getElementById('fromdate').value), getDateIdNew(document.getElementById('todate').value));" />            
+                  </div>
+              </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>  
 <div class="col-md-12 noPrint" style="text-align:center;">
     <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" />
-    <input id="btnCreateReport" type="button" value="Xuất ra Excel file" onclick="ExportExcel(getUrlParameter('type'), 6);" />
+    <input id="btnCreateReport" type="button" value="Xuất ra Excel file" onclick="ExportExcel(getUrlParameter('type'), 6,getDateIdNew(document.getElementById('fromdate').value), getDateIdNew(document.getElementById('todate').value));" />
 </div>
 
 <div id="divResult" class="col-md-12">
@@ -32,7 +62,7 @@
             for (var i = 0; i < Model.Count; i++)
             {
                 var hoso = Model[i];
-                var ngayxuly = hoso.ngayxuly.HasValue == true ? hoso.ngayxuly.Value.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) : "";
+                var ngayxuly = hoso.thoigianxuly.HasValue == true ? hoso.thoigianxuly.Value.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) : "";
             <tr>
                 <td>@(i + 1)</td><td>@hoso.ketquaxuly</td><td>@hoso.ketquaxulychitiet</td>
                 <td>@hoso.tendonvixuly</td><td>@hoso.hoten</td>
@@ -71,5 +101,8 @@
         }
         return paraValue.toLowerCase();
     }    
+    function searchxuly(type,fromdate,todate){
+        location.href="/baocao/xuly?type="+type+"&fromdate="+fromdate+"&todate="+todate;
+    }
 </script>
 

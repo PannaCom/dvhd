@@ -4,19 +4,49 @@
 
 <link rel="stylesheet" href="~/Content/css/printStyle.css" />
 
-<h3>Báo Cáo Theo Địa Bàn</h3>
 
-<div class="col-md-12 noPrint">
-    <div class="form-group">
-        <label for="room" style="width:auto;display:block;">Địa bàn vi phạm(Quận huyện/Tỉnh thành)</label>
-        <input name="baocao_tinh" type="text" tabindex="1" id="baocao_tinh" value="" class="form-control" placeholder="Cầu Giấy, Ba Đình, Hà Nội, Huế, Đăk Lăk, ..." onkeyup="baocao_search(this, 2);"/>
-        <input type="button" value="Tìm kiếm" onclick="baocao_getData('baocao_tinh', 2);">
+<!-- Reservation form -->
+<section id="reservation-form" style="margin-top:10px;" class="noPrint">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">     
+        <h3>Báo Cáo Theo Địa Bàn</h3>      
+        <form class="form-inline reservation-horizontal clearfix" role="form"   name="reservationform" id="reservationform">
+          <div class="row">
+              <div class="col-sm-2" >
+                  <div class="form-group">
+                    <label>Địa Bàn Vi Phạm</label>
+				    <input name="baocao_tinh" type="text" tabindex="1" id="baocao_tinh" value="" class="form-control" placeholder="Cầu Giấy, Ba Đình, Hà Nội, Huế, Đăk Lăk, ..." onkeyup="baocao_search(this, 2,getDateIdNew(document.getElementById('fromdate').value),getDateIdNew(document.getElementById('todate').value));"/>
+                  </div>
+              </div>
+              <div class="col-sm-2" >
+                  <div class="form-group">
+                    <label>Từ ngày</label>
+				    <input name="fromdate" type="date" id="fromdate" value="" class="form-control" placeholder="Từ ngày" />              
+                  </div>
+              </div>
+              <div class="col-sm-2" >
+                  <div class="form-group">
+                    <label>Đến ngày</label>
+				    <input name="todate" type="date" id="todate" value="" class="form-control" placeholder="Đến ngày" />               
+                  </div>
+              </div>
+              <div class="col-sm-2" >
+                  <div class="form-group">
+                    <label>Tìm</label>
+				    <input type="button" style="height:32px;" value="Tìm kiếm" onclick="baocao_getData('baocao_tinh', 2, getDateIdNew(document.getElementById('fromdate').value), getDateIdNew(document.getElementById('todate').value));">            
+                  </div>
+              </div>
+          </div>
+        </form>
+      </div>
     </div>
-</div>
+  </div>
+</section>  
 
-<div class="col-md-12 noPrint" style="text-align:center;">
+<div class="col-md-12 noPrint" style="text-align:center;margin-top:15px;">
     <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" disabled="disabled" />
-    <input id="btnCreateReport" type="button" value="Xuất ra Excel file" onclick="ExportExcel(document.getElementById('baocao_tinh').value, 2);" disabled="disabled"/>
+    <input id="btnCreateReport" type="button" value="Xuất ra Excel file" onclick="ExportExcel(document.getElementById('baocao_tinh').value, 2, getDateIdNew(document.getElementById('fromdate').value), getDateIdNew(document.getElementById('todate').value));" disabled="disabled"/>
 </div>
 
 <div id="divResult" class="col-md-12">

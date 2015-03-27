@@ -9,6 +9,10 @@ function formatDate(strDate) {
     return (tmpDate.length == 2 ? tmpDate : "0" + tmpDate) + "/" + (tmpMonth.length == 2 ? tmpMonth : "0" + tmpMonth)
         + "/" + fullDate.getFullYear().toString();
 }
+function getDateIdNew(d) {
+    d = d.replace(/\-/g, "");
+    return d;
+}
 
 function setDefaultValue(str) {
     if (str == undefined || str == null) {
@@ -17,10 +21,11 @@ function setDefaultValue(str) {
     return str;
 }
 
-function baocao_search(input, type) {
+function baocao_search(input, type, fromdate, todate) {
     var inputId = input.id;
+    var urlTime = "&fromdate=" + fromdate + "&todate=" + todate;
     if (input.onkeyup.arguments[0].which == 13) {
-        baocao_getData(inputId, type);
+        baocao_getData(inputId, type, fromdate, todate);
         $(".ui-autocomplete").hide();
         return;
     }
@@ -38,20 +43,23 @@ function baocao_search(input, type) {
     }
 
     $('#' + inputId).autocomplete({
-        source: urlSearch + input.value,
+        source: urlSearch + input.value + urlTime,
         select: function (event, ui) {
             $(event.target).val(ui.item.value);           
-            baocao_getData(inputId, type);
+            baocao_getData(inputId, type, fromdate, todate);
             return false;
         },
         minLength: 1
     });
 }
 
-function baocao_getData(inputId, type) {
+function baocao_getData(inputId, type, fromdate, todate) {
     $("#tbResult").html("Đang tổng hợp báo cáo, xin chờ....");
     var keyword = document.getElementById(inputId).value;
     var urlGetDetails = "";
+    var urlTime = "&fromdate=" + fromdate + "&todate=" + todate;
+    //alert(fromdate);
+    //return;
     if (type == 1) { // Theo Loai
         urlGetDetails = '/Home/getLoaiDetails?keyword=';
     } else if (type == 2) { // Theo Dia Ban
@@ -64,7 +72,7 @@ function baocao_getData(inputId, type) {
         urlGetDetails = '/Home/getHanhViVPDetails?keyword=';
     }
     $.ajax({
-        url: urlGetDetails + keyword,
+        url: urlGetDetails + keyword + urlTime,
         type: 'POST',
         dataType: 'json',
         success: function (result) {
@@ -140,8 +148,8 @@ function setResult2Table(result, type) {
 }
 
 //Export Excel
-function ExportExcel(keyword, type) {
-    window.open("/baocao/ExportExcel?keyword=" + keyword + "&type=" + type, "_blank");
+function ExportExcel(keyword, type,fromdate,todate) {
+    window.open("/baocao/ExportExcel?keyword=" + keyword + "&type=" + type+"&fromdate="+fromdate+"&todate="+todate, "_blank");
 }
 
 //function baocao_createPDF(inputId, type) {    
