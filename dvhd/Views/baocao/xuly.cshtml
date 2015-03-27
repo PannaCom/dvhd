@@ -12,7 +12,8 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">  
-        <h3 id="titleXuLy"></h3>        
+        <h3 id="titleXuLy"></h3> 
+        <p>* Khoảng thời gian từ ngày đến ngày tính là thời gian xử lý</p>          
         <form class="form-inline reservation-horizontal clearfix" role="form"   name="reservationform" id="reservationform">
           <div class="row">
               <div class="col-sm-2" >
@@ -39,7 +40,7 @@
     </div>
   </div>
 </section>  
-<div class="col-md-12 noPrint" style="text-align:center;">
+<div class="col-md-12 noPrint" style="text-align:center;margin-top:15px;">
     <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" />
     <input id="btnCreateReport" type="button" value="Xuất ra Excel file" onclick="ExportExcel(getUrlParameter('type'), 6,getDateIdNew(document.getElementById('fromdate').value), getDateIdNew(document.getElementById('todate').value));" />
 </div>

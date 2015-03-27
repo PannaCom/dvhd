@@ -92,8 +92,8 @@ namespace dvhd.Controllers
 
         public ActionResult xuly(string type, string fromdate, string todate)
         {
-            DateTime fdate = DateTime.Now.AddDays(-1000);
-            DateTime tdate = DateTime.Now.AddDays(1000);
+            DateTime fdate = DateTime.Now.AddDays(-365);
+            DateTime tdate = DateTime.Now;
             if (fromdate != "" && fromdate != null)
             {
                 fdate = Config.convertToDateTimeFromString(fromdate);
@@ -148,7 +148,7 @@ namespace dvhd.Controllers
             {
                 case 0:
                     filename = "Báo Cáo Tổng Hợp Địa Bàn " + keyword + " " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
-                    htmlContent = "<table>"+baocaotonghopreport(keyword)+"</table>";
+                    htmlContent = "<table>" + baocaotonghopreport(keyword, fromdate, todate) + "</table>";
                     break;
                 case 1:
                     filename = "Báo Cáo Theo Loài " + keyword + " " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);                    
@@ -588,8 +588,18 @@ namespace dvhd.Controllers
             public int? xulyhinhsu { get; set; }
             public int? khongxuly { get; set; }
         }
-        public string baocaotonghopreport(string tinhvipham)
+        public string baocaotonghopreport(string tinhvipham, string fromdate, string todate)
         {
+            DateTime fdate = DateTime.Now.AddDays(-1000);
+            DateTime tdate = DateTime.Now.AddDays(1000);
+            if (fromdate != "")
+            {
+                fdate = Config.convertToDateTimeFromString(fromdate);
+            }
+            if (todate != "")
+            {
+                tdate = Config.convertToDateTimeFromString(todate);
+            }
             try
             {
                
@@ -599,7 +609,7 @@ namespace dvhd.Controllers
                 string ketquaxuly2 = Config.ketquaxuly[2];
                 string ketquaxuly3 = Config.ketquaxuly[3];
                 int stongsovu = 0, ssovuhanhchinh = 0, ssovuhinhsu = 0, sxulyhanhchinh = 0, sxulyhinhsu = 0, skhongxuly = 0;
-                string query = "select tinhvipham,quanvipham,sum(case when id<>-1 then 1 end) as tongsovu,sum(case when hinhthucvipham=N'" + hinhthucvipham0 + "' then 1 end) as sovuhanhchinh,sum(case when hinhthucvipham=N'" + hinhthucvipham1 + "' then 1 end) as sovuhinhsu,sum(case when ketquaxuly=N'" + ketquaxuly1 + "' then 1 end) as xulyhanhchinh,sum(case when ketquaxuly=N'" + ketquaxuly2 + "' then 1 end) as xulyhinhsu,sum(case when ketquaxuly=N'" + ketquaxuly3 + "' then 1 end) as khongxuly from HoSo where tinhvipham like N'%" + tinhvipham + "%' group by tinhvipham,quanvipham order by tinhvipham,quanvipham";
+                string query = "select tinhvipham,quanvipham,sum(case when id<>-1 then 1 end) as tongsovu,sum(case when hinhthucvipham=N'" + hinhthucvipham0 + "' then 1 end) as sovuhanhchinh,sum(case when hinhthucvipham=N'" + hinhthucvipham1 + "' then 1 end) as sovuhinhsu,sum(case when ketquaxuly=N'" + ketquaxuly1 + "' then 1 end) as xulyhanhchinh,sum(case when ketquaxuly=N'" + ketquaxuly2 + "' then 1 end) as xulyhinhsu,sum(case when ketquaxuly=N'" + ketquaxuly3 + "' then 1 end) as khongxuly from HoSo where tinhvipham like N'%" + tinhvipham + "%' and thoigianvipham>='" + fdate.ToString() + "' and thoigianvipham<='" + tdate.ToString() + "' group by tinhvipham,quanvipham order by tinhvipham,quanvipham";
                 var p = db.Database.SqlQuery<rpbaocaotonghop>(query).ToList();
                 var content = "<tr><th>Tỉnh thành</th><th>Quận huyện</th><th>Tổng số vụ</th><th>Số vụ vi phạm hành chính</th><th>Số vụ vi phạm hình sự</th><th>Số vụ xử lý hành chính</th><th>Số vụ xử lý hình sự</th><th>Số vụ không xử lý</th><tr>";
                 for (int i = 0; i < p.Count; i++)

@@ -434,9 +434,12 @@ function baocaotonghop() {
     $("#tbResult").html("Đang tổng hợp báo cáo, xin chờ....");
     var formdata = new FormData(); //FormData object
     var tinhvipham = document.getElementById("tinhvipham").value;
+    var fromdate = getDateIdNew(document.getElementById("fromdate").value);
+    var todate = getDateIdNew(document.getElementById("todate").value);
     //var pass = document.getElementById("pass").value;
     formdata.append("tinhvipham", tinhvipham);
-    //formdata.append("pass", pass);
+    formdata.append("fromdate", fromdate);
+    formdata.append("todate", todate);
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/baocao/baocaotonghopreport');
     xhr.send(formdata);

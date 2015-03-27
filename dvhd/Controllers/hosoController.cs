@@ -23,13 +23,27 @@ namespace dvhd.Controllers
         //
         // GET: /hoso/
 
-        public ActionResult Index(int? page, string keyword)
+        public ActionResult Index(int? page, string keyword, string fromdate, string todate)
         {
+            DateTime fdate = DateTime.Now.AddDays(-730);
+            DateTime tdate = DateTime.Now;
+            if (fromdate != "" && fromdate != null)
+            {
+                fdate = Config.convertToDateTimeFromString(fromdate);
+            }
+            if (todate != "" && todate != null)
+            {
+                tdate = Config.convertToDateTimeFromString(todate);
+            }
+            ViewBag.fdate = fdate;
+            ViewBag.fromdate = fromdate;
+            ViewBag.tdate = tdate;
+            ViewBag.todate = todate;
             if (keyword == null) keyword = "";
             ViewBag.keyword = keyword;
             if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
             if (!Config.checkPermission(Config.getCookie("logged"), "HS0")) return RedirectToAction("Permission", "Home");
-            var p = (from q in db.HoSoes where q.hoten.Contains(keyword) || q.cmthochieu.Contains(keyword) select q).OrderByDescending(o => o.id).Take(1000);
+            var p = (from q in db.HoSoes where (q.hoten.Contains(keyword) || q.cmthochieu.Contains(keyword)) && q.thoigianvipham>=fdate && q.thoigianvipham<=tdate select q).OrderByDescending(o => o.id).Take(1000);
             int pageSize = Config.PageSize;
             int pageNumber = (page ?? 1);
             ViewBag.page = page;
