@@ -429,6 +429,30 @@ function uploadProcessLoaidongvat() {
     }
     return false;
 }
+function getListTinhThanh(idoption,value) {
+    
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', ' /Home/getAllTinhThanh?keyword=');
+    xhr.send();
+    var content = "";
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var news = '{"news":' + xhr.responseText + '}';
+            var json_parsed = $.parseJSON(news);
+
+            $("#"+idoption).html("");
+            for (var i = 0; i < json_parsed.news.length; i++) {
+                if (json_parsed.news[i]) {
+                    var name = json_parsed.news[i];
+                    //alert(name);
+                    $("#" + idoption).append("<option value='" + name + "'>" + name + "</option>");
+                }
+            }
+            if (value != "") $("#" + idoption).val(value);
+        }
+    }
+   
+}
 //Báo cáo thống kê tổng hợp
 function baocaotonghop() {
     $("#tbResult").html("Đang tổng hợp báo cáo, xin chờ....");
@@ -580,4 +604,19 @@ function changePermission() {
             alert("Chọn quyền");
                
     } 
+}
+function selectTATS() {
+    if (document.getElementById("slck").value == "1") {
+        $("#tienantiensu").show();
+        $("#mahosotienan").show();
+    } else {
+        $("#tienantiensu").hide();
+        $("#mahosotienan").hide();
+    }
+}
+function checkPrice(obj) {
+    if (isNaN(obj.value))
+        return 0;
+    else
+        return parseInt(obj.value);
 }

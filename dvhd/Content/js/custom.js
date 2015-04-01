@@ -306,6 +306,37 @@ jQuery(document).ready(function () {
     // Reservation Form	
     //jQueryUI - Datepicker
     if (jQuery().datepicker) {
+        //jQuery('#ngaysinh').datepicker({
+        //    showAnim: "drop",
+        //    dateFormat: "dd/mm/yy",
+        //});
+        //jQuery('#thoigianxuly1').datepicker({
+        //    showAnim: "drop",
+        //    dateFormat: "dd/mm/yy",
+        //});
+        //jQuery('#thoigianvipham1').datepicker({
+        //    showAnim: "drop",
+        //    dateFormat: "dd/mm/yy",
+        //});
+        //jQuery('#ngaycap').datepicker({
+        //    showAnim: "drop",
+        //    dateFormat: "dd/mm/yy",
+        //});
+        //jQuery('#fromdate').datepicker({
+        //    showAnim: "drop",
+        //    dateFormat: "dd/mm/yy",
+        //});
+        //jQuery('#todate').datepicker({
+        //    showAnim: "drop",
+        //    dateFormat: "dd/mm/yy",
+        //    beforeShow: function () {
+        //        var a = jQuery("#fromdate").datepicker('getDate');
+        //        if (a) return {
+        //            minDate: a
+        //        }
+        //    }
+        //});
+
         jQuery('#checkin').datepicker({
             showAnim: "drop",
             dateFormat: "dd/mm/yy",

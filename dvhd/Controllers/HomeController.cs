@@ -334,6 +334,11 @@ namespace dvhd.Controllers
             var p = (from q in db.TinhThanhs where q.tinhthanhpho.Contains(keyword) orderby q.tinhthanhpho select q.tinhthanhpho).Distinct().Take(10);
             return JsonConvert.SerializeObject(p.ToList());
         }
+        public string getAllTinhThanh(string keyword)
+        {
+            var p = (from q in db.TinhThanhs where q.tinhthanhpho.Contains(keyword) orderby q.tinhthanhpho select q.tinhthanhpho).Distinct();
+            return JsonConvert.SerializeObject(p.ToList());
+        }
         public string getLoaiDVHD(string keyword)
         {
             var p = (from q in db.DsDvhds where q.ten.Contains(keyword) select q.ten).Take(10);
