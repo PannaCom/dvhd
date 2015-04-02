@@ -354,6 +354,7 @@ namespace dvhd.Controllers
         }
         public ActionResult Search(int? page, string keyword)
         {
+            ViewBag.keyword = keyword;
             var p = (from q in db.HoSoes where q.hoten.Contains(keyword) || q.cmthochieu.Contains(keyword) || q.hokhauthuongtru.Contains(keyword) || q.noicap.Contains(keyword) || q.nghenghiep.Contains(keyword) || q.hinhthucvipham.Contains(keyword) || q.hanhvivipham.Contains(keyword) || q.quanvipham.Contains(keyword) || q.tinhvipham.Contains(keyword) || q.tuyenduongvanchuyen.Contains(keyword) || q.loaidongvat.Contains(keyword) || q.soluongchitiet.Contains(keyword) || q.donvibatgiu.Contains(keyword) || q.ketquaxuly.Contains(keyword) || q.ketquaxulychitiet.Contains(keyword) || q.tendonvixuly.Contains(keyword) || q.hotencanboxuly.Contains(keyword) || q.ketquaxuly.Contains(keyword) || q.ketquaxulychitiet.Contains(keyword) select q).OrderByDescending(o => o.id).Take(1000);
             int pageSize = Config.PageSize;
             int pageNumber = (page ?? 1);
