@@ -32,6 +32,61 @@
         {
             <text>Hộ Khẩu: <b>@item.noicap</b>, </text>
         }
+        
+
+      
+        @if (item.nghenghiep != null && item.nghenghiep.ToLowerInvariant().Contains(@ViewBag.keyword.ToLowerInvariant()))
+        {
+            <text>Nghề Nghiệp: <b>@item.nghenghiep</b>, </text>
+        }
+        @if (item.hinhthucvipham != null && item.hinhthucvipham.ToLowerInvariant().Contains(@ViewBag.keyword.ToLowerInvariant()))
+        {
+            <text>Hình Thức Vi Phạm: <b>@item.hinhthucvipham</b>, </text>
+        }
+        @if (item.hanhvivipham != null && item.hanhvivipham.ToLowerInvariant().Contains(@ViewBag.keyword.ToLowerInvariant()))
+        {
+            <text>Hành Vi Vi Phạm: <b>@item.hanhvivipham</b>, </text>
+        }                    
+        @if (item.quanvipham != null && item.quanvipham.ToLowerInvariant().Contains(@ViewBag.keyword.ToLowerInvariant()))
+        {
+            <text>Quận Vi Phạm: <b>@item.quanvipham</b>, </text>
+        }
+        @if (item.tinhvipham != null && item.tinhvipham.ToLowerInvariant().Contains(@ViewBag.keyword.ToLowerInvariant()))
+        {
+            <text>Tỉnh Vi Phạm: <b>@item.tinhvipham</b>, </text>
+        }
+        @if (item.tuyenduongvanchuyen != null && item.tuyenduongvanchuyen.ToLowerInvariant().Contains(@ViewBag.keyword.ToLowerInvariant()))
+        {
+            <text>Tuyến Đường Vận Chuyển: <b>@item.tuyenduongvanchuyen</b>, </text>
+        }                
+        @if (item.loaidongvat != null && item.loaidongvat.ToLowerInvariant().Contains(@ViewBag.keyword.ToLowerInvariant()))
+        {
+            <text>Loại Động Vật: <b>@item.loaidongvat</b>, </text>
+        }
+        @if (item.soluongchitiet != null && item.soluongchitiet.ToLowerInvariant().Contains(@ViewBag.keyword.ToLowerInvariant()))
+        {
+            <text>Số Lượng Chi Tiết: <b>@item.soluongchitiet</b>, </text>
+        }
+        @if (item.donvibatgiu != null && item.donvibatgiu.ToLowerInvariant().Contains(@ViewBag.keyword.ToLowerInvariant()))
+        {
+            <text>Đơn Vị Bắt Giữ: <b>@item.donvibatgiu</b>, </text>
+        }                  
+        @if (item.ketquaxuly != null && item.ketquaxuly.ToLowerInvariant().Contains(@ViewBag.keyword.ToLowerInvariant()))
+        {
+            <text>Kết Quả Xử Lý: <b>@item.ketquaxuly</b>, </text>
+        }
+        @if (item.ketquaxulychitiet != null && item.ketquaxulychitiet.ToLowerInvariant().Contains(@ViewBag.keyword.ToLowerInvariant()))
+        {
+            <text>Kết Quả Xử Lý Chi Tiết: <b>@item.ketquaxulychitiet</b>, </text>
+        }
+        @if (item.tendonvixuly != null && item.tendonvixuly.ToLowerInvariant().Contains(@ViewBag.keyword.ToLowerInvariant()))
+        {
+            <text>Tên Đơn Vị Xử Lý: <b>@item.tendonvixuly</b>, </text>
+        }                        
+        @if (item.hotencanboxuly != null && item.hotencanboxuly.ToLowerInvariant().Contains(@ViewBag.keyword.ToLowerInvariant()))
+        {
+            <text>Họ Tên Cán Bộ Xử Lý: <b>@item.hotencanboxuly</b>, </text>
+        }                    
         </p>
     </div>
 }
