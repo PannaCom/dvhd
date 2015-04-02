@@ -148,6 +148,23 @@
 
 <!-- Go-top Button -->
 <div id="go-top"><i class="fa fa-angle-up fa-2x"></i></div>
-
+        <div id="dvautosearch" style="z-index:1001;position:fixed;left:40%;top:40%;width:31%;height:auto;display:none;background-color:#b6ff00;border:1px solid #b6ff00;"><div id="labelautosearch" style="display:block;float:left;position:relative;margin-top:4px;"><span >Gõ từ khóa cần tìm:</span></div><input name="keywordsearch" type="text" id="keywordsearch" value="" class="form-control" style="display:block;float:left;position:relative;width:200px;" /><input type="button" value="tìm kiếm" onclick="submitsearch();" style="height:32px;"></div>      
+        <script>
+            document.addEventListener("keydown", autosearch);
+            function autosearch(event) {
+                var keyCode = ('which' in event) ? event.which : event.keyCode;
+                //alert("The Unicode key code is: " + keyCode);
+                if (keyCode == 18) {
+                    $("#dvautosearch").show();
+                    document.getElementById("keywordsearch").focus();
+                }
+                if (keyCode == 27) {
+                    $("#dvautosearch").hide();
+                }
+            }
+            function submitsearch() {
+                window.location.href = "/Home/Search?keyword=" + document.getElementById("keywordsearch").value;
+            }
+        </script>
     </body>
 </html>

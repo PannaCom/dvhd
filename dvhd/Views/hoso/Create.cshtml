@@ -442,17 +442,17 @@
         document.getElementById("EditForm").submit();
     }
     function selectKetQuaXuLy() {
-        if (document.getElementById("ketquaxuly").value == "@Html.Raw(@dvhd.Config.ketquaxuly[1])") {
+        if (document.getElementById("ketquaxuly").selectedIndex == 1) {
             $("#dvsotienphat").show();
             $("#dvxulytangvat").show();
             $("#dvsothangtu").hide();
             $("#dvnguyennhankhongxuly").hide();
-        } else if (document.getElementById("ketquaxuly").value == "@Html.Raw(@dvhd.Config.ketquaxuly[2])") {
+        } else if (document.getElementById("ketquaxuly").selectedIndex == 2) {
             $("#dvsotienphat").show();
             $("#dvxulytangvat").show();
             $("#dvsothangtu").show();
             $("#dvnguyennhankhongxuly").hide();
-        } else if (document.getElementById("ketquaxuly").value == "@Html.Raw(@dvhd.Config.ketquaxuly[3])") {
+        } else if (document.getElementById("ketquaxuly").selectedIndex == 3) {
             $("#dvsotienphat").hide();
             $("#dvxulytangvat").hide();
             $("#dvsothangtu").hide();

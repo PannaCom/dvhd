@@ -1,0 +1,17 @@
+﻿@model PagedList.IPagedList<dvhd.Models.HoSo>
+@using PagedList.Mvc; 
+@{
+    ViewBag.Title = "Danh sách đối tượng vi phạm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kết quả tìm kiếm với từ khóa: @ViewBag.keyword</h2>
+
+@foreach (var item in Model)
+{
+    <div style="width:100%;display:block;float:left;position:relative;"><h3>@item.hoten</h3></div>
+}

@@ -155,6 +155,8 @@ namespace dvhd.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (hoso.xulytangvat == null) hoso.xulytangvat = "";
+                if (hoso.nguyennhankhongxuly == null) hoso.nguyennhankhongxuly = "";
                 db.HoSoes.Add(hoso);
                 db.SaveChanges();
                 return RedirectToAction("AddMore", new { hosocode = hoso.hosocode });
@@ -190,6 +192,8 @@ namespace dvhd.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (hoso.xulytangvat == null) hoso.xulytangvat = "";
+                if (hoso.nguyennhankhongxuly == null) hoso.nguyennhankhongxuly = "";
                 db.Entry(hoso).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

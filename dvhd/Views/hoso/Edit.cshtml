@@ -17,10 +17,11 @@
             $("#dvsothangtu").show();
             $("#dvnguyennhankhongxuly").hide();
         } else if (document.getElementById("ketquaxuly").selectedIndex == 3) {
+            $("#dvnguyennhankhongxuly").show();
             $("#dvsotienphat").hide();
             $("#dvxulytangvat").hide();
             $("#dvsothangtu").hide();
-            $("#dvnguyennhankhongxuly").show();
+           
         }
     }
 </script>
@@ -313,7 +314,7 @@
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Kết quả xử lý</label>
                           @Html.Partial("~/Views/Shared/_KetQuaXuLy.cshtml")  
-                          <script>document.getElementById("ketquaxuly").value = "@Html.Raw(@Model.ketquaxuly)"; selectKetQuaXuLy();</script>            
+                          <script>document.getElementById("ketquaxuly").value = "@Html.Raw(@Model.ketquaxuly)";// alert(document.getElementById("ketquaxuly").selectedIndex);//</script>            
                       </div>
                  </div>
                 <div class="col-md-12"  id="dvsotienphat">
@@ -340,6 +341,7 @@
                         <input name="nguyennhankhongxuly" type="text" tabindex="33" id="nguyennhankhongxuly" value="@Model.nguyennhankhongxuly"  class="form-control" placeholder="thiếu chứng cứ, thủ phạm bỏ trốn, hồ sơ chưa đầy đủ.." />                
                       </div>
                  </div>
+                <script> selectKetQuaXuLy();</script>
                 <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Đơn vị xử lý</label>
