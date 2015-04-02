@@ -13,5 +13,25 @@
 
 @foreach (var item in Model)
 {
-    <div style="width:100%;display:block;float:left;position:relative;"><h3>@item.hoten</h3></div>
+    <div style="width:100%;display:block;float:left;position:relative;margin-top: 0;margin-bottom: 23px;">
+        <a href="/hoso/details/@item.id" target="_blank"><h3 class="asearch">@item.hoten</h3></a>
+        <p>
+        @if (item.hoten.ToLowerInvariant().Contains(@ViewBag.keyword.ToLowerInvariant()))
+        {
+            <text>Họ tên: <b>@item.hoten</b>, </text>
+        }
+        @if (item.cmthochieu!=null && item.cmthochieu.ToLowerInvariant().Contains(@ViewBag.keyword.ToLowerInvariant()))
+        {
+            <text>Số CMT: <b>@item.cmthochieu</b>, </text>
+        }
+        @if (item.hokhauthuongtru!=null && item.hokhauthuongtru.ToLowerInvariant().Contains(@ViewBag.keyword.ToLowerInvariant()))
+        {
+            <text>Hộ Khẩu: <b>@item.hokhauthuongtru</b>, </text>
+        }
+        @if (item.noicap != null && item.noicap.ToLowerInvariant().Contains(@ViewBag.keyword.ToLowerInvariant()))
+        {
+            <text>Hộ Khẩu: <b>@item.noicap</b>, </text>
+        }
+        </p>
+    </div>
 }

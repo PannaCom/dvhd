@@ -2227,4 +2227,15 @@ border: 1px solid;
 .progressbarlabel {
     color:yellow;
 }
- 
+.asearch {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size:18px;
+    color:#609;
+    display: inline;
+    font-weight: normal;
+    margin: 0;
+} 
