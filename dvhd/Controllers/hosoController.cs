@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using dvhd.Models;
 using PagedList;
-using System.IO;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-using iTextSharp.text.html.simpleparser;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -235,30 +229,30 @@ namespace dvhd.Controllers
             base.Dispose(disposing);
         }
 
-        //create report
-        [HttpPost]
-        [ValidateInput(false)]
-        public string createReport(string html) {
-            Document document = new Document();
-            try
-            {
-                string path = HttpContext.Server.MapPath("../Images/Report" + "\\");
-                string reportName = "HoSoDayDu" + Guid.NewGuid().ToString() + ".pdf";
-                PdfWriter.GetInstance(document, new FileStream(path + reportName, FileMode.Create));
-                document.Open();                
-                List<IElement> htmlarraylist = HTMLWorker.ParseToList(new StringReader(html), null);
-                for (int k = 0; k < htmlarraylist.Count; k++)
-                {
-                    document.Add((IElement)htmlarraylist[k]);
-                }
+        ////create report
+        //[HttpPost]
+        //[ValidateInput(false)]
+        //public string createReport(string html) {
+        //    Document document = new Document();
+        //    try
+        //    {
+        //        string path = HttpContext.Server.MapPath("../Images/Report" + "\\");
+        //        string reportName = "HoSoDayDu" + Guid.NewGuid().ToString() + ".pdf";
+        //        PdfWriter.GetInstance(document, new FileStream(path + reportName, FileMode.Create));
+        //        document.Open();                
+        //        List<IElement> htmlarraylist = HTMLWorker.ParseToList(new StringReader(html), null);
+        //        for (int k = 0; k < htmlarraylist.Count; k++)
+        //        {
+        //            document.Add((IElement)htmlarraylist[k]);
+        //        }
 
-                document.Close();
-                return reportName;
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
-        }
+        //        document.Close();
+        //        return reportName;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return ex.Message;
+        //    }
+        //}
     }
 }
