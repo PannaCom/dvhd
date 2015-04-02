@@ -4,7 +4,26 @@
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<script>
+    function selectKetQuaXuLy() {
+        if (document.getElementById("ketquaxuly").selectedIndex == 1) {
+            $("#dvsotienphat").show();
+            $("#dvxulytangvat").show();
+            $("#dvsothangtu").hide();
+            $("#dvnguyennhankhongxuly").hide();
+        } else if (document.getElementById("ketquaxuly").selectedIndex == 2) {
+            $("#dvsotienphat").show();
+            $("#dvxulytangvat").show();
+            $("#dvsothangtu").show();
+            $("#dvnguyennhankhongxuly").hide();
+        } else if (document.getElementById("ketquaxuly").selectedIndex == 3) {
+            $("#dvsotienphat").hide();
+            $("#dvxulytangvat").hide();
+            $("#dvsothangtu").hide();
+            $("#dvnguyennhankhongxuly").show();
+        }
+    }
+</script>
 <h2 style="margin-left:5px;">Nhập dữ liệu đối tượng vi phạm</h2>
 <i style="margin-left:5px;">Dấu * cho biết trường  bắt buộc phải nhập</i>
 <a href="/hoso/Create?hosocode=@ViewBag.hosocode" target="_blank">+Thêm đồng phạm</a>
@@ -92,8 +111,9 @@
                  </div>
                 <div class="col-md-12">
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Nơi cấp </label>
-                        <input name="noicap" type="text" tabindex="9" id="noicap" value="@Model.noicap" class="form-control" placeholder="Nơi cấp cmt hoặc hộ chiếu"/>                
+                        <label for="room" style="width:auto;display:block;">Nơi cấp</label>
+                        <select id="noicap" class="form-control" name="noicap" tabindex="9"></select>
+                        <script>getListTinhThanh("noicap", "@Html.Raw(@Model.noicap)");</script>                    
                       </div>
                  </div>
                  <div class="col-md-12">
@@ -120,7 +140,12 @@
                         <input name="diachicoquan" type="text" tabindex="13" id="diachicoquan" value="@Model.diachicoquan" class="form-control" placeholder="Nhập địa chỉ cơ quan, email và số điện thoại cơ quan"/>                
                       </div>
                  </div>
-                
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Nghề nghiệp</label>
+                        <input name="nghenghiep" type="text" tabindex="13" id="nghenghiep" value="@Model.nghenghiep" class="form-control" placeholder="Nếu không có nơi công tác thì làm nghề gì?"/>                
+                      </div>
+                 </div>
                  <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Đặc điểm nhận dạng</label>
@@ -130,9 +155,15 @@
                  <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Tiền án tiền sự</label>
-                        <input name="tienantiensu" type="text" tabindex="15" id="tienantiensu" value="@Model.tienantiensu" class="form-control" placeholder="Tiền án tiền sự"/>                
+                        <select id="slck" class="form-control" name="slck" tabindex="30" onchange="selectTATS();"><option value="0" selected>Không</option><option value="1">Có</option></select>
+                        <input name="tienantiensu" type="text" tabindex="15" id="tienantiensu" value="@Model.tienantiensu" class="form-control" placeholder="Tiền án tiền sự" style="display:none;"/>
+                        <label for="room" style="width:auto;display:none;" id="lbmahosotienan">Mã hồ sơ</label>
+                        <input name="mahosotienan" type="text" tabindex="15" id="mahosotienan" value="@Model.mahosotienan" class="form-control" placeholder="Mã hồ sơ" style="display:none;"/>                  
                       </div>
                  </div>
+                 @if (Model.tienantiensu!=null){
+                    <script>$("#tienantiensu").show(); $("#mahosotienan").show(); $("#lbmahosotienan").show(); $("#slck").val("1");</script>
+                 }
             </div>
             <div class="tab-pane fade" id="hanhvi" >
                 <div class="col-md-12">
@@ -154,13 +185,7 @@
                         <label for="room" style="width:auto;display:block;">Thuộc tỉnh thành</label>
                         <input name="tinhvipham" type="text" tabindex="18" id="tinhvipham" value="@Model.tinhvipham" class="form-control" placeholder="Thuộc tỉnh thành" onkeyup="searchTinhThanh();"/>                
                       </div>
-                 </div>
-                <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Mô tả vi phạm chi tiết</label>
-                        <textarea name="motavipham" tabindex="19" id="motavipham"  rows="4" cols="20" class="form-control">@Model.motavipham</textarea>                
-                      </div>
-                 </div>
+                 </div>                
                 <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Hình thức vi phạm</label>
@@ -170,7 +195,7 @@
                  </div>
                  <div class="col-md-12">
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Hành vi vi phạm</label>
+                        <label for="room" style="width:auto;display:block;">Hành vi vi phạm(điều 190 Bộ luật Hình Sự)</label>
                         @Html.Partial("~/Views/Shared/_HanhViViPham.cshtml")    
                         <script>document.getElementById("hanhvivipham").value = "@Html.Raw(@Model.hanhvivipham)";</script>               
                       </div>
@@ -185,7 +210,9 @@
                  <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Tuyến đường vận chuyển</label>
-                        <input name="tuyenduongvanchuyen" type="text" tabindex="23" id="tuyenduongvanchuyen" value="@Model.tuyenduongvanchuyen" class="form-control" placeholder="tuyến đường vận chuyển" />                
+                        Bắt đầu từ: <input name="batdau" type="text" tabindex="23" id="batdau" value="@dvhd.Config.getBatDauNoiDen(@Model.tuyenduongvanchuyen,0)" class="form-control" placeholder="bắt đầu từ" /> 
+                        Nơi đến: <input name="noiden" type="text" tabindex="23" id="noiden" value="@dvhd.Config.getBatDauNoiDen(@Model.tuyenduongvanchuyen,1)" class="form-control" placeholder="nơi đến" /> 
+                        <input name="tuyenduongvanchuyen" type="hidden" tabindex="23" id="tuyenduongvanchuyen" value="@Model.tuyenduongvanchuyen" class="form-control" placeholder="tuyến đường vận chuyển" />                
                       </div>
                  </div>
                  <div class="col-md-12">
@@ -226,7 +253,7 @@
                         <script>document.getElementById("tinhtrangsong").value = "@Html.Raw(@Model.tinhtrangsong)";</script>  
                       </div>
                  </div>
-                <div class="col-md-12">
+                <div class="col-md-12" style="display:none;">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Đơn vị tính</label>
                         @Html.Partial("~/Views/Shared/_DonViTinh.cshtml")     
@@ -250,6 +277,12 @@
                         <label for="room" style="width:auto;display:block;">Tình trạng bảo tồn</label>
                         @Html.Partial("~/Views/Shared/_TinhTrangBaoTon.cshtml")   
                         <script>document.getElementById("tinhtrangbaoton").value = "@Html.Raw(@Model.tinhtrangbaoton)";</script>      
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Thông tin khác nếu có</label>
+                        <textarea name="motavipham" tabindex="19" id="motavipham"  rows="4" cols="20" class="form-control">@Model.motavipham</textarea>                
                       </div>
                  </div>
                  <div class="col-md-12">
@@ -280,14 +313,38 @@
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Kết quả xử lý</label>
                           @Html.Partial("~/Views/Shared/_KetQuaXuLy.cshtml")  
-                          <script>document.getElementById("ketquaxuly").value = "@Html.Raw(@Model.ketquaxuly)";</script>            
+                          <script>document.getElementById("ketquaxuly").value = "@Html.Raw(@Model.ketquaxuly)"; selectKetQuaXuLy();</script>            
+                      </div>
+                 </div>
+                <div class="col-md-12"  id="dvsotienphat">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Số tiền phạt(Đơn vị VNĐ)</label>
+                        <input name="sotienphat" type="text" tabindex="33" id="sotienphat" value="@Model.sotienphat" class="form-control" placeholder="Số tiền phạt" onblur="checkPrice(this);" />                
+                      </div>
+                 </div>                 
+                <div class="col-md-12"  id="dvxulytangvat">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Xử lý tang vật</label>
+                        <input name="xulytangvat" type="text" tabindex="33" id="xulytangvat" value="@Model.xulytangvat"  class="form-control" placeholder="tiêu hủy hay thanh lý..." />                
+                      </div>
+                 </div>
+                <div class="col-md-12" style="display:none;" id="dvsothangtu">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Số tháng tù</label>
+                        <input name="sothangtu" type="text" tabindex="33" id="sothangtu" value="@Model.sothangtu" class="form-control" placeholder="phạt bao nhiêu tháng tù nếu có.." onblur="checkPrice(this);"/>                
+                      </div>
+                 </div>
+                <div class="col-md-12" style="display:none;" id="dvnguyennhankhongxuly">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Nguyên nhân vì sao không xử lý</label>
+                        <input name="nguyennhankhongxuly" type="text" tabindex="33" id="nguyennhankhongxuly" value="@Model.nguyennhankhongxuly"  class="form-control" placeholder="thiếu chứng cứ, thủ phạm bỏ trốn, hồ sơ chưa đầy đủ.." />                
                       </div>
                  </div>
                 <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Đơn vị xử lý</label>
                         @Html.Partial("~/Views/Shared/_DonViXuLy.cshtml")  
-                        <script>document.getElementById("donvixuly").value = "@Html.Raw(@Model.donvixuly)";</script>                    
+                        <script>document.getElementById("donvixuly").value="@Html.Raw(@Model.donvixuly.Trim())";</script>                    
                       </div>
                  </div>
                  <div class="col-md-12">
@@ -328,7 +385,7 @@
                  </div>
                 <div class="col-md-12">
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Mô tả chi tiết kết quả xư lý</label>
+                        <label for="room" style="width:auto;display:block;">Mô tả chi tiết kết quả xư lý(hình phạt là gì, số tiền phạt nếu là hành chính, kết quả tuyên án nếu bị kết án hình sự)</label>
                         <textarea name="motachitietxuly" tabindex="40" id="motachitietxuly" value="" rows="4" cols="20" class="form-control">@Model.motachitietxuly</textarea>                
                         <input type="hidden" id="hosocode" name="hosocode" value="@ViewBag.hosocode">
                       </div>
@@ -421,6 +478,8 @@
         if ($("#thoigianxuly1").val() != "" && $("#thoigianxuly2").val() != "") {
             $("#thoigianxuly").val($("#thoigianxuly1").val() + " " + $("#thoigianxuly2").val());
         }
+        document.getElementById("tuyenduongvanchuyen").value = document.getElementById("batdau").value + " - " + document.getElementById("noiden").value;
         document.getElementById("EditForm").submit();
     }
+    
 </script>

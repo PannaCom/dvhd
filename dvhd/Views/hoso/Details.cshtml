@@ -77,25 +77,23 @@
             <td><label>Nơi Công Tác :</label></td> <td colspan="4"> @Html.DisplayFor(model => model.noicongtac) </td>            
         </tr>
         <tr>
-            <td><label>Địa Chỉ Cơ Quan :</label></td> <td colspan="4"> @Html.DisplayFor(model => model.diachicoquan) </td>
+            <td><label>Địa Chỉ Cơ Quan :</label></td> <td > @Html.DisplayFor(model => model.diachicoquan) </td>
+            <td><label>Nghề Nghiệp :</label></td> <td colspan="2"> @Html.DisplayFor(model => model.nghenghiep) </td>
         </tr>
         <tr>
             <td><label>Đặc Điểm Nhận Dạng :</label></td> <td colspan="4"> @Html.DisplayFor(model => model.dacdiemnhandang) </td>            
         </tr>
         <tr>
-            <td><label>Tiền Án Tiền Sự :</label></td> <td colspan="4"> @Html.DisplayFor(model => model.tienantiensu) </td>
+            <td><label>Tiền Án Tiền Sự :</label></td> <td > @Html.DisplayFor(model => model.tienantiensu) </td>
+            <td><label>Mã Hồ Sơ :</label></td> <td colspan="2"> @Html.DisplayFor(model => model.mahosotienan) </td>
         </tr>
     </table>
-    
     <h4><u>Hành Vi Vi Phạm</u></h4>
     <table class="tbBanIn">
         <tr>
             <td style="width:305px;"><label>Thời Gian Vi Phạm :</label></td> <td style="width:10%"> @thoigianvipham </td>
             <td style="width:13%"><label>Địa Điểm Vi Phạm :</label></td> <td colspan="2"> @Html.DisplayFor(model => model.quanvipham) , @Html.DisplayFor(model => model.tinhvipham) </td>            
-        </tr>
-        <tr>
-            <td><label>Mô Tả Vi Phạm :</label></td> <td colspan="4"> @Html.DisplayFor(model => model.motavipham) </td>
-        </tr>
+        </tr>        
         <tr>
             <td><label>Hình Thức Vi Phạm :</label></td> <td> @Html.DisplayFor(model => model.hinhthucvipham) </td>
             <td><label>Hành Vi Vi Phạm :</label></td> <td colspan="2"> @Html.DisplayFor(model => model.hanhvivipham)</td>            
@@ -103,7 +101,10 @@
         <tr>
             <td><label>Phương Thức Vận Chuyển :</label></td> <td> @Html.DisplayFor(model => model.phuongthucvanchuyen) </td>
             <td><label>Tuyến Đường Vận Chuyển :</label></td> <td colspan="2"> @Html.DisplayFor(model => model.tuyenduongvanchuyen)</td>            
-        </tr>      
+        </tr>   
+        <tr>
+            <td><label>Thông Tin Khác :</label></td> <td colspan="4"> @Html.DisplayFor(model => model.motavipham) </td>
+        </tr>   
         <tr>
              @if (Model.anhdongvat != null)
              {
@@ -164,6 +165,14 @@
         <tr>
             <td style="width:15%"><label>Thời Gian Xử Lý :</label></td> <td style="width:15%"> @thoigianxuly </td>
             <td style="width:25%"><label>Kết Quả Xử Lý :</label></td> <td> @Html.DisplayFor(model => model.ketquaxuly) </td>            
+        </tr>
+        <tr>
+            <td style="width:15%"><label>Số Tiền Phạt :</label></td> <td style="width:15%"> @dvhd.Config.formatNumber(@Model.sotienphat) VNĐ</td>
+            <td style="width:25%"><label>Xử Lý Tang Vật :</label></td> <td> @Html.DisplayFor(model => model.xulytangvat) </td>            
+        </tr>
+        <tr>
+            <td style="width:15%"><label>Số Tháng Tù :</label></td> <td style="width:15%"> @Model.sothangtu</td>
+            <td style="width:25%"><label>Nguyên Nhân Không Xử Lý(Nếu Có) :</label></td> <td> @Html.DisplayFor(model => model.nguyennhankhongxuly) </td>            
         </tr>
         <tr>
             <td><label>Đơn Vị Xử Lý :</label></td> <td> @Html.DisplayFor(model => model.donvixuly) </td>

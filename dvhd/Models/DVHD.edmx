@@ -36,9 +36,11 @@
           <Property Name="coquancap" Type="nvarchar" MaxLength="250" />
           <Property Name="noicongtac" Type="nvarchar" MaxLength="250" />
           <Property Name="diachicoquan" Type="nvarchar" MaxLength="250" />
+          <Property Name="nghenghiep" Type="nvarchar" MaxLength="50" />
           <Property Name="anhdoituong" Type="nvarchar" MaxLength="250" />
           <Property Name="dacdiemnhandang" Type="nvarchar" MaxLength="550" />
           <Property Name="tienantiensu" Type="nvarchar" MaxLength="850" />
+          <Property Name="mahosotienan" Type="nvarchar" MaxLength="50" />
           <Property Name="thoigianvipham" Type="datetime" />
           <Property Name="quanvipham" Type="nvarchar" MaxLength="50" />
           <Property Name="tinhvipham" Type="nvarchar" MaxLength="50" />
@@ -58,6 +60,10 @@
           <Property Name="tendonvibatgiu" Type="nvarchar" MaxLength="550" />
           <Property Name="thoigianxuly" Type="datetime" />
           <Property Name="ketquaxuly" Type="nvarchar" MaxLength="150" />
+          <Property Name="sotienphat" Type="bigint" />
+          <Property Name="xulytangvat" Type="nvarchar" MaxLength="50" />
+          <Property Name="sothangtu" Type="int" />
+          <Property Name="nguyennhankhongxuly" Type="ntext" />
           <Property Name="donvixuly" Type="nvarchar" MaxLength="150" />
           <Property Name="tendonvixuly" Type="nvarchar" MaxLength="550" />
           <Property Name="hotencanboxuly" Type="nvarchar" MaxLength="250" />
@@ -94,8 +100,8 @@
         <EntityContainer Name="dvhdEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="DsDvhds" EntityType="dvhdModel.DsDvhd" />
           <EntitySet Name="TinhThanhs" EntityType="dvhdModel.TinhThanh" />
-          <EntitySet Name="HoSoes" EntityType="dvhdModel.HoSo" />
           <EntitySet Name="users" EntityType="dvhdModel.user" />
+          <EntitySet Name="HoSoes" EntityType="dvhdModel.HoSo" />
         </EntityContainer>
         <EntityType Name="DsDvhd">
           <Key>
@@ -111,6 +117,16 @@
           <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="quanhuyen" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="tinhthanhpho" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="pass" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="groups" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="permission" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="HoSo">
           <Key>
@@ -130,9 +146,11 @@
           <Property Type="String" Name="coquancap" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="noicongtac" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="diachicoquan" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="nghenghiep" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="anhdoituong" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="dacdiemnhandang" MaxLength="550" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="tienantiensu" MaxLength="850" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="mahosotienan" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="thoigianvipham" Precision="3" />
           <Property Type="String" Name="quanvipham" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="tinhvipham" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -152,6 +170,10 @@
           <Property Type="String" Name="tendonvibatgiu" MaxLength="550" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="thoigianxuly" Precision="3" />
           <Property Type="String" Name="ketquaxuly" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="Int64" Name="sotienphat" />
+          <Property Type="String" Name="xulytangvat" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="sothangtu" />
+          <Property Type="String" Name="nguyennhankhongxuly" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="donvixuly" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="tendonvixuly" MaxLength="550" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="hotencanboxuly" MaxLength="250" FixedLength="false" Unicode="true" />
@@ -162,16 +184,6 @@
           <Property Type="String" Name="ketquaxulychitiet" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="motachitietxuly" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="hosocode" MaxLength="150" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="user">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="name" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="pass" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="groups" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="permission" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -196,6 +208,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="dvhdModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="permission" ColumnName="permission" />
+                <ScalarProperty Name="groups" ColumnName="groups" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="HoSoes">
             <EntityTypeMapping TypeName="dvhdModel.HoSo">
               <MappingFragment StoreEntitySet="HoSo">
@@ -209,6 +232,10 @@
                 <ScalarProperty Name="hotencanboxuly" ColumnName="hotencanboxuly" />
                 <ScalarProperty Name="tendonvixuly" ColumnName="tendonvixuly" />
                 <ScalarProperty Name="donvixuly" ColumnName="donvixuly" />
+                <ScalarProperty Name="nguyennhankhongxuly" ColumnName="nguyennhankhongxuly" />
+                <ScalarProperty Name="sothangtu" ColumnName="sothangtu" />
+                <ScalarProperty Name="xulytangvat" ColumnName="xulytangvat" />
+                <ScalarProperty Name="sotienphat" ColumnName="sotienphat" />
                 <ScalarProperty Name="ketquaxuly" ColumnName="ketquaxuly" />
                 <ScalarProperty Name="thoigianxuly" ColumnName="thoigianxuly" />
                 <ScalarProperty Name="tendonvibatgiu" ColumnName="tendonvibatgiu" />
@@ -228,9 +255,11 @@
                 <ScalarProperty Name="tinhvipham" ColumnName="tinhvipham" />
                 <ScalarProperty Name="quanvipham" ColumnName="quanvipham" />
                 <ScalarProperty Name="thoigianvipham" ColumnName="thoigianvipham" />
+                <ScalarProperty Name="mahosotienan" ColumnName="mahosotienan" />
                 <ScalarProperty Name="tienantiensu" ColumnName="tienantiensu" />
                 <ScalarProperty Name="dacdiemnhandang" ColumnName="dacdiemnhandang" />
                 <ScalarProperty Name="anhdoituong" ColumnName="anhdoituong" />
+                <ScalarProperty Name="nghenghiep" ColumnName="nghenghiep" />
                 <ScalarProperty Name="diachicoquan" ColumnName="diachicoquan" />
                 <ScalarProperty Name="noicongtac" ColumnName="noicongtac" />
                 <ScalarProperty Name="coquancap" ColumnName="coquancap" />
@@ -244,17 +273,6 @@
                 <ScalarProperty Name="quoctich" ColumnName="quoctich" />
                 <ScalarProperty Name="ngaysinh" ColumnName="ngaysinh" />
                 <ScalarProperty Name="hoten" ColumnName="hoten" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="users">
-            <EntityTypeMapping TypeName="dvhdModel.user">
-              <MappingFragment StoreEntitySet="users">
-                <ScalarProperty Name="permission" ColumnName="permission" />
-                <ScalarProperty Name="groups" ColumnName="groups" />
-                <ScalarProperty Name="pass" ColumnName="pass" />
-                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

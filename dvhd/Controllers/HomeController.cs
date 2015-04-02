@@ -67,6 +67,7 @@ namespace dvhd.Controllers
                      orderby q.loaidongvat
                      select new
                      {
+                         q.id,
                          q.loaidongvat,
                          q.tinhtrangbaoton,
                          q.donvitinh,
@@ -103,6 +104,7 @@ namespace dvhd.Controllers
                           select new
                           {
                               diaban = q.quanvipham + "/" + q.tinhvipham,
+                              q.id,
                               q.hoten,
                               q.choohientai,
                               q.hanhvivipham,
@@ -119,6 +121,7 @@ namespace dvhd.Controllers
                       select new
                       {
                           diaban = q.quanvipham + "/" + q.tinhvipham,
+                          q.id,
                           q.hoten,
                           q.choohientai,
                           q.hanhvivipham,
@@ -151,6 +154,7 @@ namespace dvhd.Controllers
                          select new
                          {
                              q.hoten,
+                             q.id,
                              q.cmthochieu,
                              q.choohientai,
                              q.hotencha,
@@ -170,6 +174,7 @@ namespace dvhd.Controllers
                      select new
                      {
                          q.hoten,
+                         q.id,
                          q.cmthochieu,
                          q.choohientai,
                          q.hotencha,
@@ -200,6 +205,7 @@ namespace dvhd.Controllers
                      orderby q.loaidongvat
                      select new
                      {
+                         q.id,
                          q.hinhthucvipham,
                          q.hanhvivipham,
                          q.loaidongvat,
@@ -230,7 +236,8 @@ namespace dvhd.Controllers
                      where q.hanhvivipham.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
                      orderby q.loaidongvat
                      select new
-                     {                         
+                     {
+                         q.id,
                          q.hanhvivipham,
                          q.hinhthucvipham,
                          q.loaidongvat,

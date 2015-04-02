@@ -356,6 +356,26 @@ namespace dvhd
             else
                 return false;
         }
-        
+        public static string formatNumber(long? number)
+        {
+            if (number == null || number == 0) return "";
+            return String.Format("{0:#,##0}", number);// number.ToString("##,#");
+        }
+        public static string getBatDauNoiDen(string val, int type) {
+            try
+            {
+                if (val == null || val.Trim() == "" || !val.Contains("-")) return "";
+                if (val.Contains("-"))
+                {
+                    string[] temp = val.Split('-');
+                    if (type == 0) return temp[0].Trim();
+                    if (type == 1) return temp[1].Trim();
+                }
+            }
+            catch (Exception ex) {
+                return "";
+            }
+            return "";
+        }
     }
 }

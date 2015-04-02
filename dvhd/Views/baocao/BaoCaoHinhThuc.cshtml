@@ -70,7 +70,7 @@
                 var hoso = Model[i];
                 var thoigianvipham = hoso.thoigianvipham.HasValue == true ? hoso.thoigianvipham.Value.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) : "";
                 <tr>
-                    <td>@(i + 1)</td><td>@hoso.hinhthucvipham</td><td>@hoso.hanhvivipham</td>
+                    <td>@(i + 1)</td><td><a href="/hoso/Details/@hoso.id" target=_blank>@hoso.hinhthucvipham</a></td><td>@hoso.hanhvivipham</td>
                     <td>@hoso.loaidongvat</td><td>@hoso.quanvipham/@hoso.tinhvipham</td><td>@hoso.motavipham</td>
                     <td>@hoso.soluongchitiet</td><td>@hoso.tendonvibatgiu</td>
                     <td>@hoso.phuongthucvanchuyen</td><td>@hoso.tuyenduongvanchuyen</td><td>@thoigianvipham</td>

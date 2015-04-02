@@ -16,6 +16,30 @@
         <p>* Khoảng thời gian từ ngày đến ngày tính là thời gian xử lý</p>          
         <form class="form-inline reservation-horizontal clearfix" role="form"   name="reservationform" id="reservationform">
           <div class="row">
+              <div class="col-sm-2" id="dvsotienphat">
+                  <div class="form-group" >
+                    <label>Số tiền phạt >=</label>
+				    <input name="sotienphat" type="text" id="sotienphat" value="@ViewBag.sotienphat" class="form-control" placeholder="Số tiền phạt" onblur="checkPrice(this);" />              
+                  </div>
+              </div>
+              <div class="col-sm-2" id="dvxulytangvat">
+                  <div class="form-group" >
+                    <label>Xử lý tang vật</label>
+				    <input name="xulytangvat" type="text" id="xulytangvat" value="@ViewBag.xulytangvat" class="form-control" placeholder="tiêu hủy, thanh lý" />              
+                  </div>
+              </div>
+              <div class="col-sm-2" id="dvsothangtu">
+                  <div class="form-group" >
+                    <label>Số tháng tù >=</label>
+				    <input name="sothangtu" type="text" id="sothangtu" value="@ViewBag.sothangtu" class="form-control" placeholder="Số tháng tù" onblur="checkPrice(this);"/>              
+                  </div>
+              </div>
+              <div class="col-sm-2" id="dvnguyennhankhongxuly">
+                  <div class="form-group" >
+                    <label>Nguyên nhân không xử lý</label>
+				    <input name="nguyennhankhongxuly" type="text" id="nguyennhankhongxuly" value="@ViewBag.nguyennhankhongxuly" class="form-control" placeholder="nguyên nhân không xử lý" />              
+                  </div>
+              </div>
               <div class="col-sm-2" >
                   <div class="form-group">
                     <label>Từ ngày</label>
@@ -52,9 +76,9 @@
     }
     <table id="tbResult" class="tbBanIn">
         <tr>
-            <th style="width:22px;">Stt</th><th style="width:70px;">Kết Quả Xử Lý</th><th style="width:100px;">Kết Quả Xử Lý Chi Tiết</th>
+            <th style="width:22px;">Stt</th><th style="width:70px;">Kết Quả Xử Lý</th><th style="width:200px;">Kết Quả Xử Lý Chi Tiết</th>
             <th style="width:100px;">Tên Đơn Vị Xử Lý</th>
-		    <th style="width:100px;">Bị Can</th><th style="width:100px;">Mô Tả Chi Tiết Xử Lý</th><th style="width:500px;">Mô Tả Chi Tiết Vi Phạm</th>
+		    <th style="width:100px;">Bị Can</th><th style="width:100px;">Mô Tả Chi Tiết Xử Lý</th><th style="width:400px;">Mô Tả Chi Tiết Vi Phạm</th>
 		    <th style="width:100px;">Hành Vi Vi Phạm</th><th style="width:75px;">Ngày Xử Lý</th>
             <th style="width:90px;">Cán Bộ Xử Lý</th><th style="width:70px;">Cấp Bậc</th>
         </tr>
@@ -64,8 +88,16 @@
             {
                 var hoso = Model[i];
                 var ngayxuly = hoso.thoigianxuly.HasValue == true ? hoso.thoigianxuly.Value.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture) : "";
+                var ketqua = "";
+                if (hoso.sotienphat != null && hoso.sotienphat > 0) { ketqua += "<br>Số tiền phạt:" + dvhd.Config.formatNumber(hoso.sotienphat); }
+                if (hoso.xulytangvat != null && hoso.xulytangvat != "") { ketqua += "<br>Xử lý tang vật:" + hoso.xulytangvat; }
+                if (hoso.sothangtu != null && hoso.sothangtu > 0) {ketqua += "<br>Số tháng tù:" + hoso.sothangtu; }
+                if (hoso.nguyennhankhongxuly != null && hoso.nguyennhankhongxuly != "")
+                {
+                    ketqua += "<br>Nguyên nhân không xử lý:" + hoso.nguyennhankhongxuly;
+                }
             <tr>
-                <td>@(i + 1)</td><td>@hoso.ketquaxuly</td><td>@hoso.ketquaxulychitiet</td>
+                <td>@(i + 1)</td><td><a href="/hoso/Details/@hoso.id" target=_blank>@hoso.ketquaxuly</a></td><td>@hoso.ketquaxulychitiet@Html.Raw(@ketqua)</td>
                 <td>@hoso.tendonvixuly</td><td>@hoso.hoten</td>
                 <td>@hoso.motachitietxuly</td><td>@hoso.motavipham</td>
                 <td>@hoso.hanhvivipham</td><td>@ngayxuly</td><td>@hoso.hotencanboxuly</td><td>@hoso.capbac</td>
@@ -88,7 +120,26 @@
             $("#titleXuLy").text("Báo Cáo Tổng Hợp Kết Quả Xử Lý Vi Phạm");
         }        
     });
-
+    function selectKetQuaXuLy() {
+        var rs = "@Html.Raw(@ViewBag.type)";
+        if (rs== "@Html.Raw(@dvhd.Config.ketquaxuly[1])") {
+            $("#dvsotienphat").show();
+            $("#dvxulytangvat").show();
+            $("#dvsothangtu").hide();
+            $("#dvnguyennhankhongxuly").hide();
+        } else if (rs == "@Html.Raw(@dvhd.Config.ketquaxuly[2])") {
+            $("#dvsotienphat").show();
+            $("#dvxulytangvat").show();
+            $("#dvsothangtu").show();
+            $("#dvnguyennhankhongxuly").hide();
+        } else if (rs == "@Html.Raw(@dvhd.Config.ketquaxuly[3])") {
+            $("#dvsotienphat").hide();
+            $("#dvxulytangvat").hide();
+            $("#dvsothangtu").hide();
+            $("#dvnguyennhankhongxuly").show();
+        }
+    }
+    selectKetQuaXuLy();
     function getUrlParameter(sParam) {
         var sPageURL = window.location.search.substring(1);
         var sURLVariables = sPageURL.split('&');
@@ -103,7 +154,11 @@
         return paraValue.toLowerCase();
     }    
     function searchxuly(type,fromdate,todate){
-        location.href="/baocao/xuly?type="+type+"&fromdate="+fromdate+"&todate="+todate;
+        var sotienphat=$("#sotienphat").val();
+        var xulytangvat=$("#xulytangvat").val();
+        var sothangtu=$("#sothangtu").val();
+        var nguyennhankhongxuly=$("#nguyennhankhongxuly").val();
+        location.href="/baocao/xuly?type="+type+"&fromdate="+fromdate+"&todate="+todate+"&sotienphat="+sotienphat+"&xulytangvat="+xulytangvat+"&sothangtu="+sothangtu+"&nguyennhankhongxuly="+nguyennhankhongxuly;
     }
 </script>
 

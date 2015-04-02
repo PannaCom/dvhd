@@ -1,4 +1,26 @@
-﻿// format date to dd/MM/yyyy
+﻿function detectmob() {
+
+    if (navigator.userAgent.match(/Android/i)
+     || navigator.userAgent.match(/webOS/i)
+     || navigator.userAgent.match(/iPhone/i)
+     || navigator.userAgent.match(/iPad/i)
+     || navigator.userAgent.match(/iPod/i)
+     || navigator.userAgent.match(/BlackBerry/i)
+     || navigator.userAgent.match(/Windows Phone/i)
+     ) {
+        return true;
+    }
+    else {
+        return false;
+    }
+
+}
+if (navigator.userAgent.toLowerCase().indexOf("chrome") < 0 && !detectmob()) {
+    alert("Phần mềm sử dụng trình duyệt Chrome để hiển thị các tính năng tốt nhất, xin download!");
+    window.location.href = "http://www.google.com/chrome/";
+}
+
+// format date to dd/MM/yyyy
 function formatDate(strDate) {
     if (strDate == undefined || strDate == null) {
         return "";
@@ -91,7 +113,7 @@ function setResult2Table(result, type) {
 		+ '<th style="width:220px;">Tên Đơn Vị Bắt Giữ</th><th style="width:110px;">Phương Thức Vận Chuyển</th>'
 		+ '<th style="width:110px;">Tuyến Đường Vận Chuyển</th><th style="width:75px;">Ngày Vi Phạm</th></tr>';
         $.each(result, function (idx, q) {
-            htmlContent += '<tr><td>' + (idx + 1) + '</td><td>' + setDefaultValue(q.loaidongvat) + '</td><td>' + setDefaultValue(q.tinhtrangbaoton) + '</td><td>'
+            htmlContent += '<tr><td>' + (idx + 1) + '</td><td><a href=\'/hoso/Details/' + q.id + '\' target=_blank>' + setDefaultValue(q.loaidongvat) + '</a></td><td>' + setDefaultValue(q.tinhtrangbaoton) + '</td><td>'
                 + setDefaultValue(q.donvitinh) + '</td><td>' + setDefaultValue(q.soluongchitiet) + '</td><td>' + setDefaultValue(q.trigiatangvat) + '</td><td>' 
                 + setDefaultValue(q.tendonvibatgiu) + '</td><td>' + setDefaultValue(q.phuongthucvanchuyen) + '</td><td>'
                 + setDefaultValue(q.tuyenduongvanchuyen) + '</td><td>' + formatDate(q.thoigianvipham) + '</td></tr>';
@@ -103,7 +125,7 @@ function setResult2Table(result, type) {
 		+ '<th style="width:250px;">Số Lượng Chi Tiết</th><th style="width:220px;">Tên Đơn Vị Bắt Giữ</th>'
 		+ '<th style="width:75px;">Ngày Vi Phạm</th></tr>';
         $.each(result, function (idx, q) {            
-            htmlContent += '<tr><td>' + (idx + 1) + '</td><td>' + setDefaultValue(q.diaban) + '</td><td>' + setDefaultValue(q.hoten) + '</td><td>'
+            htmlContent += '<tr><td>' + (idx + 1) + '</td><td><a href="/hoso/Details/' + q.id + '" target=_blank>' + setDefaultValue(q.diaban) + '</a></td><td>' + setDefaultValue(q.hoten) + '</td><td>'
                 + setDefaultValue(q.choohientai) + '</td><td>' + setDefaultValue(q.hanhvivipham) + '</td><td>' + setDefaultValue(q.loaidongvat) + '</td><td>' 
                 + setDefaultValue(q.soluongchitiet) + '</td><td>' + setDefaultValue(q.tendonvibatgiu) + '</td><td>'
                 + formatDate(q.thoigianvipham) + '</td></tr>';
@@ -114,7 +136,7 @@ function setResult2Table(result, type) {
 		+ '<th style="width:200px;">Tiền Án Tiền Sự</th><th style="width:160px;">Hành Vi Vi Phạm</th>'
 		+ '<th style="width:150px;">Tên Loài</th><th style="width:150px;">Số Lượng Chi Tiết</th><th style="width:75px;">Ngày Vi Phạm</th></tr>';
         $.each(result, function (idx, q) {
-            htmlContent += '<tr><td>' + (idx + 1) + '</td><td>' + setDefaultValue(q.hoten) + '</td><td>' + setDefaultValue(q.cmthochieu) + '</td><td>'
+            htmlContent += '<tr><td>' + (idx + 1) + '</td><td><a href="/hoso/Details/' + q.id + '" target=_blank>' + setDefaultValue(q.hoten) + '</a></td><td>' + setDefaultValue(q.cmthochieu) + '</td><td>'
                 + setDefaultValue(q.choohientai) + '</td><td>Họ tên Cha: ' + setDefaultValue(q.hotencha) + '<br/>Họ tên Mẹ: ' + setDefaultValue(q.hotenme) + '</td><td>'
                 + setDefaultValue(q.tienantiensu) + '</td><td>' + setDefaultValue(q.hanhvivipham) + '</td><td>'
                 + setDefaultValue(q.loaidongvat) + '</td><td>' + setDefaultValue(q.soluongchitiet) + '</td><td>' + formatDate(q.thoigianvipham) + '</td></tr>';
@@ -125,7 +147,7 @@ function setResult2Table(result, type) {
 		        + '<th style="width:470px;">Mô Tả Chi Tiết</th><th style="width:150px;">Số Lượng Chi Tiết</th><th style="width:120px;">Tên Đơn Vị Bắt Giữ</th>'
                 + '<th style="width:70px;">Phương Thức Vận Chuyển</th><th style="width:70px;">Tuyến Đường Vận Chuyển</th><th style="width:75px;">Ngày Vi Phạm</th></tr>';
         $.each(result, function (idx, q) {
-            htmlContent += '<tr><td>' + (idx + 1) + '</td><td>' + setDefaultValue(q.hinhthucvipham) + '</td><td>' + setDefaultValue(q.hanhvivipham) + '</td><td>'
+            htmlContent += '<tr><td>' + (idx + 1) + '</td><td><a href="/hoso/Details/' + q.id + '" target=_blank>' + setDefaultValue(q.hinhthucvipham) + '</a></td><td>' + setDefaultValue(q.hanhvivipham) + '</td><td>'
                 + setDefaultValue(q.loaidongvat) + '</td><td>' + setDefaultValue(q.diaban) + '</td><td>' + setDefaultValue(q.motavipham) + '</td><td>'
                 + setDefaultValue(q.soluongchitiet) + '</td><td>' + setDefaultValue(q.tendonvibatgiu) + '</td><td>'
                 + setDefaultValue(q.phuongthucvanchuyen) + '</td><td>' + setDefaultValue(q.tuyenduongvanchuyen) + '</td><td>' + formatDate(q.thoigianvipham) + '</td></tr>';
@@ -136,7 +158,7 @@ function setResult2Table(result, type) {
 		        + '<th style="width:470px;">Mô Tả Chi Tiết</th><th style="width:150px;">Số Lượng Chi Tiết</th><th style="width:120px;">Tên Đơn Vị Bắt Giữ</th>'
                 + '<th style="width:70px;">Phương Thức Vận Chuyển</th><th style="width:70px;">Tuyến Đường Vận Chuyển</th><th style="width:75px;">Ngày Vi Phạm</th></tr>';
         $.each(result, function (idx, q) {
-            htmlContent += '<tr><td>' + (idx + 1) + '</td><td>' + setDefaultValue(q.hanhvivipham) + '</td><td>' + setDefaultValue(q.hinhthucvipham) + '</td><td>'
+            htmlContent += '<tr><td>' + (idx + 1) + '</td><td><a href="/hoso/Details/' + q.id + '" target=_blank>' + setDefaultValue(q.hanhvivipham) + '</a></td><td>' + setDefaultValue(q.hinhthucvipham) + '</td><td>'
                 + setDefaultValue(q.loaidongvat) + '</td><td>' + setDefaultValue(q.diaban) + '</td><td>' + setDefaultValue(q.motavipham) + '</td><td>'
                 + setDefaultValue(q.soluongchitiet) + '</td><td>' + setDefaultValue(q.tendonvibatgiu) + '</td><td>'
                 + setDefaultValue(q.phuongthucvanchuyen) + '</td><td>' + setDefaultValue(q.tuyenduongvanchuyen) + '</td><td>' + formatDate(q.thoigianvipham) + '</td></tr>';
@@ -615,8 +637,6 @@ function selectTATS() {
     }
 }
 function checkPrice(obj) {
-    if (isNaN(obj.value))
-        return 0;
-    else
-        return parseInt(obj.value);
-}
+    if (obj.value == "") return 0;
+    obj.value = parseInt(removeSpecialCharater(obj.value));
+}

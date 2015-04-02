@@ -28,9 +28,11 @@ namespace dvhd.Models
         public string coquancap { get; set; }
         public string noicongtac { get; set; }
         public string diachicoquan { get; set; }
+        public string nghenghiep { get; set; }
         public string anhdoituong { get; set; }
         public string dacdiemnhandang { get; set; }
         public string tienantiensu { get; set; }
+        public string mahosotienan { get; set; }
         public Nullable<System.DateTime> thoigianvipham { get; set; }
         public string quanvipham { get; set; }
         public string tinhvipham { get; set; }
@@ -50,6 +52,10 @@ namespace dvhd.Models
         public string tendonvibatgiu { get; set; }
         public Nullable<System.DateTime> thoigianxuly { get; set; }
         public string ketquaxuly { get; set; }
+        public Nullable<long> sotienphat { get; set; }
+        public string xulytangvat { get; set; }
+        public Nullable<int> sothangtu { get; set; }
+        public string nguyennhankhongxuly { get; set; }
         public string donvixuly { get; set; }
         public string tendonvixuly { get; set; }
         public string hotencanboxuly { get; set; }

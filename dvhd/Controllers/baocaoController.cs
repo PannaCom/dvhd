@@ -90,7 +90,7 @@ namespace dvhd.Controllers
             return View();
         }
 
-        public ActionResult xuly(string type, string fromdate, string todate)
+        public ActionResult xuly(string type, string fromdate, string todate,long? sotienphat,string xulytangvat,int? sothangtu,string nguyennhankhongxuly)
         {
             DateTime fdate = DateTime.Now.AddDays(-365);
             DateTime tdate = DateTime.Now;
@@ -102,9 +102,17 @@ namespace dvhd.Controllers
             {
                 tdate = Config.convertToDateTimeFromString(todate);
             }
+            if (sotienphat == null) sotienphat = 0;
+            if (xulytangvat == null) xulytangvat = "";
+            if (sothangtu == null) sothangtu = 0;
+            if (nguyennhankhongxuly == null) nguyennhankhongxuly ="";
             ViewBag.type = type;
             ViewBag.fdate = fdate;
             ViewBag.tdate = tdate;
+            ViewBag.sotienphat = sotienphat;
+            ViewBag.xulytangvat = xulytangvat;
+            ViewBag.sothangtu = sothangtu;
+            ViewBag.nguyennhankhongxuly = nguyennhankhongxuly;
             if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
             if (type.Equals(Config.ketquaxuly[1]) && !Config.checkPermission(Config.getCookie("logged"), "BC6")) return RedirectToAction("Permission", "Home");
             if (type.Equals(Config.ketquaxuly[2]) && !Config.checkPermission(Config.getCookie("logged"), "BC7")) return RedirectToAction("Permission", "Home");
@@ -112,7 +120,7 @@ namespace dvhd.Controllers
             if (type != null && type != string.Empty)
             {
                 var p = (from q in db.HoSoes
-                         where q.ketquaxuly.Contains(type) && q.thoigianxuly >= fdate && q.thoigianxuly <= tdate select q).OrderBy(o => o.ketquaxuly).ThenBy(o => o.thoigianxuly).ToList();                
+                         where q.ketquaxuly.Contains(type) && q.thoigianxuly >= fdate && q.thoigianxuly <= tdate && q.sotienphat>=sotienphat && q.sothangtu>=sothangtu && q.xulytangvat.Contains(xulytangvat) && q.nguyennhankhongxuly.Contains(nguyennhankhongxuly) select q).OrderBy(o => o.ketquaxuly).ThenBy(o => o.thoigianxuly).ToList();                
                 return View(p);
             }
             return View();
