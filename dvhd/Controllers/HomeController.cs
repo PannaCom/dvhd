@@ -256,7 +256,77 @@ namespace dvhd.Controllers
         {
             var p = (from q in db.HoSoes where q.hanhvivipham.Contains(keyword) orderby q.hanhvivipham select q.hanhvivipham).Distinct().Take(10);
             return JsonConvert.SerializeObject(p.ToList());
-        }        
+        }
+
+        public string getDVBG(string keyword)
+        {
+            var p = (from q in db.HoSoes where q.donvibatgiu.Contains(keyword) select q.donvibatgiu).Distinct().Take(10);
+            return JsonConvert.SerializeObject(p.ToList());
+        }
+
+        public string getDVXL(string keyword)
+        {
+            var p = (from q in db.HoSoes where q.donvixuly.Contains(keyword) select q.donvixuly).Distinct().Take(10);
+            return JsonConvert.SerializeObject(p.ToList());
+        }
+
+        
+        public string getDVBGDetails(string keyword, string fromdate, string todate)
+        {
+            DateTime fdate = DateTime.Now.AddDays(-1000);
+            DateTime tdate = DateTime.Now.AddDays(1000);
+            if (fromdate != "")
+            {
+                fdate = Config.convertToDateTimeFromString(fromdate);
+            }
+            if (todate != "")
+            {
+                tdate = Config.convertToDateTimeFromString(todate);
+            }
+            var p = (from q in db.HoSoes
+                     where q.donvibatgiu.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
+                     select new
+                     {
+                         q.id,
+                         q.tendonvibatgiu,
+                         q.diachilienhe,
+                         q.hotencanboxuly,
+                         q.capbac,
+                         q.hoten,
+                         q.loaidongvat,
+                         q.soluongchitiet,
+                         q.thoigianvipham
+                     }).OrderBy(o => o.tendonvibatgiu).ThenBy(o => o.thoigianvipham);
+            return JsonConvert.SerializeObject(p.ToList());
+        }
+
+        public string getDVXLDetails(string keyword, string fromdate, string todate)
+        {
+            DateTime fdate = DateTime.Now.AddDays(-1000);
+            DateTime tdate = DateTime.Now.AddDays(1000);
+            if (fromdate != "")
+            {
+                fdate = Config.convertToDateTimeFromString(fromdate);
+            }
+            if (todate != "")
+            {
+                tdate = Config.convertToDateTimeFromString(todate);
+            }
+            var p = (from q in db.HoSoes
+                     where q.donvixuly.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
+                     select new
+                     {
+                         q.id,
+                         q.tendonvixuly,
+                         q.hoten,
+                         q.hanhvivipham,
+                         diadiem = q.quanvipham + "/" + q.tinhvipham,
+                         q.loaidongvat,
+                         q.soluongchitiet,
+                         q.thoigianvipham
+                     }).OrderBy(o => o.tendonvixuly).ThenBy(o => o.thoigianvipham);
+            return JsonConvert.SerializeObject(p.ToList());
+        }
 
         public static string getLoaiContentPDF(string keyword)
         {
@@ -351,6 +421,7 @@ namespace dvhd.Controllers
             var p = (from q in db.DsDvhds where q.ten.Contains(keyword) select q.ten).Take(10);
             return JsonConvert.SerializeObject(p.ToList());
         }
+        
         public ActionResult Search(int? page, string keyword)
         {
             ViewBag.keyword = keyword;

@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Báo cáo theo Đơn Vị Xử Lý";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/css/printStyle.css" />
+
+<!-- Reservation form -->
+<section id="reservation-form" style="margin-top:10px;" class="noPrint">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">  
+        <h3>Báo Cáo Theo Đơn Vị Xử Lý</h3>    
+        <p>* Khoảng thời gian từ ngày đến ngày tính là thời gian vi phạm</p>        
+        <form class="form-inline reservation-horizontal clearfix" role="form"   name="reservationform" id="reservationform">
+          <div class="row">
+              <div class="col-sm-2" >
+                  <div class="form-group">
+                    <label>Đơn Vị Xử Lý</label>
+				    <input name="baocao_DVXL" type="text" tabindex="1" id="baocao_DVXL" value="" class="form-control" placeholder="Công An, Tòa Án ..." onkeyup="baocao_search(this, 8,getDateIdNew(document.getElementById('fromdate').value),getDateIdNew(document.getElementById('todate').value));"/>              
+                  </div>
+              </div>
+              <div class="col-sm-2" >
+                  <div class="form-group">
+                    <label>Từ ngày</label>
+				    <input name="fromdate" type="date" id="fromdate" value="" class="form-control" placeholder="Từ ngày" />              
+                  </div>
+              </div>
+              <div class="col-sm-2" >
+                  <div class="form-group">
+                    <label>Đến ngày</label>
+				    <input name="todate" type="date" id="todate" value="" class="form-control" placeholder="Đến ngày" />               
+                  </div>
+              </div>
+              <div class="col-sm-2" >
+                  <div class="form-group">
+                    <label>Tìm</label>
+				    <input type="button" style="height:32px;" value="Tìm kiếm" onclick="baocao_getData('baocao_DVXL', 8, getDateIdNew(document.getElementById('fromdate').value), getDateIdNew(document.getElementById('todate').value));" />            
+                  </div>
+              </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>  
+
+
+<div class="col-md-12 noPrint" style="text-align:center;margin-top:15px;">
+    <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" disabled="disabled" />
+    <input id="btnCreateReport" type="button" value="Xuất ra Excel file" onclick="ExportExcel(document.getElementById('baocao_DVXL').value, 8, getDateIdNew(document.getElementById('fromdate').value), getDateIdNew(document.getElementById('todate').value));" disabled="disabled"/>    
+</div>
+
+<div id="divResult" class="col-md-12">
+    <label id="countResult"></label>
+    <table id="tbResult" class="tbBanIn"></table>
+</div>

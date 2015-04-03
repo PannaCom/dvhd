@@ -43,7 +43,25 @@ namespace dvhd.Controllers
             if (!Config.checkPermission(Config.getCookie("logged"), "BC3")) return RedirectToAction("Permission", "Home");
             return View();
         }
-        
+
+        //
+        // GET: /BaoCaoTheoDonViBatGiu/
+        public ActionResult BaoCaoTheoDonViBatGiu()
+        {
+            //if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
+            //if (!Config.checkPermission(Config.getCookie("logged"), "BC3")) return RedirectToAction("Permission", "Home");
+            return View();
+        }
+
+        //
+        // GET: /BaoCaoTheoDonViXuLy/
+        public ActionResult BaoCaoTheoDonViXuLy()
+        {
+            //if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
+            //if (!Config.checkPermission(Config.getCookie("logged"), "BC3")) return RedirectToAction("Permission", "Home");
+            return View();
+        }
+
         // GET: /BaoCaoTongHop/
         public ActionResult BaoCaoTongHop()
         {
@@ -177,7 +195,15 @@ namespace dvhd.Controllers
                 case 6: 
                     filename = "Báo Cáo Theo Kết Quả Xử Lý " + keyword + " " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
                     htmlContent = getXuLyData(keyword, fromdate, todate);                    
-                    break;                
+                    break;
+                case 7:
+                    filename = "Báo Cáo Theo Đơn Vị Bắt Giữ " + keyword + " " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    htmlContent = getDVBGData(keyword, fromdate, todate);
+                    break;
+                case 8:
+                    filename = "Báo Cáo Theo Đơn Vị Xử Lý " + keyword + " " + DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    htmlContent = getDVXLData(keyword, fromdate, todate);
+                    break;
             }
 
             System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment; filename=" + filename + ".xls");
@@ -508,6 +534,93 @@ namespace dvhd.Controllers
                 htmlContent += p[i].tendonvibatgiu + "</td><td style=\"width:auto;\">" + p[i].phuongthucvanchuyen + "</td><td style=\"width:auto;\">";
                 htmlContent += p[i].tuyenduongvanchuyen + "</td><td style=\"width:auto;\">"
                     + (p[i].thoigianvipham.HasValue == true ? p[i].thoigianvipham.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture) : string.Empty) + "</td></tr>";
+            }
+            htmlContent += "</table>";
+            return htmlContent;
+        }
+
+        public string getDVBGData(string keyword, string fromdate, string todate)
+        {
+            DateTime fdate = DateTime.Now.AddDays(-1000);
+            DateTime tdate = DateTime.Now.AddDays(1000);
+            if (fromdate != "")
+            {
+                fdate = Config.convertToDateTimeFromString(fromdate);
+            }
+            if (todate != "")
+            {
+                tdate = Config.convertToDateTimeFromString(todate);
+            }
+            // lấy dữ liệu từ db
+            var p = (from q in db.HoSoes
+                     where q.donvibatgiu.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
+                     select new
+                     {
+                         q.id,
+                         q.tendonvibatgiu,
+                         q.diachilienhe,
+                         q.hotencanboxuly,
+                         q.capbac,
+                         q.hoten,
+                         q.loaidongvat,
+                         q.soluongchitiet,
+                         q.thoigianvipham
+                     }).OrderBy(o => o.tendonvibatgiu).ThenBy(o => o.thoigianvipham).ToList();
+            // ghi dữ liệu
+            var htmlContent = "<table><tr><th style=\"width:auto;\">Stt</th><th style=\"width:auto;\">Tên Đơn Vị Bắt Giữ</th>";
+            htmlContent += "<th style=\"width:auto;\">Địa Chỉ Liên Hệ</th><th style=\"width:auto;\">Cán Bộ Xử Lý</th>";
+            htmlContent += "<th style=\"width:auto;\">Cấp Bậc</th><th style=\"width:auto;\">Đối Tượng Vi Phạm</th>";
+            htmlContent += "<th style=\"width:auto;\">Loại Động Vật</th><th style=\"width:auto;\">Số Lượng Chi Tiết</th>";
+            htmlContent += "<th style=\"width:auto;\">Ngày Vi Phạm</th></tr>";
+            for (int i = 0; i < p.Count; i++)
+            {
+                htmlContent += "<tr><td >" + (i + 1) + "</td><td style=\"width:auto;\">" + p[i].tendonvibatgiu + "</td><td style=\"width:auto;\">" + p[i].diachilienhe + "</td><td style=\"width:auto;\">";
+                htmlContent += p[i].hotencanboxuly + "</td><td style=\"width:auto;\">" + p[i].capbac + "</td><td style=\"width:auto;\">" + p[i].hoten + "</td><td style=\"width:auto;\">";
+                htmlContent += p[i].loaidongvat + "</td><td style=\"width:auto;\">" + p[i].soluongchitiet + "</td><td style=\"width:auto;\">";
+                htmlContent += (p[i].thoigianvipham.HasValue == true ? p[i].thoigianvipham.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture) : string.Empty) + "</td></tr>";
+            }
+            htmlContent += "</table>";
+            return htmlContent;
+        }
+
+        public string getDVXLData(string keyword, string fromdate, string todate)
+        {
+            DateTime fdate = DateTime.Now.AddDays(-1000);
+            DateTime tdate = DateTime.Now.AddDays(1000);
+            if (fromdate != "")
+            {
+                fdate = Config.convertToDateTimeFromString(fromdate);
+            }
+            if (todate != "")
+            {
+                tdate = Config.convertToDateTimeFromString(todate);
+            }
+            // lấy dữ liệu từ db
+            var p = (from q in db.HoSoes
+                     where q.donvixuly.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
+                     select new
+                     {
+                         q.id,
+                         q.tendonvixuly,
+                         q.hoten,
+                         q.hanhvivipham,
+                         diadiem = q.quanvipham + "/" + q.tinhvipham,
+                         q.loaidongvat,
+                         q.soluongchitiet,
+                         q.thoigianvipham
+                     }).OrderBy(o => o.tendonvixuly).ThenBy(o => o.thoigianvipham).ToList();
+            // ghi dữ liệu
+            var htmlContent = "<table><tr><th style=\"width:auto;\">Stt</th><th style=\"width:auto;\">Tên Đơn Vị Xử Lý</th>";
+            htmlContent += "<th style=\"width:auto;\">Bị Can</th><th style=\"width:auto;\">Hành Vi Vi Phạm</th>";
+            htmlContent += "<th style=\"width:auto;\">Địa Điểm Vi Phạm</th>";
+            htmlContent += "<th style=\"width:auto;\">Loại Động Vật</th><th style=\"width:auto;\">Số Lượng Chi Tiết</th>";
+            htmlContent += "<th style=\"width:auto;\">Ngày Vi Phạm</th></tr>";
+            for (int i = 0; i < p.Count; i++)
+            {
+                htmlContent += "<tr><td >" + (i + 1) + "</td><td style=\"width:auto;\">" + p[i].tendonvixuly + "</td><td style=\"width:auto;\">" + p[i].hoten + "</td><td style=\"width:auto;\">";
+                htmlContent += p[i].hanhvivipham + "</td><td style=\"width:auto;\">" + p[i].diadiem + "</td><td style=\"width:auto;\">";
+                htmlContent += p[i].loaidongvat + "</td><td style=\"width:auto;\">" + p[i].soluongchitiet + "</td><td style=\"width:auto;\">";
+                htmlContent += (p[i].thoigianvipham.HasValue == true ? p[i].thoigianvipham.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture) : string.Empty) + "</td></tr>";
             }
             htmlContent += "</table>";
             return htmlContent;

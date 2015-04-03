@@ -13,7 +13,7 @@
     else {
         return false;
     }
-
+    
 }
 if (navigator.userAgent.toLowerCase().indexOf("chrome") < 0 && !detectmob()) {
     alert("Phần mềm sử dụng trình duyệt Chrome để hiển thị các tính năng tốt nhất, xin download!");
@@ -31,6 +31,7 @@ function formatDate(strDate) {
     return (tmpDate.length == 2 ? tmpDate : "0" + tmpDate) + "/" + (tmpMonth.length == 2 ? tmpMonth : "0" + tmpMonth)
         + "/" + fullDate.getFullYear().toString();
 }
+
 function getDateIdNew(d) {
     d = d.replace(/\-/g, "");
     return d;
@@ -62,6 +63,10 @@ function baocao_search(input, type, fromdate, todate) {
         urlSearch = '/Home/getCMT?keyword=';
     } else if (type == 5) { // Theo Hanh Vi Vi Pham
         urlSearch = '/Home/getHanhViVP?keyword=';
+    } else if (type == 7) { // Theo Don Vi Bat Giu
+        urlSearch = '/Home/getDVBG?keyword=';
+    } else if (type == 8) { // Theo Don Vi Xu Ly
+        urlSearch = '/Home/getDVXL?keyword=';
     }
 
     $('#' + inputId).autocomplete({
@@ -92,6 +97,10 @@ function baocao_getData(inputId, type, fromdate, todate) {
         urlGetDetails = '/Home/getHTVPDetails?keyword=';
     } else if (type == 5) { // Hanh Vi Vi Pham
         urlGetDetails = '/Home/getHanhViVPDetails?keyword=';
+    } else if (type == 7) { // Theo Don Vi Bat Giu
+        urlGetDetails = '/Home/getDVBGDetails?keyword=';
+    } else if (type == 8) { // Theo Don Vi Xu Ly
+        urlGetDetails = '/Home/getDVXLDetails?keyword=';
     }
     $.ajax({
         url: urlGetDetails + keyword + urlTime,
@@ -163,6 +172,30 @@ function setResult2Table(result, type) {
                 + setDefaultValue(q.soluongchitiet) + '</td><td>' + setDefaultValue(q.tendonvibatgiu) + '</td><td>'
                 + setDefaultValue(q.phuongthucvanchuyen) + '</td><td>' + setDefaultValue(q.tuyenduongvanchuyen) + '</td><td>' + formatDate(q.thoigianvipham) + '</td></tr>';
         });
+    } else if (type == 7) { // Theo Don Vi Bat Giu
+        htmlContent = '<tr><th style="width:22px;">Stt</th><th style="width:140px;">Tên Đơn Vị Bắt Giữ</th>'
+        + '<th style="width:180px;">Địa Chỉ Liên Hệ</th><th style="width:70px;">Cán Bộ Xử Lý</th>'
+        + '<th style="width:80px;">Cấp Bậc</th><th style="width:90px;">Đối Tượng Vi Phạm</th>'
+		+ '<th style="width:100px;">Loại Động Vật</th><th style="width:140px;">Số Lượng Chi Tiết</th>'
+		+ '<th style="width:75px;">Ngày Vi Phạm</th></tr>';
+        $.each(result, function (idx, q) {
+            htmlContent += '<tr><td>' + (idx + 1) + '</td><td><a href=\'/hoso/Details/' + q.id + '\' target=_blank>' + setDefaultValue(q.tendonvibatgiu) + '</a></td><td>' + setDefaultValue(q.diachilienhe) + '</td><td>'
+                + setDefaultValue(q.hotencanboxuly) + '</td><td>' + setDefaultValue(q.capbac) + '</td><td>' + setDefaultValue(q.hoten) + '</td><td>'
+                + setDefaultValue(q.loaidongvat) + '</td><td>' + setDefaultValue(q.soluongchitiet) + '</td><td>'
+                + formatDate(q.thoigianvipham) + '</td></tr>';
+        });
+    } else if (type == 8) { // Theo Don Vi Xu Ly
+        htmlContent = '<tr><th style="width:22px;">Stt</th><th style="width:140px;">Tên Đơn Vị Xử Lý</th>'
+        + '<th style="width:80px;">Bị Can</th><th style="width:160px;">Hành Vi Vi Phạm</th>'
+        + '<th style="width:100px;">Địa Điểm Vi Phạm</th>'
+		+ '<th style="width:100px;">Loại Động Vật</th><th style="width:180px;">Số Lượng Chi Tiết</th>'
+		+ '<th style="width:75px;">Ngày Vi Phạm</th></tr>';
+        $.each(result, function (idx, q) {
+            htmlContent += '<tr><td>' + (idx + 1) + '</td><td><a href=\'/hoso/Details/' + q.id + '\' target=_blank>' + setDefaultValue(q.tendonvixuly) + '</a></td><td>' + setDefaultValue(q.hoten) + '</td><td>'
+                + setDefaultValue(q.hanhvivipham) + '</td><td>' + setDefaultValue(q.diadiem) + '</td><td>'
+                + setDefaultValue(q.loaidongvat) + '</td><td>' + setDefaultValue(q.soluongchitiet) + '</td><td>'
+                + formatDate(q.thoigianvipham) + '</td></tr>';
+        });       
     }
     $("#tbResult").html(htmlContent);
     $("#btnCreateReport").removeAttr("disabled");
