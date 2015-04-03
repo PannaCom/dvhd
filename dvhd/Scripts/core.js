@@ -639,4 +639,4 @@ function selectTATS() {
 function checkPrice(obj) {
     if (obj.value == "") return 0;
     obj.value = parseInt(removeSpecialCharater(obj.value));
-}
+}

@@ -9,11 +9,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Kết quả tìm kiếm với từ khóa: @ViewBag.keyword</h2>
+<h2 style="margin-left:15px;">Kết quả tìm kiếm với từ khóa: @ViewBag.keyword</h2>
 
 @foreach (var item in Model)
 {
-    <div style="width:100%;display:block;float:left;position:relative;margin-top: 0;margin-bottom: 23px;">
+    <div style="width:100%;display:block;float:left;position:relative;margin-top: 0;margin-bottom: 23px;margin-left:15px;">
         <a href="/hoso/details/@item.id" target="_blank"><h3 class="asearch">@item.hoten</h3></a>
         <p>
         @if (item.hoten.ToLowerInvariant().Contains(@ViewBag.keyword.ToLowerInvariant()))
@@ -88,5 +88,24 @@
             <text>Họ Tên Cán Bộ Xử Lý: <b>@item.hotencanboxuly</b>, </text>
         }                    
         </p>
+    </div>
+}
+@if (Model.PageCount > 1)
+{
+    <div class="col-md-12" style="margin-left:15px;">
+    <ul class="pagination clearfix">
+            <li class="disabled"><a href="#">«</a></li>
+            @for (int i = 1; i <= Model.PageCount; i++)
+            {
+                if (i != ViewBag.page)
+                {
+                   <text><li><a href="/Home/Search?page=@i&keyword=@ViewBag.keyword">@i</a></li></text>
+                }
+                else
+                {
+                   <text><li><a href="/Home/Search?page=@i&keyword=@ViewBag.keyword" style="background-color:#ddd ;">@i</a></li></text>
+                }
+            }
+    </ul>
     </div>
 }

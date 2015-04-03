@@ -19,7 +19,7 @@ namespace dvhd.Controllers
 
         public ActionResult Index(int? page, string keyword, string fromdate, string todate)
         {
-            DateTime fdate = DateTime.Now.AddDays(-730);
+            DateTime fdate = DateTime.Now.AddDays(-3*365);
             DateTime tdate = DateTime.Now;
             if (fromdate != "" && fromdate != null)
             {

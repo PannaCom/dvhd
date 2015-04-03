@@ -148,7 +148,7 @@
 
 <!-- Go-top Button -->
 <div id="go-top"><i class="fa fa-angle-up fa-2x"></i></div>
-        <div id="dvautosearch" style="z-index:1001;position:fixed;left:40%;top:40%;width:31%;height:auto;display:none;background-color:#b6ff00;border:1px solid #b6ff00;"><div id="labelautosearch" style="display:block;float:left;position:relative;margin-top:4px;"><span >Gõ từ khóa cần tìm:</span></div><input name="keywordsearch" type="text" id="keywordsearch" value="" class="form-control" style="display:block;float:left;position:relative;width:200px;" /><input type="button" value="tìm kiếm" onclick="submitsearch();" style="height:32px;"></div>      
+        <div id="dvautosearch" style="z-index:1001;position:fixed;left:40%;top:40%;width:31%;height:auto;display:none;background-color:#b6ff00;border:1px solid #b6ff00;"><div id="labelautosearch" style="display:block;float:left;position:relative;margin-top:4px;"><span >Gõ từ khóa cần tìm:</span></div><input name="keywordsearch" type="text" id="keywordsearch" value="" class="form-control" style="display:block;float:left;position:relative;width:230px;" /><input type="button" value="tìm kiếm" onclick="submitsearch();" style="height:32px;"></div>      
         <script>
             document.addEventListener("keydown", autosearch);
             function autosearch(event) {
@@ -163,8 +163,13 @@
                 }
             }
             function submitsearch() {
+                if (document.getElementById("keywordsearch").value == "") {
+                    alert("Nhập ít nhất một ký tự để tìm kiếm");
+                    return;
+                }
                 window.location.href = "/Home/Search?keyword=" + document.getElementById("keywordsearch").value;
             }
-        </script>
+        </script>
+
     </body>
 </html>
