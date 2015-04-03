@@ -36,7 +36,7 @@
           <Property Name="coquancap" Type="nvarchar" MaxLength="250" />
           <Property Name="noicongtac" Type="nvarchar" MaxLength="250" />
           <Property Name="diachicoquan" Type="nvarchar" MaxLength="250" />
-          <Property Name="nghenghiep" Type="nvarchar" MaxLength="50" />
+          <Property Name="nghenghiep" Type="nvarchar" MaxLength="250" />
           <Property Name="anhdoituong" Type="nvarchar" MaxLength="250" />
           <Property Name="dacdiemnhandang" Type="nvarchar" MaxLength="550" />
           <Property Name="tienantiensu" Type="nvarchar" MaxLength="850" />
@@ -48,7 +48,7 @@
           <Property Name="hinhthucvipham" Type="nvarchar" MaxLength="50" />
           <Property Name="hanhvivipham" Type="nvarchar" MaxLength="550" />
           <Property Name="phuongthucvanchuyen" Type="nvarchar" MaxLength="50" />
-          <Property Name="tuyenduongvanchuyen" Type="nvarchar" MaxLength="250" />
+          <Property Name="tuyenduongvanchuyen" Type="nvarchar" MaxLength="350" />
           <Property Name="loaidongvat" Type="nvarchar" MaxLength="450" />
           <Property Name="tinhtrangsong" Type="nvarchar" MaxLength="50" />
           <Property Name="donvitinh" Type="nvarchar" MaxLength="50" />
@@ -57,21 +57,21 @@
           <Property Name="tinhtrangbaoton" Type="nvarchar" MaxLength="150" />
           <Property Name="anhdongvat" Type="nvarchar" MaxLength="150" />
           <Property Name="donvibatgiu" Type="nvarchar" MaxLength="50" />
-          <Property Name="tendonvibatgiu" Type="nvarchar" MaxLength="550" />
+          <Property Name="tendonvibatgiu" Type="nvarchar" MaxLength="650" />
           <Property Name="thoigianxuly" Type="datetime" />
-          <Property Name="ketquaxuly" Type="nvarchar" MaxLength="150" />
+          <Property Name="ketquaxuly" Type="nvarchar" MaxLength="550" />
           <Property Name="sotienphat" Type="bigint" />
-          <Property Name="xulytangvat" Type="nvarchar" MaxLength="50" />
+          <Property Name="xulytangvat" Type="nvarchar" MaxLength="860" />
           <Property Name="sothangtu" Type="int" />
           <Property Name="nguyennhankhongxuly" Type="ntext" />
           <Property Name="donvixuly" Type="nvarchar" MaxLength="150" />
           <Property Name="tendonvixuly" Type="nvarchar" MaxLength="550" />
           <Property Name="hotencanboxuly" Type="nvarchar" MaxLength="250" />
-          <Property Name="capbac" Type="nvarchar" MaxLength="50" />
+          <Property Name="capbac" Type="nvarchar" MaxLength="150" />
           <Property Name="diachilienhe" Type="ntext" />
           <Property Name="ngayxuly" Type="datetime" />
           <Property Name="bican" Type="nvarchar" MaxLength="150" />
-          <Property Name="ketquaxulychitiet" Type="nvarchar" MaxLength="150" />
+          <Property Name="ketquaxulychitiet" Type="ntext" />
           <Property Name="motachitietxuly" Type="ntext" />
           <Property Name="hosocode" Type="nvarchar" MaxLength="150" />
         </EntityType>
@@ -146,7 +146,7 @@
           <Property Type="String" Name="coquancap" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="noicongtac" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="diachicoquan" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="nghenghiep" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="nghenghiep" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="anhdoituong" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="dacdiemnhandang" MaxLength="550" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="tienantiensu" MaxLength="850" FixedLength="false" Unicode="true" />
@@ -158,7 +158,7 @@
           <Property Type="String" Name="hinhthucvipham" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="hanhvivipham" MaxLength="550" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="phuongthucvanchuyen" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="tuyenduongvanchuyen" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="tuyenduongvanchuyen" MaxLength="350" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="loaidongvat" MaxLength="450" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="tinhtrangsong" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="donvitinh" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -167,21 +167,21 @@
           <Property Type="String" Name="tinhtrangbaoton" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="anhdongvat" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="donvibatgiu" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="tendonvibatgiu" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="tendonvibatgiu" MaxLength="650" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="thoigianxuly" Precision="3" />
-          <Property Type="String" Name="ketquaxuly" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ketquaxuly" MaxLength="550" FixedLength="false" Unicode="true" />
           <Property Type="Int64" Name="sotienphat" />
-          <Property Type="String" Name="xulytangvat" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="xulytangvat" MaxLength="860" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="sothangtu" />
           <Property Type="String" Name="nguyennhankhongxuly" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="donvixuly" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="tendonvixuly" MaxLength="550" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="hotencanboxuly" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="capbac" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="capbac" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="diachilienhe" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="ngayxuly" Precision="3" />
           <Property Type="String" Name="bican" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="ketquaxulychitiet" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ketquaxulychitiet" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="motachitietxuly" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="hosocode" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
