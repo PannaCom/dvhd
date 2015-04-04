@@ -103,6 +103,9 @@
             <td><label>Tuyến Đường Vận Chuyển :</label></td> <td colspan="2"> @Html.DisplayFor(model => model.tuyenduongvanchuyen)</td>            
         </tr>   
         <tr>
+            <td><label>Phương Thức Thủ Đoạn :</label></td> <td colspan="4">@Html.DisplayFor(model => model.phuongthucthudoan) </td>            
+        </tr>
+        <tr>
             <td><label>Thông Tin Khác :</label></td> <td colspan="4"> @Html.DisplayFor(model => model.motavipham) </td>
         </tr>   
         <tr>
@@ -167,6 +170,10 @@
             <td style="width:25%"><label>Kết Quả Xử Lý :</label></td> <td> @Html.DisplayFor(model => model.ketquaxuly) </td>            
         </tr>
         <tr>
+            <td style="width:15%"><label>Hình Phạt Chính :</label></td> <td style="width:15%"> @Html.DisplayFor(model => model.hinhphatchinh)</td>
+            <td style="width:25%"><label>Hình Phạt Bổ Sung :</label></td> <td> @Html.DisplayFor(model => model.hinhphatbosung) </td>            
+        </tr>
+        <tr>
             <td style="width:15%"><label>Số Tiền Phạt :</label></td> <td style="width:15%"> @dvhd.Config.formatNumber(@Model.sotienphat) VNĐ</td>
             <td style="width:25%"><label>Xử Lý Tang Vật :</label></td> <td> @Html.DisplayFor(model => model.xulytangvat) </td>            
         </tr>
@@ -180,7 +187,7 @@
         </tr>
         <tr>
             <td><label>Cán Bộ Xử Lý :</label></td> <td> @Html.DisplayFor(model => model.hotencanboxuly) </td>
-            <td><label>Cấp Bậc :</label></td> <td> @Html.DisplayFor(model => model.capbac) </td>            
+            <td><label>Chức Vụ :</label></td> <td> @Html.DisplayFor(model => model.capbac) </td>            
         </tr>
         <tr>
             <td><label>Địa Chỉ Liên Hệ :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.diachilienhe) </td>

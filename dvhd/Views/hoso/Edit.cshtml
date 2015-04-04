@@ -82,13 +82,13 @@
                  </div>
                 <div class="col-md-12">
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Hộ khẩu thường trú </label>
+                        <label for="room" style="width:auto;display:block;">Hộ khẩu thường trú *</label>
                         <input name="hokhauthuongtru" type="text" tabindex="4" id="hokhauthuongtru" value="@Model.hokhauthuongtru" class="form-control" placeholder="Nhập hộ khẩu thường trú"/>                
                       </div>
                  </div>
                 <div class="col-md-12">
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Chỗ ở hiện tại *</label>
+                        <label for="room" style="width:auto;display:block;">Chỗ ở hiện tại </label>
                         <input name="choohientai" type="text" tabindex="5" id="choohientai" value="@Model.choohientai" class="form-control" placeholder="Nhập chỗ ở hiện tại"/>                
                       </div>
                  </div>
@@ -397,7 +397,7 @@
                  </div>
                 <div class="col-md-12">
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Địa chỉ liên hệ(địa chỉ cơ quan, số điện thoại, email của cán bộ)</label>
+                        <label for="room" style="width:auto;display:block;">Địa chỉ liên hệ(địa chỉ cơ quan, số điện thoại...cán bộ nếu có)</label>
                         <textarea name="diachilienhe" tabindex="37" id="diachilienhe" value="" rows="4" cols="20" class="form-control">@Model.diachilienhe</textarea>                
                       </div>
                  </div>
@@ -497,11 +497,7 @@
             document.getElementById("hokhauthuongtru").focus();
             return;
         }
-        if (document.getElementById("choohientai").value == "") {
-            alert("Nhập chỗ ở hiện tại");
-            document.getElementById("choohientai").focus();
-            return;
-        }
+       
         if ($("#thoigianvipham1").val() != "" && $("#thoigianvipham2").val() != "") {
             $("#thoigianvipham").val($("#thoigianvipham1").val() + " " + $("#thoigianvipham2").val());
         }
