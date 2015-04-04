@@ -48,8 +48,8 @@ namespace dvhd.Controllers
         // GET: /BaoCaoTheoDonViBatGiu/
         public ActionResult BaoCaoTheoDonViBatGiu()
         {
-            //if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
-            //if (!Config.checkPermission(Config.getCookie("logged"), "BC3")) return RedirectToAction("Permission", "Home");
+            if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
+            if (!Config.checkPermission(Config.getCookie("logged"), "BC4")) return RedirectToAction("Permission", "Home");
             return View();
         }
 
@@ -57,8 +57,8 @@ namespace dvhd.Controllers
         // GET: /BaoCaoTheoDonViXuLy/
         public ActionResult BaoCaoTheoDonViXuLy()
         {
-            //if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
-            //if (!Config.checkPermission(Config.getCookie("logged"), "BC3")) return RedirectToAction("Permission", "Home");
+            if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
+            if (!Config.checkPermission(Config.getCookie("logged"), "BC5")) return RedirectToAction("Permission", "Home");
             return View();
         }
 
@@ -66,7 +66,7 @@ namespace dvhd.Controllers
         public ActionResult BaoCaoTongHop()
         {
             if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
-            if (!Config.checkPermission(Config.getCookie("logged"), "BC9")) return RedirectToAction("Permission", "Home");
+            if (!Config.checkPermission(Config.getCookie("logged"), "BC11")) return RedirectToAction("Permission", "Home");
             return View();
         }
 
@@ -84,7 +84,7 @@ namespace dvhd.Controllers
                 tdate = Config.convertToDateTimeFromString(todate);
             } 
             if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
-            if (!Config.checkPermission(Config.getCookie("logged"), "BC4")) return RedirectToAction("Permission", "Home");
+            if (!Config.checkPermission(Config.getCookie("logged"), "BC6")) return RedirectToAction("Permission", "Home");
             if (type != null && type != string.Empty)
             {
                 var p = (from q in db.HoSoes
@@ -100,7 +100,7 @@ namespace dvhd.Controllers
         public ActionResult BaoCaoHanhVi()
         {
             if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
-            if (!Config.checkPermission(Config.getCookie("logged"), "BC5")) return RedirectToAction("Permission", "Home");
+            if (!Config.checkPermission(Config.getCookie("logged"), "BC7")) return RedirectToAction("Permission", "Home");
             return View();
         }
 
@@ -128,9 +128,9 @@ namespace dvhd.Controllers
             ViewBag.sothangtu = sothangtu;
             ViewBag.nguyennhankhongxuly = nguyennhankhongxuly;
             if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
-            if (type.Equals(Config.ketquaxuly[1]) && !Config.checkPermission(Config.getCookie("logged"), "BC6")) return RedirectToAction("Permission", "Home");
-            if (type.Equals(Config.ketquaxuly[2]) && !Config.checkPermission(Config.getCookie("logged"), "BC7")) return RedirectToAction("Permission", "Home");
-            if (type.Equals(Config.ketquaxuly[3]) && !Config.checkPermission(Config.getCookie("logged"), "BC8")) return RedirectToAction("Permission", "Home");
+            if (type.Equals(Config.ketquaxuly[1]) && !Config.checkPermission(Config.getCookie("logged"), "BC8")) return RedirectToAction("Permission", "Home");
+            if (type.Equals(Config.ketquaxuly[2]) && !Config.checkPermission(Config.getCookie("logged"), "BC9")) return RedirectToAction("Permission", "Home");
+            if (type.Equals(Config.ketquaxuly[3]) && !Config.checkPermission(Config.getCookie("logged"), "BC10")) return RedirectToAction("Permission", "Home");
             if (type != null && type != string.Empty)
             {
                 var p = (from q in db.HoSoes

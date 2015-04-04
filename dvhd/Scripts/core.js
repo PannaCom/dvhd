@@ -539,48 +539,48 @@ function baocaotonghop() {
 //Phần dành cho phân quyền user
 function checkPermission(obj, value) {
     if (obj.checked) {
-        if (document.getElementById("permission").value.indexOf(value) < 0) document.getElementById("permission").value += value;
+        if (document.getElementById("permission").value.indexOf(value + ",") < 0) document.getElementById("permission").value += value + ",";
     } else {
-        document.getElementById("permission").value = document.getElementById("permission").value.replace(value, "");
+        document.getElementById("permission").value = document.getElementById("permission").value.replace(value + ",", "");
     }
 }
 function checkHS() {
     if (!document.getElementById("HS").checked) {
         for (var i = 0; i <= 4; i++) {
             if (document.getElementById("HS" + i)) document.getElementById("HS" + i).checked = false;
-            document.getElementById("permission").value = document.getElementById("permission").value.replace("HS" + i, "");
+            document.getElementById("permission").value = document.getElementById("permission").value.replace("HS" + i + ",", "");
         }
         return;
     }
     for (var i = 0; i <= 4; i++) {
         if (document.getElementById("HS" + i)) document.getElementById("HS" + i).checked = true;
-        if (document.getElementById("permission").value.indexOf("HS" + i) < 0) document.getElementById("permission").value += "HS" + i;
+        if (document.getElementById("permission").value.indexOf("HS" + i + ",") < 0) document.getElementById("permission").value += "HS" + i + ",";
     }
 }
 function checkUS() {
     if (!document.getElementById("US").checked) {
         for (var i = 0; i <= 3; i++) {
             if (document.getElementById("US" + i)) document.getElementById("US" + i).checked = false;
-            document.getElementById("permission").value = document.getElementById("permission").value.replace("US" + i, "");
+            document.getElementById("permission").value = document.getElementById("permission").value.replace("US" + i + ",", "");
         }
         return;
     }
     for (var i = 0; i <= 3; i++) {
         if (document.getElementById("US" + i)) document.getElementById("US" + i).checked = true;
-        if (document.getElementById("permission").value.indexOf("US" + i) < 0) document.getElementById("permission").value += "US" + i;
+        if (document.getElementById("permission").value.indexOf("US" + i + ",") < 0) document.getElementById("permission").value += "US" + i + ",";
     }
 }
 function checkBC(from, to) {
     if (!document.getElementById("BC_" + from + "_" + to).checked) {
         for (var i = from; i <= to; i++) {
             if (document.getElementById("BC" + i)) document.getElementById("BC" + i).checked = false;
-            document.getElementById("permission").value = document.getElementById("permission").value.replace("BC" + i, "");
+            document.getElementById("permission").value = document.getElementById("permission").value.replace("BC" + i + ",", "");
         }
         return;
     }
     for (var i = from; i <= to; i++) {
         if (document.getElementById("BC" + i)) document.getElementById("BC" + i).checked = true;
-        if (document.getElementById("permission").value.indexOf("BC" + i) < 0) document.getElementById("permission").value += "BC" + i;
+        if (document.getElementById("permission").value.indexOf("BC" + i + ",") < 0) document.getElementById("permission").value += "BC" + i + ",";
     }
 }
 function checkAll() {
@@ -588,31 +588,31 @@ function checkAll() {
         clearAll();
         return;
     }
-    if (document.getElementById("permission").value.indexOf("ALL") < 0) document.getElementById("permission").value += "ALL";
+    document.getElementById("permission").value = "";
+    if (document.getElementById("permission").value.indexOf("ALL,") < 0) document.getElementById("permission").value += "ALL,";
     //var per = "";
     for (var i = 0; i <= 4; i++) {
         if (document.getElementById("HS" + i)) document.getElementById("HS" + i).checked = true;
-        if (document.getElementById("permission").value.indexOf("HS" + i) < 0) document.getElementById("permission").value += "HS" + i;
+        if (document.getElementById("permission").value.indexOf("HS" + i + ",") < 0) document.getElementById("permission").value += "HS" + i + ",";
     }
-    for (var i = 1; i <= 9; i++) {
+    for (var i = 1; i <= 11; i++) {
         if (document.getElementById("BC" + i)) document.getElementById("BC" + i).checked = true;
-        if (document.getElementById("permission").value.indexOf("BC" + i) < 0) document.getElementById("permission").value += "BC" + i;
+        if (document.getElementById("permission").value.indexOf("BC" + i + ",") < 0) document.getElementById("permission").value += "BC" + i + ",";
     }
     for (var i = 0; i <= 3; i++) {
         if (document.getElementById("US" + i)) document.getElementById("US" + i).checked = true;
-        if (document.getElementById("permission").value.indexOf("US" + i) < 0) document.getElementById("permission").value += "US" + i;
+        if (document.getElementById("permission").value.indexOf("US" + i + ",") < 0) document.getElementById("permission").value += "US" + i + ",";
     }
     document.getElementById("HS").checked = true;
     document.getElementById("US").checked = true;
-    document.getElementById("BC_1_3").checked = true;
-    document.getElementById("BC_4_5").checked = true;
-    document.getElementById("BC_6_9").checked = true;
+    document.getElementById("BC_1_5").checked = true;
+    document.getElementById("BC_6_11").checked = true;
 }
 function clearAll() {
     for (var i = 0; i <= 4; i++) {
         if (document.getElementById("HS" + i)) document.getElementById("HS" + i).checked = false;
     }
-    for (var i = 1; i <= 9; i++) {
+    for (var i = 1; i <= 11; i++) {
         if (document.getElementById("BC" + i)) document.getElementById("BC" + i).checked = false;
     }
     for (var i = 0; i <= 3; i++) {
@@ -621,9 +621,8 @@ function clearAll() {
     document.getElementById("permission").value = "";
     document.getElementById("HS").checked = false;
     document.getElementById("US").checked = false;
-    document.getElementById("BC_1_3").checked = false;
-    document.getElementById("BC_4_5").checked = false;
-    document.getElementById("BC_6_9").checked = false;
+    document.getElementById("BC_1_5").checked = false;
+    document.getElementById("BC_6_11").checked = false;
 }
 function changePermission() {
     var groupname = $("#groups").val();
@@ -648,12 +647,10 @@ function changePermission() {
         case "Viện kiểm sát":
         case "Tòa án":
             document.getElementById("ALL").checked = false;
-            document.getElementById("BC_1_3").checked = true;
-            document.getElementById("BC_4_5").checked = true;
-            document.getElementById("BC_6_9").checked = true;
-            checkBC(1, 3);
-            checkBC(4, 5);
-            checkBC(6, 9);
+            document.getElementById("BC_1_5").checked = true;
+            document.getElementById("BC_6_11").checked = true;
+            checkBC(1, 5);
+            checkBC(6, 11);
             break;
         default:
             alert("Chọn quyền");
@@ -672,4 +669,12 @@ function selectTATS() {
 function checkPrice(obj) {
     if (obj.value == "") return 0;
     obj.value = parseInt(removeSpecialCharater(obj.value));
+}
+function getNoiCapHoChieu(value) {
+    if (document.getElementById("isHoChieu").checked == true) {
+        $("#dvnoicap").html("<input name=\"noicap\" type=\"text\" tabindex=\"9\" id=\"noicap\" value=\"" + value + "\" class=\"form-control\" placeholder=\"Nhập nơi cấp hộ chiếu\"/>");
+    } else {
+        $("#dvnoicap").html("<select id=\"noicap\" class=\"form-control\" name=\"noicap\" tabindex=\"9\"></select>");
+        getListTinhThanh("noicap", "");
+    }
 }

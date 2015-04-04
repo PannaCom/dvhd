@@ -96,10 +96,18 @@
                 {
                     ketqua += "<br>Nguyên nhân không xử lý:" + hoso.nguyennhankhongxuly;
                 }
+                var hinhphat = "";
+                if (hoso.hinhphatchinh != null && hoso.hinhphatchinh != "") {
+                    hinhphat += "<br>Hình phạt chính:" + hoso.hinhphatchinh;
+                }
+                if (hoso.hinhphatbosung != null && hoso.hinhphatbosung != "")
+                {
+                    hinhphat += "<br>Hình phạt bổ sung:" + hoso.hinhphatbosung;
+                }
             <tr>
                 <td>@(i + 1)</td><td><a href="/hoso/Details/@hoso.id" target=_blank>@hoso.ketquaxuly</a></td><td>@hoso.ketquaxulychitiet@Html.Raw(@ketqua)</td>
                 <td>@hoso.tendonvixuly</td><td>@hoso.hoten</td>
-                <td>@hoso.motachitietxuly</td><td>@hoso.motavipham</td>
+                <td>@hoso.motachitietxuly@Html.Raw(@hinhphat)</td><td>@hoso.motavipham</td>
                 <td>@hoso.hanhvivipham</td><td>@ngayxuly</td><td>@hoso.hotencanboxuly</td><td>@hoso.capbac</td>
              </tr>
             }

@@ -260,13 +260,13 @@ namespace dvhd.Controllers
 
         public string getDVBG(string keyword)
         {
-            var p = (from q in db.HoSoes where q.donvibatgiu.Contains(keyword) select q.donvibatgiu).Distinct().Take(10);
+            var p = (from q in db.HoSoes where q.tendonvibatgiu.Contains(keyword) select q.tendonvibatgiu).Distinct().Take(10);
             return JsonConvert.SerializeObject(p.ToList());
         }
 
         public string getDVXL(string keyword)
         {
-            var p = (from q in db.HoSoes where q.donvixuly.Contains(keyword) select q.donvixuly).Distinct().Take(10);
+            var p = (from q in db.HoSoes where q.tendonvixuly.Contains(keyword) select q.tendonvixuly).Distinct().Take(10);
             return JsonConvert.SerializeObject(p.ToList());
         }
 
@@ -284,7 +284,7 @@ namespace dvhd.Controllers
                 tdate = Config.convertToDateTimeFromString(todate);
             }
             var p = (from q in db.HoSoes
-                     where q.donvibatgiu.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
+                     where q.tendonvibatgiu.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
                      select new
                      {
                          q.id,
@@ -313,7 +313,7 @@ namespace dvhd.Controllers
                 tdate = Config.convertToDateTimeFromString(todate);
             }
             var p = (from q in db.HoSoes
-                     where q.donvixuly.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
+                     where q.tendonvixuly.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
                      select new
                      {
                          q.id,

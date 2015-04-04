@@ -58,13 +58,13 @@
                  </div>
                 <div class="col-md-12">
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Hộ khẩu thường trú </label>
+                        <label for="room" style="width:auto;display:block;">Hộ khẩu thường trú *</label>
                         <input name="hokhauthuongtru" type="text" tabindex="4" id="hokhauthuongtru" value="" class="form-control" placeholder="Nhập hộ khẩu thường trú"/>                
                       </div>
                  </div>
                 <div class="col-md-12">
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Chỗ ở hiện tại *</label>
+                        <label for="room" style="width:auto;display:block;">Chỗ ở hiện tại </label>
                         <input name="choohientai" type="text" tabindex="5" id="choohientai" value="" class="form-control" placeholder="Nhập chỗ ở hiện tại"/>                
                       </div>
                  </div>
@@ -84,13 +84,16 @@
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Số chứng minh thư(hộ chiếu)</label>
                         <input name="cmthochieu" type="text" tabindex="8" id="cmthochieu" value="" class="form-control" placeholder="Số cmt hoặc hộ chiếu"/>                
+                        <input type="checkbox" id="isHoChieu" onclick="getNoiCapHoChieu('');">Nếu là Hộ Chiếu thì đánh dấu
                       </div>
                  </div>
                 <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Nơi cấp</label>
-                        <select id="noicap" class="form-control" name="noicap" tabindex="9"></select>
-                        <script>getListTinhThanh("noicap","");</script>                    
+                        <div id="dvnoicap">
+                            <select id="noicap" class="form-control" name="noicap" tabindex="9"></select>                        
+                            <script>getListTinhThanh("noicap","");</script>                    
+                        </div>
                       </div>
                  </div>
                  <div class="col-md-12">
@@ -175,6 +178,12 @@
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Phương thức vận chuyển</label>
                         @Html.Partial("~/Views/Shared/_PhuongThucVanChuyen.cshtml")                  
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Phương thức thủ đoạn</label>
+                        <input name="phuongthucthudoan" type="text" tabindex="22" id="phuongthucthudoan" value="" class="form-control" placeholder="phương thức thủ đoạn" />                
                       </div>
                  </div>
                  <div class="col-md-12">
@@ -277,6 +286,18 @@
                           @Html.Partial("~/Views/Shared/_KetQuaXuLy.cshtml")           
                       </div>
                  </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Hình phạt chính</label>
+                        <input name="hinhphatchinh" type="text" tabindex="33" id="hinhphatchinh"  class="form-control" placeholder="hình phạt chính..." />                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;">Hình phạt bổ sung</label>
+                        <input name="hinhphatbosung" type="text" tabindex="33" id="hinhphatbosung"  class="form-control" placeholder="hình phạt bổ sung..." />                
+                      </div>
+                 </div>
                 <div class="col-md-12"  id="dvsotienphat">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Số tiền phạt(Đơn vị VNĐ)</label>
@@ -345,7 +366,7 @@
                  </div>                 
                 <div class="col-md-12">
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Mô tả chi tiết kết quả xư lý(hình phạt là gì, số tiền phạt nếu là hành chính, kết quả tuyên án nếu bị kết án hình sự)</label>
+                        <label for="room" style="width:auto;display:block;">Mô tả chi tiết và thông tin khác nếu có</label>
                         <textarea name="motachitietxuly" tabindex="40" id="motachitietxuly" value="" rows="4" cols="20" class="form-control"></textarea>                
                         <input type="hidden" id="hosocode" name="hosocode" value="@ViewBag.hosocode">
                       </div>
@@ -427,11 +448,7 @@
             document.getElementById("hokhauthuongtru").focus();
             return;
         }
-        if (document.getElementById("choohientai").value == "") {
-            alert("Nhập chỗ ở hiện tại");
-            document.getElementById("choohientai").focus();
-            return;
-        }
+        
         if ($("#thoigianvipham1").val() != "" && $("#thoigianvipham2").val() != "") {
             $("#thoigianvipham").val($("#thoigianvipham1").val() +" "+ $("#thoigianvipham2").val());
         }

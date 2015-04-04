@@ -349,9 +349,10 @@ namespace dvhd
                 return DateTime.Now.Month.ToString();
             }
         }
-        public static bool checkPermission(string permission,string value) { 
+        public static bool checkPermission(string permission,string value) {
             if (permission==null || permission=="" || value==null || value=="") return false;
-            if (permission.ToUpperInvariant().Contains(value.ToUpperInvariant()))
+            if (permission.Contains("ALL")) return true;
+            if (permission.ToUpperInvariant().Contains(value.ToUpperInvariant() + ","))
                 return true;
             else
                 return false;

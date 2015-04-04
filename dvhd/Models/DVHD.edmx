@@ -49,6 +49,7 @@
           <Property Name="hanhvivipham" Type="nvarchar" MaxLength="550" />
           <Property Name="phuongthucvanchuyen" Type="nvarchar" MaxLength="50" />
           <Property Name="tuyenduongvanchuyen" Type="nvarchar" MaxLength="350" />
+          <Property Name="phuongthucthudoan" Type="nvarchar" MaxLength="450" />
           <Property Name="loaidongvat" Type="nvarchar" MaxLength="450" />
           <Property Name="tinhtrangsong" Type="nvarchar" MaxLength="50" />
           <Property Name="donvitinh" Type="nvarchar" MaxLength="50" />
@@ -64,6 +65,8 @@
           <Property Name="xulytangvat" Type="nvarchar" MaxLength="860" />
           <Property Name="sothangtu" Type="int" />
           <Property Name="nguyennhankhongxuly" Type="ntext" />
+          <Property Name="hinhphatchinh" Type="nvarchar" MaxLength="350" />
+          <Property Name="hinhphatbosung" Type="nvarchar" MaxLength="350" />
           <Property Name="donvixuly" Type="nvarchar" MaxLength="150" />
           <Property Name="tendonvixuly" Type="nvarchar" MaxLength="550" />
           <Property Name="hotencanboxuly" Type="nvarchar" MaxLength="250" />
@@ -159,6 +162,7 @@
           <Property Type="String" Name="hanhvivipham" MaxLength="550" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="phuongthucvanchuyen" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="tuyenduongvanchuyen" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="phuongthucthudoan" MaxLength="450" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="loaidongvat" MaxLength="450" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="tinhtrangsong" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="donvitinh" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -174,6 +178,8 @@
           <Property Type="String" Name="xulytangvat" MaxLength="860" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="sothangtu" />
           <Property Type="String" Name="nguyennhankhongxuly" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="hinhphatchinh" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="hinhphatbosung" MaxLength="350" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="donvixuly" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="tendonvixuly" MaxLength="550" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="hotencanboxuly" MaxLength="250" FixedLength="false" Unicode="true" />
@@ -232,6 +238,8 @@
                 <ScalarProperty Name="hotencanboxuly" ColumnName="hotencanboxuly" />
                 <ScalarProperty Name="tendonvixuly" ColumnName="tendonvixuly" />
                 <ScalarProperty Name="donvixuly" ColumnName="donvixuly" />
+                <ScalarProperty Name="hinhphatbosung" ColumnName="hinhphatbosung" />
+                <ScalarProperty Name="hinhphatchinh" ColumnName="hinhphatchinh" />
                 <ScalarProperty Name="nguyennhankhongxuly" ColumnName="nguyennhankhongxuly" />
                 <ScalarProperty Name="sothangtu" ColumnName="sothangtu" />
                 <ScalarProperty Name="xulytangvat" ColumnName="xulytangvat" />
@@ -247,6 +255,7 @@
                 <ScalarProperty Name="donvitinh" ColumnName="donvitinh" />
                 <ScalarProperty Name="tinhtrangsong" ColumnName="tinhtrangsong" />
                 <ScalarProperty Name="loaidongvat" ColumnName="loaidongvat" />
+                <ScalarProperty Name="phuongthucthudoan" ColumnName="phuongthucthudoan" />
                 <ScalarProperty Name="tuyenduongvanchuyen" ColumnName="tuyenduongvanchuyen" />
                 <ScalarProperty Name="phuongthucvanchuyen" ColumnName="phuongthucvanchuyen" />
                 <ScalarProperty Name="hanhvivipham" ColumnName="hanhvivipham" />

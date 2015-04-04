@@ -41,6 +41,7 @@ namespace dvhd.Models
         public string hanhvivipham { get; set; }
         public string phuongthucvanchuyen { get; set; }
         public string tuyenduongvanchuyen { get; set; }
+        public string phuongthucthudoan { get; set; }
         public string loaidongvat { get; set; }
         public string tinhtrangsong { get; set; }
         public string donvitinh { get; set; }
@@ -56,6 +57,8 @@ namespace dvhd.Models
         public string xulytangvat { get; set; }
         public Nullable<int> sothangtu { get; set; }
         public string nguyennhankhongxuly { get; set; }
+        public string hinhphatchinh { get; set; }
+        public string hinhphatbosung { get; set; }
         public string donvixuly { get; set; }
         public string tendonvixuly { get; set; }
         public string hotencanboxuly { get; set; }
