@@ -435,5 +435,8 @@ namespace dvhd.Controllers
             ViewBag.page = page;
             return View(p.ToPagedList(pageNumber, pageSize));
         }
+        public ActionResult Help() {
+            return View();
+        }
     }
 }
