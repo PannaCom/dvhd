@@ -3,50 +3,60 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style id="styleDetail" type="text/css">
-    /* Ban In css*/
-    .contentfaq {
-        display:none;
-    }
    
 </style>
 <div style="width:100%;margin-left:15px;padding-right:15px;">
 <h2>Tài Liệu Hướng Dẫn Sử Dụng Hệ Thống</h2>
-<h4><a class="loginlink" href="#">I. Đăng Nhập Hệ Thống</a></h4>
-<p class="contentfaq">Để sử dụng hệ thống, user cần được phân quyền truy cập vào những nội dung cần thiết. Liên hệ quản trị dự án để được cung cấp thông tin truy cập bao gồm username và mật khẩu(password):
+<a href="#dangnhap"><h4>I. Đăng Nhập Hệ Thống</h4></a>
+<a href="#cacchucnang"><h4>II. Các chức năng của hệ thống</h4></a>
+<a href="#cacchucnang1"><h4 style="margin-left:15px;">II.1. Quản lý hồ sơ vi phạm</h4></a> 
+    <a href="#cacchucnang1"><h4 style="margin-left:30px;">II.1.1. Nhập hồ sơ đối tượng vi phạm</h4></a>    
+    <a href="#danhsachhoso"><h4 style="margin-left:30px;" >II.1.2. Danh sách hồ sơ</h4></a>    
+<a href="#tracuu"><h4 style="margin-left:15px;">II.2. Tra cứu theo loài bị vi phạm, địa bàn, đối tượng vi phạm, đơn vị bắt giữ, đơn vị xử lý</h4></a>
+<a href="#baocao"><h4 style="margin-left:15px;">II.3. Báo cáo theo hình thức, hành vi, kết quả xử lý vi phạm và báo cáo tổng hợp</h4></a>
+<p id="dangnhap"><h3>Đăng nhập hệ thống</h3>Để sử dụng hệ thống, user cần được phân quyền truy cập vào những nội dung cần thiết. Liên hệ quản trị dự án để được cung cấp thông tin truy cập bao gồm username và mật khẩu(password):
 </p>
-<p class="contentfaq"><img src="/Images/Help/1.png" width="900"></p>
-<p class="contentfaq"><i>Màn hình đăng nhập, Điền user và password được cung cấp, click nút login để đăng nhập</i></p>
-<h4>II. Các chức năng của hệ thống</h4>
-<p class="contentfaq">Hệ thống bao gồm các module nhập liệu hồ sơ đầu vào cho chương trình, xem danh sách hồ sơ đã nhập, rút trích, tra cứu theo nhiều điều kiện để lọc ra các hồ sơ cần tìm, lập các báo cáo theo các trường dữ liệu cần quan tâm và trích dẫn.</p>
-<h4 >II.1. Quản lý hồ sơ vi phạm</h4>
-    <h4 style="margin-left:15px;">II.1.1. Nhập hồ sơ đối tượng vi phạm</h4>
-    <p style="margin-left:15px;padding-right:15px;" class="contentfaq">
-        Để thêm dữ liệu vào cho cơ sở dữ liệu động vật hoang dã, lưu trữ những vụ vi phạm bảo vệ động vật hoang dã, cần nhập dữ liệu đầu vào cho hệ thống. 
+<p ><img src="/Images/Help/1.png" width="900"></p>
+<p ><i>Màn hình đăng nhập, Điền user và password được cung cấp, click nút login để đăng nhập</i></p>
+<p id="cacchucnang"><h3>Các chức năng của hệ thống</h3>Hệ thống bao gồm các module nhập liệu hồ sơ đầu vào cho chương trình, xem danh sách hồ sơ đã nhập, rút trích, tra cứu theo nhiều điều kiện để lọc ra các hồ sơ cần tìm, lập các báo cáo theo các trường dữ liệu cần quan tâm và trích dẫn.</p>
+<p style="padding-right:15px;" id="cacchucnang1">
+        <h3>Nhập hồ sơ</h3>Để thêm dữ liệu vào cho cơ sở dữ liệu động vật hoang dã, lưu trữ những vụ vi phạm bảo vệ động vật hoang dã, cần nhập dữ liệu đầu vào cho hệ thống. 
 	    Chọn menu Nhập hồ sơ đối tượng vi phạm thuộc Quản lý hồ sơ vi phạm, điền vào các trường dữ liệu quan trọng mà hồ sơ cung cấp. Có 03 phần nhập: Thông tin về đối tượng vi phạm,
         hành vi vi phạm và kết quả xử lý.
     </p>
-    <p style="margin-left:15px;" class="contentfaq"><img src="/Images/Help/3.png" width="900"></p>
-    <p style="margin-left:15px;" class="contentfaq"><i>Màn hình nhập dữ liệu</i></p>
-    <h4 style="margin-left:15px;" >II.1.2. Danh sách hồ sơ</h4>
-    <p style="margin-left:15px;padding-right:15px;" class="contentfaq">
-        Thông tin về hồ sơ vi phạm đã nhập được hiển thị dưới dạng danh sách, từ danh sách đó, người dùng có thể sửa, cập nhật lại thông tin đã nhập,
+    <p  class="contentfaq"><img src="/Images/Help/3.png" width="900"></p>
+    <p  class="contentfaq"><i>Màn hình nhập dữ liệu</i></p>
+<p style="padding-right:15px;" id="danhsachhoso">
+        <h3>Danh sách hồ sơ</h3>Thông tin về hồ sơ vi phạm đã nhập được hiển thị dưới dạng danh sách, từ danh sách đó, người dùng có thể sửa, cập nhật lại thông tin đã nhập,
         hoặc xem lại toàn bộ hồ sơ hoặc xóa hồ sơ bằng cách click vào các chữ Sửa, Hồ Sơ, Xóa ở cột bên phải màn hình.
         Người dùng có thể tìm kiếm hồ sơ bằng cách gõ theo tên đối tượng vi phạm và chọn khoảng thời gian vi phạm
     </p>
-    <p style="margin-left:15px;" class="contentfaq"><img src="/Images/Help/4.png" width="900"></p>
-    <p style="margin-left:15px;" class="contentfaq"><i>Màn hình Danh sách hồ sơ</i></p>
-<h4 >II.2. Tra cứu</h4>
-    <h4 style="margin-left:15px;">II.2.1. Tra cứu theo loài bị vi phạm, địa bàn, đối tượng vi phạm, đơn vị bắt giữ, đơn vị xử lý </h4>
-    <p style="margin-left:15px;padding-right:15px;" class="contentfaq">
+    <p  class="contentfaq"><img src="/Images/Help/4.png" width="900"></p>
+    <p  class="contentfaq"><i>Màn hình Danh sách hồ sơ</i></p>
+<p style="padding-right:15px;" id="tracuu">
+        <h3>Tra cứu. Chọn menu Tra cứu như hình dưới để tra cứu theo loài động vật, địa bàn, tên đối tượng...</h3>
+        <p  class="contentfaq"><img src="/Images/Help/51.png" width="900"></p>
         Tùy theo nhu cầu tra cứu, hệ thống ưu tiên các trường dữ liệu mà người sử dụng cần tra cứu lên đầu, ví dụ tên loài, địa bàn vi phạm, ...để người dùng
         dễ dàng truy cập thông tin và hồ sơ.
-    </p>
+</p>
+<p  class="contentfaq"><img src="/Images/Help/5.png" width="900"></p>
+<p  class="contentfaq"><i>Màn hình Tra cứu theo tên loài vi phạm</i></p>
+<p  class="contentfaq"><img src="/Images/Help/6.png" width="900"></p>
+<p  class="contentfaq"><i>Màn hình Tra cứu theo địa bàn vi phạm</i></p>
+<p><b>Tương tự như vậy đối với màn hình tra cứu theo tên đối tượng vi phạm, theo đơn vị bắt giữ và xử lý, người dùng gõ tên cần tra cứu và khoảng thời gian vi phạm cần tìm.</b></p>
+<p style="padding-right:15px;" id="baocao">
+        <h3>Báo cáo theo hình thức, hành vi, kết quả xử lý vi phạm, báo cáo tổng hợp</h3>
+        <p  class="contentfaq"><img src="/Images/Help/6.png" width="900"></p>
+        Tùy theo nhu cầu lập báo cáo,  ưu tiên các trường dữ liệu mà người sử dụng cần tra cứu lên đầu, ví dụ hình thức, hành vi vi phạm, kết quả xử lý, báo cáo tổng hợp, ...để người dùng
+        dễ dàng truy cập thông tin và in báo cáo.
+</p>
+<p  class="contentfaq"><img src="/Images/Help/7.png" width="900"></p>
+<p  class="contentfaq"><i>Màn hình báo cáo theo hình thức</i></p>
+<p  class="contentfaq"><img src="/Images/Help/8.png" width="900"></p>
+<p  class="contentfaq"><i>Màn hình báo cáo theo hành vi</i></p>
+<p  class="contentfaq"><img src="/Images/Help/9.png" width="900"></p>
+<p  class="contentfaq"><i>Báo cáo tổng hợp thống kê số lượng tất cả các vụ vi phạm theo địa bàn cần quan tâm</i></p>
+<p><b>Tương tự như vậy đối với màn hình  báo cáo theo kết quả xử lý hành chính, hình sự, và không xử lý. Lưu ý khoảng thời gian này là khoảng thời gian xử lý chứ không phải thời gian vi phạm.</b></p>
+<p  class="contentfaq"><img src="/Images/Help/10.png" width="900"></p>
+<p  class="contentfaq"><i>Báo cáo xử lý kết quả(hành chính,hình sự,không xử lý) với khoảng thời gian tìm kiếm là thời gian xử lý</i></p>
 </div>
-<script type="text/javascript">
-$(document).ready(function(){
-    $('.loginlink').click(function () {
-        $('.contentfaq').hide();
-        $(this).next('.contentfaq').show();
-    });
-});
-</script>
