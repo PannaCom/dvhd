@@ -1,4 +1,5 @@
-﻿function detectmob() {
+﻿var indexSlide = 0;
+function detectmob() {
 
     if (navigator.userAgent.match(/Android/i)
      || navigator.userAgent.match(/webOS/i)
@@ -677,4 +678,10 @@ function getNoiCapHoChieu(value) {
         $("#dvnoicap").html("<select id=\"noicap\" class=\"form-control\" name=\"noicap\" tabindex=\"9\"></select>");
         getListTinhThanh("noicap", "");
     }
+}
+
+function slideImage() {
+    indexSlide++;
+    if (indexSlide >= 3) indexSlide = 0;
+    $("#dvslide").html("<img src=\"/Images/Slide/"+indexSlide+".jpg\" width=\"100%\" height=\"300px\">");
 }

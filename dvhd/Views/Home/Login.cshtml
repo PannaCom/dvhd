@@ -2,25 +2,48 @@
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
-
-<div>
-    <div style="width:100%;text-align:center;">
-      <h1>Hệ quản trị cơ sở dữ liệu Động Vật Hoang Dã </h1>
-      <h2 >Đăng nhập hệ thống</h2>  
-    </div>
-    <form class="clearfix mt50" role="form" method="post" name="contactform" id="contactform">
-          <div class="row">            
-              <div class="form-group" style="width:80%;margin-left:4%;">
-                <label for="name" accesskey="U"><span class="required">*</span> User</label>
-                <input name="name" type="text" id="name" class="form-control" value=""/>
-              </div>
-              <div class="form-group" style="width:80%;margin-left:4%;">
-                <label for="email" accesskey="E"><span class="required">*</span> Password</label>
-                <input name="pass" type="password" id="pass" value="" class="form-control"/>
-              </div>            
-              <div class="form-group" style="width:80%;margin-left:4%;">
-                 <button type="button" class="btn btn-info" onclick="Login();">Login</button>
-              </div>            
+
+<div class="container">
+  <div class="row"> 
+    <!-- Blog -->
+    <section class="blog mt50">
+      <div class="col-md-9">
+         <section class="revolution-slider">
+          <div class="bannercontainer">
+            <div class="banner" id="dvslide">
+              <img src="/Images/Slide/0.jpg" width="100%" height="300px">
+            </div>
           </div>
-    </form>
+        </section>     
+      </div>
+    </section>
+    <!-- Aside -->
+    <aside class="mt50"> 
+      <!-- Widget: Text -->
+      <div class="col-md-3">
+        <div class="widget">
+          <h3>Đăng nhập hệ thống</h3> 
+          <form class="clearfix mt50" role="form" method="post" name="contactform" id="contactform">
+              <div class="row">            
+                  <div class="form-group" style="width:80%;margin-left:4%;">
+                    <label for="name" accesskey="U"><span class="required">*</span> User</label>
+                    <input name="name" type="text" id="name" class="form-control" value=""/>
+                  </div>
+                  <div class="form-group" style="width:80%;margin-left:4%;">
+                    <label for="email" accesskey="E"><span class="required">*</span> Password</label>
+                    <input name="pass" type="password" id="pass" value="" class="form-control"/>
+                  </div>            
+                  <div class="form-group" style="width:80%;margin-left:4%;">
+                     <button type="button" class="btn btn-info" onclick="Login();">Login</button>
+                  </div>            
+              </div>
+          </form>          
+        </div>  
+      </div>
+    </aside>
+  </div>
 </div>
+<script>
+    
+    setInterval(slideImage, 2000);
+</script>

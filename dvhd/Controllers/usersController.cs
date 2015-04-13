@@ -90,11 +90,13 @@ namespace dvhd.Controllers
             {
                 MD5 md5Hash = MD5.Create();
                 pass = Config.GetMd5Hash(md5Hash, pass);
-                var p = (from q in db.users where q.name.Contains(name) && q.pass.Contains(pass) select q).FirstOrDefault().permission;
-                if (p != null && p != "")
+                var p = (from q in db.users where q.name.Contains(name) && q.pass.Contains(pass) select q).FirstOrDefault();
+                if (p != null && p.name != "")
                 {
                     //Ghi ra cookie
-                    Config.setCookie("logged", p);
+                    Config.setCookie("logged", p.permission);
+                    Config.setCookie("username", p.name);
+                    Config.setCookie("userid", p.id.ToString());
                     return "1";
                 }
                 else

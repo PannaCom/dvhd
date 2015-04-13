@@ -857,9 +857,9 @@ header #logo {
 #reservation-form .reservation-horizontal, #reservation-form .reservation-vertical, #contact-form .contact-vertical {
 	-webkit-border-radius: 5px 5px 5px 5px;
 	border-radius: 5px 5px 5px 5px;
-	border: 1px solid #ebebeb;
+	border: 1px solid #38BC54;
 	-webkit-box-shadow: 0 3px 0 0 rgba(0,0,0,0.12);
-	box-shadow: 0 3px 0 0 rgba(0,0,0,0.12);
+	box-shadow: 0 3px 0 0 #38BC54;
 	/*padding: 30px 30px;*/
     padding: 10px 30px;
 	z-index: 9999;

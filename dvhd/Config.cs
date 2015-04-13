@@ -15,7 +15,7 @@ namespace dvhd
     public class Config
     {
 
-        public static string domain = "http://demo.binhyen.net";//"http://localhost:58509//";
+        public static string domain = "http://localhost:58509/";//"http://wlc.binhyen.net";//"http://localhost:58509//";
         public static int PageSize =15;
       
         public static string HoSoImagePath = "/Images/HoSo";

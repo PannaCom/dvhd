@@ -19,6 +19,18 @@ namespace dvhd.Controllers
         }
         public ActionResult Login()
         {
+            string slide = "";
+            string[] slogan = new string[3] { "Bảo vệ động vật hoang dã", "Quản lý hồ sơ vi phạm", "Báo cáo thống kê dữ liệu"};
+            for (int i = 0; i <= 2; i++)
+            {
+                slide += "<li data-transition=\"fade\" data-slotamount=\"7\" data-masterspeed=\"1500\">";
+                slide += "<img src=\"" + Config.domain + "/Images/Slide/" + i + ".jpg\" style=\"opacity:0;\" alt=\"slidebg1\"  data-bgfit=\"cover\" data-bgposition=\"left bottom\" data-bgrepeat=\"no-repeat\">";
+                //slide += " <div class=\"textlink\"><span style=\"text-shadow: 0 0 5px #0026ff, 0 0 7px #0026ff;margin: 10 10 10 10;color:#fff;display: block;font-size:18px;line-height: 1;-webkit-margin-before: 0.67em;-webkit-margin-after: 0.67em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;font-weight: bold;\">" + rshp[h].caption + "</span><b><a href=\"" + rshp[h].link + "\" style=\"color:#fff;font-weight:bold;font-size:12px;\">" + rshp[h].linktext + "</a></b></div>";
+                slide += " <div class=\"caption sft revolution-starhotel smalltext\" data-x=\"35\" data-y=\"30\" data-speed=\"800\" data-start=\"1700\" data-easing=\"easeOutBack\">";
+                slide += " <span style=\"text-shadow: 0 0 25px #000, 0 0 27px #000;margin: 10px 0;color:#fff;display: block;font-size:28px;line-height: 1;-webkit-margin-before: 0.67em;-webkit-margin-after: 0.67em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;font-weight:bold;\">" + slogan[i] + "</span><br>";
+                slide += " </div></li>";
+            }
+            ViewBag.slide = slide;
             return View();
         }
         public ActionResult Logout()
@@ -28,7 +40,8 @@ namespace dvhd.Controllers
                 Response.Cookies["logged"].Expires = DateTime.Now.AddDays(-1);
             }
             Session.Abandon();
-            return View();
+            return RedirectToAction("Login", "Home");
+            //return View();
         }
         public ActionResult Permission() {
             return View();
