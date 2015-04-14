@@ -6,13 +6,12 @@
 }
 
 <link rel="stylesheet" href="~/Content/css/printStyle.css" />
-
+<h3 id="titleXuLy" style="margin-left:10px;"></h3>
 <!-- Reservation form -->
 <section id="reservation-form" style="margin-top:10px;" class="noPrint">
   <div class="container">
     <div class="row">
-      <div class="col-md-12">  
-        <h3 id="titleXuLy"></h3> 
+      <div class="col-md-12">
         <p>* Khoảng thời gian từ ngày đến ngày tính là thời gian xử lý</p>          
         <form class="form-inline reservation-horizontal clearfix" role="form"   name="reservationform" id="reservationform">
           <div class="row">
@@ -34,9 +33,9 @@
 				    <input name="sothangtu" type="text" id="sothangtu" value="@ViewBag.sothangtu" class="form-control" placeholder="Số tháng tù" onblur="checkPrice(this);"/>              
                   </div>
               </div>
-              <div class="col-sm-2" id="dvnguyennhankhongxuly">
+              <div class="col-sm-3" id="dvnguyennhankhongxuly">
                   <div class="form-group" >
-                    <label>Nguyên nhân không xử lý</label>
+                    <label style="width:auto;display:block;">Nguyên nhân không xử lý</label>
 				    <input name="nguyennhankhongxuly" type="text" id="nguyennhankhongxuly" value="@ViewBag.nguyennhankhongxuly" class="form-control" placeholder="nguyên nhân không xử lý" />              
                   </div>
               </div>
@@ -65,8 +64,8 @@
   </div>
 </section>  
 <div class="col-md-12 noPrint" style="text-align:center;margin-top:15px;">
-    <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" />
-    <input id="btnCreateReport" type="button" value="Xuất ra Excel file" onclick="ExportExcel(getUrlParameter('type'), 6,getDateIdNew(document.getElementById('fromdate').value), getDateIdNew(document.getElementById('todate').value));" />
+    <img src="/Images/print.png" width="32" height="32">&nbsp;<input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" />
+    <img src="/Images/excel.png" width="32" height="32"><input id="btnCreateReport" type="button" value="Xuất ra Excel file" onclick="ExportExcel(getUrlParameter('type'), 6,getDateIdNew(document.getElementById('fromdate').value), getDateIdNew(document.getElementById('todate').value));" />
 </div>
 
 <div id="divResult" class="col-md-12">

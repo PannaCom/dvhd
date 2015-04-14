@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "changePass";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 style="margin-left:10px;">Đổi mật khẩu</h2>
+
+    <fieldset>
+        <div class="col-md-12">
+              <div class="form-group">
+                 <label for="room" style="width:auto;display:block;">Mật khẩu cũ * </label>
+                 <input name="oldpass" type="password" tabindex="1" id="oldpass" value="" class="form-control" placeholder="Nhập password"/>                  
+              </div>
+        </div>
+        <div class="col-md-12">
+              <div class="form-group">
+                 <label for="room" style="width:auto;display:block;">Mật khẩu mới * </label>
+                 <input name="pass" type="password" tabindex="2" id="pass" value="" class="form-control" placeholder="Nhập password"/>
+                 <label for="room" style="width:auto;display:block;">Nhập lại mật khẩu mới * </label>
+                 <input name="pass2" type="password" tabindex="2" id="pass2" value="" class="form-control" placeholder="Nhập password"/>                               
+              </div>
+        </div>
+        <div class="col-md-12">
+              <div class="form-group">
+                  <input type="button" value="Đổi mật khẩu" onclick="checkField();"/>
+              </div>
+        </div>      
+        
+    </fieldset>
+   
+<script>
+    
+    function checkField() {
+        //alert(document.getElementById("permission").value);
+        //return;
+        if (document.getElementById("oldpass").value == "") {
+            alert("Nhập mật khẩu cũ");
+            document.getElementById("oldpass").focus();
+            return;
+        }
+        if (document.getElementById("pass").value == "") {
+            alert("Nhập mật khẩu mới");
+            document.getElementById("pass").focus();
+            return;
+        }
+        if (document.getElementById("pass2").value == "") {
+            alert("Nhập lại mật khẩu mới");
+            document.getElementById("pass2").focus();
+            return;
+        }
+        if (document.getElementById("pass").value != document.getElementById("pass2").value) {
+            alert("Nhập lại mật khẩu mới phải giống nhau");
+            document.getElementById("pass2").focus();
+            return;
+        }
+        var formdata = new FormData(); //FormData object
+        var oldpass = document.getElementById("oldpass").value;
+        var pass = document.getElementById("pass").value;        
+        formdata.append("id", @ViewBag.id);
+        formdata.append("oldpass", oldpass);
+        formdata.append("pass", pass);        
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/users/updatePass');
+        xhr.send(formdata);
+        var content = "";
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.responseText == 0) {
+                    alert("Sai mật khẩu cũ!");
+                } else {
+                    alert("Cập nhật thành công!");
+                    window.location.href = "/Home/Index";
+                }
+            }
+        }
+    }
+    
+</script>

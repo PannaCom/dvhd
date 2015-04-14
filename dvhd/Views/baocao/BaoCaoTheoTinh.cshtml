@@ -3,14 +3,13 @@
 }
 
 <link rel="stylesheet" href="~/Content/css/printStyle.css" />
-
+<h3 style="margin-left:10px;">Báo Cáo Theo Địa Bàn</h3>   
 
 <!-- Reservation form -->
 <section id="reservation-form" style="margin-top:10px;" class="noPrint">
   <div class="container">
     <div class="row">
-      <div class="col-md-12">     
-        <h3>Báo Cáo Theo Địa Bàn</h3>      
+      <div class="col-md-12">   
         <p>* Khoảng thời gian từ ngày đến ngày tính là thời gian vi phạm</p> 
         <form class="form-inline reservation-horizontal clearfix" role="form"   name="reservationform" id="reservationform">
           <div class="row">
@@ -46,8 +45,8 @@
 </section>  
 
 <div class="col-md-12 noPrint" style="text-align:center;margin-top:15px;">
-    <input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" disabled="disabled" />
-    <input id="btnCreateReport" type="button" value="Xuất ra Excel file" onclick="ExportExcel(document.getElementById('baocao_tinh').value, 2, getDateIdNew(document.getElementById('fromdate').value), getDateIdNew(document.getElementById('todate').value));" disabled="disabled"/>
+    <img src="/Images/print.png" width="32" height="32">&nbsp;<input id="btnCreateReportBanIn" type="button" value="Bản in" onclick="baocao_createPDFBanin();" disabled="disabled" />
+    <img src="/Images/excel.png" width="32" height="32"><input id="btnCreateReport" type="button" value="Xuất ra Excel file" onclick="ExportExcel(document.getElementById('baocao_tinh').value, 2, getDateIdNew(document.getElementById('fromdate').value), getDateIdNew(document.getElementById('todate').value));" disabled="disabled"/>
 </div>
 
 <div id="divResult" class="col-md-12">

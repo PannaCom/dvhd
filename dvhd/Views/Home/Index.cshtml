@@ -2,8 +2,37 @@
     ViewBag.Title = "Hệ quản trị cơ sở dữ liệu Động Vật Hoang Dã";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div style="text-align:center;">
-    <h1>Hệ quản trị cơ sở dữ liệu Động Vật Hoang Dã</h1>
-    <h4>Hiển thị các tính năng tốt nhất với trình duyệt <a href="http://www.google.com/chrome/">Chrome</a></h4>
-    <p><img src="/Images/banner.jpg" /></p>
+
+<div class="container">
+  <div class="row"> 
+    <!-- Blog -->
+    <section class="blog mt50">
+      <div class="col-md-9">
+         <section class="revolution-slider">
+          <div class="bannercontainer">
+            <div class="banner" id="dvslide">
+              <img src="/Images/Slide/0.jpg" width="100%" height="300px">
+            </div>
+          </div>
+        </section>     
+      </div>
+    </section>
+    <!-- Aside -->
+    <aside class="mt50"> 
+      <!-- Widget: Text -->
+      <div class="col-md-3">
+        <div class="widget">
+          <h3>Đơn Vị Cộng Tác</h3> 
+          <p><img src="/Images/worldbank.png" style="border:1px solid #808080;"></p>
+          <p><img src="/Images/wspa.png" style="border:1px solid #808080;"></p>
+          <p><img src="/Images/jica.png" style="border:1px solid #808080;"></p>
+          <p><img src="/Images/wwf.png" style="border:1px solid #808080;"></p>         
+        </div>  
+      </div>
+    </aside>
+  </div>
 </div>
+<script>
+
+    setInterval(slideImage, 2000);
+</script>

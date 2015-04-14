@@ -151,7 +151,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-family: "Tahoma", "Arial", "sans-serif";
 	font-weight: 600;
 	line-height: 1.1;
-	color: #36813c;/*006600*/
+	color: #36813c;/*36813c*/
 }
 h1, .h1 {
 	font-size: 36px;
@@ -227,7 +227,7 @@ a:focus {
 }
 /* Link hover color */
 a:hover, a:focus, .box-icon a:hover, .usp a:hover i {
-	color: #006600;
+	color: #36813c;
 }
 /* Margins */
 .mt20 {
@@ -253,7 +253,7 @@ a:hover, a:focus, .box-icon a:hover, .usp a:hover i {
 }
 /* Form */
 label {
-	/*color: #006600;
+	/*color: #36813c;
     font-weight:bold;*/
     display: block;
     font-weight: bold;
@@ -264,7 +264,7 @@ label {
 	color: #057ad4;
 }
 .form-control option {
-	color: #006600;
+	color: #36813c;
 }
 .form-control option:disabled {
 	color: #bfbfbf;
@@ -612,14 +612,14 @@ header nav {
 	background-color: #fff;
 }
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
-	color: #006600;
+	color: #36813c;
 	background-color: transparent;
 }
 .navbar-default .navbar-text {
-	color: #006600;
+	color: #36813c;
 }
 .navbar-default .navbar-nav > li > a {
-	color: #006600;
+	color: #36813c;
 }
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
 	background-color: transparent;
@@ -628,7 +628,7 @@ header nav {
 	background-color: transparent;
 }
 .navbar-default .navbar-nav > .disabled > a, .navbar-default .navbar-nav > .disabled > a:hover, .navbar-default .navbar-nav > .disabled > a:focus {
-	color: #006600;
+	color: #36813c;
 	background-color: transparent;
 }
 .navbar-default .navbar-collapse, .navbar-default .navbar-form {
@@ -642,7 +642,7 @@ header nav {
 	font-size: 13px;
 }
 .navbar-default .navbar-nav .dropdown-menu > li > a {
-	color: #006600;
+	color: #36813c;
 }
 .navbar-default .navbar-nav .dropdown-menu > .active > a, .navbar-default .navbar-nav .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .dropdown-menu > .active > a:focus {
 	color: #ffffff;
@@ -840,11 +840,11 @@ header #logo {
 	right: 0;
 }
 .yamm a{
-	color: #006600;
+	color: #36813c;
 }
 .list-unstyled, .list-unstyled ul {
 	min-width: 120px;
-	color: #006600;
+	color: #36813c;
 }
 
 /* Reservation Form
@@ -1514,8 +1514,8 @@ aside .widget .news-content span a {
 }
 /* Nav Tabs */
 .nav-tabs {
-	border-bottom: 1px solid #006600;
-    /*border:1px solid #006600;*/ 
+	border-bottom: 1px solid #36813c;
+    /*border:1px solid #36813c;*/ 
 }
 .nav-tabs > li {
 	float: left;
@@ -1539,10 +1539,10 @@ aside .widget .news-content span a {
 	background: #fff;
 }
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-	color: #006600;
+	color: #36813c;
 	cursor: default;
 	background-color: blanchedalmond;
-	border: 2px solid #006600;
+	border: 2px solid #36813c;
 	border-bottom-color: transparent;
 }
 .tab-content {
@@ -1553,7 +1553,7 @@ aside .widget .news-content span a {
 	margin-top: 30px;
 }
 .nav-pills > li > a {
-	color: #006600;
+	color: #36813c;
 	-webkit-transition: all 0.2s ease;
 	-moz-transition: all 0.2s ease;
 	-ms-transition: all 0.2s ease;
@@ -1603,7 +1603,7 @@ aside .widget .news-content span a {
 }
 .popover {
 	font-size: 12px;
-	color: #006600;
+	color: #36813c;
 }
 /* Table */
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
@@ -1676,14 +1676,14 @@ footer {
     background:#005A00;
 }
 footer a {
-	color: #006600;
+	color: #36813c;
 }
 footer a:hover, footer a:focus {
-	color: #006600;
+	color: #36813c;
 }
 footer h4 {
 	font-size: 14px;
-	color: #006600;
+	color: #36813c;
 	text-transform: uppercase;
 	margin: 0 0 30px 0;
 }
@@ -1713,7 +1713,7 @@ color: #d1d1d1;
 }
 /* Footer Bottom */
 footer .footer-bottom {
-	background:#005A00; /*#236baa;006600*/
+	background:#005A00; /*#236baa;36813c*/
 	padding: 30px 0;
 	margin-top: 50px;
 	line-height: 14px;

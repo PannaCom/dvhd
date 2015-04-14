@@ -72,6 +72,31 @@ namespace dvhd.Controllers
 
             return View(user);
         }
+        public ActionResult changePass() {
+            ViewBag.id = Config.getCookie("userid");
+            ViewBag.username = Config.getCookie("username");
+            return View();
+        }
+        public string updatePass(int id,string oldpass,string pass) {
+            try
+            {
+                MD5 md5Hash = MD5.Create();
+                string hash = Config.GetMd5Hash(md5Hash, pass);
+                oldpass = Config.GetMd5Hash(md5Hash, oldpass);
+                var p = db.users.Where(o => o.id == id).Where(o => o.pass.Contains(oldpass)).FirstOrDefault().name;
+
+                if (p != null && p != "")
+                {
+                    db.Database.ExecuteSqlCommand("update users set pass=N'" + hash + "' where id=" + id);
+                    return "1";
+                }
+                else return "0";
+                
+            }
+            catch (Exception ex) {
+                return "0";
+            }
+        }
         public string updatePermission(int id, string permission)
         {
             try
