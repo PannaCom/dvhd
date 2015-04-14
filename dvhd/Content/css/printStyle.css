@@ -1,13 +1,13 @@
 ﻿/* Ban In css*/
 .tbBanIn {
     width: 100%;
-    border: 1px solid #bbbcbb;
+    border: 1px solid #36813c;
     border-collapse: collapse;
     table-layout: fixed;
 }
 
     .tbBanIn td, .tbBanIn th {
-        border: 1px solid #bbbcbb;
+        border: 1px solid #36813c;
         padding: 1px !important;
     }
 
