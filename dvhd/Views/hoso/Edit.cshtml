@@ -262,10 +262,11 @@
                 }
                 <div class="col-md-12">
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Tình trạng</label>
+                        <label for="room" style="width:auto;display:block;">Tình trạng sống/chết</label>
                         <select id="tinhtrangsong" class="form-control" name="tinhtrangsong" tabindex="25">
                             <option value="sống">sống</option>
                             <option value="chết">chết</option>
+                            <option value="tổng hợp">tổng hợp</option>
                         </select>
                         <script>document.getElementById("tinhtrangsong").value = "@Html.Raw(@Model.tinhtrangsong)";</script>  
                       </div>
@@ -374,7 +375,7 @@
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Đơn vị xử lý</label>
                         @Html.Partial("~/Views/Shared/_DonViXuLy.cshtml")  
-                        <script>document.getElementById("donvixuly").value="@Html.Raw(@Model.donvixuly.Trim())";</script>                    
+                        <script>document.getElementById("donvixuly").value="@Html.Raw(@Model.donvixuly)";</script>                    
                       </div>
                  </div>
                  <div class="col-md-12">

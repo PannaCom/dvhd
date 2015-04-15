@@ -45,6 +45,49 @@ namespace dvhd
             }
             //return DateTime.Now.Year * 365 + DateTime.Now.Month * 30 + DateTime.Now.Day;
         }
+        public static string getUserName(){
+            try{
+                return getDayDateMonthYearVn()+", Xin chào <b>"+getCookie("username")+"</b>";
+            }catch(Exception ex){
+                return "";
+            }
+        }
+        public static string getDayDateMonthYearVn() {
+            try
+            {
+                DateTime d = DateTime.Now;
+                string day="";
+                string format="ngày "+d.Day.ToString()+" tháng "+d.Month.ToString()+" năm "+d.Year.ToString();
+                switch (d.DayOfWeek) {
+                    case DayOfWeek.Monday: 
+                            format = "Thứ hai, " + format;
+                            break;
+                    case DayOfWeek.Tuesday:
+                            format = "Thứ ba, " + format;
+                            break;
+                    case DayOfWeek.Wednesday:
+                            format = "Thứ tư, " + format;
+                            break;
+                    case DayOfWeek.Thursday:
+                            format = "Thứ năm, " + format;
+                            break;
+                    case DayOfWeek.Friday:
+                            format = "Thứ sáu, " + format;
+                            break;  
+                    case DayOfWeek.Saturday:
+                            format = "Thứ bảy, " + format;
+                            break;  
+                    case DayOfWeek.Sunday:
+                            format = "Chủ nhật, " + format;
+                            break;  
+                }
+                return format;
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
         public static int datetimeidaddday(int days)
         {
             DateTime d1;
