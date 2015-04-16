@@ -43,7 +43,7 @@
                 <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Họ tên * </label>
-                        <input name="hoten" type="text" tabindex="1" id="hoten" value="@Model.hoten" class="form-control" placeholder="Gõ tên đối tượng vi phạm"/>(<a onclick="uploadAnhDaiDien();" style="cursor:pointer;">Click để upload ảnh nếu có</a>)                
+                        <input name="hoten" type="text" tabindex="1" id="hoten" value="@Model.hoten" class="form-control" placeholder="Gõ tên đối tượng vi phạm, nếu không rõ ghi :hàng vô chủ"/>(<a onclick="uploadAnhDaiDien();" style="cursor:pointer;">Click để upload ảnh nếu có</a>)                
                       </div>
                  </div>
                 <div id="anhdaidiendiv" style="display:none;">
@@ -292,7 +292,7 @@
                  </div>
                  <div class="col-md-12">
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Tình trạng bảo tồn</label>
+                        <label for="room" style="width:auto;display:block;">Tình trạng bảo vệ</label>
                         @Html.Partial("~/Views/Shared/_TinhTrangBaoTon.cshtml")   
                         <script>document.getElementById("tinhtrangbaoton").value = "@Html.Raw(@Model.tinhtrangbaoton)";</script>      
                       </div>
@@ -305,7 +305,7 @@
                  </div>
                  <div class="col-md-12">
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Đơn vị bắt giữ</label>
+                        <label for="room" style="width:auto;display:block;">Lực lượng bắt giữ</label>
                         @Html.Partial("~/Views/Shared/_DonViCoQuan.cshtml")   
                         <script>document.getElementById("donvibatgiu").value = "@Html.Raw(@Model.donvibatgiu)";</script>      
                       </div>
@@ -493,7 +493,7 @@
             document.getElementById("hoten").focus();
             return;
         }
-        if (document.getElementById("hokhauthuongtru").value == "") {
+        if (document.getElementById("hokhauthuongtru").value == "" && document.getElementById("hoten").value !="hàng vô chủ") {
             alert("Nhập hộ khẩu thường trú");
             document.getElementById("hokhauthuongtru").focus();
             return;
