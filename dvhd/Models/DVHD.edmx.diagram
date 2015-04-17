@@ -8,7 +8,8 @@
         <EntityTypeShape EntityType="dvhdModel.DsDvhd" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dvhdModel.TinhThanh" Width="1.5" PointX="5.125" PointY="3.375" />
         <EntityTypeShape EntityType="dvhdModel.user" Width="1.5" PointX="5.25" PointY="7.875" />
-        <EntityTypeShape EntityType="dvhdModel.HoSo" Width="1.5" PointX="9.03136667843506" PointY="29.230878217718974" />
+        <EntityTypeShape EntityType="dvhdModel.HoSo" Width="1.5" PointX="6.6260752522508035" PointY="13.773897847986733" />
+        <EntityTypeShape EntityType="dvhdModel.News" Width="1.5" PointX="8.9880208563935113" PointY="9.7823742375627045" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

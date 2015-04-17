@@ -69,5 +69,10 @@ namespace dvhd.Models
         public string ketquaxulychitiet { get; set; }
         public string motachitietxuly { get; set; }
         public string hosocode { get; set; }
+        public Nullable<int> isgrouporcorp { get; set; }
+        public Nullable<int> lastusereditid { get; set; }
+        public string lastusernameedit { get; set; }
+        public Nullable<System.DateTime> lastupdate { get; set; }
+        public string logs { get; set; }
     }
 }

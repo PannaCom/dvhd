@@ -9,12 +9,14 @@
         if (document.getElementById("ketquaxuly").selectedIndex == 1) {
             $("#dvsotienphat").show();
             $("#dvxulytangvat").show();
+            $("#lblthoigianxuly").html("Thời gian xử phạt");
             $("#dvsothangtu").hide();
             $("#dvnguyennhankhongxuly").hide();
         } else if (document.getElementById("ketquaxuly").selectedIndex == 2) {
             $("#dvsotienphat").show();
             $("#dvxulytangvat").show();
             $("#dvsothangtu").show();
+            $("#lblthoigianxuly").html("Thời gian xử lý( thời gian chuyển hồ sơ, kết án, đình chỉ, tạm đình chỉ...)");
             $("#dvnguyennhankhongxuly").hide();
         } else if (document.getElementById("ketquaxuly").selectedIndex == 3) {
             $("#dvnguyennhankhongxuly").show();
@@ -26,7 +28,7 @@
     }
 </script>
 <h2 style="margin-left:5px;">Nhập dữ liệu đối tượng vi phạm</h2>
-<i style="margin-left:5px;">Dấu * cho biết trường  bắt buộc phải nhập</i>
+<i style="margin-left:5px;">Dấu * cho biết trường  bắt buộc phải nhập, Hồ sơ này cập nhật lần cuối bởi <b>@Model.lastusernameedit lúc @Model.lastupdate</b></i>
 <a href="/hoso/Create?hosocode=@ViewBag.hosocode" target="_blank">+Thêm đồng phạm</a>
 @using (Html.BeginForm("Edit", "hoso", FormMethod.Post, new { id = "EditForm" })) {
     @Html.AntiForgeryToken()
@@ -42,8 +44,8 @@
             <div class="tab-pane fade active in" id="thongtin">
                 <div class="col-md-12">
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Họ tên * </label>
-                        <input name="hoten" type="text" tabindex="1" id="hoten" value="@Model.hoten" class="form-control" placeholder="Gõ tên đối tượng vi phạm, nếu không rõ ghi :hàng vô chủ"/>(<a onclick="uploadAnhDaiDien();" style="cursor:pointer;">Click để upload ảnh nếu có</a>)                
+                        <label for="room" style="width:auto;display:block;">Họ tên *(Nếu là hàng vô chủ ghi rõ hàng vô chủ, nếu là nhiều cá nhân ghi họ tên cách nhau bởi dấu ,) </label>
+                        <input name="hoten" type="text" tabindex="1" id="hoten" value="@Model.hoten" class="form-control" placeholder="Gõ tên đối tượng vi phạm, nếu không rõ ghi hàng vô chủ"/>(<a onclick="uploadAnhDaiDien();" style="cursor:pointer;">Click để upload ảnh nếu có</a>)                
                       </div>
                  </div>
                 <div id="anhdaidiendiv" style="display:none;">
@@ -60,7 +62,7 @@
                           <div class="form-group">
                             <label for="room" style="width:auto;display:block;">Ảnh đại diện</label>
                             <input name="anhdoituong" type="hidden" id="anhdoituong" value="@Model.anhdoituong" class="form-control" />                  
-                              <div id="imageShow" style="width:200px;height:126px;"><img src="@Model.anhdoituong" width="200" height="126"></div>
+                              <div id="imageShow" style="width:200px;height:126px;"><img src="@dvhd.Config.domain/@Model.anhdoituong" width="200" height="126"></div>
                           </div>
                      </div>
                  </div>
@@ -253,7 +255,7 @@
                           <div class="form-group">
                             <label for="room" style="width:auto;display:block;">Ảnh </label>
                             <input name="anhdongvat" type="hidden" id="anhdongvat" value="@Model.anhdongvat" class="form-control" />                  
-                              <div id="imageShowloaidongvat" style="width:200px;height:126px;"><img src="@Model.anhdongvat"  width="200" height="126"></div>
+                              <div id="imageShowloaidongvat" style="width:200px;height:126px;"><img src="@dvhd.Config.domain/@Model.anhdongvat"  width="200" height="126"></div>
                           </div>
                      </div>
                  </div>
@@ -300,7 +302,7 @@
                 <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Thông tin khác nếu có</label>
-                        <textarea name="motavipham" tabindex="19" id="motavipham"  rows="4" cols="20" class="form-control">@Model.motavipham</textarea>                
+                        <textarea name="motavipham" tabindex="29" id="motavipham"  rows="4" cols="20" class="form-control">@Model.motavipham</textarea>                
                       </div>
                  </div>
                  <div class="col-md-12">
@@ -318,15 +320,7 @@
                       </div>
                  </div>
             </div>
-            <div class="tab-pane fade" id="ketqua" >
-                <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Thời gian xử lý</label>
-                        <input name="thoigianxuly1" type="date" id="thoigianxuly1" value="@dvhd.Config.showDate(@Model.thoigianxuly)" class="form-control" placeholder="Nhập thời gian xử lý"/>
-                        <input name="thoigianxuly2" type="time" id="thoigianxuly2" value="@dvhd.Config.showTime(@Model.thoigianxuly)" class="form-control" placeholder="Nhập thời gian xử lý"/>   
-                        <input name="thoigianxuly" type="hidden" id="thoigianxuly" value=""/>                 
-                      </div>
-                 </div>
+            <div class="tab-pane fade" id="ketqua" >                
                  <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Kết quả xử lý</label>
@@ -368,6 +362,14 @@
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Nguyên nhân vì sao không xử lý</label>
                         <input name="nguyennhankhongxuly" type="text" tabindex="33" id="nguyennhankhongxuly" value="@Model.nguyennhankhongxuly"  class="form-control" placeholder="thiếu chứng cứ, thủ phạm bỏ trốn, hồ sơ chưa đầy đủ.." />                
+                      </div>
+                 </div>
+                <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;" id="lblthoigianxuly">Thời gian xử lý</label>
+                        <input name="thoigianxuly1" type="date" id="thoigianxuly1" value="@dvhd.Config.showDate(@Model.thoigianxuly)" tabindex="33" class="form-control" placeholder="Nhập thời gian xử lý"/>
+                        <input name="thoigianxuly2" type="time" id="thoigianxuly2" value="@dvhd.Config.showTime(@Model.thoigianxuly)" tabindex="33" class="form-control" placeholder="Nhập thời gian xử lý"/>   
+                        <input name="thoigianxuly" type="hidden" id="thoigianxuly" value=""/>                 
                       </div>
                  </div>
                 <script> selectKetQuaXuLy();</script>
@@ -419,6 +421,7 @@
                         <label for="room" style="width:auto;display:block;">Mô tả chi tiết và thông tin khác nếu có</label>
                         <textarea name="motachitietxuly" tabindex="40" id="motachitietxuly" value="" rows="4" cols="20" class="form-control">@Model.motachitietxuly</textarea>                
                         <input type="hidden" id="hosocode" name="hosocode" value="@ViewBag.hosocode">
+                        <input type="hidden" id="logs" name="logs" value="@Model.logs">
                       </div>
                  </div>
             </div>
@@ -452,7 +455,7 @@
             $("#progresslabelloaidongvat").text("Upload ảnh thành công!");
         }
     });
-    evt.preventDefault();
+    
     function changeKetQuaXuLy() {
         var content = "";
         //Nếu là Cơ quan điều tra thì có các hình thức xử lý
@@ -485,9 +488,26 @@
                 }
         $("#ketquaxulydiv").html(content);
     }
+    
+    function checkPerrmisionEditField(){
+        
+        var nguoixem='@ViewBag.userid';
+        var nguoisua='@Model.lastusereditid';
+        //alert("bang nhau");
+        if (nguoixem==nguoisua){
+            //$("#hoten").propAttr("readonly",false);
+            document.getElementById("hoten").readOnly=false;
+            
+        }else{
+            
+            document.getElementById("hoten").readOnly=true;
+        }
+    }
+    //checkPerrmisionEditField();
     function checkField() {
         //alert(document.getElementById("ngaysinh").value);
         //return;
+        
         if (document.getElementById("hoten").value == "") {
             alert("Nhập họ tên đối tượng");
             document.getElementById("hoten").focus();
@@ -508,5 +528,5 @@
         document.getElementById("tuyenduongvanchuyen").value = document.getElementById("batdau").value + " - " + document.getElementById("noiden").value;
         document.getElementById("EditForm").submit();
     }
-    
+    evt.preventDefault();
 </script>

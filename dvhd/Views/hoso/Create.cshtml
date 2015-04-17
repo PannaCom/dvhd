@@ -22,8 +22,8 @@
             <div class="tab-pane fade active in" id="thongtin" >
                 <div class="col-md-12" >
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Họ tên * </label>
-                        <input name="hoten" type="text" tabindex="1" id="hoten" value="" class="form-control" placeholder="Gõ tên đối tượng vi phạm, nếu không rõ ghi :hàng vô chủ"/>(<a onclick="uploadAnhDaiDien();" style="cursor:pointer;">Click để upload ảnh nếu có</a>)                
+                        <label for="room" style="width:auto;display:block;">Họ tên *(Nếu là hàng vô chủ ghi rõ hàng vô chủ, nếu là nhiều cá nhân ghi họ tên cách nhau bởi dấu ,) </label>
+                        <input name="hoten" type="text" tabindex="1" id="hoten" value="" class="form-control" placeholder="Gõ tên đối tượng vi phạm, nếu không rõ ghi hàng vô chủ"/>(<a onclick="uploadAnhDaiDien();" style="cursor:pointer;">Click để upload ảnh nếu có</a>)                
                       </div>
                  </div>
                 <div id="anhdaidiendiv" style="display:none;">
@@ -272,15 +272,7 @@
                       </div>
                  </div>
             </div>
-            <div class="tab-pane fade" id="ketqua" >
-                <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Thời gian xử lý</label>
-                        <input name="thoigianxuly1" type="date" id="thoigianxuly1" tabindex="32" value="" class="form-control" placeholder="Nhập thời gian xử lý"/>
-                        <input name="thoigianxuly2" type="time" id="thoigianxuly2" tabindex="32"  value="11:00:00" class="form-control" placeholder="Nhập thời gian xử lý"/>   
-                        <input name="thoigianxuly" type="hidden" id="thoigianxuly" value=""/>                 
-                      </div>
-                 </div>
+            <div class="tab-pane fade" id="ketqua" >                
                  <div class="col-md-12">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Kết quả xử lý</label>
@@ -316,11 +308,19 @@
                         <label for="room" style="width:auto;display:block;">Số tháng tù</label>
                         <input name="sothangtu" type="text" tabindex="33" id="sothangtu" value="0" class="form-control" placeholder="phạt bao nhiêu tháng tù nếu có.." onblur="checkPrice(this);"/>                
                       </div>
-                 </div>
+                 </div>               
                 <div class="col-md-12" style="display:none;" id="dvnguyennhankhongxuly">
                       <div class="form-group">
                         <label for="room" style="width:auto;display:block;">Nguyên nhân vì sao không xử lý</label>
                         <input name="nguyennhankhongxuly" type="text" tabindex="33" id="nguyennhankhongxuly"  class="form-control" placeholder="thiếu chứng cứ, thủ phạm bỏ trốn, hồ sơ chưa đầy đủ.." />                
+                      </div>
+                 </div>
+                 <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="room" style="width:auto;display:block;" id="lblthoigianxuly">Thời gian xử lý</label>
+                        <input name="thoigianxuly1" type="date" id="thoigianxuly1" tabindex="32" value="" class="form-control" placeholder="Nhập thời gian xử lý"/>
+                        <input name="thoigianxuly2" type="time" id="thoigianxuly2" tabindex="32"  value="11:00:00" class="form-control" placeholder="Nhập thời gian xử lý"/>   
+                        <input name="thoigianxuly" type="hidden" id="thoigianxuly" value=""/>                 
                       </div>
                  </div>
                 <div class="col-md-12">
@@ -463,12 +463,14 @@
         if (document.getElementById("ketquaxuly").selectedIndex == 1) {
             $("#dvsotienphat").show();
             $("#dvxulytangvat").show();
+            $("#lblthoigianxuly").html("Thời gian xử phạt");
             $("#dvsothangtu").hide();
             $("#dvnguyennhankhongxuly").hide();
         } else if (document.getElementById("ketquaxuly").selectedIndex == 2) {
             $("#dvsotienphat").show();
             $("#dvxulytangvat").show();
             $("#dvsothangtu").show();
+            $("#lblthoigianxuly").html("Thời gian xử lý( thời gian chuyển hồ sơ, kết án, đình chỉ, tạm đình chỉ...)");
             $("#dvnguyennhankhongxuly").hide();
         } else if (document.getElementById("ketquaxuly").selectedIndex == 3) {
             $("#dvsotienphat").hide();

@@ -151,6 +151,16 @@ namespace dvhd.Controllers
             {
                 if (hoso.xulytangvat == null) hoso.xulytangvat = "";
                 if (hoso.nguyennhankhongxuly == null) hoso.nguyennhankhongxuly = "";
+                try
+                {
+                    hoso.lastupdate = DateTime.Now;
+                    hoso.lastusereditid = (int?)int.Parse(Config.getCookie("userid"));
+                    hoso.lastusernameedit = Config.getCookie("username");
+                    hoso.logs = hoso.lastusernameedit+" cập nhật lúc " + hoso.lastupdate.ToString();
+                }
+                catch (Exception ex) { 
+
+                }
                 db.HoSoes.Add(hoso);
                 db.SaveChanges();
                 return RedirectToAction("AddMore", new { hosocode = hoso.hosocode });
@@ -169,6 +179,7 @@ namespace dvhd.Controllers
             if (!Config.checkPermission(Config.getCookie("logged"), "HS3")) return RedirectToAction("Permission", "Home");
             HoSo hoso = db.HoSoes.Find(id);
             ViewBag.hosocode = hoso.hosocode;
+            ViewBag.userid = Config.getCookie("userid");
             if (hoso.hosocode == null) ViewBag.hosocode = Guid.NewGuid().ToString();
             if (hoso == null)
             {
@@ -181,6 +192,7 @@ namespace dvhd.Controllers
         // POST: /hoso/Edit/5
 
         [HttpPost]
+        [ValidateInput(false)]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(HoSo hoso)
         {
@@ -188,6 +200,17 @@ namespace dvhd.Controllers
             {
                 if (hoso.xulytangvat == null) hoso.xulytangvat = "";
                 if (hoso.nguyennhankhongxuly == null) hoso.nguyennhankhongxuly = "";
+                try
+                {
+                    hoso.lastupdate = DateTime.Now;
+                    hoso.lastusereditid = (int?)int.Parse(Config.getCookie("userid"));
+                    hoso.lastusernameedit = Config.getCookie("username");
+                    hoso.logs = hoso.logs + "\r\n"+hoso.lastusernameedit+" cập nhật lúc " + hoso.lastupdate.ToString();
+                }
+                catch (Exception ex)
+                {
+
+                }
                 db.Entry(hoso).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
