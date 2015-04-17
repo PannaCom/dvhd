@@ -24,7 +24,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="hoten" Type="ntext" Nullable="false" />
+          <Property Name="hoten" Type="nvarchar" Nullable="false" MaxLength="550" />
           <Property Name="ngaysinh" Type="datetime" />
           <Property Name="quoctich" Type="nvarchar" MaxLength="150" />
           <Property Name="hokhauthuongtru" Type="nvarchar" MaxLength="500" />
@@ -121,8 +121,8 @@
           <EntitySet Name="DsDvhds" EntityType="dvhdModel.DsDvhd" />
           <EntitySet Name="TinhThanhs" EntityType="dvhdModel.TinhThanh" />
           <EntitySet Name="users" EntityType="dvhdModel.user" />
-          <EntitySet Name="HoSoes" EntityType="dvhdModel.HoSo" />
           <EntitySet Name="News" EntityType="dvhdModel.News" />
+          <EntitySet Name="HoSoes" EntityType="dvhdModel.HoSo" />
         </EntityContainer>
         <EntityType Name="DsDvhd">
           <Key>
@@ -149,12 +149,23 @@
           <Property Type="String" Name="groups" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="permission" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="title" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="image" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="des" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="fullcontent" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="datetime" Precision="3" />
+        </EntityType>
         <EntityType Name="HoSo">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="hoten" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="hoten" Nullable="false" MaxLength="550" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="ngaysinh" Precision="3" />
           <Property Type="String" Name="quoctich" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="hokhauthuongtru" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -214,17 +225,6 @@
           <Property Type="DateTime" Name="lastupdate" Precision="3" />
           <Property Type="String" Name="logs" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="News">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="title" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="image" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="des" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="fullcontent" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="datetime" Precision="3" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -255,6 +255,18 @@
                 <ScalarProperty Name="groups" ColumnName="groups" />
                 <ScalarProperty Name="pass" ColumnName="pass" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="dvhdModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="datetime" ColumnName="datetime" />
+                <ScalarProperty Name="fullcontent" ColumnName="fullcontent" />
+                <ScalarProperty Name="des" ColumnName="des" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -321,18 +333,6 @@
                 <ScalarProperty Name="quoctich" ColumnName="quoctich" />
                 <ScalarProperty Name="ngaysinh" ColumnName="ngaysinh" />
                 <ScalarProperty Name="hoten" ColumnName="hoten" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="News">
-            <EntityTypeMapping TypeName="dvhdModel.News">
-              <MappingFragment StoreEntitySet="News">
-                <ScalarProperty Name="datetime" ColumnName="datetime" />
-                <ScalarProperty Name="fullcontent" ColumnName="fullcontent" />
-                <ScalarProperty Name="des" ColumnName="des" />
-                <ScalarProperty Name="image" ColumnName="image" />
-                <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

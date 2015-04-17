@@ -121,35 +121,35 @@ function setResult2Table(result, type) {
         + '<th style="width:80px;">Tình Trạng Bảo Tồn</th><th style="width:70px;">Đơn Vị Tính</th>'
         + '<th style="width:250px;">Số Lượng Chi Tiết</th><th style="width:90px;">Trị Giá Tang Vật</th>'
 		+ '<th style="width:220px;">Tên Đơn Vị Bắt Giữ</th><th style="width:110px;">Phương Thức Vận Chuyển</th>'
-		+ '<th style="width:110px;">Tuyến Đường Vận Chuyển</th><th style="width:75px;">Ngày Vi Phạm</th></tr>';
+		+ '<th style="width:110px;">Tuyến Đường Vận Chuyển</th><th style="width:75px;">Ngày Vi Phạm</th><th style="width:75px;" class="noPrint"></th></tr>';
         $.each(result, function (idx, q) {
             htmlContent += '<tr><td>' + (idx + 1) + '</td><td><a href=\'/hoso/Details/' + q.id + '\' target=_blank>' + setDefaultValue(q.loaidongvat) + '</a></td><td>' + setDefaultValue(q.tinhtrangbaoton) + '</td><td>'
                 + setDefaultValue(q.donvitinh) + '</td><td>' + setDefaultValue(q.soluongchitiet) + '</td><td>' + setDefaultValue(q.trigiatangvat) + '</td><td>' 
                 + setDefaultValue(q.tendonvibatgiu) + '</td><td>' + setDefaultValue(q.phuongthucvanchuyen) + '</td><td>'
-                + setDefaultValue(q.tuyenduongvanchuyen) + '</td><td>' + formatDate(q.thoigianvipham) + '</td></tr>';
+                + setDefaultValue(q.tuyenduongvanchuyen) + '</td><td>' + formatDate(q.thoigianvipham) + '</td><td class="noPrint"><a href="/hoso/Edit/' + q.id + '" target=_blank>Sửa</a><a href="/hoso/Delete/' + q.id + '" target=_blank>-Xóa</a></td></tr>';
         });
     } else if (type == 2) { // Theo Dia Ban        
         htmlContent = '<tr><th style="width:22px;">Stt</th><th style="width:100px;">Tên Địa Bàn</th>'
-        + '<th style="width:120px;">Đối Tượng Vi Phạm</th><th style="width:260px;">Địa Chỉ Thường Trú</th>'
+        + '<th style="width:120px;">Đối Tượng Vi Phạm</th><th style="width:220px;">Địa Chỉ Thường Trú</th>'
         + '<th style="width:105px;">Hành Vi Vi Phạm</th><th style="width:150px;">Tên Loài</th>'
 		+ '<th style="width:250px;">Số Lượng Chi Tiết</th><th style="width:220px;">Tên Đơn Vị Bắt Giữ</th>'
-		+ '<th style="width:75px;">Ngày Vi Phạm</th></tr>';
+		+ '<th style="width:75px;">Ngày Vi Phạm</th><th style="width:75px;" class="noPrint"></th></tr>';
         $.each(result, function (idx, q) {            
             htmlContent += '<tr><td>' + (idx + 1) + '</td><td><a href="/hoso/Details/' + q.id + '" target=_blank>' + setDefaultValue(q.diaban) + '</a></td><td>' + setDefaultValue(q.hoten) + '</td><td>'
                 + setDefaultValue(q.choohientai) + '</td><td>' + setDefaultValue(q.hanhvivipham) + '</td><td>' + setDefaultValue(q.loaidongvat) + '</td><td>' 
                 + setDefaultValue(q.soluongchitiet) + '</td><td>' + setDefaultValue(q.tendonvibatgiu) + '</td><td>'
-                + formatDate(q.thoigianvipham) + '</td></tr>';
+                + formatDate(q.thoigianvipham) + '</td><td class="noPrint"><a href="/hoso/Edit/' + q.id + '" target=_blank>Sửa</a><a href="/hoso/Delete/' + q.id + '" target=_blank>-Xóa</a></td></tr>';
         });
     } else if (type == 3) { // Theo Doi Tuong
         htmlContent = '<tr><th style="width:22px;">Stt</th><th style="width:120px;">Đối Tượng Vi Phạm</th><th style="width:80px;">Số CMT/Hộ Chiếu</th>'
-        + '<th style="width:235px;">Địa Chỉ Thường Trú</th><th style="width:110px;">Thông Tin Thân Nhân</th>'
+        + '<th style="width:201px;">Địa Chỉ Thường Trú</th><th style="width:110px;">Thông Tin Thân Nhân</th>'
 		+ '<th style="width:200px;">Tiền Án Tiền Sự</th><th style="width:160px;">Hành Vi Vi Phạm</th>'
-		+ '<th style="width:150px;">Tên Loài</th><th style="width:150px;">Số Lượng Chi Tiết</th><th style="width:75px;">Ngày Vi Phạm</th></tr>';
+		+ '<th style="width:150px;">Tên Loài</th><th style="width:150px;">Số Lượng Chi Tiết</th><th style="width:75px;">Ngày Vi Phạm</th><th style="width:75px;" class="noPrint"></th></tr>';
         $.each(result, function (idx, q) {
             htmlContent += '<tr><td>' + (idx + 1) + '</td><td><a href="/hoso/Details/' + q.id + '" target=_blank>' + setDefaultValue(q.hoten) + '</a></td><td>' + setDefaultValue(q.cmthochieu) + '</td><td>'
                 + setDefaultValue(q.choohientai) + '</td><td>Họ tên Cha: ' + setDefaultValue(q.hotencha) + '<br/>Họ tên Mẹ: ' + setDefaultValue(q.hotenme) + '</td><td>'
                 + setDefaultValue(q.tienantiensu) + '</td><td>' + setDefaultValue(q.hanhvivipham) + '</td><td>'
-                + setDefaultValue(q.loaidongvat) + '</td><td>' + setDefaultValue(q.soluongchitiet) + '</td><td>' + formatDate(q.thoigianvipham) + '</td></tr>';
+                + setDefaultValue(q.loaidongvat) + '</td><td>' + setDefaultValue(q.soluongchitiet) + '</td><td>' + formatDate(q.thoigianvipham) + '</td><td class="noPrint"><a href="/hoso/Edit/' + q.id + '" target=_blank>Sửa</a><a href="/hoso/Delete/' + q.id + '" target=_blank>-Xóa</a></td></tr>';
         });
     } else if (type == 4) { // Theo Hinh Thuc Vi Pham
         htmlContent = '<tr><th style="width:22px;">Stt</th><th style="width:70px;">Hình Thức Vi Phạm</th><th style="width:70px;">Hành Vi Vi Phạm</th>'
@@ -178,24 +178,24 @@ function setResult2Table(result, type) {
         + '<th style="width:180px;">Địa Chỉ Liên Hệ</th><th style="width:70px;">Cán Bộ Xử Lý</th>'
         + '<th style="width:80px;">Cấp Bậc</th><th style="width:90px;">Đối Tượng Vi Phạm</th>'
 		+ '<th style="width:100px;">Loại Động Vật</th><th style="width:140px;">Số Lượng Chi Tiết</th>'
-		+ '<th style="width:75px;">Ngày Vi Phạm</th></tr>';
+		+ '<th style="width:75px;">Ngày Vi Phạm</th><th style="width:75px;" class="noPrint"></th></tr>';
         $.each(result, function (idx, q) {
             htmlContent += '<tr><td>' + (idx + 1) + '</td><td><a href=\'/hoso/Details/' + q.id + '\' target=_blank>' + setDefaultValue(q.tendonvibatgiu) + '</a></td><td>' + setDefaultValue(q.diachilienhe) + '</td><td>'
                 + setDefaultValue(q.hotencanboxuly) + '</td><td>' + setDefaultValue(q.capbac) + '</td><td>' + setDefaultValue(q.hoten) + '</td><td>'
                 + setDefaultValue(q.loaidongvat) + '</td><td>' + setDefaultValue(q.soluongchitiet) + '</td><td>'
-                + formatDate(q.thoigianvipham) + '</td></tr>';
+                + formatDate(q.thoigianvipham) + '</td><td class="noPrint"><a href="/hoso/Edit/' + q.id + '" target=_blank>Sửa</a><a href="/hoso/Delete/' + q.id + '" target=_blank>-Xóa</a></td></tr>';
         });
     } else if (type == 8) { // Theo Don Vi Xu Ly
         htmlContent = '<tr><th style="width:22px;">Stt</th><th style="width:140px;">Tên Đơn Vị Xử Lý</th>'
         + '<th style="width:80px;">Bị Can</th><th style="width:160px;">Hành Vi Vi Phạm</th>'
         + '<th style="width:100px;">Địa Điểm Vi Phạm</th>'
 		+ '<th style="width:100px;">Loại Động Vật</th><th style="width:180px;">Số Lượng Chi Tiết</th>'
-		+ '<th style="width:75px;">Ngày Vi Phạm</th></tr>';
+		+ '<th style="width:75px;">Ngày Vi Phạm</th><th style="width:75px;" class="noPrint"></th></tr>';
         $.each(result, function (idx, q) {
             htmlContent += '<tr><td>' + (idx + 1) + '</td><td><a href=\'/hoso/Details/' + q.id + '\' target=_blank>' + setDefaultValue(q.tendonvixuly) + '</a></td><td>' + setDefaultValue(q.hoten) + '</td><td>'
                 + setDefaultValue(q.hanhvivipham) + '</td><td>' + setDefaultValue(q.diadiem) + '</td><td>'
                 + setDefaultValue(q.loaidongvat) + '</td><td>' + setDefaultValue(q.soluongchitiet) + '</td><td>'
-                + formatDate(q.thoigianvipham) + '</td></tr>';
+                + formatDate(q.thoigianvipham) + '</td><td class="noPrint"><a href="/hoso/Edit/' + q.id + '" target=_blank>Sửa</a><a href="/hoso/Delete/' + q.id + '" target=_blank>-Xóa</a></td></tr>';
         });       
     }
     $("#tbResult").html(htmlContent);
