@@ -685,3 +685,9 @@ function slideImage() {
     if (indexSlide >= 5) indexSlide = 0;
     $("#dvslide").html("<img src=\"/Images/Slide/" + indexSlide + ".jpg\" width=\"100%\" height=\"300px\" style=\"border:1px solid #808080;border-radius:5px 5px 5px 5px;\">");
 }
+function showLoadingImage() {
+    $("#loadingImage").show();
+}
+function hideLoadingImage() {
+    $("#loadingImage").hide();
+}

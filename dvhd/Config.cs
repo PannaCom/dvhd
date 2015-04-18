@@ -17,12 +17,13 @@ namespace dvhd
 
         public static string domain = "http://wlc.binhyen.net";//"http://localhost:58509/"//"http://wlc.binhyen.net"//"http://localhost:58509//";
         public static int PageSize =15;
-      
+        public static string SlideImagePath = "/Images/Slide";
         public static string HoSoImagePath = "/Images/HoSo";
         public static string LogoImagePath = "/Images";
        
         public static int imgWidthNews = 300;
         public static int imgHeightNews = 400;
+        
         private static dvhdEntities db = new dvhdEntities();
         public static string[] hinhthucvipham = new string[]{ "hành chính","hình sự"};
         public static string[] ketquaxuly = new string[] { "chưa có", "hành chính","hình sự","không xử lý"};

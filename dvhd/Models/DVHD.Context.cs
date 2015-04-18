@@ -30,5 +30,6 @@ namespace dvhd.Models
         public DbSet<user> users { get; set; }
         public DbSet<News> News { get; set; }
         public DbSet<HoSo> HoSoes { get; set; }
+        public DbSet<banner> banners { get; set; }
     }
 }

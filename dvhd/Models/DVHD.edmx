@@ -6,12 +6,23 @@
     <edmx:StorageModels>
     <Schema Namespace="dvhdModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="dvhdModelStoreContainer">
+          <EntitySet Name="banner" EntityType="dvhdModel.Store.banner" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="DsDvhd" EntityType="dvhdModel.Store.DsDvhd" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="HoSo" EntityType="dvhdModel.Store.HoSo" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="News" EntityType="dvhdModel.Store.News" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TinhThanh" EntityType="dvhdModel.Store.TinhThanh" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="users" EntityType="dvhdModel.Store.users" store:Type="Tables" Schema="dbo" />
         </EntityContainer>
+        <EntityType Name="banner">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="images" Type="nvarchar" MaxLength="150" />
+          <Property Name="no" Type="int" />
+          <Property Name="link" Type="nvarchar" MaxLength="50" />
+          <Property Name="type" Type="int" />
+        </EntityType>
         <EntityType Name="DsDvhd">
           <Key>
             <PropertyRef Name="id" />
@@ -123,6 +134,7 @@
           <EntitySet Name="users" EntityType="dvhdModel.user" />
           <EntitySet Name="News" EntityType="dvhdModel.News" />
           <EntitySet Name="HoSoes" EntityType="dvhdModel.HoSo" />
+          <EntitySet Name="banners" EntityType="dvhdModel.banner" />
         </EntityContainer>
         <EntityType Name="DsDvhd">
           <Key>
@@ -224,6 +236,16 @@
           <Property Type="String" Name="lastusernameedit" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="lastupdate" Precision="3" />
           <Property Type="String" Name="logs" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="banner">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="images" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="no" />
+          <Property Type="String" Name="link" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="type" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -333,6 +355,17 @@
                 <ScalarProperty Name="quoctich" ColumnName="quoctich" />
                 <ScalarProperty Name="ngaysinh" ColumnName="ngaysinh" />
                 <ScalarProperty Name="hoten" ColumnName="hoten" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="banners">
+            <EntityTypeMapping TypeName="dvhdModel.banner">
+              <MappingFragment StoreEntitySet="banner">
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="link" ColumnName="link" />
+                <ScalarProperty Name="no" ColumnName="no" />
+                <ScalarProperty Name="images" ColumnName="images" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
