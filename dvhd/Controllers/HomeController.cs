@@ -37,6 +37,34 @@ namespace dvhd.Controllers
 
             //}
             //ViewBag.slide = list;
+            //Tin tuc
+            try
+            {
+                var p2 = (from q in db.News select q).OrderByDescending(o => o.id).Take(4);
+                var prs2 = p2.ToList();
+                string news = "";
+                string link = "";
+                for (int j = 0; j < prs2.Count; j++)
+                {
+                    link = "/News/Details/" + prs2[j].id;
+                    ///hotel/" + Config.unicodeToNoMark(prs[j].name) + "-" + ViewBag.fromdate + "-" + ViewBag.todate + "-" + prs[j].id + "
+                    news += "<div class=\"col-sm-3 single\" style=\"height:auto;\">";
+                    news += " <div ><a href=\"" + link + "\"><img src=\"" + Config.domain+prs2[j].image + "\" alt=\"" + prs2[j].title + "\" style=\"width:250px;height:200px;\" class=\"img-responsive\" /></a>";
+                    news += "  <div class=\"mask\">";
+                    news += "   <div class=\"main\">";
+                    news += "      <a href=\"" + link + "\"><b>" + prs2[j].title + "</b></a>";
+                    news += "      <p>" + prs2[j].des + "</p>";
+                    news += "    </div>";
+                    news += " </div>";
+                    news += " </div>";
+                    news += " </div>";
+
+                }
+                ViewBag.news = news;
+            }
+            catch (Exception ex2)
+            {
+            }
             return View();
         }
         public string getListBanner() {

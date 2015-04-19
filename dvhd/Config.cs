@@ -17,7 +17,7 @@ namespace dvhd
 
         public static string domain = "http://wlc.binhyen.net";//"http://localhost:58509/"//"http://wlc.binhyen.net"//"http://localhost:58509//";
         public static int PageSize =15;
-        public static int NewsPageSize = 3;
+        public static int NewsPageSize = 8;
         public static string SlideImagePath = "/Images/Slide";
         public static string HoSoImagePath = "/Images/HoSo";
         public static string LogoImagePath = "/Images";
