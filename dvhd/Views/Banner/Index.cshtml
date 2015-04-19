@@ -1,0 +1,39 @@
+﻿@model IEnumerable<dvhd.Models.banner>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="margin-left:10px;">Danh sách banner trên trang chủ</h2>
+
+<p style="margin-left:10px;">
+    @Html.ActionLink("Thêm mới", "Create")
+</p>
+<table style="margin-left:10px;border: 1px solid #36813c;border-collapse : collapse;width:100%;" >
+    <tr>
+        <th style="border: 1px solid #36813c; padding: 2px !important;">
+            Ảnh
+        </th>
+        <th style="border: 1px solid #36813c; padding: 2px !important;">
+            Vị trí xuất hiện
+        </th>        
+        <th style="border: 1px solid #36813c; padding: 2px !important;"></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td style="border: 1px solid #36813c; padding: 2px !important;">
+            <img src="@item.images" width="600px" height="300px">
+        </td>
+        <td align="center" style="border: 1px solid #36813c; padding: 2px !important;">
+            @item.no
+        </td>       
+        <td style="border: 1px solid #36813c; padding: 2px !important;">
+            @Html.ActionLink("Sửa", "Edit", new { id=item.id }) |            
+            @Html.ActionLink("Xóa", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

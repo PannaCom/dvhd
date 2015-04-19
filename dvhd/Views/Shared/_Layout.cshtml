@@ -101,10 +101,13 @@
             <ul class="dropdown-menu">
               <li><a href="/users/index"><img src="/Images/user.png" height="32" width="32" style="margin-right:2px;">Quản lý user</a></li>
               <li><a href="/users/changePass"><img src="/Images/pass.png" height="32" width="32" style="margin-right:2px;">Đổi mật khẩu</a></li>  
+              <li><a href="/Banner/Index"><img src="/Images/banner.png" height="32" width="32" style="margin-right:2px;">Đổi banner ảnh trang chủ</a></li>
+              <li><a href="/News/Index"><img src="/Images/news.png" height="32" width="32" style="margin-right:2px;">Quản lý tin tức</a></li>      
               <li><a href="/Home/Help"><img src="/Images/help/faq.png" height="32" width="32" style="margin-right:2px;">Trợ giúp</a></li>  
               <li><a href="/Home/Logout"><img src="/Images/exit.png" height="32" width="32" style="margin-right:2px;">Thoát hệ thống</a></li>  
             </ul>
-          </li>          
+          </li>
+          <li class="dropdown"><a href="/News/List" class="dropdown-toggle js-activated"><img src="/Images/news.png" height="32" width="32" style="margin-right:2px;">Tin tức</a></li>            
         </ul>
         <div style="float:right;margin-top:18px;">@Html.Raw(@dvhd.Config.getUserName())</div>
       </div>

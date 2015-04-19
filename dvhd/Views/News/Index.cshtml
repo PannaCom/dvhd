@@ -1,0 +1,66 @@
+﻿@model PagedList.IPagedList<dvhd.Models.News>
+@using PagedList.Mvc; 
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Danh sách Bài viết</h2>
+<div class="col-md-12">
+        <div class="form-group">
+                <label for="room" style="width:auto;display:block;">Tên bài viết</label>
+                <input name="name" type="text" id="name" value="@ViewBag.name" class="form-control" style="width:auto;"/>                                  
+                <button type="button" class="btn btn-info" onclick="search();">Tìm kiếm</button>  
+                <button type="button" class="btn  btn-lg btn-info" style="float:right;" onclick="add();">Thêm mới</button> 
+        </div>
+</div>
+<table style="margin-left:10px;border: 1px solid #36813c;border-collapse : collapse;width:100%;" >
+    <tr style="border-bottom:solid 1px #808080;">
+        <th style="border: 1px solid #36813c; padding: 2px !important;">
+            Tên bài viết
+        </th style="border: 1px solid #36813c; padding: 2px !important;">
+        <th style="border: 1px solid #36813c; padding: 2px !important;width:300px;">
+            Tóm tắt
+        </th>
+        <th style="border: 1px solid #36813c; padding: 2px !important;">
+            Ảnh
+        </th>
+        <th style="border: 1px solid #36813c; padding: 2px !important;"></th>
+    </tr>
+@foreach (var item in Model)
+{
+    <tr style="border-bottom:solid 1px #808080;">
+        <td style="border: 1px solid #36813c; padding: 2px !important;">
+            <h4>@Html.Raw(@item.title)</h4>
+        </td>
+        <td style="border: 1px solid #36813c; padding: 2px !important;width:300px;">
+            @Html.Raw(@item.des)
+        </td>
+        <td style="border: 1px solid #36813c; padding: 2px !important;">
+            <img src="@item.image" width="200px" height="200px">
+        </td>
+        <td style="border: 1px solid #36813c; padding: 2px !important;">
+            <b>@Html.ActionLink("Sửa", "Edit", new { id = item.id }) |            
+            @Html.ActionLink("Xóa", "Delete", new { id = item.id })|            
+            @Html.ActionLink("Xem", "Details", new { id = item.id })</b>
+        </td>
+    </tr>
+}
+</table>
+<div class="col-md-12">
+<ul class="pagination clearfix">
+        <li class="disabled"><a href="#">«</a></li>
+        @for (int i = 1; i <= Model.PageCount; i++)
+        { 
+                            <text><li><a href="/News/Index?name=@ViewBag.name&page=@i">@i</a></li></text>
+                        }
+</ul>
+</div>
+<script>
+    function search() {
+        window.location.href = "/News/Index?name=" + document.getElementById("name").value;
+    }
+    function add() {
+        window.location.href = "/News/Create";
+    }
+</script>

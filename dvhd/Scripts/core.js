@@ -1,4 +1,5 @@
 ﻿var indexSlide = 0;
+var arrSlide = [];
 function detectmob() {
 
     if (navigator.userAgent.match(/Android/i)
@@ -682,12 +683,37 @@ function getNoiCapHoChieu(value) {
 
 function slideImage() {
     indexSlide++;
-    if (indexSlide >= 5) indexSlide = 0;
-    $("#dvslide").html("<img src=\"/Images/Slide/" + indexSlide + ".jpg\" width=\"100%\" height=\"300px\" style=\"border:1px solid #808080;border-radius:5px 5px 5px 5px;\">");
+    if (indexSlide >= arrSlide.length) indexSlide = 0;
+    $("#dvslide").html("<img src=\"" + arrSlide[indexSlide] + "\" width=\"100%\" height=\"300px\" style=\"border:1px solid #808080;border-radius:5px 5px 5px 5px;\">");
 }
 function showLoadingImage() {
     $("#loadingImage").show();
 }
 function hideLoadingImage() {
     $("#loadingImage").hide();
+}
+function getListBanner() {
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/Home/getListBanner');
+    xhr.send();
+    var content = "";
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            //arrSlide = new Array(xhr.responseText);
+            //alert(xhr.responseText);
+            var news = '{"news":' + xhr.responseText + '}';
+            var json_parsed = $.parseJSON(news);
+            for (var i = 0; i < json_parsed.news.length; i++) {
+                if (json_parsed.news[i]) {
+                    var name = json_parsed.news[i].images;
+                    //alert(name);
+                    arrSlide[i] = name;
+                }
+            }
+            //if (value != "") $("#" + idoption).val(value);
+            document.getElementById("dvslide").innerHTML = "<img src=\"" + arrSlide[0] + "\" width=\"100%\" height=\"300px\" style=\"border:1px solid #808080;border-radius:5px 5px 5px 5px;\">";
+        }
+    }
+
 }

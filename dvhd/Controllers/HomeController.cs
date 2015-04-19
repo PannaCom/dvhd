@@ -13,24 +13,83 @@ namespace dvhd.Controllers
         public ActionResult Index()
         {
             if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Home");
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            //ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            //string list = "";
+            //try
+            //{
+            //    var p1 = (from q in db.banners select q).OrderBy(o => o.no).ThenByDescending(o => o.id).ThenBy(o => o.images).Take(5);
+            //    var p = p1.ToList();
+            //    for (int i = 0; i < p.Count; i++)
+            //    {
+            //        if (i <= 0)
+            //        {
+            //            list += "\"" + p[i].images + "\"";
+            //        }
+            //        else
+            //        {
+            //            list += ",\"" + p[i].images + "\"";
+            //        }
+            //    }
 
+            //}
+            //catch (Exception ex)
+            //{
+
+            //}
+            //ViewBag.slide = list;
             return View();
+        }
+        public string getListBanner() {
+            string list = "";
+            try
+            {
+                var p1 = (from q in db.banners where q.no>=0 select q).OrderBy(o => o.no).ThenByDescending(o => o.id).ThenBy(o => o.images).Take(5);
+                var p = p1.ToList();
+                //for (int i = 0; i < p.Count; i++)
+                //{
+                //    if (i <= 0)
+                //    {
+                //        list += "\"" + p[i].images + "\"";
+                //    }
+                //    else
+                //    {
+                //        list += ",\"" + p[i].images + "\"";
+                //    }
+                //}
+                return JsonConvert.SerializeObject(p);
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
         }
         public ActionResult Login()
         {
-            string slide = "";
-            string[] slogan = new string[3] { "Bảo vệ động vật hoang dã", "Quản lý hồ sơ vi phạm", "Báo cáo thống kê dữ liệu"};
-            for (int i = 0; i <= 2; i++)
-            {
-                slide += "<li data-transition=\"fade\" data-slotamount=\"7\" data-masterspeed=\"1500\">";
-                slide += "<img src=\"" + Config.domain + "/Images/Slide/" + i + ".jpg\" style=\"opacity:0;\" alt=\"slidebg1\"  data-bgfit=\"cover\" data-bgposition=\"left bottom\" data-bgrepeat=\"no-repeat\">";
-                //slide += " <div class=\"textlink\"><span style=\"text-shadow: 0 0 5px #0026ff, 0 0 7px #0026ff;margin: 10 10 10 10;color:#fff;display: block;font-size:18px;line-height: 1;-webkit-margin-before: 0.67em;-webkit-margin-after: 0.67em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;font-weight: bold;\">" + rshp[h].caption + "</span><b><a href=\"" + rshp[h].link + "\" style=\"color:#fff;font-weight:bold;font-size:12px;\">" + rshp[h].linktext + "</a></b></div>";
-                slide += " <div class=\"caption sft revolution-starhotel smalltext\" data-x=\"35\" data-y=\"30\" data-speed=\"800\" data-start=\"1700\" data-easing=\"easeOutBack\">";
-                slide += " <span style=\"text-shadow: 0 0 25px #000, 0 0 27px #000;margin: 10px 0;color:#fff;display: block;font-size:28px;line-height: 1;-webkit-margin-before: 0.67em;-webkit-margin-after: 0.67em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;font-weight:bold;\">" + slogan[i] + "</span><br>";
-                slide += " </div></li>";
-            }
-            ViewBag.slide = slide;
+            //string list = "";
+            //try
+            //{
+            //    var p1 = (from q in db.banners select q).OrderBy(o => o.no).ThenByDescending(o => o.id).ThenBy(o => o.images).Take(5);
+            //    var p = p1.ToList();
+
+            //    for (int i = 0; i < p.Count; i++)
+            //    {
+            //        if (i <= 0)
+            //        {
+            //            list += "\"" + p[i].images + "\"";
+            //        }
+            //        else
+            //        {
+            //            list += ",\"" + p[i].images + "\"";
+            //        }
+            //    }
+
+            //}
+            //catch (Exception ex)
+            //{
+
+            //}
+            //ViewBag.slide = list;
+            
             return View();
         }
         public ActionResult Logout()

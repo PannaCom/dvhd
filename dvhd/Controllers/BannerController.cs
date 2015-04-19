@@ -89,6 +89,7 @@ namespace dvhd.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.filename = Guid.NewGuid().ToString();
             return View(banner);
         }
 

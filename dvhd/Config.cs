@@ -17,10 +17,11 @@ namespace dvhd
 
         public static string domain = "http://wlc.binhyen.net";//"http://localhost:58509/"//"http://wlc.binhyen.net"//"http://localhost:58509//";
         public static int PageSize =15;
+        public static int NewsPageSize = 3;
         public static string SlideImagePath = "/Images/Slide";
         public static string HoSoImagePath = "/Images/HoSo";
         public static string LogoImagePath = "/Images";
-       
+        public static string NewsImagePath = "/Images/News";
         public static int imgWidthNews = 300;
         public static int imgHeightNews = 400;
         
@@ -421,6 +422,27 @@ namespace dvhd
                 return "";
             }
             return "";
+        }
+        public static string getListSlide() {
+            try
+            {
+                var p1 = (from q in db.banners select q).OrderBy(o => o.no).ThenByDescending(o=>o.id).ThenBy(o=>o.images).Take(5);
+                var p=p1.ToList();
+                string list="";
+                for (int i = 0; i < p.Count; i++) {
+                    if (i <= 0)
+                    {
+                        list += "\"" + p[i].images + "\"";
+                    }
+                    else {
+                        list += ",\"" + p[i].images + "\"";
+                    }
+                }
+                return list;
+            }
+            catch (Exception ex) {
+                return "";
+            }
         }
     }
 }

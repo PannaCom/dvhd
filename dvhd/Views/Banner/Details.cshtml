@@ -1,0 +1,44 @@
+﻿@model dvhd.Models.banner
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>banner</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.images)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.images)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.no)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.no)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.link)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.link)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.type)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.type)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
