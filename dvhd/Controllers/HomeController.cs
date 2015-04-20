@@ -71,8 +71,8 @@ namespace dvhd.Controllers
             string list = "";
             try
             {
-                var p1 = (from q in db.banners where q.no>=0 select q).OrderBy(o => o.no).ThenByDescending(o => o.id).ThenBy(o => o.images).Take(5);
-                var p = p1.ToList();
+                var p1 = (from q in db.banners where q.no >= 0 && q.type == 0 select new { images=q.images,no=q.no,id=q.id }).OrderBy(o => o.no).ThenByDescending(o => o.id).ThenBy(o => o.images);
+                //var p = p1.ToList();
                 //for (int i = 0; i < p.Count; i++)
                 //{
                 //    if (i <= 0)
@@ -84,7 +84,7 @@ namespace dvhd.Controllers
                 //        list += ",\"" + p[i].images + "\"";
                 //    }
                 //}
-                return JsonConvert.SerializeObject(p);
+                return JsonConvert.SerializeObject(p1.ToList());
             }
             catch (Exception ex)
             {

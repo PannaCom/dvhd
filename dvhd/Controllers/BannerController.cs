@@ -18,7 +18,7 @@ namespace dvhd.Controllers
 
         public ActionResult Index()
         {
-            return View(db.banners.ToList());
+            return View(db.banners.OrderBy(o=>o.no).ThenByDescending(o=>o.id).ToList());
         }
 
         //
