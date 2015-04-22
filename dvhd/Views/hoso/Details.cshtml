@@ -9,25 +9,8 @@
     var thoigianvipham = Model.thoigianvipham.HasValue == true ? Model.thoigianvipham.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture) : "";
     var thoigianxuly = Model.thoigianxuly.HasValue == true ? Model.thoigianxuly.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture) : "";
 }
-<style id="styleDetail" type="text/css">
-    /* Ban In css*/
-    .tbBanIn {
-        font-size: 13px;
-        font-family: "Roboto", "Arial", "sans-serif !important";
-        width:99%;
-        border: 1px solid #36813c;
-        border-collapse: collapse;
-        table-layout:fixed;
-    }
-    .tbBanIn td, .tbBanIn th {
-        border: 1px solid #36813c;
-        padding: 2px !important;
-    }
-    .tbBanIn label {
-        font-weight:bold;
-        margin: 0 !important;
-    }
-</style>
+
+<link rel="stylesheet" href="~/Content/css/printStyle.css" />
 
 <div id="divDetail" style="width: 100%; padding: 0 10px; margin-bottom:10px;">
     <h2>Thông Tin Chi Tiết</h2>
@@ -163,7 +146,7 @@
         @Html.DisplayFor(model => model.tinhtrangbaoton)
     </div>*@
     
-    <h4><u>Xử Lý Vi Phạm</u></h4>
+    <h4><u>Kết Quả Xử Lý</u></h4>
     <table class="tbBanIn">
         <tr>
             <td style="width:15%"><label>Thời Gian Xử Lý :</label></td> <td style="width:15%"> @thoigianxuly </td>
@@ -197,33 +180,34 @@
             <td colspan="2"></td>         
         </tr>
         <tr>
-            <td><label>Kết Quả Xử Lý Chi Tiết :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.ketquaxulychitiet) </td>
+            <td><label>Chi Tiết :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.ketquaxulychitiet) </td>
         </tr>
         <tr>
-            <td><label>Mô Tả Xử Lý :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.motachitietxuly) </td>
+            <td><label>Thông Tin Khác :</label></td> <td colspan="3"> @Html.DisplayFor(model => model.motachitietxuly) </td>
         </tr>
     </table>          
 </div>
 
 <div style="width:100%;text-align:center;">
-    <input type="button" value="In Thông Tin Chi Tiết" onclick="printDetails();" />
+    <input type="button" value="In Thông Tin Chi Tiết" onclick="printDetails();" class="noPrint"/>
     
 </div>
 
 <script type="text/javascript">
     function printDetails() {
-        var mywindow = window.open('', 'Thông Tin Chi Tiết', 'height=650,width=1200');
-        mywindow.document.write('<html><head><title>Thông Tin Chi Tiết</title>');
-        mywindow.document.write('<style type="text/css">' + $("#styleDetail").html() + '</style>');
-        mywindow.document.write('</head><body >');
-        mywindow.document.write($("#divDetail").html());
-        mywindow.document.write('</body></html>');
+        //var mywindow = window.open('', 'Thông Tin Chi Tiết', 'height=650,width=1200');
+        //mywindow.document.write('<html><head><title>Thông Tin Chi Tiết</title>');
+        //mywindow.document.write('<style type="text/css">' + $("#styleDetail").html() + '</style>');
+        //mywindow.document.write('</head><body >');
+        //mywindow.document.write($("#divDetail").html());
+        //mywindow.document.write('</body></html>');
 
-        mywindow.document.close(); // necessary for IE >= 10
-        mywindow.focus(); // necessary for IE >= 10
+        //mywindow.document.close(); // necessary for IE >= 10
+        //mywindow.focus(); // necessary for IE >= 10
 
-        mywindow.print();
-        mywindow.close();
+        //mywindow.print();
+        //mywindow.close();
+        window.print();
     }
 
     function createPDF() {

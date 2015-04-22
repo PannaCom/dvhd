@@ -497,7 +497,7 @@ function getListTinhThanh(idoption,value) {
             var news = '{"news":' + xhr.responseText + '}';
             var json_parsed = $.parseJSON(news);
 
-            $("#"+idoption).html("");
+            $("#" + idoption).html("<option value='Chưa rõ'>Chưa rõ</option>");
             for (var i = 0; i < json_parsed.news.length; i++) {
                 if (json_parsed.news[i]) {
                     var name = json_parsed.news[i];

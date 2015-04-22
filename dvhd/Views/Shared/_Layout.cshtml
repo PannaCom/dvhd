@@ -60,6 +60,7 @@
     <div class="row">
       <div style="width:100%;text-align:center;margin-top:0px;padding-top:0px;">
             <div id="logo" class="col-xs-2"><a href="/Home/"><img src="/Images/logomain.jpg" id="default-logo"  style="height:74px"></a></div><div class="col-xs-9" style="margin-left:0px;padding-left:0px;"><H2 style="margin-top:27px;">CƠ SỞ DỮ LIỆU VI PHẠM PHÁP LUẬT BẢO VỆ ĐỘNG VẬT HOANG DÃ</H2></div>
+            
       </div>
     </div>
   </div>
@@ -72,7 +73,7 @@
     <div class="container">      
       <div id="navbar-collapse-grid" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">         
-          <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle js-activated"><img src="/Images/profile.png" height="32" width="32" style="margin-right:2px;">Quản lý hồ sơ vi phạm<b class="caret"></b></a>
+          <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle js-activated"><img src="/Images/profile.png" height="32" width="32" style="margin-right:2px;">Hồ sơ vi phạm<b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="/hoso/Index"><img src="/Images/people.png" height="32" width="32" style="margin-right:2px;">Danh sách hồ sơ</a></li>
               <li><a href="/hoso/Create"><img src="/Images/create.png" height="32" width="32" style="margin-right:2px;">Nhập hồ sơ đối tượng vi phạm</a></li>
@@ -102,14 +103,14 @@
               <li><a href="/users/index"><img src="/Images/user.png" height="32" width="32" style="margin-right:2px;">Quản lý user</a></li>
               <li><a href="/users/changePass"><img src="/Images/pass.png" height="32" width="32" style="margin-right:2px;">Đổi mật khẩu</a></li>  
               <li><a href="/Banner/Index"><img src="/Images/banner.png" height="32" width="32" style="margin-right:2px;">Đổi banner ảnh trang chủ</a></li>
-              <li><a href="/News/Index"><img src="/Images/news.png" height="32" width="32" style="margin-right:2px;">Quản lý tin tức</a></li>      
-              <li><a href="/Home/Help"><img src="/Images/help/faq.png" height="32" width="32" style="margin-right:2px;">Trợ giúp</a></li>  
+              <li><a href="/News/Index"><img src="/Images/news.png" height="32" width="32" style="margin-right:2px;">Quản lý tin tức</a></li>
               <li><a href="/Home/Logout"><img src="/Images/exit.png" height="32" width="32" style="margin-right:2px;">Thoát hệ thống</a></li>  
             </ul>
           </li>
           <li class="dropdown"><a href="/News/List" class="dropdown-toggle js-activated"><img src="/Images/news.png" height="32" width="32" style="margin-right:2px;">Tin tức</a></li>            
+          <li class="dropdown"><a href="/Home/Help" class="dropdown-toggle js-activated"><img src="/Images/help/faq.png" height="32" width="32" style="margin-right:2px;">Trợ giúp</a></li>  
         </ul>
-        <div style="float:right;margin-top:18px;">@Html.Raw(@dvhd.Config.getUserName())</div>
+        <div style="float:right;margin-top:21px;">@Html.Raw(@dvhd.Config.getUserName())</div>
       </div>
     </div>
   </div>
@@ -120,7 +121,7 @@
             @RenderBody()
         </div>
         <!-- Footer -->
-<footer style="margin-top:20px;height:auto;display:block;position:relative;float:left;width:100%;">
+<footer style="margin-top:20px;height:auto;display:block;position:relative;float:left;width:100%;" >
   
   <div class="footer-bottom noPrint" style="margin-top:0px;padding:20px 0;">
     <div class="container">

@@ -15,7 +15,7 @@ namespace dvhd
     public class Config
     {
 
-        public static string domain = "http://wlc.binhyen.net";//"http://localhost:58509/"//"http://wlc.binhyen.net"//"http://localhost:58509//";
+        public static string domain = "http://wlc.vea.gov.vn/";//"http://localhost:58509/"//"http://wlc.binhyen.net"//"http://localhost:58509//";
         public static int PageSize =15;
         public static int NewsPageSize = 8;
         public static string SlideImagePath = "/Images/Slide";
