@@ -58,7 +58,7 @@
                  </div>
                 <div class="col-md-12">
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Hộ khẩu thường trú *</label>
+                        <label for="room" style="width:auto;display:block;">Hộ khẩu thường trú </label>
                         <input name="hokhauthuongtru" type="text" tabindex="4" id="hokhauthuongtru" value="" class="form-control" placeholder="Nhập hộ khẩu thường trú"/>                
                       </div>
                  </div>
@@ -144,7 +144,7 @@
             <div class="tab-pane fade" id="hanhvi" >
                 <div class="col-md-12">
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Thời gian vi phạm</label>
+                        <label for="room" style="width:auto;display:block;">Thời gian vi phạm *</label>
                         <input name="thoigianvipham1" type="date" tabindex="16" id="thoigianvipham1" value="" class="form-control" placeholder="Nhập thời gian vi phạm"/>
                         <input name="thoigianvipham2" type="time" tabindex="16" id="thoigianvipham2" value="11:00:00" class="form-control" placeholder="Nhập thời gian vi phạm"/>
                         <input type="hidden" id="thoigianvipham" name="thoigianvipham"/>                    
@@ -170,7 +170,7 @@
                  </div>
                  <div class="col-md-12">
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Hành vi vi phạm(điều 190 Bộ luật Hình Sự) </label>
+                        <label for="room" style="width:auto;display:block;">Hành vi vi phạm (chọn các hình thức vi phạm bên dưới, nếu không có nhập mới) *</label>
                         @Html.Partial("~/Views/Shared/_HanhViViPham.cshtml")                  
                       </div>
                  </div>
@@ -377,7 +377,7 @@
             </div>
         </div>
             <div class="form-group" style="text-align:center;">
-                <input type="button" value="THÊM HỒ SƠ" onclick="checkField();" style="font-weight:bold;"/>
+                <input type="button" value="THÊM HỒ SƠ" id="btnaddfield" onclick="checkField();" style="font-weight:bold;"/>
             </div>
        </div>
     </fieldset>
@@ -439,17 +439,33 @@
         $("#ketquaxulydiv").html(content);
     }
     function checkField() {
-        if (document.getElementById("hoten").value == "") {
+        if (document.getElementById("hoten").value.trim() == "") {
             alert("Nhập họ tên đối tượng");
             document.getElementById("hoten").focus();
             return;
         }
-        if (document.getElementById("hokhauthuongtru").value == "" && document.getElementById("hoten").value !="hàng vô chủ") {
-            alert("Nhập hộ khẩu thường trú");
-            document.getElementById("hokhauthuongtru").focus();
+        //if (document.getElementById("hokhauthuongtru").value == "" && document.getElementById("hoten").value !="hàng vô chủ") {
+        //    alert("Nhập hộ khẩu thường trú");
+        //    document.getElementById("hokhauthuongtru").focus();
+        //    return;
+        //}
+        if (document.getElementById("thoigianvipham1").value.trim() == "") {
+            alert("Nhập thời gian vi phạm");
+            document.getElementById("thoigianvipham1").focus();
             return;
         }
-        
+
+        if (document.getElementById("loaidongvat").value.trim() == "") {
+            alert("Nhập loài động vật bị vi phạm");
+            document.getElementById("loaidongvat").focus();
+            return;
+        }
+         
+        if (document.getElementById("hanhvivipham").value.trim() == "") {
+            alert("Nhập hành vi vi phạm");
+            document.getElementById("hanhvivipham").focus();
+            return;
+        }
         if ($("#thoigianvipham1").val() != "" && $("#thoigianvipham2").val() != "") {
             $("#thoigianvipham").val($("#thoigianvipham1").val() +" "+ $("#thoigianvipham2").val());
         }
@@ -457,6 +473,7 @@
             $("#thoigianxuly").val($("#thoigianxuly1").val() + " " + $("#thoigianxuly2").val());
         }
         document.getElementById("tuyenduongvanchuyen").value = document.getElementById("batdau").value + " - " + document.getElementById("noiden").value;
+        document.getElementById("btnaddfield").disabled = true;
         document.getElementById("EditForm").submit();
     }
     function selectKetQuaXuLy() {

@@ -163,8 +163,8 @@ namespace dvhd.Controllers
                 }
                 db.HoSoes.Add(hoso);
                 db.SaveChanges();
-                return RedirectToAction("AddMore", new { hosocode = hoso.hosocode });
-                //return RedirectToAction("Index");
+                //return RedirectToAction("AddMore", new { hosocode = hoso.hosocode });
+                return RedirectToAction("Index");
             }
 
             return View(hoso);

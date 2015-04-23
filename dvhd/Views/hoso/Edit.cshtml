@@ -30,14 +30,14 @@
 <div style="z-index:1001;background-color:#b6ff00;border:1px solid #b6ff00;display:none;position:fixed;top:40%;left:20%;right:20%;width:500px;float:left;" id="dvedittext">Nhập bổ sung dữ liệu(<b>user @Model.lastusernameedit</b> đã nhập trước đó) <input type="text" id="edittext" size="50"><input type="button" value="Bổ sung" onclick="updatevalue();"><input type="button" value="Bỏ qua" onclick="hideedit();"></div>
 <h2 style="margin-left:5px;">Nhập dữ liệu đối tượng vi phạm</h2>
 <p><i style="margin-left:5px;">Dấu * cho biết trường  bắt buộc phải nhập, Hồ sơ này cập nhật lần cuối bởi <b>@Model.lastusernameedit lúc @Model.lastupdate</b></i>
-<a href="/hoso/Create?hosocode=@ViewBag.hosocode" target="_blank">+Thêm đồng phạm</a></p>
+<a href="/hoso/Create?hosocode=@ViewBag.hosocode" target="_blank">&nbsp;&nbsp;(<img src="/Images/group.png" width="32" height="32">Thêm đồng phạm nếu có)</a></p>
 <p><i><b>Nếu bạn không phải là người cập nhật trường dữ liệu nào đó, khi muốn bổ sung dữ liệu, click lên trường đó sẽ hiện ra ô để nhập bổ sung</b></i></p>
 @using (Html.BeginForm("Edit", "hoso", FormMethod.Post, new { id = "EditForm" })) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(false)
     <fieldset>
         <div class="col-md-11" style="border:1px solid #36813c;margin-left:5px;">
-        <ul class="nav nav-tabs" style="padding-left:6px;">
+        <ul class="nav nav-tabs" style="padding-left:6px;" id="mytab">
           <li class="active"><a href="#thongtin" data-toggle="tab" aria-expanded="true">Thông tin đối tượng vi phạm</a></li>
           <li class=""><a href="#hanhvi" data-toggle="tab" aria-expanded="false">Hành vi vi phạm</a></li>
           <li class=""><a href="#ketqua" data-toggle="tab" aria-expanded="false">Kết quả xử lý</a></li>
@@ -87,7 +87,7 @@
                  </div>
                 <div class="col-md-12">
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Hộ khẩu thường trú *</label>
+                        <label for="room" style="width:auto;display:block;">Hộ khẩu thường trú </label>
                         <input name="hokhauthuongtru" type="text" tabindex="4" id="hokhauthuongtru" value="@Model.hokhauthuongtru" class="form-control" placeholder="Nhập hộ khẩu thường trú" onclick="editmore(this);"/>                
                       </div>
                  </div>
@@ -178,7 +178,7 @@
             <div class="tab-pane fade" id="hanhvi" >
                 <div class="col-md-12">
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Thời gian vi phạm</label>
+                        <label for="room" style="width:auto;display:block;">Thời gian vi phạm *</label>
                         <input name="thoigianvipham1" type="date" tabindex="16" id="thoigianvipham1" value="@dvhd.Config.showDate(@Model.thoigianvipham)" class="form-control" placeholder="Nhập thời gian vi phạm"/>
                         <input name="thoigianvipham2" type="time" tabindex="16" id="thoigianvipham2" value="@dvhd.Config.showTime(@Model.thoigianvipham)" class="form-control" placeholder="Nhập thời gian vi phạm"/>
                         <input type="hidden" id="thoigianvipham" name="thoigianvipham"/>                    
@@ -205,7 +205,7 @@
                  </div>
                  <div class="col-md-12">
                       <div class="form-group">
-                        <label for="room" style="width:auto;display:block;">Hành vi vi phạm(điều 190 Bộ luật Hình Sự)</label>
+                        <label for="room" style="width:auto;display:block;">Hành vi vi phạm (chọn các hình thức vi phạm bên dưới, nếu không có nhập mới) *</label>
                         @Html.Partial("~/Views/Shared/_HanhViViPham.cshtml")    
                         <script>document.getElementById("hanhvivipham").value = "@Html.Raw(@Model.hanhvivipham)";</script>               
                       </div>
@@ -424,7 +424,7 @@
             </div>
         </div>
         <div class="form-group" style="text-align:center;">
-                <input type="button" value="CẬP NHẬT HỒ SƠ" onclick="checkField();" style="font-weight:bold;"/>
+                <input type="button" value="CẬP NHẬT HỒ SƠ" id="btnaddfield" onclick="checkField();" style="font-weight:bold;"/>
             </div>
         </div>
     </fieldset>
@@ -529,17 +529,37 @@
         //alert(document.getElementById("ngaysinh").value);
         //return;
         
-        if (document.getElementById("hoten").value == "") {
+        if (document.getElementById("hoten").value.trim() == "") {
             alert("Nhập họ tên đối tượng");
             document.getElementById("hoten").focus();
             return;
         }
-        if (document.getElementById("hokhauthuongtru").value == "" && document.getElementById("hoten").value !="hàng vô chủ") {
-            alert("Nhập hộ khẩu thường trú");
-            document.getElementById("hokhauthuongtru").focus();
+        //if (document.getElementById("hokhauthuongtru").value == "" && document.getElementById("hoten").value !="hàng vô chủ") {
+        //    alert("Nhập hộ khẩu thường trú");
+        //    document.getElementById("hokhauthuongtru").focus();
+        //    return;
+        //}
+        if (document.getElementById("thoigianvipham1").value.trim() == "") {
+            alert("Nhập thời gian vi phạm");
+            document.getElementById("thoigianvipham1").focus();
             return;
         }
-       
+        if (document.getElementById("loaidongvat").value.trim() == "") {
+            alert("Nhập loài động vật bị vi phạm");
+            //$('#hanhvi').tab('show');         
+            //alert($('#hanhvi').html());
+            //var $tab = $('[data-toggle="tab"][href="#hanhvi"]');
+            //$tab.show();
+            //$tab.tab('show');  
+            document.getElementById("loaidongvat").focus();
+            return;
+        }
+        if (document.getElementById("hanhvivipham").value.trim() == "") {
+            alert("Nhập hành vi vi phạm");
+            document.getElementById("hanhvivipham").focus();
+            return;
+        }
+
         if ($("#thoigianvipham1").val() != "" && $("#thoigianvipham2").val() != "") {
             $("#thoigianvipham").val($("#thoigianvipham1").val() + " " + $("#thoigianvipham2").val());
         }
@@ -547,6 +567,7 @@
             $("#thoigianxuly").val($("#thoigianxuly1").val() + " " + $("#thoigianxuly2").val());
         }
         document.getElementById("tuyenduongvanchuyen").value = document.getElementById("batdau").value + " - " + document.getElementById("noiden").value;
+        document.getElementById("btnaddfield").disabled = true;
         document.getElementById("EditForm").submit();
     }
     evt.preventDefault();

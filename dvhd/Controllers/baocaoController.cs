@@ -134,7 +134,7 @@ namespace dvhd.Controllers
             if (type != null && type != string.Empty)
             {
                 var p = (from q in db.HoSoes
-                         where q.ketquaxuly.Contains(type) && q.thoigianxuly >= fdate && q.thoigianxuly <= tdate && q.sotienphat>=sotienphat && q.sothangtu>=sothangtu && q.xulytangvat.Contains(xulytangvat) && q.nguyennhankhongxuly.Contains(nguyennhankhongxuly) select q).OrderBy(o => o.ketquaxuly).ThenBy(o => o.thoigianxuly).ToList();                
+                         where q.ketquaxuly.Contains(type) && ((q.thoigianxuly >= fdate && q.thoigianxuly <= tdate) || q.thoigianxuly==null) && q.sotienphat>=sotienphat && q.sothangtu>=sothangtu && q.xulytangvat.Contains(xulytangvat) && q.nguyennhankhongxuly.Contains(nguyennhankhongxuly) select q).OrderBy(o => o.ketquaxuly).ThenBy(o => o.thoigianxuly).ToList();                
                 return View(p);
             }
             return View();

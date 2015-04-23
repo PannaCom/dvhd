@@ -163,7 +163,7 @@ namespace dvhd.Controllers
                 tdate = Config.convertToDateTimeFromString(todate);
             } 
             var p = (from q in db.HoSoes
-                     where q.loaidongvat.Contains(keyword) && q.thoigianvipham>=fdate && q.thoigianvipham<=tdate
+                     where q.loaidongvat.Contains(keyword) && ((q.thoigianvipham >= fdate && q.thoigianvipham <= tdate) || q.thoigianvipham == null)
                      orderby q.loaidongvat
                      select new
                      {
@@ -199,7 +199,7 @@ namespace dvhd.Controllers
                 var quan = quanTinh[0].Trim();
                 var tinh = quanTinh[1].Trim();
                 var p1 = (from q in db.HoSoes
-                          where q.quanvipham.Contains(quan) && q.tinhvipham.Contains(tinh) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
+                          where q.quanvipham.Contains(quan) && q.tinhvipham.Contains(tinh) && ((q.thoigianvipham >= fdate && q.thoigianvipham <= tdate) || q.thoigianvipham == null)
                           orderby q.tinhvipham, q.quanvipham
                           select new
                           {
@@ -216,7 +216,7 @@ namespace dvhd.Controllers
                 return JsonConvert.SerializeObject(p1.ToList());
             }
             var p2 = (from q in db.HoSoes
-                      where (q.quanvipham.Contains(keyword) || q.tinhvipham.Contains(keyword)) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
+                      where (q.quanvipham.Contains(keyword) || q.tinhvipham.Contains(keyword)) && ((q.thoigianvipham >= fdate && q.thoigianvipham <= tdate) || q.thoigianvipham == null)
                       orderby q.tinhvipham, q.quanvipham
                       select new
                       {
@@ -249,7 +249,7 @@ namespace dvhd.Controllers
             if ((keyword!="" && keyword!=null) && ((int.TryParse(keyword.Substring(0, 1), out rs) || (keyword.Length > 1 && Char.IsLetter(keyword, 0) && int.TryParse(keyword.Substring(1, 1), out rs)))))
             {                
                 var p1 = (from q in db.HoSoes
-                          where q.cmthochieu.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
+                          where q.cmthochieu.Contains(keyword) && ((q.thoigianvipham >= fdate && q.thoigianvipham <= tdate) || q.thoigianvipham == null)
                          orderby q.cmthochieu
                          select new
                          {
@@ -269,7 +269,7 @@ namespace dvhd.Controllers
             }
 
             var p2 = (from q in db.HoSoes
-                      where q.hoten.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
+                      where q.hoten.Contains(keyword) && ((q.thoigianvipham >= fdate && q.thoigianvipham <= tdate) || q.thoigianvipham == null)
                      orderby q.hoten
                      select new
                      {
@@ -301,7 +301,7 @@ namespace dvhd.Controllers
                 tdate = Config.convertToDateTimeFromString(todate);
             } 
             var p = (from q in db.HoSoes
-                     where q.hinhthucvipham.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
+                     where q.hinhthucvipham.Contains(keyword) && ((q.thoigianvipham >= fdate && q.thoigianvipham <= tdate) || q.thoigianvipham == null)
                      orderby q.loaidongvat
                      select new
                      {
@@ -333,7 +333,7 @@ namespace dvhd.Controllers
                 tdate = Config.convertToDateTimeFromString(todate);
             } 
             var p = (from q in db.HoSoes
-                     where q.hanhvivipham.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
+                     where q.hanhvivipham.Contains(keyword) && ((q.thoigianvipham >= fdate && q.thoigianvipham <= tdate) || q.thoigianvipham == null)
                      orderby q.loaidongvat
                      select new
                      {
@@ -384,7 +384,7 @@ namespace dvhd.Controllers
                 tdate = Config.convertToDateTimeFromString(todate);
             }
             var p = (from q in db.HoSoes
-                     where q.tendonvibatgiu.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
+                     where q.tendonvibatgiu.Contains(keyword) && ((q.thoigianvipham >= fdate && q.thoigianvipham <= tdate) || q.thoigianvipham == null)
                      select new
                      {
                          q.id,
@@ -413,7 +413,7 @@ namespace dvhd.Controllers
                 tdate = Config.convertToDateTimeFromString(todate);
             }
             var p = (from q in db.HoSoes
-                     where q.tendonvixuly.Contains(keyword) && q.thoigianvipham >= fdate && q.thoigianvipham <= tdate
+                     where q.tendonvixuly.Contains(keyword) && ((q.thoigianvipham >= fdate && q.thoigianvipham <= tdate) || q.thoigianvipham == null)
                      select new
                      {
                          q.id,
