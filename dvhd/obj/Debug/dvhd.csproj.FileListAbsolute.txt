@@ -13,7 +13,6 @@ D:\Project\GitHub\DVHD\branches\svn\dvhd\bin\Microsoft.Data.OData.dll
 D:\Project\GitHub\DVHD\branches\svn\dvhd\bin\Microsoft.Web.Infrastructure.dll
 D:\Project\GitHub\DVHD\branches\svn\dvhd\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
 D:\Project\GitHub\DVHD\branches\svn\dvhd\bin\Microsoft.Web.WebPages.OAuth.dll
-D:\Project\GitHub\DVHD\branches\svn\dvhd\bin\Newtonsoft.Json.dll
 D:\Project\GitHub\DVHD\branches\svn\dvhd\bin\PagedList.dll
 D:\Project\GitHub\DVHD\branches\svn\dvhd\bin\PagedList.Mvc.dll
 D:\Project\GitHub\DVHD\branches\svn\dvhd\bin\System.Net.Http.Formatting.dll
@@ -34,7 +33,6 @@ D:\Project\GitHub\DVHD\branches\svn\dvhd\bin\WebMatrix.WebData.dll
 D:\Project\GitHub\DVHD\branches\svn\dvhd\bin\PagedList.xml
 D:\Project\GitHub\DVHD\branches\svn\dvhd\bin\PagedList.Mvc.xml
 D:\Project\GitHub\DVHD\branches\svn\dvhd\bin\EntityFramework.xml
-D:\Project\GitHub\DVHD\branches\svn\dvhd\bin\Newtonsoft.Json.xml
 D:\Project\GitHub\DVHD\branches\svn\dvhd\bin\System.Net.Http.Formatting.xml
 D:\Project\GitHub\DVHD\branches\svn\dvhd\bin\System.Web.Helpers.xml
 D:\Project\GitHub\DVHD\branches\svn\dvhd\bin\System.Web.Http.xml
@@ -84,5 +82,6 @@ D:\Project\GitHub\DVHD\branches\svn\dvhd\bin\ko\System.Spatial.resources.dll
 D:\Project\GitHub\DVHD\branches\svn\dvhd\bin\ru\System.Spatial.resources.dll
 D:\Project\GitHub\DVHD\branches\svn\dvhd\bin\zh-Hans\System.Spatial.resources.dll
 D:\Project\GitHub\DVHD\branches\svn\dvhd\bin\zh-Hant\System.Spatial.resources.dll
+D:\Project\GitHub\DVHD\branches\svn\dvhd\obj\Debug\dvhd.csprojResolveAssemblyReference.cache
 D:\Project\GitHub\DVHD\branches\svn\dvhd\obj\Debug\dvhd.dll
 D:\Project\GitHub\DVHD\branches\svn\dvhd\obj\Debug\dvhd.pdb
